@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<bitfields product="phpkd_vblvb">
+	<bitfielddefs>
+		<group name="nocache">
+			<group name="phpkd_vblvb_hosts">
+				<bitfield name="adrive_com"      >1</bitfield>
+				<bitfield name="axifile_com"     >2</bitfield>
+				<bitfield name="badongo_com"     >4</bitfield>
+				<bitfield name="bitroad_net"     >8</bitfield>
+				<bitfield name="cocoshare_cc"    >16</bitfield>
+				<bitfield name="depositfiles_com">32</bitfield>
+				<bitfield name="easy_share_com"  >64</bitfield>
+				<bitfield name="egoshare_com"    >128</bitfield>
+				<bitfield name="filefactory_com" >256</bitfield>
+				<bitfield name="filefront_com"   >512</bitfield>
+				<bitfield name="files_to"        >1024</bitfield>
+				<bitfield name="flyupload_com"   >2048</bitfield>
+				<bitfield name="gigasize_com"    >4096</bitfield>
+				<bitfield name="ifile_it"        >8192</bitfield>
+				<bitfield name="ifolder_ru"      >16384</bitfield>
+				<bitfield name="mediafire_com"   >32768</bitfield>
+				<bitfield name="megashare_com"   >65536</bitfield>
+				<bitfield name="megaupload_com"  >131072</bitfield>
+				<bitfield name="momupload_com"   >262144</bitfield>
+				<bitfield name="netload_in"      >524288</bitfield>
+				<bitfield name="rapidshare_com"  >1048576</bitfield>
+				<bitfield name="rapidshare_de"   >2097152</bitfield>
+				<bitfield name="rnbload_com"     >4194304</bitfield>
+				<bitfield name="savefile_com"    >8388608</bitfield>
+				<bitfield name="sendspace_com"   >16777216</bitfield>
+				<bitfield name="speedyshare_com" >33554432</bitfield>
+				<bitfield name="turboupload_com" >67108864</bitfield>
+				<bitfield name="uploaded_to"     >134217728</bitfield>
+				<bitfield name="uploading_com"   >268435456</bitfield>
+				<bitfield name="uploadpalace_com">536870912</bitfield>
+			</group>
+			<group name="phpkd_vblvb_hosts2">
+				<bitfield name="usaupload_net"   >1</bitfield>
+				<bitfield name="ziddu_com"       >2</bitfield>
+				<bitfield name="zshare_net"      >4</bitfield>
+			</group>
+			<group name="phpkd_vblvb_masks">
+				<bitfield name="anonym_to"             >1</bitfield>
+				<bitfield name="linkbucks_com"         >2</bitfield>
+				<bitfield name="lix_in"                >4</bitfield>
+				<bitfield name="rapidshare_com_folders">8</bitfield>
+			</group>
+			<group name="phpkd_vblvb_rprts">
+				<bitfield name="pm"    >1</bitfield>
+				<bitfield name="email" >2</bitfield>
+				<bitfield name="thread">4</bitfield>
+				<bitfield name="reply" >8</bitfield>
+			</group>
+			<group name="phpkd_vblvb_rprtu">
+				<bitfield name="pm"    >1</bitfield>
+				<bitfield name="email" >2</bitfield>
+			</group>
+			<group name="phpkd_vblvb_punish">
+				<bitfield name="moderate">1</bitfield>
+				<bitfield name="close"   >2</bitfield>
+				<bitfield name="move"    >4</bitfield>
+				<bitfield name="delete"  >8</bitfield>
+				<!-- <bitfield name="postwarn">16</bitfield> -->
+			</group>
+		</group>
+	</bitfielddefs>
+</bitfields>
+
+<!-- CVS: $RCSfile$ - $Revision: 11111 $ -->

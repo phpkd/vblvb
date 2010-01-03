@@ -1,0 +1,36 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|              Brought to you by PHP KingDom (www.phpkd.net)              |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+PHPKD - vB Link Verifier Bot -- Upgrade Procedure:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     1. Upload required files to their appropriate places (Allow Overwrite):
+	includes
+	     phpkd
+	          vblvb
+		cron.php
+		functions.php
+		install.php
+		plugins.php
+
+	     xml
+	          bitfield_phpkd_vblvb.xml
+
+     2. Download your local license file from: Customer Area » My Packages » vB Link Verifier Bot » Licenses » View » Local License Key » Click to Download
+	And uplod it to it's appropriate location (Allow Overwrite):
+	includes
+	     phpkd
+	          vblvb
+		license.php
+
+     3. Import the product's XML file "product-phpkd_vblvb.xml" from AdminCP (Allow Overwrite).
+
+     4. Check & configure product's settings.
+
+     5. You're Done :).
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|              Brought to you by PHP KingDom (www.phpkd.net)              |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

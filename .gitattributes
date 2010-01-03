@@ -1,1 +1,26 @@
 * text=auto !eol
+English/import/product-phpkd_vblvb.xml -text
+English/readme/info.txt -text
+English/readme/install.txt -text
+English/readme/license.txt -text
+English/readme/upgrade.txt -text
+English/screenshots/PHPKD-VBLVB-AdminCP_Settings_1.png -text
+English/screenshots/PHPKD-VBLVB-AdminCP_Settings_2.png -text
+English/screenshots/PHPKD-VBLVB-AdminCP_Settings_3.png -text
+English/screenshots/PHPKD-VBLVB-AdminCP_Settings_4.png -text
+English/screenshots/PHPKD-VBLVB-Cronjob.png -text
+English/screenshots/PHPKD-VBLVB-Email_Reports.png -text
+English/screenshots/PHPKD-VBLVB-PM_Reports.png -text
+English/screenshots/PHPKD-VBLVB-Staff_Cronjob_Report.png -text
+English/screenshots/PHPKD-VBLVB-Staff_Email_Report.png -text
+English/screenshots/PHPKD-VBLVB-Staff_PM_Report_Content.png -text
+English/screenshots/PHPKD-VBLVB-User_Email_Report.png -text
+English/screenshots/PHPKD-VBLVB-User_PM_Report.png -text
+English/upload/includes/md5_sums_phpkd_vblvb.php -text
+English/upload/includes/phpkd/index.html -text
+English/upload/includes/phpkd/vblvb/cron.php -text
+English/upload/includes/phpkd/vblvb/functions.php -text
+English/upload/includes/phpkd/vblvb/index.html -text
+English/upload/includes/phpkd/vblvb/install.php -text
+English/upload/includes/phpkd/vblvb/plugins.php -text
+English/upload/includes/xml/bitfield_phpkd_vblvb.xml -text
