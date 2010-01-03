@@ -17,7 +17,7 @@ PHPKD - vB Link Verifier Bot -- Upgrade Procedure:
 	     xml
 	          bitfield_phpkd_vblvb.xml
 
-     2. Download your local license file from: Customer Area � My Packages � vB Link Verifier Bot � Licenses � View � Local License Key � Click to Download
+     2. Download your local license file from: Customer Area » My Packages » vB Link Verifier Bot » Licenses » View » Local License Key » Click to Download
 	And uplod it to it's appropriate location (Allow Overwrite):
 	includes
 	     phpkd
