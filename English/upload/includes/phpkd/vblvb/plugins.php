@@ -2,7 +2,7 @@
 /*==================================================================================*\
 || ################################################################################ ||
 || # Product Name: PHPKD - vB Link Verifier Bot                  Version: 3.8.100 # ||
-|| # License Type: Commercial License                            $Revision$ # ||
+|| # License Type: Commercial License                             $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
 || #            Copyright ©2005-2010 PHP KingDom. All Rights Reserved.            # ||

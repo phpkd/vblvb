@@ -1,7 +1,7 @@
 PHP KingDom Commercial Software License Agreement
 http://info.phpkd.net/en/license/commercial/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-s
+
 The Software and any related documentation are "Commercial Items". This Software License Agreement (this "Agreement") is between you (either an individual or an entity, referred to hereinafter as "you" or "your") and PHP KingDom, and its affiliates ("PHPKD", "we", "our" or "us") for all commercial software that accompanies this Agreement, as may be updated or replaced by feature enhancements, software updates or maintenance releases (the "Software") and any services that may be provided by PHP KingDom under this Agreement ("Services"). Do not use the Software until you have carefully read the following Agreement.
 By installing, copying, accessing, downloading or using the Software (or authorizing any other person to do so) you are indicating that you are 18 years of age or older (any parent or guardian of a person under the age of 18 may accept this Agreement on behalf of a user), are capable of entering into a binding legal agreement, have read and understand this Agreement and you accept its terms and conditions. If you do not agree with the terms and conditions of this Agreement, do not install, copy, access, download or use the Software.
 
@@ -62,3 +62,5 @@ The License will not be governed by the United Nations Convention on Contracts f
 13. Miscellaneous
 ----------------------------
 You acknowledge that, in providing you with the Software and/or Services, PHP KingDom has relied upon your agreement to be bound by the terms of this Agreement. You further acknowledge that you have read, understood, and agreed to be bound by the terms of the License and this Agreement, and hereby reaffirm your acceptance of those terms. You further acknowledge that this Agreement constitutes the complete statement of the agreement between you and PHP KingDom, and that this Agreement does not include any other prior or contemporaneous promises, representations, or descriptions regarding the Software. The unauthorized agents, employees or distributors of PHP KingDom or its affiliates are not authorized to make modifications to this Agreement, or to make any additional representations, commitments, or warranties binding on PHP KingDom. Accordingly, additional statements, whether oral or written, do not constitute representations or warranties by PHP KingDom and should not be relied upon.
+
+$Id$
