@@ -1,7 +1,7 @@
 PHP KingDom Commercial Software License Agreement
 http://info.phpkd.net/en/license/commercial/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+s
 The Software and any related documentation are "Commercial Items". This Software License Agreement (this "Agreement") is between you (either an individual or an entity, referred to hereinafter as "you" or "your") and PHP KingDom, and its affiliates ("PHPKD", "we", "our" or "us") for all commercial software that accompanies this Agreement, as may be updated or replaced by feature enhancements, software updates or maintenance releases (the "Software") and any services that may be provided by PHP KingDom under this Agreement ("Services"). Do not use the Software until you have carefully read the following Agreement.
 By installing, copying, accessing, downloading or using the Software (or authorizing any other person to do so) you are indicating that you are 18 years of age or older (any parent or guardian of a person under the age of 18 may accept this Agreement on behalf of a user), are capable of entering into a binding legal agreement, have read and understand this Agreement and you accept its terms and conditions. If you do not agree with the terms and conditions of this Agreement, do not install, copy, access, download or use the Software.
 

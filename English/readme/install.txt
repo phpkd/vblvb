@@ -18,7 +18,7 @@ PHPKD - vB Link Verifier Bot -- Installation Procedure:
 	     xml
 	          bitfield_phpkd_vblvb.xml
 
-     2. Download your local license file from: Customer Area » My Packages » vB Link Verifier Bot » Licenses » View » Local License Key » Click to Download
+     2. Download your local license file from: Customer Area ï¿½ My Packages ï¿½ vB Link Verifier Bot ï¿½ Licenses ï¿½ View ï¿½ Local License Key ï¿½ Click to Download
 	And uplod it to it's appropriate location:
 	includes
 	     phpkd
@@ -28,8 +28,8 @@ PHPKD - vB Link Verifier Bot -- Installation Procedure:
      3. Import the product's XML file "product-phpkd_vblvb.xml" from AdminCP.
 
      4. Get you license key & enter it in your product's settings:
-	Get from: Customer Area » My Packages » vB Link Verifier Bot » Licenses » License Key
-	Enter Here: AdminCP » vBulletin Settings » PHPKD - Link Verifier Bot » License Key
+	Get from: Customer Area ï¿½ My Packages ï¿½ vB Link Verifier Bot ï¿½ Licenses ï¿½ License Key
+	Enter Here: AdminCP ï¿½ vBulletin Settings ï¿½ PHPKD - Link Verifier Bot ï¿½ License Key
 
      5. Activate & Configure product's settings.
 
