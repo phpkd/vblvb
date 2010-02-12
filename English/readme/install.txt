@@ -1,0 +1,54 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|              Brought to you by PHP KingDom (www.phpkd.net)              |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+PHPKD - vB Link Verifier Bot -- Installation Procedure:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     1. Upload required files to their appropriate places:
+	|- includes
+	     + phpkd
+	          + hooks
+		- admin_options_print.php
+		- admin_options_processing.php
+		- editpost_update_process.php
+		- newpost_process.php
+	          + vblvb
+		- class_core.php
+		- class_dm.php
+		- class_dml.php
+		- cron.php
+		- functions.php
+		- functions_databuild.php
+		- init.php
+		- install.php
+	     - md5_sums_phpkd_vblvb.php
+
+	     + xml
+	          - bitfield_phpkd_vblvb.xml
+
+     2. Import the product's XML file "product-phpkd_vblvb.xml" from AdminCP.
+
+     3. Get you license key & enter it in your product's settings:
+	Get from: Customer Area » My Packages » vB Link Verifier Bot » Licenses » License Key
+	Enter Here: AdminCP » vBulletin Settings » PHPKD - Link Verifier Bot » License Key
+
+     4. Activate & Configure product's settings.
+
+     5. [After Successful Installation]: Download your local license file from: Customer Area » My Packages » vB Link Verifier Bot » Licenses » View » Local License Key » Click to Download
+	And upload it to it's appropriate location:
+	|- includes
+	     + phpkd
+	          + vblvb
+		- license.php
+
+     6. If you are upgrading from 'Lite' edition to 'Ultimate' edition, you've to import the product "product-phpkd_vblvb_fix.xml" from AdminCP found inside "do_not_upload" folder.
+
+     7. You're Done :).
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|              Brought to you by PHP KingDom (www.phpkd.net)              |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$Version: 4.0.122 $ - $Id: install.txt 96 2010-01-21 10:30:27Z PHPKD $

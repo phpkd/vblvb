@@ -1,0 +1,456 @@
+<?php
+/*==================================================================================*\
+|| ################################################################################ ||
+|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
+|| # License Type: Commercial License                             $Revision: 64 $ # ||
+|| # ---------------------------------------------------------------------------- # ||
+|| # 																			  # ||
+|| #            Copyright ©2005-2010 PHP KingDom. All Rights Reserved.            # ||
+|| #      This product may not be redistributed in whole or significant part.     # ||
+|| # 																			  # ||
+|| # --------------- 'vB Link Verifier Bot' IS NOT FREE SOFTWARE ---------------- # ||
+|| #     http://www.phpkd.net | http://info.phpkd.net/en/license/commercial       # ||
+|| ################################################################################ ||
+\*==================================================================================*/
+
+
+if (@get_class($this) != 'PHPKD_VBLVB' OR !defined('PHPKD_VBLVB'))
+{
+	echo 'Prohibited Access!';
+	exit;
+}
+
+
+foreach ($initparams AS $key => $value)
+{
+	if (!$value)
+	{
+		continue;
+	}
+
+	switch ($key)
+	{
+		case 'vbphrase':
+			$this->vbphrase = $value;
+			break;
+
+
+		// Initialize Hooks
+		case 'hooks':
+			$this->hooks = array(
+				'admin_options_print'      => TRUE,
+				'admin_options_processing' => TRUE,
+				'editpost_update_process'  => TRUE,
+				'newpost_process'          => TRUE
+			);
+			break;
+
+
+		// Checked Hosts
+		case 'hosts':
+			$rawhosts = array(
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check regex also soon!
+				'HOSTS1_2SHARED_COM'          => array('bitfield' => 1,         'status' => 'alive', 'urlmatch' => "2shared\.com\/file\/[0-9]+/[0-9a-z]+",                    'contentmatch' => "Save file to your PC"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS1_4SHARED_COM'          => array('bitfield' => 2,         'status' => 'alive', 'urlmatch' => "4shared\.com\/(file|get)\/[0-9]+\/[0-9a-z]+",             'contentmatch' => "(fileNameTextSpan|downloadDelayTimeSec)"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT BUT REQUIRES trailing slash '/' after the first numeric sylable if the second sylable didn't entered!.
+				'HOSTS1_9Q9Q_NET'             => array('bitfield' => 4,         'status' => 'alive', 'urlmatch' => "9q9q\.net\/Download\/[0-9]+",                             'contentmatch' => "ReportAbuse"),
+
+				'HOSTS1_ADRIVE_COM'           => array('bitfield' => 8,         'status' => 'alive', 'urlmatch' => "adrive\.com\/public\/[0-9a-z]+",                          'contentmatch' => "(download\.adrive\.com\/public\/view\/|Public File Busy)"),
+				'HOSTS1_ARABSH_COM'           => array('bitfield' => 16,        'status' => 'alive', 'urlmatch' => "arabsh\.com\/[0-9a-z]+",                                  'contentmatch' => "download1info"),
+				'HOSTS1_AXIFILE_COM'          => array('bitfield' => 32,        'status' => 'alive', 'urlmatch' => "axifile\.com\/\?[0-9]+",                                  'contentmatch' => "mydownload.php\?",                                          'urlsearch' => "@com\?@i",                                    'urlreplace' => "com/?"),
+				'HOSTS1_BADONGO_COM'          => array('bitfield' => 64,        'status' => 'alive', 'urlmatch' => "badongo\.com\/([a-z]{2}\/)?(file|vid)\/[0-9]+",           'contentmatch' => "(fileBoxMenu|fileBoxDLink)",                                'urlsearch' => "@com\/([a-z]{2}\/)?(file|vid)\/@i",           'urlreplace' => "com/en/\\2/"),            
+				'HOSTS1_BITROAD_NET'          => array('bitfield' => 128,       'status' => 'alive', 'urlmatch' => "bitroad\.net\/download\/[0-9a-z]+\/",                     'contentmatch' => "Download a file"),
+
+				// This host's links should NOT end with a trailing slash '/'
+				'HOSTS1_BOX_NET'              => array('bitfield' => 256,       'status' => 'alive', 'urlmatch' => "box\.net\/shared\/[0-9a-z]+",                             'contentmatch' => "box_download_shared_file"),
+
+				'HOSTS1_COCOSHARE_CC'         => array('bitfield' => 512,       'status' => 'dead',  'urlmatch' => "cocoshare\.cc\/[0-9]+\/",                                 'contentmatch' => "Filesize"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS1_CRAZYUPLOAD_COM'      => array('bitfield' => 1024,      'status' => 'alive', 'urlmatch' => "crazyupload\.com\/[0-9a-z]+",                             'contentmatch' => "You have requested"),
+
+				'HOSTS1_DEPOSITFILES_COM'     => array('bitfield' => 2048,      'status' => 'alive', 'urlmatch' => "depositfiles\.com\/([a-z]{2}\/)?files\/[0-9a-z]+",        'contentmatch' => "File name",                                                 'urlsearch' => "@com\/([a-z]{2}\/)?files\/@i",                'urlreplace' => "com/en/files/"),
+
+				// This host's links should NOT end with trailing slashe '/', Just put 'launch' after the 'download' phrase & you'l go to the download page directly without waiting!
+				'HOSTS1_DIVSHARE_COM'         => array('bitfield' => 4096,      'status' => 'alive', 'urlmatch' => "divshare\.com\/download\/?[0-9-]+",                       'contentmatch' => "file_name"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, in such case the link should NOT contain a trailing slash '/' after the first sylable!
+				'HOSTS1_DIVXDEN_COM'          => array('bitfield' => 8192,      'status' => 'alive', 'urlmatch' => "divxden\.com\/[0-9a-z]+",                                 'contentmatch' => "Choose your stream speed"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, in such case the link should NOT contain a trailing slash '/' after the first sylable!
+				'HOSTS1_DUALSHARE_COM'        => array('bitfield' => 16384,     'status' => 'alive', 'urlmatch' => "dualshare\.com\/[0-9a-z]+",                               'contentmatch' => "file_slot"),
+
+				'HOSTS1_DUCKLOAD_COM'         => array('bitfield' => 32768,     'status' => 'alive', 'urlmatch' => "duckload\.com\/download\/[0-9]+\/[0-9a-z_-]+",            'contentmatch' => "index\.php\?Modul=download"),
+
+				// If the '.html' has been removed from the URL, then the URL should NOT ends with a trailing slash '/'
+				'HOSTS1_EARTHFILEZ_COM'       => array('bitfield' => 65536,     'status' => 'alive', 'urlmatch' => "earthfilez\.com\/[0-9a-z]+",                              'contentmatch' => "You have requested"),
+
+				'HOSTS1_EASY_SHARE_COM'       => array('bitfield' => 131072,    'status' => 'alive', 'urlmatch' => "easy-share\.com\/[0-9]+",                                 'contentmatch' => "You are requesting"),
+				'HOSTS1_EGOSHARE_COM'         => array('bitfield' => 262144,    'status' => 'alive', 'urlmatch' => "egoshare\.com\/download.php\?id=[0-9a-z]+",               'contentmatch' => "You have requested"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not entered (but not if entered wrong), so we can make it optional in the check regex also soon!
+				'HOSTS1_ENTERUPLOAD_COM'      => array('bitfield' => 524288,    'status' => 'alive', 'urlmatch' => "enterupload\.com\/[0-9a-z]+",                             'contentmatch' => "You have requested"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, ONLY the first 12 characters are critical, other characters are ignored, so we can make it optional in the check regex also soon!
+				'HOSTS1_EVILSHARE_COM'        => array('bitfield' => 1048576,   'status' => 'alive', 'urlmatch' => "evilshare\.com\/[0-9a-z]+",                               'contentmatch' => "You have requested"),
+
+				// This host's links should NOT end with a trailing slash '/'
+				'HOSTS1_FILE2BOX_COM'         => array('bitfield' => 2097152,   'status' => 'alive', 'urlmatch' => "file2box\.com\/[0-9a-z]+",                                'contentmatch' => "Filename"),
+
+				'HOSTS1_FILEBASE_TO'          => array('bitfield' => 4194304,   'status' => 'alive', 'urlmatch' => "filebase\.to\/files\/[0-9]+\/[0-9a-z_-]+",                'contentmatch' => "captcha\/CaptchaImage\.php"),
+
+				// Note: HTTPS links seems to be not working!
+				'HOSTS1_FILEBOX_COM'          => array('bitfield' => 8388608,   'status' => 'alive', 'urlmatch' => "filebox\.com\/[0-9a-z]+",                                 'contentmatch' => "Shared File Information"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS1_FILEDIP_COM'          => array('bitfield' => 16777216,  'status' => 'alive', 'urlmatch' => "filedip\.com\/[0-9a-z]+",                                 'contentmatch' => "You have requested"),
+
+				'HOSTS1_FILEDROPPER_COM'      => array('bitfield' => 33554432,  'status' => 'alive', 'urlmatch' => "filedropper\.com\/[0-9a-z_-]+",                           'contentmatch' => "\/processing\/filedownload\.php\?id="),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check regex also soon!
+				'HOSTS1_FILEFACTORY_COM'      => array('bitfield' => 67108864,  'status' => 'alive', 'urlmatch' => "filefactory\.com\/file\/[0-9a-z]+",                       'contentmatch' => "metadata"),
+
+				// This host's links shouldn't end with a trailing slash '/'
+				'HOSTS1_FILEFLYER_COM'        => array('bitfield' => 134217728, 'status' => 'alive', 'urlmatch' => "fileflyer\.com\/view\/[0-9a-z]+",                         'contentmatch' => "Download your files here"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check regex also soon!
+				'HOSTS1_FILEFRONT_COM'        => array('bitfield' => 268435456, 'status' => 'alive', 'urlmatch' => "filefront\.com\/[0-9]+",                                  'contentmatch' => "File name"),
+
+				'HOSTS1_FILEMOJO_COM'         => array('bitfield' => 536870912, 'status' => 'alive', 'urlmatch' => "filemojo\.com\/downloads\/[0-9a-z_-]+",                   'contentmatch' => "Downloading"),
+
+
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS2_FILERAMA_COM'         => array('bitfield' => 1,         'status' => 'alive', 'urlmatch' => "filerama\.com\/[0-9a-z]+",                                'contentmatch' => "file_slot"),
+
+				'HOSTS2_FILESERVER_CC'        => array('bitfield' => 2,         'status' => 'alive', 'urlmatch' => "fileserver\.cc\/[0-9a-z]+",                               'contentmatch' => "You have requested"),
+				'HOSTS2_FILESOVERMILES_COM'   => array('bitfield' => 4,         'status' => 'alive', 'urlmatch' => "filesovermiles\.com\/[0-9a-z]+",                          'contentmatch' => "File name"),
+				'HOSTS2_FILESPLASH_COM'       => array('bitfield' => 8,         'status' => 'alive', 'urlmatch' => "filesplash\.com\/[0-9a-z]+",                              'contentmatch' => "file_slot"),
+				'HOSTS2_FILES_TO'             => array('bitfield' => 16,        'status' => 'alive', 'urlmatch' => "files\.to\/get\/[0-9]+\/[0-9a-z]+",                       'contentmatch' => "You requested the following file"),
+				'HOSTS2_FLYUPLOAD_COM'        => array('bitfield' => 32,        'status' => 'dead',  'urlmatch' => "flyupload.com\/get\?fid=[0-9]+",                          'contentmatch' => "Download Now"),
+				'HOSTS2_GIGASIZE_COM'         => array('bitfield' => 64,        'status' => 'alive', 'urlmatch' => "gigasize\.com\/get\.php\?d=[0-9a-z]+",                    'contentmatch' => "dldcontent"),
+
+				'HOSTS2_HOSTUJE_NET'          => array('bitfield' => 128,       'status' => 'alive', 'urlmatch' => "hostuje\.net\/file\.php\?id=[0-9a-z]+",                   'contentmatch' => "obraz.php"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT BUT REQUIRES trailing slash '/' after the second sylable if the third sylable didn't entered!.
+				'HOSTS2_HOTFILE_COM'          => array('bitfield' => 256,       'status' => 'alive', 'urlmatch' => "hotfile\.com\/dl\/[0-9]+\/[0-9a-z]+",                     'contentmatch' => "downloading"),
+
+				'HOSTS2_HULKSHARE_COM'        => array('bitfield' => 512,       'status' => 'alive', 'urlmatch' => "hulkshare\.com\/[0-9a-z]+",                               'contentmatch' => "file_slot"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check regex also soon!
+				'HOSTS2_IFILE_IT'             => array('bitfield' => 1024,      'status' => 'alive', 'urlmatch' => "ifile\.it\/[0-9a-z]+",                                    'contentmatch' => "request download ticket"),
+
+				'HOSTS2_IFOLDER_RU'           => array('bitfield' => 2048,      'status' => 'alive', 'urlmatch' => "ifolder\.ru\/[0-9]+",                                     'contentmatch' => "confirmed_number"),
+				'HOSTS2_JUMBOFILES_COM'       => array('bitfield' => 4096,      'status' => 'alive', 'urlmatch' => "jumbofiles\.com\/[0-9a-z]+",                              'contentmatch' => "Downloaded"),
+
+				// Last sylable of the link doesn't affect URL validity ONLY ONLY if entered wrong -but not if ignored-, AND AND REQUIRES trailing '.html' after the last sylable!.
+				'HOSTS2_LETITBIT_NET'         => array('bitfield' => 8192,      'status' => 'alive', 'urlmatch' => "letitbit\.net\/download\/[0-9]+\.[0-9a-z]+\/[0-9a-z_-]+", 'contentmatch' => "download4.php"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT BUT REQUIRES trailing slash '/' after the first numeric sylable if the second sylable didn't entered!.
+				'HOSTS2_LOAD_TO'              => array('bitfield' => 16384,     'status' => 'alive', 'urlmatch' => "load\.to\/[0-9a-z]+",                                     'contentmatch' => "You are going to download"),
+
+				'HOSTS2_LOOMBO_COM'           => array('bitfield' => 32768,     'status' => 'alive', 'urlmatch' => "loombo\.com\/[0-9a-z]+",                                  'contentmatch' => "Human Verification"),
+				'HOSTS2_M5ZN_COM'             => array('bitfield' => 65536,     'status' => 'alive', 'urlmatch' => "m5zn\.com\/download-[0-9a-z-]+",                          'contentmatch' => "start_download\.php"),
+				'HOSTS2_MEDIAFIRE_COM'        => array('bitfield' => 131072,    'status' => 'alive', 'urlmatch' => "mediafire\.com\/(download\.php)?\?[0-9a-z]+",             'contentmatch' => "download_file_title"),
+				'HOSTS2_MEGASHARE_COM'        => array('bitfield' => 262144,    'status' => 'alive', 'urlmatch' => "megashare\.com\/[0-9]+",                                  'contentmatch' => "Select your download"),
+
+				// After massive checking for multiple links, megaupload restrict access for the same IP address for a specific time period, the following message displayed:
+				// We have detected an elevated number of requests from your IP address. This may be caused by improperly designed third-party software. A temporary access restriction is in place. Please check back in XX minutes or log in using your premium account. (IP: 41.196.231.1)
+				'HOSTS2_MEGAUPLOAD_COM'       => array('bitfield' => 524288,    'status' => 'alive', 'urlmatch' => "megaupload\.com\/\?d=[0-9a-z]+(&setlang=[a-z]{2}\/)?",    'contentmatch' => "(Filename:|All download slots assigned to your country)",   'urlsearch' => "@com\/\?d=([0-9a-z]+)(&setlang=[a-z]{2})?@i", 'urlreplace' => "com/?d=\\1&setlang=en", 'downmatch' => "temporary access restriction is in place"),
+
+				'HOSTS2_MIDUPLOAD_COM'        => array('bitfield' => 1048576,   'status' => 'alive', 'urlmatch' => "midupload\.com\/[0-9a-z]+",                               'contentmatch' => "method_free"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS2_MLFAT4ARAB_COM'       => array('bitfield' => 2097152,   'status' => 'alive', 'urlmatch' => "mlfat4arab\.com\/[0-9a-z]+",                              'contentmatch' => "file_slot"),
+
+				'HOSTS2_MOIDISK_RU'           => array('bitfield' => 4194304,   'status' => 'alive', 'urlmatch' => "moidisk\.ru\/[0-9a-z]+",                                  'contentmatch' => "file_slot"),
+				'HOSTS2_MOMUPLOAD_COM'        => array('bitfield' => 8388608,   'status' => 'dead',  'urlmatch' => "momupload\.com\/files\/",                                 'contentmatch' => "You want to download the file"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS2_MY2SHARE_COM'         => array('bitfield' => 16777216,  'status' => 'alive', 'urlmatch' => "my2share\.com\/[0-9a-z]+",                                'contentmatch' => "file_slot"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT BUT REQUIRES .htm after the first sylable if the second sylable didn't entered!.
+				'HOSTS2_NETLOAD_IN'           => array('bitfield' => 33554432,  'status' => 'alive', 'urlmatch' => "netload\.in\/datei[0-9a-z]+",                             'contentmatch' => "File download"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS2_ONLINE_SHARING_NET'   => array('bitfield' => 67108864,  'status' => 'alive', 'urlmatch' => "online-sharing\.net\/[0-9a-z]+",                          'contentmatch' => "file_slot"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS2_PRODDL_COM'           => array('bitfield' => 134217728, 'status' => 'alive', 'urlmatch' => "proddl\.com\/[0-9a-z]+",                                  'contentmatch' => "You have requested"),
+
+				'HOSTS2_PRZEKLEJ_PL'          => array('bitfield' => 268435456, 'status' => 'alive', 'urlmatch' => "przeklej\.pl\/plik\/[0-9a-z_-]+",                         'contentmatch' => "file-details"),
+				'HOSTS2_PRZESLIJ_NET'         => array('bitfield' => 536870912, 'status' => 'alive', 'urlmatch' => "przeslij\.net\/download\.php\?file=[0-9a-z_-]+",          'contentmatch' => "Download a File from our Server"),
+
+
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS3_QUICKUPLOAD_NET'      => array('bitfield' => 1,         'status' => 'alive', 'urlmatch' => "quickupload\.net\/[0-9a-z]+",                             'contentmatch' => "You have requested"),
+
+				'HOSTS3_RAPIDSHARE_COM'       => array('bitfield' => 2,         'status' => 'alive', 'urlmatch' => "rapidshare\.com\/files\/[0-9]+\/[0-9a-z_-]+",             'contentmatch' => "(FILE DOWNLOAD|This file is larger than 200 Megabyte)"),
+				'HOSTS3_RAPIDSHARE_DE'        => array('bitfield' => 4,         'status' => 'alive', 'urlmatch' => "rapidshare\.de\/files\/[0-9]+\/[0-9a-z_-]+",              'contentmatch' => "You want to download"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT BUT REQUIRES trailing slash '/' after the first numeric sylable if the second sylable didn't entered!.
+				'HOSTS3_RNBLOAD_COM'          => array('bitfield' => 8,         'status' => 'alive', 'urlmatch' => "rnbload\.com\/file\/[0-9]+",                              'contentmatch' => "Filename"),
+
+				'HOSTS3_SAVEFILE_COM'         => array('bitfield' => 16,        'status' => 'dead',  'urlmatch' => "savefile\.com\/files\/",                                  'contentmatch' => "link to this file"),
+				'HOSTS3_SENDSPACE_COM'        => array('bitfield' => 32,        'status' => 'alive', 'urlmatch' => "sendspace\.com\/file\/[0-9a-z]+",                         'contentmatch' => "(The download link is located below|You are about to download)"),
+				'HOSTS3_SENDUIT_COM'          => array('bitfield' => 64,        'status' => 'alive', 'urlmatch' => "senduit\.com\/[0-9a-z]+",                                 'contentmatch' => "Your download will begin"),
+				'HOSTS3_SPEEDYSHARE_COM'      => array('bitfield' => 128,       'status' => 'alive', 'urlmatch' => "speedyshare\.com\/files\/[0-9]+\/[0-9a-z_-]+",            'contentmatch' => "\/download\/"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check regex also soon!
+				'HOSTS3_STORAGE_TO'           => array('bitfield' => 256,       'status' => 'alive', 'urlmatch' => "storage\.to\/get\/[0-9a-z]+",                             'contentmatch' => "Downloading"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS3_SUPERFASTFILE_COM'    => array('bitfield' => 512,       'status' => 'alive', 'urlmatch' => "superfastfile\.com\/[0-9a-z]+",                           'contentmatch' => "method_free"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, in such case the link should NOT contain a trailing slash '/' after the first sylable!
+				'HOSTS3_TERADEPOT_COM'        => array('bitfield' => 1024,      'status' => 'alive', 'urlmatch' => "teradepot\.com\/[0-9a-z]+",                               'contentmatch' => "You have requested"),
+
+				'HOSTS3_TRANSFERBIGFILES_COM' => array('bitfield' => 2048,      'status' => 'alive', 'urlmatch' => "transferbigfiles\.com\/Get\.aspx\?id=[0-9a-z-]+",         'contentmatch' => "Your Files"),
+				'HOSTS3_TURBOUPLOAD_COM'      => array('bitfield' => 4096,      'status' => 'alive', 'urlmatch' => "turboupload\.com\/[0-9a-z]+",                             'contentmatch' => "You have requested"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if entered wrong -BUT BUT not if ignored-, it should has at least one character, so we can make it optional in the check regex also soon!
+				'HOSTS3_UPFORDOWN_COM'        => array('bitfield' => 8192,      'status' => 'alive', 'urlmatch' => "upfordown\.com\/public\/pdownload\/[0-9]+\/[0-9a-z_-]+",  'contentmatch' => "File Type"),
+
+				'HOSTS3_UPLOADED_TO'          => array('bitfield' => 16384,     'status' => 'alive', 'urlmatch' => "(uploaded\.to|ul\.to)\/(\?id=|file\/)?[0-9a-z]+",         'contentmatch' => "Filename"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check regex also soon!
+				// This host sometimes goes down & display the following message: Service Not Available. We're sorry. Our service is temporarily unavailable. Everything is fine, but we'd appreciate your patience while our techs correct the situation. Please try accessing your account in a few minutes.
+				'HOSTS3_UPLOADING_COM'        => array('bitfield' => 32768,     'status' => 'alive', 'urlmatch' => "uploading\.com\/files\/[0-9a-z]+",                        'contentmatch' => "File download", 'downmatch' => "Service Not Available"),
+
+				'HOSTS3_UPLOADPALACE_COM'     => array('bitfield' => 65536,     'status' => 'dead',  'urlmatch' => "uploadpalace\.com\/[a-zA-Z]{2}\/file\/[0-9]+\/",          'contentmatch' => "Filename:"),
+				'HOSTS3_USAUPLOAD_NET'        => array('bitfield' => 131072,    'status' => 'dead',  'urlmatch' => "usaupload\.net\/d\/",                                     'contentmatch' => "This is the download page for file"),
+
+				// This host's links shouldn't end with a trailing slash '/'
+				'HOSTS3_USERSHARE_NET'        => array('bitfield' => 262144,    'status' => 'alive', 'urlmatch' => "usershare\.net\/[0-9a-z]+",                               'contentmatch' => "file_slot"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, in such case the link should NOT contain a trailing slash '/' after the first sylable!
+				'HOSTS3_USEUPLOAD_COM'        => array('bitfield' => 524288,    'status' => 'alive', 'urlmatch' => "useupload\.com\/[0-9a-z]+",                               'contentmatch' => "file_slot"),
+
+				// Last sylable of the link doesn't affect URL validity ONLY ONLY if entered wrong -but not if ignored-, AND AND REQUIRES trailing '.html' after the last sylable!.
+				'HOSTS3_VIP_FILE_COM'         => array('bitfield' => 1048576,   'status' => 'alive', 'urlmatch' => "vip-file\.com\/download\/[0-9]+\.[0-9a-z]+\/[0-9a-z_-]+", 'contentmatch' => "File Name"),
+
+				// Only first siz characters are critical, any other added characters are ignored!!
+				'HOSTS3_X7_TO'                => array('bitfield' => 2097152,   'status' => 'alive', 'urlmatch' => "x7\.to\/[0-9a-z]+",                                       'contentmatch' => "requestTicket"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity ONLY ONLY if not included -BUT BUT not if entered wrong-, so we can make it optional in the check regex also soon!
+				'HOSTS3_XINONY_COM'           => array('bitfield' => 4194304,   'status' => 'alive', 'urlmatch' => "xinony\.com\/[0-9a-z]+",                                  'contentmatch' => "You have requested"),
+
+				// There's three different formats for this host's URLs
+				'HOSTS3_YOUSENDIT_COM'        => array('bitfield' => 8388608,   'status' => 'alive', 'urlmatch' => "yousendit\.com\/((download\/|transfer\.php\?action=batch_download&batch_id=)[0-9a-z]+|transfer\.php\?action=batch_download&send_id=[0-9]+&email=[0-9a-z]+)", 'contentmatch' => "download-button"),
+
+				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT BUT REQUIRES trailing slash '/' after the first numeric sylable if the second sylable didn't entered!.
+				'HOSTS3_ZIDDU_COM'            => array('bitfield' => 16777216,  'status' => 'alive', 'urlmatch' => "ziddu\.com\/download\/[0-9]+",                            'contentmatch' => "Uploaded Date"),
+
+				'HOSTS3_ZIPPYSHARE_COM'       => array('bitfield' => 33554432,  'status' => 'alive', 'urlmatch' => "zippyshare\.com\/v\/[0-9]+\/file.html",                   'contentmatch' => "You have requested"),
+				'HOSTS3_ZOMGUPLOAD_COM'       => array('bitfield' => 67108864,  'status' => 'alive', 'urlmatch' => "zomgupload\.com\/[0-9a-z]+",                              'contentmatch' => "method_free"),
+				'HOSTS3_ZSHARE_NET'           => array('bitfield' => 134217728, 'status' => 'alive', 'urlmatch' => "zshare\.net\/(download|audio|video)\/[0-9a-z]+",          'contentmatch' => "File Name")
+			);
+
+			foreach ($rawhosts AS $key => $value)
+			{
+				$switch = substr($key, 0, 6);
+				switch ($switch)
+				{
+					case 'HOSTS1':
+						if ($this->registry->options['phpkd_vblvb_hosts'] & $value['bitfield'])
+						{
+							$this->hosts[] = array('urlmatch' => $value['urlmatch'], 'contentmatch' => $value['contentmatch'], 'urlsearch' => $value['urlsearch'], 'urlreplace' => $value['urlreplace']);
+						}
+						break;
+					case 'HOSTS2':
+						if ($this->registry->options['phpkd_vblvb_hosts2'] & $value['bitfield'])
+						{
+							$this->hosts[] = array('urlmatch' => $value['urlmatch'], 'contentmatch' => $value['contentmatch'], 'urlsearch' => $value['urlsearch'], 'urlreplace' => $value['urlreplace']);
+						}
+						break;
+					case 'HOSTS3':
+						if ($this->registry->options['phpkd_vblvb_hosts3'] & $value['bitfield'])
+						{
+							$this->hosts[] = array('urlmatch' => $value['urlmatch'], 'contentmatch' => $value['contentmatch'], 'urlsearch' => $value['urlsearch'], 'urlreplace' => $value['urlreplace']);
+						}
+						break;
+				}
+			}
+			break;
+
+
+		// Detected Masks
+		case 'masks':
+			$rawmasks = array(
+				'anonym.to'      => array('bitfield' => 1, 'urlmatch' => "#^(http)\:\/\/(www\.)?anonym\.to\/\?#i"),
+				'lix.in'         => array('bitfield' => 2, 'urlmatch' => "#^(http)\:\/\/(www\.)?lix\.in\/#i"),
+				'linkbucks.com'  => array('bitfield' => 4, 'urlmatch' => "#^(http)\:\/\/(www\.)?linkbucks\.com\/link\/#i"),
+				'rapidshare.com' => array('bitfield' => 8, 'urlmatch' => "#rapidshare\.com\/users\/#i")
+			);
+
+			foreach ($rawmasks AS $key => $value)
+			{
+				if ($this->registry->options['phpkd_vblvb_masks'] & $value['bitfield'])
+				{
+					$this->masks[$key] = $value['urlmatch'];
+				}
+			}
+			break;
+
+
+		// Staff Reports
+		case 'staff_reports':
+			$rawrprts = array(
+				'RPRTS_PM'     => array('bitfield' => 1),
+				'RPRTS_EMAIL'  => array('bitfield' => 2),
+				'RPRTS_THREAD' => array('bitfield' => 4),
+				'RPRTS_REPLY'  => array('bitfield' => 8)
+			);
+
+			foreach ($rawrprts AS $key => $value)
+			{
+				if ($this->registry->options['phpkd_vblvb_rprts'] & $value['bitfield'])
+				{
+					$this->staff_reports[$key] = $value['bitfield'];
+				}
+			}
+			break;
+
+
+		// User Reports
+		case 'user_reports':
+			$rawrprtu = array(
+				'RPRTU_PM'     => array('bitfield' => 1),
+				'RPRTU_EMAIL'  => array('bitfield' => 2)
+			);
+
+			foreach ($rawrprtu AS $key => $value)
+			{
+				if ($this->registry->options['phpkd_vblvb_rprtu'] & $value['bitfield'])
+				{
+					$this->user_reports[$key] = $value['bitfield'];
+				}
+			}
+			break;
+
+
+		// TODO: Punishment methods
+		case 'punishments':
+			$rawpunishments = array(
+				'PUNISH_MODERATE' => array('bitfield' => 1),
+				'PUNISH_CLOSE'    => array('bitfield' => 2),
+				'PUNISH_MOVE'     => array('bitfield' => 4),
+			//	'PUNISH_DELETE'   => array('bitfield' => 8)
+			);
+
+			foreach ($rawpunishments AS $key => $value)
+			{
+				if ($this->registry->options['phpkd_vblvb_punish'] & $value['bitfield'])
+				{
+					$this->punishments[] = $key;
+				}
+			}
+			break;
+
+
+		// TODO: Checked protocols
+		case 'protocols':
+			$rawprotocols = array(
+				'HTTP'   => array('bitfield' => 1),
+				'HTTPS'  => array('bitfield' => 2),
+				'FTP'    => array('bitfield' => 4),
+				// 'GOPHER' => array('bitfield' => 8),
+				// 'NEWS'   => array('bitfield' => 16),
+				// 'TELNET' => array('bitfield' => 32)
+			);
+
+			foreach ($rawprotocols AS $key => $value)
+			{
+				if ($this->registry->options['phpkd_vblvb_protocols'] & $value['bitfield'])
+				{
+					$this->protocols[] = $key;
+				}
+			}
+			break;
+
+
+		// Checked thread modes!
+		case 'threadmodes':
+			$rawthreadmodes = array(
+				'OPENED'     => array('bitfield' => 1),
+				'CLOSED'     => array('bitfield' => 2),
+				'MODERATED'  => array('bitfield' => 4),
+				'STICKY'     => array('bitfield' => 8),
+				'DELETED'    => array('bitfield' => 16),
+				'REDIRECTED' => array('bitfield' => 16)
+			);
+
+			foreach ($rawthreadmodes AS $key => $value)
+			{
+				if ($this->registry->options['phpkd_vblvb_threadmodes'] & $value['bitfield'])
+				{
+					$this->threadmodes[] = $key;
+				}
+			}
+			break;
+
+
+		// Checked post modes!
+		case 'postmodes':
+			$rawpostmodes = array(
+				'OPENED'    => array('bitfield' => 1),
+				'MODERATED' => array('bitfield' => 2),
+				'DELETED'   => array('bitfield' => 4)
+			);
+
+			foreach ($rawpostmodes AS $key => $value)
+			{
+				if ($this->registry->options['phpkd_vblvb_postmodes'] & $value['bitfield'])
+				{
+					$this->postmodes[] = $key;
+				}
+			}
+			break;
+
+
+		// Checked BBCodes
+		case 'bbcodes':
+			$rawbbcodes = array(
+				'BASIC'  => array('bitfield' => 1,    'open' => '\[b|\[i|\[u',                              'close' => '\[/b|\[/i|\[/u'),
+				'COLOR'  => array('bitfield' => 2,    'open' => '\[color|\[highlight',                      'close' => '\[/color|\[/highlight'),
+				'SIZE'   => array('bitfield' => 4,    'open' => '\[size',                                   'close' => '\[/size'),
+				'FONT'   => array('bitfield' => 8,    'open' => '\[font',                                   'close' => '\[/font'),
+				'ALIGN'  => array('bitfield' => 16,   'open' => '\[left|\[center|\[right|\[indent|\[align', 'close' => '\[/left|\[/center|\[/right|\[/indent|\[/align'),
+				'LIST'   => array('bitfield' => 32,   'open' => '\[\*'),
+				'LINK'   => array('bitfield' => 64),
+				'CODE'   => array('bitfield' => 128,  'open' => '\[code',                                   'close' => '\[/code'),
+				'PHP'    => array('bitfield' => 256,  'open' => '\[php',                                    'close' => '\[/php'),
+				'HTML'   => array('bitfield' => 512,  'open' => '\[html',                                   'close' => '\[/html'),
+				'QUOTE'  => array('bitfield' => 1024, 'open' => '\[quote',                                  'close' => '\[/quote'),
+				'HIDE'   => array('bitfield' => 2048, 'open' => '\[hide',                                   'close' => '\[/hide'),
+				'CHARGE' => array('bitfield' => 4096, 'open' => '\[charge',                                 'close' => '\[/charge'),
+			);
+
+			foreach ($rawbbcodes AS $key => $value)
+			{
+				if ($this->registry->options['phpkd_vblvb_bbcodes'] & $value['bitfield'])
+				{
+					$this->bbcodes[$key] = array('open' => $value['open'], 'close' => $value['close']);
+				}
+			}
+			break;
+
+
+		default:
+			// Do nothing!
+			break;
+	}
+}
+
+
+/*============================================================================*\
+|| ########################################################################### ||
+|| # Version: 4.0.122
+|| # $Revision: 64 $
+|| # Released: $Date: 2010-01-14 03:54:53 +0200 (Thu, 14 Jan 2010) $
+|| ########################################################################### ||
+\*============================================================================*/
