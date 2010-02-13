@@ -2,7 +2,7 @@
 /*==================================================================================*\
 || ################################################################################ ||
 || # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
-|| # License Type: Commercial License                             $Revision: 96 $ # ||
+|| # License Type: Commercial License                             $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
 || #            Copyright ©2005-2010 PHP KingDom. All Rights Reserved.            # ||
@@ -29,8 +29,8 @@ define('PHPKD_TOCKEN', '7efad4a065eb29fb5ac56d57bc2c090c');
  *
  * @package vB Link Verifier Bot 'Pro' Edition
  * @author PHP KingDom Development Team
- * @version $Revision: 96 $
- * @since $Date: 2010-01-21 12:30:27 +0200 (Thu, 21 Jan 2010) $
+ * @version $Revision$
+ * @since $Date$
  * @copyright PHP KingDom (PHPKD)
  */
 class PHPKD_VBLVB_DML extends PHPKD_VBLVB
@@ -500,7 +500,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 /*============================================================================*\
 || ########################################################################### ||
 || # Version: 4.0.122
-|| # $Revision: 96 $
-|| # Released: $Date: 2010-01-21 12:30:27 +0200 (Thu, 21 Jan 2010) $
+|| # $Revision$
+|| # Released: $Date$
 || ########################################################################### ||
 \*============================================================================*/

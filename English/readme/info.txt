@@ -608,4 +608,4 @@ Recent Products:
 |              Brought to you by PHP KingDom (www.phpkd.net)              |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.0.122 $ - $Id: info.txt 96 2010-01-21 10:30:27Z PHPKD $
+$Version: 4.0.122 $ - $Id$

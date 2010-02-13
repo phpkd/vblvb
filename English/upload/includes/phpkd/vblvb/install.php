@@ -2,7 +2,7 @@
 /*==================================================================================*\
 || ################################################################################ ||
 || # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
-|| # License Type: Commercial License                             $Revision: 96 $ # ||
+|| # License Type: Commercial License                             $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
 || #            Copyright ©2005-2010 PHP KingDom. All Rights Reserved.            # ||
@@ -26,8 +26,8 @@ if (!defined('VB_AREA') OR !defined('IN_CONTROL_PANEL'))
  *
  * @package vB Link Verifier Bot 'Pro' Edition
  * @author PHP KingDom Development Team
- * @version $Revision: 96 $
- * @since $Date: 2010-01-21 12:30:27 +0200 (Thu, 21 Jan 2010) $
+ * @version $Revision$
+ * @since $Date$
  * @copyright PHP KingDom (PHPKD)
  */
 class PHPKD_VBLVB_Install
@@ -128,10 +128,10 @@ class PHPKD_VBLVB_Install
 			'productid'       => $this->info['productid'],
 			'title'           => $this->info['title'],
 			'version'         => $this->info['version'],
-			'revision'        => trim(substr(substr('$Revision: 96 $', 10), 0, -1)),
+			'revision'        => trim(substr(substr('$Revision$', 10), 0, -1)),
 			'author'          => 'Abdelrahman Hossam Omran (SolidSnake@GTI)',
 			'vendor'          => 'PHP KingDom',
-			'released'        => trim(substr(substr('$Date: 2010-01-21 12:30:27 +0200 (Thu, 21 Jan 2010) $', 6), 0, -1)),
+			'released'        => trim(substr(substr('$Date$', 6), 0, -1)),
 			'url'             => $this->info['url'],
 			'versioncheckurl' => $this->info['versioncheckurl'],
 			'extradetails'    => str_replace('url', 'info', $this->info['url']),
@@ -352,7 +352,7 @@ class PHPKD_VBLVB_Install
 /*============================================================================*\
 || ########################################################################### ||
 || # Version: 4.0.122
-|| # $Revision: 96 $
-|| # Released: $Date: 2010-01-21 12:30:27 +0200 (Thu, 21 Jan 2010) $
+|| # $Revision$
+|| # Released: $Date$
 || ########################################################################### ||
 \*============================================================================*/
