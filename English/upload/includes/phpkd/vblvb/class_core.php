@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
+|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.130 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -129,7 +129,7 @@ class PHPKD_VBLVB
 
 
 	/**
-	* The DM handler
+	* The DM Object Handler
 	*
 	* @var	PHPKD_VBLVB_DM
 	*/
@@ -194,11 +194,7 @@ class PHPKD_VBLVB
 			define('PHPKD_VBLVB', TRUE);
 		}
 
-		if (is_array($initparams) AND !empty($initparams))
-		{
-			$this->initialize($initparams);
-			// $this->error('phpkd_vblvb_init_falied');
-		}
+		$this->initialize($initparams);
 	}
 
 
@@ -211,14 +207,17 @@ class PHPKD_VBLVB
 	*/
 	function initialize($initparams)
 	{
-		if (file_exists(DIR . '/includes/phpkd/vblvb/init.php'))
+		// Initialized params should be passed as array!
+		if (is_array($initparams) AND !empty($initparams))
 		{
-			return require(DIR . '/includes/phpkd/vblvb/init.php');
-		}
-		else
-		{
-			//$this->error('phpkd_vblvb_init_falied');
-			trigger_error('Required initialization failed!', E_USER_ERROR);
+			if (file_exists(DIR . '/includes/phpkd/vblvb/init.php'))
+			{
+				return require(DIR . '/includes/phpkd/vblvb/init.php');
+			}
+			else
+			{
+				trigger_error('Required initialization failed!', E_USER_ERROR);
+			}
 		}
 	}
 
@@ -424,16 +423,21 @@ class PHPKD_VBLVB
 			{
 				if (is_array($initparams) AND !empty($initparams))
 				{
-					// Unset already initialized data!!
+					// Don't re-initialize the already initialized data!!
 					foreach ($initparams AS $key => $value)
 					{
-						if (is_array($this->$key) AND !empty($this->$key))
+						if (isset($this->$key))
 						{
 							unset($initparams[$key]);
 						}
 					}
+				}
+
+				if (is_array($initparams) AND !empty($initparams))
+				{
 					$this->initialize($initparams);
 				}
+
 
 				require_once(DIR . '/includes/phpkd/vblvb/class_dm.php');
 				$this->dmhandle = new PHPKD_VBLVB_DM($this->registry, $this);
@@ -450,7 +454,7 @@ class PHPKD_VBLVB
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.122
+|| # Version: 4.0.130
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

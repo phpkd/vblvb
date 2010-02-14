@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<navgroups product="phpkd_vblvb" master="true">
+
+	<navgroup phrase="phpkd_vblvb" permissions="canadmincron" displayorder="215">
+
+		<navoption displayorder="10">
+			<phrase>phpkd_vblvb_settings</phrase>
+			<link>options.php?do=phpkd_vblvb</link>
+		</navoption>
+
+		<navoption displayorder="20">
+			<phrase>phpkd_vblvb_log</phrase>
+			<link>phpkd_vblvb.php?do=log</link>
+		</navoption>
+
+	</navgroup>
+
+</navgroups>
+
+<!-- SVN: $Version: 4.0.130 $ - $Id: bitfield_phpkd_vblvb.xml 102 2010-02-13 04:41:49Z phpkdacp $ -->

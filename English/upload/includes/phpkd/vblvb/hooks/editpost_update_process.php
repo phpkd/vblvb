@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
+|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.130 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -49,7 +49,7 @@ else
 }
 
 
-if ($this->registry->options['phpkd_vblvb_checked_edited'] == 1 OR ($threadinfo['firstpostid'] == $postinfo['postid'] AND $this->registry->options['phpkd_vblvb_checked_edited'] == 2))
+if ($this->registry->options['phpkd_vblvb_checked_editedposts'] == 1 OR ($threadinfo['firstpostid'] == $postinfo['postid'] AND $this->registry->options['phpkd_vblvb_checked_editedposts'] == 2))
 {
 	$phpkd_vblvb_pass = FALSE;
 
@@ -265,7 +265,7 @@ else
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.122
+|| # Version: 4.0.130
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

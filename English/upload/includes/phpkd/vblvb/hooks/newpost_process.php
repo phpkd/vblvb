@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
+|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.130 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -49,7 +49,7 @@ else
 }
 
 
-if (($type == 'thread' AND ($this->registry->options['phpkd_vblvb_checked_new'] == 1 OR $this->registry->options['phpkd_vblvb_checked_new'] == 2)) OR $type == 'reply' AND $this->registry->options['phpkd_vblvb_checked_new'] == 1)
+if (($type == 'thread' AND ($this->registry->options['phpkd_vblvb_checked_newposts'] == 1 OR $this->registry->options['phpkd_vblvb_checked_newposts'] == 2)) OR $type == 'reply' AND $this->registry->options['phpkd_vblvb_checked_newposts'] == 1)
 {
 	// ... Licensing ... //
 	$phpkd_vblvb_license_proceed = FALSE;
@@ -102,7 +102,7 @@ else
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.122
+|| # Version: 4.0.130
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
+|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.130 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -26,16 +26,24 @@ if (!is_object($vbulletin->db))
 // ########################################################################
 
 
+$log = '';
 if ($vbulletin->options['phpkd_vblvb_active'])
 {
-	if (!$vbulletin->options['phpkd_vblvb_checked_posts'])
-	{
-		print_stop_message('phpkd_vblvb_cronjob_off');
-	}
-
 	if (!defined('IN_CONTROL_PANEL'))
 	{
 		global $vbphrase;
+	}
+
+	if (!$vbulletin->options['phpkd_vblvb_checked_existingposts'])
+	{
+		if (defined('IN_CONTROL_PANEL'))
+		{
+			print_stop_message('phpkd_vblvb_existing_notchecked');
+		}
+		else
+		{
+			$log .= $vbphrase['phpkd_vblvb_existing_notchecked'];
+		}
 	}
 
 	$error_type = (defined('IN_CONTROL_PANEL') ? ERRTYPE_ECHO : ERRTYPE_SILENT);
@@ -44,11 +52,56 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 
 	if (!$phpkd_vblvb->verify_license())
 	{
-		print_cp_message('<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>');
+		if (defined('IN_CONTROL_PANEL'))
+		{
+			print_cp_message('<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>');
+		}
+		else
+		{
+			$log .= '<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>';
+		}
 	}
 
 
-	$phpkd_vblvb->initialize(array('threadmodes' => TRUE, 'postmodes' => TRUE));
+	// Required Initialization
+	$phpkd_vblvb->initialize(array('hosts' => TRUE, 'protocols' => TRUE, 'bbcodes' => TRUE, 'threadmodes' => TRUE, 'postmodes' => TRUE));
+	if (!is_array($phpkd_vblvb->hosts) OR empty($phpkd_vblvb->hosts))
+	{
+		if (defined('IN_CONTROL_PANEL'))
+		{
+			print_stop_message('phpkd_vblvb_invalid_hosts');
+		}
+		else
+		{
+			$log .= $vbphrase['phpkd_vblvb_invalid_hosts'];
+		}
+	}
+
+	if (!is_array($phpkd_vblvb->protocols) OR empty($phpkd_vblvb->protocols))
+	{
+		if (defined('IN_CONTROL_PANEL'))
+		{
+			print_stop_message('phpkd_vblvb_invalid_protocols');
+		}
+		else
+		{
+			$log .= $vbphrase['phpkd_vblvb_invalid_protocols'];
+		}
+	}
+
+	if (!is_array($phpkd_vblvb->bbcodes) OR empty($phpkd_vblvb->bbcodes))
+	{
+		if (defined('IN_CONTROL_PANEL'))
+		{
+			print_stop_message('phpkd_vblvb_invalid_bbcodes');
+		}
+		else
+		{
+			$log .= $vbphrase['phpkd_vblvb_invalid_bbcodes'];
+		}
+	}
+
+
 	if (is_array($phpkd_vblvb->threadmodes) AND !empty($phpkd_vblvb->threadmodes))
 	{
 		$rawthreadmodes = array();
@@ -157,7 +210,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 			break;
 	}
 
-	$checked_posts = (($vbulletin->options['phpkd_vblvb_checked_posts'] == 2) ? 'AND post.postid = thread.firstpostid' : '');
+	$checked_posts = (($vbulletin->options['phpkd_vblvb_checked_existingposts'] == 2) ? 'AND post.postid = thread.firstpostid' : '');
 
 	$sucperiod = (($vbulletin->options['phpkd_vblvb_succession_period'] > 0) ? 'AND post.phpkd_vblvb_lastcheck < ' . (TIMENOW - ($vbulletin->options['phpkd_vblvb_succession_period'] * 86400)) : '');
 
@@ -182,52 +235,63 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 	");
 
 
-	$log = $vbphrase['phpkd_vblvb_log_scan_report'] . '<ol class="smallfont">';
-	if (defined('IN_CONTROL_PANEL'))
-	{
-		echo '<ol class="smallfont">';
-		vbflush();
-	}
-
 	$logpunished = '';
 	$punished = array();
-	while ($post = $vbulletin->db->fetch_array($posts))
+
+	if ($vbulletin->db->num_rows($posts))
 	{
-		$log .= '<li><a href="' . $vbulletin->options['bburl'] . '/showthread.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a><ol>';
+		// Required Initialization
+		$phpkd_vblvb->initialize(array('masks' => TRUE, 'staff_reports' => TRUE, 'user_reports' => TRUE));
+
+		$log .= $vbphrase['phpkd_vblvb_log_title'] . '<ol class="smallfont">';
 		if (defined('IN_CONTROL_PANEL'))
 		{
-			echo '<li><a href="' . $vbulletin->options['bburl'] . '/showthread.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a><ol>';
+			echo '<ol class="smallfont">';
 			vbflush();
 		}
 
-		$links = $phpkd_vblvb->dm(array('hosts' => TRUE, 'masks' => TRUE, 'protocols' => TRUE, 'bbcodes' => TRUE, 'punishments' => TRUE, 'staff_reports' => TRUE, 'user_reports' => TRUE))->fetch_urls($post['pagetext']);
-
-		$links['ignored'] = $links['all'] - ($links['alive'] + $links['dead'] + $links['down']);
-		$log .= $links['log'] . "</ol>" . construct_phrase($vbphrase['phpkd_vblvb_log_scan_summery'], $links['all'], $links['checked'], $links['alive'], $links['dead'], $links['down'], $links['ignored']) . '</li>';
-		if (defined('IN_CONTROL_PANEL'))
+		while ($post = $vbulletin->db->fetch_array($posts))
 		{
-			echo '</ol>' . construct_phrase($vbphrase['phpkd_vblvb_log_scan_summery'], $links['all'], $links['checked'], $links['alive'], $links['dead'], $links['down'], $links['ignored']) . '</li>';
-			vbflush();
-		}
-
-
-		// Critical Limit/Red Line
-		if ($links['dead'] > 0 AND $links['checked'] > 0)
-		{
-			$critical = ($links['dead'] / $links['checked']) * 100;
-			if ($critical > $vbulletin->options['phpkd_vblvb_critical'])
+			$log .= '<li><a href="' . $vbulletin->options['bburl'] . '/showthread.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a>';
+			if (defined('IN_CONTROL_PANEL'))
 			{
-				$logpunished .= '<li><a href="' . $vbulletin->options['bburl'] . '/showpost.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a></li>';
-				$punished[$post['userid']][$post['postid']] = $post;
+				echo '<li><a href="' . $vbulletin->options['bburl'] . '/showthread.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a>';
+				vbflush();
 			}
-		}
 
-		// Finished, now update 'post.phpkd_vblvb_lastcheck'
-		$vbulletin->db->query_write("
-			UPDATE " . TABLE_PREFIX . "post
-			SET phpkd_vblvb_lastcheck = " . TIMENOW . "
-			WHERE postid = $post[postid]
-		");
+			$links = $phpkd_vblvb->dm()->fetch_urls($post['pagetext']);
+
+			$links['ignored'] = $links['all'] - ($links['alive'] + $links['dead'] + $links['down']);
+			$log .= $links['log'] . construct_phrase($vbphrase['phpkd_vblvb_log_summery'], $links['all'], $links['checked'], $links['alive'], $links['dead'], $links['down'], $links['ignored']) . '</li>';
+			if (defined('IN_CONTROL_PANEL'))
+			{
+				echo construct_phrase($vbphrase['phpkd_vblvb_log_summery'], $links['all'], $links['checked'], $links['alive'], $links['dead'], $links['down'], $links['ignored']) . '</li>';
+				vbflush();
+			}
+
+
+			// Critical Limit/Red Line
+			if ($links['dead'] > 0 AND $links['checked'] > 0)
+			{
+				$critical = ($links['dead'] / $links['checked']) * 100;
+				if ($critical > $vbulletin->options['phpkd_vblvb_critical'])
+				{
+					$logpunished .= '<li><a href="' . $vbulletin->options['bburl'] . '/showpost.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a></li>';
+					$punished[$post['userid']][$post['postid']] = $post;
+				}
+			}
+
+			// Finished, now update 'post.phpkd_vblvb_lastcheck'
+			$vbulletin->db->query_write("
+				UPDATE " . TABLE_PREFIX . "post
+				SET phpkd_vblvb_lastcheck = " . TIMENOW . "
+				WHERE postid = $post[postid]
+			");
+		}
+	}
+	else
+	{
+		$log .= $vbphrase['phpkd_vblvb_nothing_checked'];
 	}
 	$vbulletin->db->free_result($posts);
 
@@ -248,24 +312,32 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 
 		// Send User Reports
 		$phpkd_vblvb->dm()->user_reports($punished);
-
-		// Send Staff Reports
-		$phpkd_vblvb->dm()->staff_reports($log);
 	}
+
+	// Send Staff Reports
+	$phpkd_vblvb->dm()->staff_reports($log);
 
 
 	unset($phpkd_vblvb);
-	log_cron_action($log, $nextitem, 1);
 }
-else if (defined('IN_CONTROL_PANEL'))
+else
 {
-	print_stop_message('phpkd_vblvb_inactive');
+	if (defined('IN_CONTROL_PANEL'))
+	{
+		print_stop_message('phpkd_vblvb_inactive');
+	}
+	else
+	{
+		$log .= $vbphrase['phpkd_vblvb_inactive'];
+	}
 }
+
+log_cron_action($log, $nextitem, 1);
 
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.122
+|| # Version: 4.0.130
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

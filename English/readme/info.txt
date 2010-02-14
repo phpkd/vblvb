@@ -11,7 +11,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.0.122
+     * 4.0.130
 
 
 Description:
@@ -546,7 +546,7 @@ History:
      * v4.0.121 21/01/2010 10:00 AM UTC: Maintenance release (public)
 	1. Bug Fix: Usergroups/Forums Excluding functions aren't working (http://forum.phpkd.net/project.php?issueid=31).
 	2. Bug Fix: Excluded Thread/Post Modes causes DB error (http://forum.phpkd.net/project.php?issueid=32).
-     * v4.0.122 12/02/2010 10:00 AM UTC: Maintenance release (public)
+     * v4.0.130 12/02/2010 10:00 AM UTC: Maintenance release (public)
 	1. Bug Fix: XXXXXXXXXXXXXXXXXX (http://forum.phpkd.net/project.php?issueid=31).
 	2. Bug Fix: 
 	3. Bug Fix: 
@@ -608,4 +608,4 @@ Recent Products:
 |              Brought to you by PHP KingDom (www.phpkd.net)              |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.0.122 $ - $Id$
+$Version: 4.0.130 $ - $Id$

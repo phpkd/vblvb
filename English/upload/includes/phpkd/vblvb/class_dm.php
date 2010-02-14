@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
+|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.130 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -94,11 +94,6 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 			}
 		}
 
-		if (!is_array($this->protocols) OR empty($this->protocols))
-		{
-			$this->error('phpkd_vblvb_invalid_protocols');
-		}
-
 
 		if (!empty($tmpbbcodes1) AND !empty($tmpbbcodes2))
 		{
@@ -166,8 +161,17 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 
 		if (is_array($actualurls) AND !empty($actualurls))
 		{
+			$log = '';
 			$counter = 0;
 			$return = array();
+
+
+			if (defined('IN_CONTROL_PANEL'))
+			{
+				echo '<ol>';
+				vbflush();
+			}
+
 			foreach(array_unique($actualurls) AS $url)
 			{
 				if ($this->registry->options['phpkd_vblvb_maxlinks'] > 0 AND $counter >= $this->registry->options['phpkd_vblvb_maxlinks'])
@@ -185,7 +189,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 					{
 						if(preg_match("#$host[urlmatch]#i", $url))
 						{
-							$return[] = $this->check(trim($url), $host['contentmatch'], $host['urlsearch'], $host['urlreplace'], $host['downmatch']);
+							$return[] = $this->check(trim($url), $host['status'], $host['contentmatch'], $host['urlsearch'], $host['urlreplace'], $host['downmatch']);
 						}
 					}
 
@@ -193,8 +197,14 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 				}
 			}
 
+			if (defined('IN_CONTROL_PANEL'))
+			{
+				echo '</ol>';
+				vbflush();
+			}
 
-			$log = '';
+
+			$log .= '<ol>';
 			$alive = $dead = $down = 0;
 			foreach ($return AS $rtrn)
 			{
@@ -213,6 +223,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 
 				$log .= $rtrn['log'];
 			}
+			$log .= '</ol>';
 
 			return array('all' => intval($counter), 'checked' => intval($alive + $dead + $down), 'alive' => intval($alive), 'dead' => intval($dead), 'down' => intval($down), 'log' => $log);
 		}
@@ -338,31 +349,41 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 	*
 	* @return	array	Checked link status & report
 	*/
-	function check($link, $regex, $pattern, $replace, $downmatch)
+	function check($url, $status, $contentmatch, $urlsearch, $urlreplace, $downmatch)
 	{
-		if(!empty($pattern)) 
-		{
-			$link = preg_replace($pattern, $replace, $link);
-		}
+		$colors = unserialize($this->registry->options['phpkd_vblvb_linkstatus_colors']);
 
-		$page = $this->vurl($link);
-		$link = htmlentities($link, ENT_QUOTES);
-
-
-		if(preg_match("#$regex#i", $page)) 
+		if ($status == 'alive')
 		{
-			$status = 'alive';
-			$log = '<li>' . $this->vbphrase['phpkd_vblvb_log_link_active'] . "<a href=\"$link\" target=\"_blank\">$link</a></li>";
+			if(!empty($urlsearch)) 
+			{
+				$url = preg_replace($urlsearch, $urlreplace, $url);
+			}
+	
+			$page = $this->vurl($url);
+			$url = htmlentities($url, ENT_QUOTES);
+	
+	
+			if(preg_match("#$contentmatch#i", $page)) 
+			{
+				$status = 'alive';
+				$log = construct_phrase($this->vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $url);
+			}
+			else if(preg_match("#$downmatch#i", $page)) 
+			{
+				$status = 'down';
+				$log = construct_phrase($this->vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $url);
+			}
+			else 
+			{
+				$status = 'dead';
+				$log = construct_phrase($this->vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $url);
+			}
 		}
-		else if(preg_match("#$downmatch#i", $page)) 
-		{
-			$status = 'down';
-			$log = '<li>' . $this->vbphrase['phpkd_vblvb_log_link_down'] . "<a href=\"$link\" target=\"_blank\">$link</a></li>";
-		}
-		else 
+		else
 		{
 			$status = 'dead';
-			$log = '<li>' . $this->vbphrase['phpkd_vblvb_log_link_dead'] . "<a href=\"$link\" target=\"_blank\">$link</a></li>";
+			$log = construct_phrase($this->vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $url);
 		}
 
 
@@ -872,7 +893,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.122
+|| # Version: 4.0.130
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

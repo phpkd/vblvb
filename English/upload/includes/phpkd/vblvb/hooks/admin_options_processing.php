@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
+|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.130 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -78,6 +78,20 @@ else if ($oldsetting['optioncode'] == 'phpkd_vblvb_usergroups')
 	$settings["$oldsetting[varname]"] = array_map('intval', $settings["$oldsetting[varname]"]);
 	$settings["$oldsetting[varname]"] = serialize($settings["$oldsetting[varname]"]);
 }
+else if ($oldsetting['optioncode'] == 'phpkd_vblvb_linkstatus_colors')
+{
+	$internalhandle = TRUE;
+
+	$store = array();
+	foreach ($settings["$oldsetting[varname]"] AS $value)
+	{
+		if ($value != '')
+		{
+			$store[] = $value;
+		}
+	}
+	$settings["$oldsetting[varname]"] = serialize($store);
+}
 
 
 if ($internalhandle)
@@ -92,7 +106,7 @@ else
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.122
+|| # Version: 4.0.130
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

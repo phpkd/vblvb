@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
+|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.130 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -260,19 +260,19 @@ foreach ($initparams AS $key => $value)
 					case 'HOSTS1':
 						if ($this->registry->options['phpkd_vblvb_hosts'] & $value['bitfield'])
 						{
-							$this->hosts[] = array('urlmatch' => $value['urlmatch'], 'contentmatch' => $value['contentmatch'], 'urlsearch' => $value['urlsearch'], 'urlreplace' => $value['urlreplace']);
+							$this->hosts[] = array('urlmatch' => $value['urlmatch'], 'status' =>  $value['status'], 'contentmatch' => $value['contentmatch'], 'urlsearch' => $value['urlsearch'], 'urlreplace' => $value['urlreplace']);
 						}
 						break;
 					case 'HOSTS2':
 						if ($this->registry->options['phpkd_vblvb_hosts2'] & $value['bitfield'])
 						{
-							$this->hosts[] = array('urlmatch' => $value['urlmatch'], 'contentmatch' => $value['contentmatch'], 'urlsearch' => $value['urlsearch'], 'urlreplace' => $value['urlreplace']);
+							$this->hosts[] = array('urlmatch' => $value['urlmatch'], 'status' =>  $value['status'], 'contentmatch' => $value['contentmatch'], 'urlsearch' => $value['urlsearch'], 'urlreplace' => $value['urlreplace']);
 						}
 						break;
 					case 'HOSTS3':
 						if ($this->registry->options['phpkd_vblvb_hosts3'] & $value['bitfield'])
 						{
-							$this->hosts[] = array('urlmatch' => $value['urlmatch'], 'contentmatch' => $value['contentmatch'], 'urlsearch' => $value['urlsearch'], 'urlreplace' => $value['urlreplace']);
+							$this->hosts[] = array('urlmatch' => $value['urlmatch'], 'status' =>  $value['status'], 'contentmatch' => $value['contentmatch'], 'urlsearch' => $value['urlsearch'], 'urlreplace' => $value['urlreplace']);
 						}
 						break;
 				}
@@ -451,7 +451,7 @@ foreach ($initparams AS $key => $value)
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.122
+|| # Version: 4.0.130
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

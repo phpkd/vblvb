@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.122 # ||
+|| # Product Name: PHPKD - vB Link Verifier Bot                  Version: 4.0.130 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -430,6 +430,31 @@ else if ($setting['optioncode'] == 'phpkd_vblvb_usergroups')
 		print_input_row($description, $name, $setting['value']);
 	}
 }
+else if ($setting['optioncode'] == 'phpkd_vblvb_linkstatus_colors')
+{
+	$handled = TRUE;
+	$setting['html'] = "<div id=\"ctrl_$setting[varname]\"><fieldset id=\"multi_input_fieldset_$setting[varname]\" style=\"padding:4px\">";
+
+	$setting['values'] = unserialize($setting['value']);
+	$setting['values'] = (is_array($setting['values']) ? $setting['values'] : array());
+	$setting['values'][] = '';
+
+	foreach ($setting['values'] AS $key => $value)
+	{
+		
+		$setting['html'] .= "<div id=\"multi_input_container_$setting[varname]_$key\">" . $this->vbphrase['phpkd_vblvb_linkstatus_' . ($key + 1)] . " <input type=\"text\" class=\"bginput\" name=\"setting[$setting[varname]][$key]\" id=\"multi_input_$setting[varname]_$key\" size=\"40\" value=\"" . htmlspecialchars_uni($value) . "\" tabindex=\"1\" /></div>";
+	}
+
+	$i = sizeof($setting['values']);
+	if ($i == 0)
+	{
+		$setting['html'] .= "<div><input type=\"text\" class=\"bginput\" name=\"setting[$setting[varname]][$i]\" size=\"40\" tabindex=\"1\" /></div>";
+	}
+
+	$setting['html'] .= "</fieldset>";
+
+	print_label_row($description, $setting['html']);
+}
 
 
 if ($handled)
@@ -444,7 +469,7 @@ else
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.122
+|| # Version: 4.0.130
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
