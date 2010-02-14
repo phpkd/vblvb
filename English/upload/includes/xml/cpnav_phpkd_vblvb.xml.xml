@@ -6,7 +6,7 @@
 
 		<navoption displayorder="10">
 			<phrase>phpkd_vblvb_settings</phrase>
-			<link>options.php?do=phpkd_vblvb</link>
+			<link>options.php?do=options&dogroup=phpkd_vblvb</link>
 		</navoption>
 
 		<navoption displayorder="20">
