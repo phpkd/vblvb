@@ -6,6 +6,8 @@
 PHPKD - vB Link Verifier Bot -- Installation Procedure:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      1. Upload required files to their appropriate places:
+	|- admincp
+	     + phpkd_vblvb.php
 	|- includes
 	     + phpkd
 	          + hooks
@@ -26,6 +28,7 @@ PHPKD - vB Link Verifier Bot -- Installation Procedure:
 
 	     + xml
 	          - bitfield_phpkd_vblvb.xml
+	          - cpnav_phpkd_vblvb.xml
 
      2. Import the product's XML file "product-phpkd_vblvb.xml" from AdminCP.
 

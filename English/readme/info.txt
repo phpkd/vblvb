@@ -349,6 +349,8 @@ Features:
 Installation Procedure:
 ~~~~~~~~~~~~~~~~~~~~~~~~
      1. Upload required files to their appropriate places:
+	|- admincp
+	     + phpkd_vblvb.php
 	|- includes
 	     + phpkd
 	          + hooks
@@ -369,6 +371,7 @@ Installation Procedure:
 
 	     + xml
 	          - bitfield_phpkd_vblvb.xml
+	          - cpnav_phpkd_vblvb.xml
 
      2. Import the product's XML file "product-phpkd_vblvb.xml" from AdminCP.
 
@@ -379,7 +382,7 @@ Installation Procedure:
      4. Activate & Configure product's settings.
 
      5. [After Successful Installation]: Download your local license file from: Customer Area » My Packages » vB Link Verifier Bot » Licenses » View » Local License Key » Click to Download
-	And upload it to it's appropriate location:
+	And upload it to it's appropriate location (rename it to 'license.php' if required):
 	|- includes
 	     + phpkd
 	          + vblvb
@@ -398,10 +401,13 @@ Upgrade Procedure:
 Controls:
 ~~~~~~~~~~
      * AdminCP Settings:
-	vBulletin AdminCP » vBulletin Options » vBulletin Options » PHPKD - Link Verifier Bot
+	vBulletin AdminCP » Settings » Options » PHPKD - Link Verifier Bot
 
      * Scheduled Task:
 	vBulletin AdminCP » Scheduled Tasks » Scheduled Task Manager » PHPKD - Link Verifier Bot
+
+     * Log Viewer:
+	vBulletin AdminCP » Link Verifier Bot » Log Records
 
 
 License:
@@ -424,17 +430,24 @@ Known Issues:
 
 Future TO-DO-LIST:
 ~~~~~~~~~~~~~~~~~~~
-     * Detailed user reports (http://forum.phpkd.net/project.php?issueid=6).
-     * Staff/User Report modes (Always send/Send only if ..) (http://forum.phpkd.net/project.php?issueid=7).
-     * Add cronjob status messages & configuration conclusion (http://forum.phpkd.net/project.php?issueid=8).
+     * Login to premium accounts (http://forum.phpkd.net/project.php?issueid=39).
      * Add separate page for online bulk checking (http://forum.phpkd.net/project.php?issueid=11).
-     * Reply to thread when dead links found (http://forum.phpkd.net/project.php?issueid=18).
-     * Post flag - Last checked in Date/Time (http://forum.phpkd.net/project.php?issueid=17).
-     * Archive all reports & link it to their threads & posts (http://forum.phpkd.net/project.php?issueid=19).
-     * Modify posts & colorize Active/Dead Links (http://forum.phpkd.net/project.php?issueid=16).
-     * Linked points system for reputation purposes (http://forum.phpkd.net/project.php?issueid=20).
-     * Administration Maintenance tools (http://forum.phpkd.net/project.php?issueid=21).
+     * Check authentication (http://forum.phpkd.net/project.php?issueid=9).
+     * Detect masked links (linksave.in, linkcrypt.ws, linkencrypter.com) (http://forum.phpkd.net/project.php?issueid=2).
+     * User Report modes (Always send/Send only if ..) (http://forum.phpkd.net/project.php?issueid=51).
+     * Run cronjob via external shceduled task services (http://forum.phpkd.net/project.php?issueid=44).
+     * Add a new thread option to enable/disable bot checking (http://forum.phpkd.net/project.php?issueid=42).
+     * Critical Limit/Red Line for each filehost in one thread (http://forum.phpkd.net/project.php?issueid=33).
+     * Detect Linkbucks Alias URLs (http://forum.phpkd.net/project.php?issueid=35).
      * Post flag - How many dead links included (http://forum.phpkd.net/project.php?issueid=25).
+     * Administration Maintenance tools (http://forum.phpkd.net/project.php?issueid=21).
+     * Linked points system for reputation purposes (http://forum.phpkd.net/project.php?issueid=20).
+     * Modify posts & colorize Active/Dead Links (http://forum.phpkd.net/project.php?issueid=16).
+     * Archive all reports & link it to their threads & posts (http://forum.phpkd.net/project.php?issueid=19).
+     * Post flag - Last checked in Date/Time (http://forum.phpkd.net/project.php?issueid=17).
+     * Reply to thread when dead links found (http://forum.phpkd.net/project.php?issueid=18).
+     * Detailed user reports (http://forum.phpkd.net/project.php?issueid=6).
+     * Add cronjob status messages & configuration conclusion (http://forum.phpkd.net/project.php?issueid=8).
      * Post your suggestions!
 
 
@@ -557,22 +570,22 @@ History:
 	1. Bug Fix: Usergroups/Forums Excluding functions aren't working (http://forum.phpkd.net/project.php?issueid=31).
 	2. Bug Fix: Excluded Thread/Post Modes causes DB error (http://forum.phpkd.net/project.php?issueid=32).
      * v4.0.130 14/02/2010 10:00 PM UTC: Featured release (public)
-	1. Compatibility: Added "product-phpkd_vblvb_fix.xml" inside "do_not_upload" to fix upgrading from "Lite" edition to "Ultimate" edition.
+	1. Compatibility: Added "product-phpkd_vblvb_fix.xml" inside "do_not_upload" to fix upgrading from "Lite" edition to "Ultimate" edition (http://forum.phpkd.net/project.php?issueid=45).
 	2. Bug Fix: Adrive.Com and Uploading.Com wrong reports in some cases (http://forum.phpkd.net/project.php?issueid=45).
 	3. Bug Fix: No reports sent when the cronjob autorun (http://forum.phpkd.net/project.php?issueid=43).
 	4. Bug Fix: "Thread Staff Reports" aren't working when the "Reply Staff Reports" turned off (http://forum.phpkd.net/project.php?issueid=40).
 	5. Bug Fix: Massive checking MegaUpload.Com Links lead to wrond dead status reports (http://forum.phpkd.net/project.php?issueid=37).
 	6. Bug Fix: "User PM Reports" doesn't work if "Staff PM Reports" is disabled (http://forum.phpkd.net/project.php?issueid=36).
-	7. Task Acheived: Change the default value for the setting "Powerful Usergroups" (http://forum.phpkd.net/project.php?issueid=41).
-	8. Task Acheived: URL status 'Temporary Down' is Important (http://forum.phpkd.net/project.php?issueid=38).
-	9. Task Acheived: Multilingual hosts requires checking & optimizing (http://forum.phpkd.net/project.php?issueid=46).
-	10. Optimization: hardcoded checked/reported links has been replaced with a configurable phrase.
-	11. Optimization: Cronjob has more checks now before running, it will check if there's hosts/protocols/bbcodes to be checked or not. If yes, proceed, if no then kill the process & display an error message. Additional check added to make sure there's posts to be checked, if there isn't then an error message displayed.
-	12. Optimization: Multiple tweaks and optimizations to the product's core.
-	13. Optimization: Display punished posts report within manual cronjob run report.
-	14. New Feature: Ability to set when to send staff reports (http://forum.phpkd.net/project.php?issueid=7).
-	15. New Feature: Ability to customize link status colors (http://forum.phpkd.net/project.php?issueid=49).
-	16. New Feature: Added a log viewer to AdminCP (http://forum.phpkd.net/project.php?issueid=48).
+	7. Task Achieved: Change the default value for the setting "Powerful Usergroups" (http://forum.phpkd.net/project.php?issueid=41).
+	8. Task Achieved: URL status 'Temporary Down' is Important (http://forum.phpkd.net/project.php?issueid=38).
+	9. Task Achieved: Multilingual hosts requires checking & optimizing (http://forum.phpkd.net/project.php?issueid=46).
+	10. Optimization: hard-coded checked/reported links has been replaced with a configurable phrase.
+	11. Optimization: Cronjob has more checks now before running, it will check if there's hosts/protocols/bbcodes to be checked or not. If yes, proceed, if no then kill the process & display an error message. Additional check added to make sure there's posts to be checked, if there isn't then an error message displayed (http://forum.phpkd.net/project.php?issueid=8).
+	12. Optimization: Display punished posts report within manual cronjob run report (http://forum.phpkd.net/project.php?issueid=50).
+	16. Optimization: Multiple tweaks and optimizations to the product's core.
+	13. New Feature: Ability to set when to send staff reports (http://forum.phpkd.net/project.php?issueid=7).
+	14. New Feature: Ability to customize link status colors (http://forum.phpkd.net/project.php?issueid=49).
+	15. New Feature: Added a log viewer to AdminCP (http://forum.phpkd.net/project.php?issueid=48).
 	17. Updated installation/upgrade instructions.
 	18. Updated the following hosts:
       1. 2shared.com
@@ -652,21 +665,19 @@ Screen Shots:
 
 Notes:
 ~~~~~~~~~~~~~~~~~
-     * English & Arabic versions supported & supplied officially.
-     * Un-official translations are available up-to-date (French, Turkish) & more translations by the way.
-     * Staff reports sent only if there's punished posts.
+     * Multiple translations are available (Arabic, English, French, German, Greek, Turkish, Spanish .. and counting!).
 
 
 Technical Notes:
 ~~~~~~~~~~~~~~~~~
      * New Plugins: 5
-     * New Phrases: 252
+     * New Phrases: 276
      * New Templates: 0
      * Manual Template changes: 0
      * Auto Template changes: 0
-     * New Files: 14
+     * New Files: 16
      * Manual File Changes: 0
-     * New vBulletin Settings: 38
+     * New vBulletin Settings: 40
      * New Usergroup Permissions: 0
      * New Moderator Permissions: 0
      * New Administrator Permissions: 0
