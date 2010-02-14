@@ -546,10 +546,93 @@ History:
      * v4.0.121 21/01/2010 10:00 AM UTC: Maintenance release (public)
 	1. Bug Fix: Usergroups/Forums Excluding functions aren't working (http://forum.phpkd.net/project.php?issueid=31).
 	2. Bug Fix: Excluded Thread/Post Modes causes DB error (http://forum.phpkd.net/project.php?issueid=32).
-     * v4.0.130 12/02/2010 10:00 AM UTC: Maintenance release (public)
-	1. Bug Fix: XXXXXXXXXXXXXXXXXX (http://forum.phpkd.net/project.php?issueid=31).
-	2. Bug Fix: 
-	3. Bug Fix: 
+     * v4.0.130 14/02/2010 10:00 PM UTC: Featured release (public)
+	1. Compatibility: Added "product-phpkd_vblvb_fix.xml" inside "do_not_upload" to fix upgrading from "Lite" edition to "Ultimate" edition.
+	2. Bug Fix: Adrive.Com and Uploading.Com wrong reports in some cases (http://forum.phpkd.net/project.php?issueid=45).
+	3. Bug Fix: No reports sent when the cronjob autorun (http://forum.phpkd.net/project.php?issueid=43).
+	4. Bug Fix: "Thread Staff Reports" aren't working when the "Reply Staff Reports" turned off (http://forum.phpkd.net/project.php?issueid=40).
+	5. Bug Fix: Massive checking MegaUpload.Com Links lead to wrond dead status reports (http://forum.phpkd.net/project.php?issueid=37).
+	6. Bug Fix: "User PM Reports" doesn't work if "Staff PM Reports" is disabled (http://forum.phpkd.net/project.php?issueid=36).
+	7. Task Acheived: Change the default value for the setting "Powerful Usergroups" (http://forum.phpkd.net/project.php?issueid=41).
+	8. Task Acheived: URL status 'Temporary Down' is Important (http://forum.phpkd.net/project.php?issueid=38).
+	9. Task Acheived: Multilingual hosts requires checking & optimizing (http://forum.phpkd.net/project.php?issueid=46).
+	10. Optimization: hardcoded checked/reported links has been replaced with a configurable phrase.
+	11. Optimization: Cronjob has more checks now before running, it will check if there's hosts/protocols/bbcodes to be checked or not. If yes, proceed, if no then kill the process & display an error message. Additional check added to make sure there's posts to be checked, if there isn't then an error message displayed.
+	12. Optimization: Multiple tweaks and optimizations to the product's core.
+	13. Optimization: Display punished posts report within manual cronjob run report.
+	14. New Feature: Ability to set when to send staff reports (http://forum.phpkd.net/project.php?issueid=7).
+	15. New Feature: Ability to customize link status colors (http://forum.phpkd.net/project.php?issueid=49).
+	16. New Feature: Added a log viewer to AdminCP (http://forum.phpkd.net/project.php?issueid=48).
+	17. Updated installation/upgrade instructions.
+	18. Updated the following hosts:
+      1. 2shared.com
+      2. adrive.com
+      3. bitroad.net
+      4. badongo.com
+      5. cocoshare.cc
+      6. crazyupload.com
+      7. depositfiles.com
+      8. divxden.com
+      9. dualshare.com
+      10. earthfilez.com
+      11. easy-share.com
+      12. egoshare.com
+      13. enterupload.com
+      14. evilshare.com
+      15. file2box.com
+      16. filebase.to
+      17. filebox.com
+      18. filedip.com
+      19. fileflyer.com
+      20. filefront.com
+      21. filemojo.com
+      22. filerama.com
+      23. files.to
+      24. fileserver.cc
+      25. filesovermiles.com
+      26. flyupload.com
+      27. hostuje.net
+      28. ifile.it
+      29. jumbofiles.com
+      30. letitbit.net
+      31. load.to
+      32. loombo.com
+      33. megashare.com
+      34. megaupload.com
+      35. midupload.com
+      36. mlfat4arab.com
+      37. moidisk.ru
+      38. momupload.com
+      39. my2share.com
+      40. netload.in
+      41. online-sharing.net
+      42. proddl.com
+      43. przeslij.net
+      44. quickupload.net
+      45. rapidshare.com
+      46. rapidshare.de
+      47. rnbload.com
+      48. savefile.com
+      49. sendspace.com
+      50. senduit.com
+      51. storage.to
+      52. superfastfile.com
+      53. teradepot.com
+      54. transferbigfiles.com
+      55. turboupload.com
+      56. upfordown.com
+      57. uploaded.to
+      58. uploading.com
+      59. uploadpalace.com
+      60. usaupload.net
+      61. usershare.net
+      62. useupload.com
+      63. vip-file.com
+      64. xinony.com
+      65. ziddu.com
+      66. zippyshare.com
+      67. zomgupload.com
+      68. zshare.net
 
 
 Screen Shots:

@@ -15,6 +15,9 @@
 
 
 $md5_sums = array(
+	'/admincp' => array(
+		'phpkd_vblvb.php'          => 'eddfcbcd2ef4b96de6f0ef5e99a3cd72',
+	),
 	'/includes/phpkd/vblvb' => array(
 		'class_core.php'          => '04686fe203fc1afe51cc87f1ce5f38b7',
 		'class_dm.php'            => '95a88ffe5200742553501ff58e4185d7',
@@ -33,6 +36,7 @@ $md5_sums = array(
 	),
 	'/includes/xml' => array(
 		'bitfield_phpkd_vblvb.xml' => '04cf6dbc986b2dbb9e3d8b486ee48c53',
+		'cpnav_phpkd_vblvb.xml'    => '04cf6dbc986b2dbb9e3d8b486ee48c53',
 	),
 );
 $md5_sum_softwareid = 'phpkd_vblvb';
