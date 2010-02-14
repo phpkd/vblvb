@@ -29,21 +29,11 @@ if (!is_object($vbulletin->db))
 $log = '';
 if ($vbulletin->options['phpkd_vblvb_active'])
 {
+	require_once(DIR . '/includes/phpkd/vblvb/functions.php');
+
 	if (!defined('IN_CONTROL_PANEL'))
 	{
 		global $vbphrase;
-	}
-
-	if (!$vbulletin->options['phpkd_vblvb_checked_existingposts'])
-	{
-		if (defined('IN_CONTROL_PANEL'))
-		{
-			print_stop_message('phpkd_vblvb_existing_notchecked');
-		}
-		else
-		{
-			$log .= $vbphrase['phpkd_vblvb_existing_notchecked'];
-		}
 	}
 
 	$error_type = (defined('IN_CONTROL_PANEL') ? ERRTYPE_ECHO : ERRTYPE_SILENT);
@@ -58,7 +48,22 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 		}
 		else
 		{
+			phpkd_vblvb_cron_kill('<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>');
 			$log .= '<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>';
+		}
+	}
+
+
+	if (!$vbulletin->options['phpkd_vblvb_checked_existingposts'])
+	{
+		if (defined('IN_CONTROL_PANEL'))
+		{
+			print_stop_message('phpkd_vblvb_existing_notchecked');
+		}
+		else
+		{
+			phpkd_vblvb_cron_kill($vbphrase['phpkd_vblvb_existing_notchecked']);
+			$log .= $vbphrase['phpkd_vblvb_existing_notchecked'];
 		}
 	}
 

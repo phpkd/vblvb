@@ -28,6 +28,14 @@ function phpkd_vblvb_stylevar_compatibility($dir = 'left')
 }
 
 
+function phpkd_vblvb_cron_kill($log)
+{
+	global $nextitem;
+	log_cron_action($log, $nextitem, 1);
+	exit;
+}
+
+
 /*============================================================================*\
 || ########################################################################### ||
 || # Version: 4.0.130
