@@ -247,7 +247,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 	{
 		// Required Initialization
 		$phpkd_vblvb->initialize(array('masks' => TRUE, 'staff_reports' => TRUE, 'user_reports' => TRUE));
-		$colors = unserialize($this->registry->options['phpkd_vblvb_linkstatus_colors']);
+		$colors = unserialize($vbulletin->options['phpkd_vblvb_linkstatus_colors']);
 
 		$log .= $vbphrase['phpkd_vblvb_log_title'] . '<ol class="smallfont">';
 		if (defined('IN_CONTROL_PANEL'))
@@ -312,9 +312,15 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 
 	if (is_array($punished) AND count($punished) > 0)
 	{
+		$log .= $vbphrase['phpkd_vblvb_log_punished_posts'] . '<ol class="smallfont">' . $logpunished . '</ol><br />';
+		if (defined('IN_CONTROL_PANEL'))
+		{
+			echo $vbphrase['phpkd_vblvb_log_punished_posts'] . '<ol class="smallfont">' . $logpunished . '</ol><br />';
+			vbflush();
+		}
+
 		// Punish Dead Posts
 		$phpkd_vblvb->dm()->punish($punished);
-		$log .= $vbphrase['phpkd_vblvb_log_punished_posts'] . '<ol class="smallfont">' . $logpunished . '</ol>';
 
 		// Send User Reports
 		$phpkd_vblvb->dm()->user_reports($punished);
