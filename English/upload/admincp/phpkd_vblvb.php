@@ -48,36 +48,23 @@ if (empty($_REQUEST['do']))
 	$_REQUEST['do'] = 'log';
 }
 
-// ###################### Start view #######################
+// ###################### Start log #######################
 if ($_REQUEST['do'] == 'log')
 {
 	$vbulletin->input->clean_array_gpc('r', array(
 		'perpage' => TYPE_INT,
-		//'varname' => TYPE_STR,
-		'orderby' => TYPE_STR,
 		'page'    => TYPE_INT
 	));
 
-	if (empty($vbulletin->GPC['varname']))
-	{
-		$vbulletin->GPC['varname'] = 'phpkd_vblvb';
-	}
-
 	if (empty($vbulletin->GPC['perpage']))
 	{
-		$vbulletin->GPC['perpage'] = 15;
-	}
-
-	$sqlconds = '';
-	if (!empty($vbulletin->GPC['varname']))
-	{
-		$sqlconds = "WHERE cronlog.varname = '" . $db->escape_string($vbulletin->GPC['varname']) . "'";
+		$vbulletin->GPC['perpage'] = 10;
 	}
 
 	$counter = $db->query_first("
 		SELECT COUNT(*) AS total
 		FROM " . TABLE_PREFIX . "cronlog AS cronlog
-		$sqlconds
+		WHERE cronlog.varname = 'phpkd_vblvb'
 	");
 	$totalpages = ceil($counter['total'] / $vbulletin->GPC['perpage']);
 
@@ -88,23 +75,13 @@ if ($_REQUEST['do'] == 'log')
 
 	$startat = ($vbulletin->GPC['page'] - 1) * $vbulletin->GPC['perpage'];
 
-	switch ($vbulletin->GPC['orderby'])
-	{
-		case 'action':
-			$order = 'cronlog.varname ASC, cronlog.dateline DESC';
-			break;
-
-		case 'date':
-		default:
-			$order = 'cronlog.dateline DESC';
-	}
 
 	$logs = $db->query_read("
 		SELECT cronlog.*
 		FROM " . TABLE_PREFIX . "cronlog AS cronlog
 		LEFT JOIN " . TABLE_PREFIX . "cron AS cron ON (cronlog.varname = cron.varname)
-		$sqlconds
-		ORDER BY $order
+		WHERE cronlog.varname = 'phpkd_vblvb'
+		ORDER BY cronlog.dateline DESC
 		LIMIT $startat, " . $vbulletin->GPC['perpage']
 	);
 
@@ -113,56 +90,38 @@ if ($_REQUEST['do'] == 'log')
 		if ($vbulletin->GPC['page'] != 1)
 		{
 			$prv = $vbulletin->GPC['page'] - 1;
-			$firstpage = "<input type=\"button\" class=\"button\" tabindex=\"1\" value=\"&laquo; " . $vbphrase['first_page'] . "\" onclick=\"window.location='cronlog.php?" . $vbulletin->session->vars['sessionurl'] . "do=view" .
-				"&varname=" . urlencode($vbulletin->GPC['varname']) .
-				"&pp=" . $vbulletin->GPC['perpage'] .
-				"&orderby=" . urlencode($vbulletin->GPC['orderby']) . "&page=1'\">";
-			$prevpage = "<input type=\"button\" class=\"button\" tabindex=\"1\" value=\"&lt; " . $vbphrase['prev_page'] . "\" onclick=\"window.location='cronlog.php?" . $vbulletin->session->vars['sessionurl'] . "do=view" .
-				"&varname=" . urlencode($vbulletin->GPC['varname']) .
-				"&pp=" . $vbulletin->GPC['perpage'] .
-				"&orderby=" . urlencode($vbulletin->GPC['orderby']) . "&page=$prv'\">";
+			$firstpage = "<input type=\"button\" class=\"button\" tabindex=\"1\" value=\"&laquo; " . $vbphrase['first_page'] . "\" onclick=\"window.location='phpkd_vblvb.php?" . $vbulletin->session->vars['sessionurl'] . "do=log" .
+				"&pp=" . $vbulletin->GPC['perpage'] . "&page=1'\">";
+			$prevpage = "<input type=\"button\" class=\"button\" tabindex=\"1\" value=\"&lt; " . $vbphrase['prev_page'] . "\" onclick=\"window.location='phpkd_vblvb.php?" . $vbulletin->session->vars['sessionurl'] . "do=log" .
+				"&pp=" . $vbulletin->GPC['perpage'] . "&page=$prv'\">";
 		}
 
 		if ($vbulletin->GPC['page'] != $totalpages)
 		{
 			$nxt = $vbulletin->GPC['page'] + 1;
-			$page_button = "cronlog.php?" . $vbulletin->session->vars['sessionurl'] . "do=view&varname=" . urlencode($vbulletin->GPC['varname']) . "&pp=" . $vbulletin->GPC['perpage'] . "&orderby=" . urlencode($vbulletin->GPC['orderby']);
+			$page_button = "phpkd_vblvb.php?" . $vbulletin->session->vars['sessionurl'] . "do=log&pp=" . $vbulletin->GPC['perpage'];
 			$nextpage = "<input type=\"button\" class=\"button\" tabindex=\"1\" value=\"" . $vbphrase['next_page'] . " &gt;\" onclick=\"window.location='$page_button&page=$nxt'\">";
 			$lastpage = "<input type=\"button\" class=\"button\" tabindex=\"1\" value=\"" . $vbphrase['last_page'] . " &raquo;\" onclick=\"window.location='$page_button&page=$totalpages'\">";
 		}
 
 		// TODO: Replace 'print_form_header' with 'print_table_start'
-		print_form_header('cronlog', 'remove');
-		print_description_row(construct_link_code($vbphrase['restart'], "cronlog.php?" . $vbulletin->session->vars['sessionurl'] . ""), 0, 4, 'thead', phpkd_vblvb_stylevar_compatibility('right'));
-		print_table_header(construct_phrase($vbphrase['scheduled_task_log_viewer_page_x_y_there_are_z_total_log_entries'], vb_number_format($vbulletin->GPC['page']), vb_number_format($totalpages), vb_number_format($counter['total'])), 4);
+		print_form_header('phpkd_vblvb', 'remove');
+		print_description_row(construct_link_code($vbphrase['restart'], "phpkd_vblvb.php?" . $vbulletin->session->vars['sessionurl'] . ""), 0, 2, 'thead', phpkd_vblvb_stylevar_compatibility('right'));
+		print_table_header(construct_phrase($vbphrase['scheduled_task_log_viewer_page_x_y_there_are_z_total_log_entries'], vb_number_format($vbulletin->GPC['page']), vb_number_format($totalpages), vb_number_format($counter['total'])), 2);
 
 		$headings = array();
-		$headings[] = $vbphrase['id'];
-		$headings[] = "<a href=\"cronlog.php?" . $vbulletin->session->vars['sessionurl'] . "do=view" .
-			"&varname=" . urlencode($vbulletin->GPC['varname']) .
-			"&pp=" . $vbulletin->GPC['perpage'] .
-			"&orderby=action" .
-			"&page=" . $vbulletin->GPC['page'] . "\" title=\"" . $vbphrase['order_by_action'] . "\">" . $vbphrase['action'] . "</a>";
-		$headings[] = "<a href=\"cronlog.php?" . $vbulletin->session->vars['sessionurl'] . "do=view" .
-			"&varname=" . urlencode($vbulletin->GPC['varname']) .
-			"&pp=" . $vbulletin->GPC['perpage'] .
-			"&orderby=date" .
-			"&page=" . $vbulletin->GPC['page'] . "\" title=\"" . $vbphrase['order_by_date'] . "\">" . $vbphrase['date'] . "</a>";
 		$headings[] = $vbphrase['info'];
 		print_cells_row($headings, 1);
 
 		while ($log = $db->fetch_array($logs))
 		{
 			$cell = array();
-			$cell[] = $log['cronlogid'];
-			$cell[] = (isset($vbphrase['task_' . $log['varname'] . '_title']) ? $vbphrase['task_' . $log['varname'] . '_title'] : $log['varname']);
-			$cell[] = '<span class="smallfont">' . vbdate($vbulletin->options['logdateformat'], $log['dateline']) . '</span>';
-			$cell[] = $log['description'];
+			$cell[] = '<strong>' . vbdate($vbulletin->options['logdateformat'], $log['dateline']) . '</strong>' . $log['description'];
 
-			print_cells_row($cell, 0, 0, -4);
+			print_cells_row($cell);
 		}
 
-		print_table_footer(4, "$firstpage $prevpage &nbsp; $nextpage $lastpage");
+		print_table_footer(2, "$firstpage $prevpage &nbsp; $nextpage $lastpage");
 	}
 	else
 	{

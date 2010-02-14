@@ -122,6 +122,10 @@ $phpkd_vblvb->uninstall_40101();]]></uninstallcode>
 			<phrase name="phpkd_vblvb_checked_existingposts_first" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[First Post Only (Only Thread's First Post)]]></phrase>
 			<phrase name="phpkd_vblvb_cutoff_mode_lastx" date="1254889566" username="PHPKD" version="4.0.101"><![CDATA[Last X Days]]></phrase>
 			<phrase name="phpkd_vblvb_cutoff_mode_specific" date="1254889584" username="PHPKD" version="4.0.101"><![CDATA[Specific date]]></phrase>
+			<phrase name="phpkd_vblvb_rprts_modes_always" date="1266151438" username="PHPKD" version="1.0"><![CDATA[Always send]]></phrase>
+			<phrase name="phpkd_vblvb_rprts_modes_checked" date="1266151455" username="PHPKD" version="1.0"><![CDATA[Send Only If there's checked posts]]></phrase>
+			<phrase name="phpkd_vblvb_rprts_modes_dead" date="1266152057" username="PHPKD" version="1.0"><![CDATA[Send Only If there's Dead posts]]></phrase>
+			<phrase name="phpkd_vblvb_rprts_modes_punished" date="1266151471" username="PHPKD" version="1.0"><![CDATA[Send Only If there's punished posts]]></phrase>
 
 			<phrase name="phpkd_vblvb_hosts_2shared_com" date="1263954801" username="PHPKD" version="4.0.120"><![CDATA[2shared.com]]></phrase>
 			<phrase name="phpkd_vblvb_hosts_4shared_com" date="1263954801" username="PHPKD" version="4.0.120"><![CDATA[4shared.com]]></phrase>
@@ -309,7 +313,6 @@ $bbtitle]]></phrase>
 			<phrase name="phpkd_vblvb_log_link_dead" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[<li><span style="color: {1}; font-weight: bold">Dead:</span> <a href="{2}" target="_blank">{2}</a></li>]]></phrase>
 			<phrase name="phpkd_vblvb_log_link_down" date="1265945499" username="PHPKD" version="4.0.130"><![CDATA[<li><span style="color: {1}; font-weight: bold">Temorary Down:</span> <a href="{2}" target="_blank">{2}</a></li>]]></phrase>
 			<phrase name="phpkd_vblvb_log_punished_posts" date="1256667949" username="PHPKD" version="4.0.101"><![CDATA[<strong>Punished Posts:</strong>]]></phrase>
-			<phrase name="phpkd_vblvb_log_title" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[<strong>Link Verifier Bot Report:</strong>]]></phrase>
 			<phrase name="phpkd_vblvb_log_summery" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[<strong>Summery: All Links: {4}, <span style="color: blue">Checked Links: {5}</span>, <span style="color: {1}">Alive: {6}</span>, <span style="color: {2}">Dead: {7}</span>, <span style="color: {3}">Temorary Down: {8}</span>, Ignored: {9}.</strong>]]></phrase>
 			<phrase name="phpkd_vblvb_punish_reason" date="1256737912" username="PHPKD" version="4.0.101"><![CDATA[Link Verifier Bot Punishment]]></phrase>
 			<phrase name="phpkd_vblvb_rprts_message" date="1256556785" username="PHPKD" version="4.0.101"><![CDATA[{1}]]></phrase>
@@ -441,6 +444,14 @@ Select "Include All Users" to check all users' posts, or select "Include Specifi
 			<phrase name="setting_phpkd_vblvb_masks_recursion_level_title" date="1263935510" username="PHPKD" version="4.0.120"><![CDATA[Unmasking recursion level]]></phrase>
 			<phrase name="setting_phpkd_vblvb_linkstatus_colors_title" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Link Status Colors]]></phrase>
 			<phrase name="setting_phpkd_vblvb_linkstatus_colors_desc" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[You can change link status colors from this setting, just enter the color's name (or hexadecimal code) for each link status as preferred.]]></phrase>
+			<phrase name="setting_phpkd_vblvb_rprts_mode_desc" date="1266152060" username="PHPKD" version="1.0"><![CDATA[When do you wish to send staff reports? You've four options to choose from:<br />
+<ul>
+	<li><strong>Always send</strong> (always send regardless there's checked/dead/punished posts or not)</li>
+	<li><strong>Send Only If there's Checked posts</strong> (send only if there's checked posts, regardless there's dead/punished posts or not)</li>
+	<li><strong>Send Only If there's Dead posts</strong> (send only if there's checked posts with dead links regardless it exceeds the critical limit or not (punished or not))</li>
+	<li><strong>Send Only If there's Punished posts</strong> (send only if there's punished posts (checked, contains dead links and exceeds the critical limit))</li>
+</ul>]]></phrase>
+			<phrase name="setting_phpkd_vblvb_rprts_mode_title" date="1266152060" username="PHPKD" version="1.0"><![CDATA[Staff Reports Mode]]></phrase>
 			<phrase name="settinggroup_phpkd_vblvb" date="1254750170" username="PHPKD" version="4.0.101"><![CDATA[PHPKD - Link Verifier Bot]]></phrase>
 		</phrasetype>
 	</phrases>
@@ -587,59 +598,68 @@ Select "Include All Users" to check all users' posts, or select "Include Specifi
 				<datatype>free</datatype>
 				<defaultvalue>2</defaultvalue>
 			</setting>
-			<setting varname="phpkd_vblvb_rprts" displayorder="280">
-				<datatype>bitfield</datatype>
-				<optioncode>phpkd_vblvb_rprts</optioncode>
-				<defaultvalue>3</defaultvalue>
-			</setting>
-			<setting varname="phpkd_vblvb_rprts_messaging" displayorder="290">
+			<setting varname="phpkd_vblvb_rprts_messaging" displayorder="280">
 				<datatype>integer</datatype>
 				<optioncode>radio:piped
 0|phpkd_vblvb_rprts_messaging_moderators
 1|phpkd_vblvb_rprts_messaging_moderators_and_administrators</optioncode>
 				<defaultvalue>1</defaultvalue>
 			</setting>
-			<setting varname="phpkd_vblvb_rprtu" displayorder="300">
+			<setting varname="phpkd_vblvb_rprts_mode" displayorder="290">
+				<datatype>integer</datatype>
+				<optioncode>radio:piped
+0|phpkd_vblvb_rprts_modes_always
+1|phpkd_vblvb_rprts_modes_checked
+2|phpkd_vblvb_rprts_modes_dead
+3|phpkd_vblvb_rprts_modes_punished</optioncode>
+				<defaultvalue>0</defaultvalue>
+			</setting>
+			<setting varname="phpkd_vblvb_rprts" displayorder="300">
+				<datatype>bitfield</datatype>
+				<optioncode>phpkd_vblvb_rprts</optioncode>
+				<defaultvalue>3</defaultvalue>
+			</setting>
+			<setting varname="phpkd_vblvb_rprtu" displayorder="310">
 				<datatype>bitfield</datatype>
 				<optioncode>phpkd_vblvb_rprtu</optioncode>
 				<defaultvalue>3</defaultvalue>
 			</setting>
-			<setting varname="phpkd_vblvb_reporter" displayorder="310">
+			<setting varname="phpkd_vblvb_reporter" displayorder="320">
 				<datatype>username</datatype>
 				<optioncode>username</optioncode>
 			</setting>
-			<setting varname="phpkd_vblvb_report_fid" displayorder="320">
+			<setting varname="phpkd_vblvb_report_fid" displayorder="330">
 				<datatype>integer</datatype>
 				<optioncode>select:eval
 $options = construct_forum_chooser_options(1);</optioncode>
 			</setting>
-			<setting varname="phpkd_vblvb_report_tid" displayorder="330">
+			<setting varname="phpkd_vblvb_report_tid" displayorder="340">
 				<datatype>integer</datatype>
 			</setting>
-			<setting varname="phpkd_vblvb_punish" displayorder="340">
+			<setting varname="phpkd_vblvb_punish" displayorder="350">
 				<datatype>bitfield</datatype>
 				<optioncode>phpkd_vblvb_punish</optioncode>
 				<defaultvalue>3</defaultvalue>
 			</setting>
-			<setting varname="phpkd_vblvb_punish_fid" displayorder="350">
+			<setting varname="phpkd_vblvb_punish_fid" displayorder="360">
 				<datatype>integer</datatype>
 				<optioncode>select:eval
 $options = construct_forum_chooser_options(1);</optioncode>
 			</setting>
-			<setting varname="phpkd_vblvb_revert" displayorder="360">
+			<setting varname="phpkd_vblvb_revert" displayorder="370">
 				<datatype>boolean</datatype>
 				<optioncode>yesno</optioncode>
 				<defaultvalue>1</defaultvalue>
 			</setting>
-			<setting varname="phpkd_vblvb_powerful_ugids" displayorder="370">
+			<setting varname="phpkd_vblvb_powerful_ugids" displayorder="380">
 				<datatype>free</datatype>
 			</setting>
-			<setting varname="phpkd_vblvb_linkstatus_colors" displayorder="380">
+			<setting varname="phpkd_vblvb_linkstatus_colors" displayorder="390">
 				<datatype>free</datatype>
 				<optioncode>phpkd_vblvb_linkstatus_colors</optioncode>
 				<defaultvalue><![CDATA[a:3:{i:0;s:7:"#008000";i:1;s:7:"#FF0000";i:2;s:7:"#FFA500";}]]></defaultvalue>
 			</setting>
-			<setting varname="phpkd_vblvb_phrases" displayorder="390">
+			<setting varname="phpkd_vblvb_phrases" displayorder="400">
 				<datatype>free</datatype>
 				<optioncode><![CDATA[<strong>Staff PM Reports:</strong> [<a href='phrase.php?do=edit&amp;e[global][phpkd_vblvb_rprts_title]' target='_blank'>Report Title</a>] [<a href='phrase.php?do=edit&amp;e[global][phpkd_vblvb_rprts_message]' target='_blank'>Report Body</a>]<br />
 <strong>Staff Email Reports:</strong> [<a href='phrase.php?do=edit&amp;e[emailsubject][phpkd_vblvb_rprts_email]' target='_blank'>Report Title</a>] [<a href='phrase.php?do=edit&amp;e[emailbody][phpkd_vblvb_rprts_email]' target='_blank'>Report Body</a>]<br /><br />

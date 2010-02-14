@@ -242,14 +242,16 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 
 	$logpunished = '';
 	$punished = array();
+	$records = array('checked' => 0, 'dead' => 0, 'punished' => 0);
 
 	if ($vbulletin->db->num_rows($posts))
 	{
 		// Required Initialization
 		$phpkd_vblvb->initialize(array('masks' => TRUE, 'staff_reports' => TRUE, 'user_reports' => TRUE));
 		$colors = unserialize($vbulletin->options['phpkd_vblvb_linkstatus_colors']);
+		$records['checked'] = $vbulletin->db->num_rows($posts);
 
-		$log .= $vbphrase['phpkd_vblvb_log_title'] . '<ol class="smallfont">';
+		$log .= '<ol class="smallfont">';
 		if (defined('IN_CONTROL_PANEL'))
 		{
 			echo '<ol class="smallfont">';
@@ -277,14 +279,20 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 
 
 			// Critical Limit/Red Line
-			if ($links['dead'] > 0 AND $links['checked'] > 0)
+			if ($links['dead'] > 0)
 			{
-				$critical = ($links['dead'] / $links['checked']) * 100;
-				if ($critical > $vbulletin->options['phpkd_vblvb_critical'])
+				if ($links['checked'] > 0)
 				{
-					$logpunished .= '<li><a href="' . $vbulletin->options['bburl'] . '/showpost.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a></li>';
-					$punished[$post['userid']][$post['postid']] = $post;
+					$records['punished']++;
+					$critical = ($links['dead'] / $links['checked']) * 100;
+					if ($critical > $vbulletin->options['phpkd_vblvb_critical'])
+					{
+						$logpunished .= '<li><a href="' . $vbulletin->options['bburl'] . '/showpost.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a></li>';
+						$punished[$post['userid']][$post['postid']] = $post;
+					}
 				}
+
+				$records['dead']++;
 			}
 
 			// Finished, now update 'post.phpkd_vblvb_lastcheck'
@@ -326,8 +334,33 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 		$phpkd_vblvb->dm()->user_reports($punished);
 	}
 
+
 	// Send Staff Reports
-	$phpkd_vblvb->dm()->staff_reports($log);
+	switch ($vbulletin->options['phpkd_vblvb_rprts_mode'])
+	{
+		case 1:
+			if ($records['checked'] >= 1)
+			{
+				$phpkd_vblvb->dm()->staff_reports($log);
+			}
+			break;
+		case 2:
+			if ($records['dead'] >= 1)
+			{
+				$phpkd_vblvb->dm()->staff_reports($log);
+			}
+			break;
+		case 3:
+			if ($records['punished'] >= 1)
+			{
+				$phpkd_vblvb->dm()->staff_reports($log);
+			}
+			break;
+		case 0:
+		default:
+			$phpkd_vblvb->dm()->staff_reports($log);
+			break;
+	}
 
 
 	unset($phpkd_vblvb);
