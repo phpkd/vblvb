@@ -286,16 +286,23 @@ Features:
 	     o Unmasking recursion level
 	          - If you've activated "Recusive Unmasking", then you may wish to set recusive level. Just enter how many levels do you wish to go in the deep. Please note that '0' means UNLIMITED (NOT recommended).
 
+	     o Sending Reports To Staff
+	          - If you've chosen to send reports to staff as "PMs" or "Emails", then you've the ability to select which staff should receive these reports.
+	          - Options: [Send Reports To Moderators Only | Send Reports To Moderators & Administrators]
+
+	     o Staff Reports Mode
+	          - When do you wish to send staff reports? You've four options to choose from:
+		+ Always send (always send regardless there's checked/dead/punished posts or not)
+		+ Send Only If there's Checked posts (send only if there's checked posts, regardless there's dead/punished posts or not)
+		+ Send Only If there's Dead posts (send only if there's checked posts with dead links regardless it exceeds the critical limit or not (punished or not))
+		+ Send Only If there's Punished posts (send only if there's punished posts (checked, contains dead links and exceeds the critical limit))
+
 	     o Staff Reports
 	          - After each run of the script, it's possible to auto send the final report to staff using any of the following methods: (PM, Email, New Reply, New Thread).
 		+ Send Private Message
 		+ Send Email Message
 		+ Post New Thread
 		+ Post New Reply
-
-	     o Sending Reports To Staff
-	          - If you've chosen to send reports to staff as "PMs" or "Emails", then you've the ability to select which staff should receive these reports.
-	          - Options: [Send Reports To Moderators Only | Send Reports To Moderators & Administrators]
 
 	     o User Reports
 	          - After each run of the script, if there is punished posts: it's possible to auto send a simple report to their owners using any of the following methods: (PM, Email) telling them that some of their posts has dead links.
@@ -327,6 +334,9 @@ Features:
 	     o Powerful User Groups
 	          - Powerful User Groups are those user groups that can override/overcome the "Critical Limit/Red Line" & force their posts to be posted despite of having dead links. Please enter User Group IDs separated by commas.
 	          - Note: This powerful ability doesn't affect only posts for those powerful user groups, but affects also any posts edited by those powerful user groups (regardless of being for them or for other users). It means they can overcome limits when posting & when editing others posts (They should have permissions of course -ex: moderators, staff).
+
+	     o Link Status Colors
+	          - You can change link status colors from this setting, just enter the color's name (or hexadecimal code) for each link status as preferred.
 
 	     o Used Phrases
 	          - You've the ability to control/localize the content used in automated messages & reports sent to staff & users.
