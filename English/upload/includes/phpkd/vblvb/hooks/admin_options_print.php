@@ -439,17 +439,9 @@ else if ($setting['optioncode'] == 'phpkd_vblvb_linkstatus_colors')
 	$setting['values'] = (is_array($setting['values']) ? $setting['values'] : array());
 	$setting['values'][] = '';
 
-	foreach ($setting['values'] AS $key => $value)
-	{
-		
-		$setting['html'] .= "<div id=\"multi_input_container_$setting[varname]_$key\">" . $this->vbphrase['phpkd_vblvb_linkstatus_' . ($key + 1)] . " <input type=\"text\" class=\"bginput\" name=\"setting[$setting[varname]][$key]\" id=\"multi_input_$setting[varname]_$key\" size=\"40\" value=\"" . htmlspecialchars_uni($value) . "\" tabindex=\"1\" /></div>";
-	}
-
-	$i = sizeof($setting['values']);
-	if ($i == 0)
-	{
-		$setting['html'] .= "<div><input type=\"text\" class=\"bginput\" name=\"setting[$setting[varname]][$i]\" size=\"40\" tabindex=\"1\" /></div>";
-	}
+	$setting['html'] .= "<div id=\"multi_input_container_$setting[varname]_0\">" . $this->vbphrase['phpkd_vblvb_linkstatus_alive'] . " <input type=\"text\" class=\"bginput\" name=\"setting[$setting[varname]][0]\" id=\"multi_input_$setting[varname]_0\" size=\"40\" value=\"" . htmlspecialchars_uni($setting['values'][0]) . "\" tabindex=\"1\" /></div>";
+	$setting['html'] .= "<div id=\"multi_input_container_$setting[varname]_1\">" . $this->vbphrase['phpkd_vblvb_linkstatus_dead'] . " <input type=\"text\" class=\"bginput\" name=\"setting[$setting[varname]][1]\" id=\"multi_input_$setting[varname]_1\" size=\"40\" value=\"" . htmlspecialchars_uni($setting['values'][1]) . "\" tabindex=\"1\" /></div>";
+	$setting['html'] .= "<div id=\"multi_input_container_$setting[varname]_2\">" . $this->vbphrase['phpkd_vblvb_linkstatus_down'] . " <input type=\"text\" class=\"bginput\" name=\"setting[$setting[varname]][2]\" id=\"multi_input_$setting[varname]_2\" size=\"40\" value=\"" . htmlspecialchars_uni($setting['values'][2]) . "\" tabindex=\"1\" /></div>";
 
 	$setting['html'] .= "</fieldset>";
 

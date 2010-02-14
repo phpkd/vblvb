@@ -134,7 +134,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 		else
 		{
 			$this->error('phpkd_vblvb_invalid_criteria');
-			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0, 'log' => $this->vbphrase['phpkd_vblvb_invalid_criteria']);
+			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0, 'log' => '<br />' . $this->vbphrase['phpkd_vblvb_invalid_criteria'] . '<br />');
 		}
 
 
@@ -155,7 +155,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 		else
 		{
 			$this->error('phpkd_vblvb_invalid_criteria');
-			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0, 'log' => $this->vbphrase['phpkd_vblvb_invalid_criteria']);
+			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0, 'log' => '<br />' . $this->vbphrase['phpkd_vblvb_invalid_criteria'] . '<br />');
 		}
 
 
@@ -230,7 +230,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 		else
 		{
 			$this->error('phpkd_vblvb_invalid_criteria');
-			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0, 'log' => $this->vbphrase['phpkd_vblvb_invalid_criteria']);
+			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0, 'log' => '<br />' . $this->vbphrase['phpkd_vblvb_invalid_criteria'] . '<br />');
 		}
 	}
 

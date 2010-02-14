@@ -247,6 +247,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 	{
 		// Required Initialization
 		$phpkd_vblvb->initialize(array('masks' => TRUE, 'staff_reports' => TRUE, 'user_reports' => TRUE));
+		$colors = unserialize($this->registry->options['phpkd_vblvb_linkstatus_colors']);
 
 		$log .= $vbphrase['phpkd_vblvb_log_title'] . '<ol class="smallfont">';
 		if (defined('IN_CONTROL_PANEL'))
@@ -267,10 +268,10 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 			$links = $phpkd_vblvb->dm()->fetch_urls($post['pagetext']);
 
 			$links['ignored'] = $links['all'] - ($links['alive'] + $links['dead'] + $links['down']);
-			$log .= $links['log'] . construct_phrase($vbphrase['phpkd_vblvb_log_summery'], $links['all'], $links['checked'], $links['alive'], $links['dead'], $links['down'], $links['ignored']) . '</li>';
+			$log .= $links['log'] . construct_phrase($vbphrase['phpkd_vblvb_log_summery'], $colors[0], $colors[1], $colors[2], $links['all'], $links['checked'], $links['alive'], $links['dead'], $links['down'], $links['ignored']) . '</li>';
 			if (defined('IN_CONTROL_PANEL'))
 			{
-				echo construct_phrase($vbphrase['phpkd_vblvb_log_summery'], $links['all'], $links['checked'], $links['alive'], $links['dead'], $links['down'], $links['ignored']) . '</li>';
+				echo construct_phrase($vbphrase['phpkd_vblvb_log_summery'], $colors[0], $colors[1], $colors[2], $links['all'], $links['checked'], $links['alive'], $links['dead'], $links['down'], $links['ignored']) . '</li>';
 				vbflush();
 			}
 
