@@ -338,7 +338,7 @@ class PHPKD_VBLVB
 		{
 			case ERRTYPE_ECHO:
 			{
-				echo $error;
+				echo '<br />' . $error . '<br />';
 			}
 			break;
 

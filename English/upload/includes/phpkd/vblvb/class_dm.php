@@ -364,12 +364,12 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 			$url = htmlentities($url, ENT_QUOTES);
 	
 	
-			if(preg_match("#$contentmatch#i", $page)) 
+			if($contentmatch != '' AND preg_match("#$contentmatch#i", $page)) 
 			{
 				$status = 'alive';
 				$log = construct_phrase($this->vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $url);
 			}
-			else if(preg_match("#$downmatch#i", $page)) 
+			else if($downmatch != '' AND preg_match("#$downmatch#i", $page)) 
 			{
 				$status = 'down';
 				$log = construct_phrase($this->vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $url);
