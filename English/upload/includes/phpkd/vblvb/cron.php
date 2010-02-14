@@ -48,8 +48,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 		}
 		else
 		{
-			phpkd_vblvb_cron_kill('<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>');
-			$log .= '<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>';
+			phpkd_vblvb_cron_kill('<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>', $nextitem);
 		}
 	}
 
@@ -62,8 +61,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 		}
 		else
 		{
-			phpkd_vblvb_cron_kill($vbphrase['phpkd_vblvb_existing_notchecked']);
-			$log .= $vbphrase['phpkd_vblvb_existing_notchecked'];
+			phpkd_vblvb_cron_kill($vbphrase['phpkd_vblvb_existing_notchecked'], $nextitem);
 		}
 	}
 
@@ -78,7 +76,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 		}
 		else
 		{
-			$log .= $vbphrase['phpkd_vblvb_invalid_hosts'];
+			phpkd_vblvb_cron_kill($vbphrase['phpkd_vblvb_invalid_hosts'], $nextitem);
 		}
 	}
 
@@ -90,7 +88,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 		}
 		else
 		{
-			$log .= $vbphrase['phpkd_vblvb_invalid_protocols'];
+			phpkd_vblvb_cron_kill($vbphrase['phpkd_vblvb_invalid_protocols'], $nextitem);
 		}
 	}
 
@@ -102,7 +100,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 		}
 		else
 		{
-			$log .= $vbphrase['phpkd_vblvb_invalid_bbcodes'];
+			phpkd_vblvb_cron_kill($vbphrase['phpkd_vblvb_invalid_bbcodes'], $nextitem);
 		}
 	}
 

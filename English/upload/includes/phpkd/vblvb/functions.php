@@ -28,9 +28,8 @@ function phpkd_vblvb_stylevar_compatibility($dir = 'left')
 }
 
 
-function phpkd_vblvb_cron_kill($log)
+function phpkd_vblvb_cron_kill($log, $nextitem)
 {
-	global $nextitem;
 	log_cron_action($log, $nextitem, 1);
 	exit;
 }

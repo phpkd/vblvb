@@ -116,7 +116,7 @@ if ($_REQUEST['do'] == 'log')
 		while ($log = $db->fetch_array($logs))
 		{
 			$cell = array();
-			$cell[] = '<strong>' . vbdate($vbulletin->options['logdateformat'], $log['dateline']) . '</strong>' . $log['description'];
+			$cell[] = '<strong>' . vbdate($vbulletin->options['logdateformat'], $log['dateline']) . '</strong><br />' . $log['description'];
 
 			print_cells_row($cell);
 		}

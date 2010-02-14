@@ -102,15 +102,6 @@ $phpkd_vblvb->uninstall_40101();]]></uninstallcode>
 			<phrase name="phpkd_vblvb_linkstatus_alive" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Alive]]></phrase>
 			<phrase name="phpkd_vblvb_linkstatus_dead" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Dead]]></phrase>
 			<phrase name="phpkd_vblvb_linkstatus_down" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Down]]></phrase>
-			<phrase name="phpkd_vblvb_nothing_checked" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Nothing to check, no records returned from your query. Please check <a href="options.php?do=options&dogroup=phpkd_vblvb">product's settings</a> first and try again.]]></phrase>
-
-			<phrase name="phpkd_vblvb_inactive" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[Sorry, the product "Link Verifier Bot" is disabled! <a href="options.php?do=options&dogroup=phpkd_vblvb">Please activate the product first then run this cronjob.</a>]]></phrase>
-			<phrase name="phpkd_vblvb_invalid_hosts" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[Sorry, no selected hosts to be chekced! You should select at least one host to check, please set your hosts selection from <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Checked Hosts" first and try again.]]></phrase>
-			<phrase name="phpkd_vblvb_invalid_protocols" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[Sorry, no selected protocols to be chekced! You should select at least one protocol to check, please set your protocols selection from <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Checked Protocols" first and try again.]]></phrase>
-			<phrase name="phpkd_vblvb_invalid_bbcodes" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[Sorry, no selected bbcodes to be chekced! You should select at least one bbcode to check, please set your bbcodes selection from <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Checked BBCodes" first and try again.]]></phrase>
-			<phrase name="phpkd_vblvb_editpost" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[There's dead links inside this post, please check & validate links first.]]></phrase>
-			<phrase name="phpkd_vblvb_newpost" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[You've dead links inside your post, please check & validate links first.]]></phrase>
-			<phrase name="phpkd_vblvb_existing_notchecked" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[You've chosen not to check existing posts. Please review the <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Existing Posts: What to check?" and make sure it's active.]]></phrase>
 		</phrasetype>
 		<phrasetype name="Control Panel Options" fieldname="cpoption">
 			<phrase name="phpkd_vblvb_checked_editedposts_all" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[All Edited Posts (Threads & Replies)]]></phrase>
@@ -331,6 +322,15 @@ Please [URL="{3}"]contact administration[/URL] for further information.
 Best Regards
 {4}]]></phrase>
 			<phrase name="phpkd_vblvb_rprtu_title" date="1256557527" username="PHPKD" version="4.0.101"><![CDATA[Link Verifier Bot Report: {1} {2}]]></phrase>
+
+			<phrase name="phpkd_vblvb_nothing_checked" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Nothing to check, no records returned from your query. Please check <a href="options.php?do=options&dogroup=phpkd_vblvb">product's settings</a> first and try again.]]></phrase>
+			<phrase name="phpkd_vblvb_inactive" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[Sorry, the product "Link Verifier Bot" is disabled! <a href="options.php?do=options&dogroup=phpkd_vblvb">Please activate the product first then run this cronjob.</a>]]></phrase>
+			<phrase name="phpkd_vblvb_invalid_hosts" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[Sorry, no selected hosts to be chekced! You should select at least one host to check, please set your hosts selection from <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Checked Hosts" first and try again.]]></phrase>
+			<phrase name="phpkd_vblvb_invalid_protocols" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[Sorry, no selected protocols to be chekced! You should select at least one protocol to check, please set your protocols selection from <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Checked Protocols" first and try again.]]></phrase>
+			<phrase name="phpkd_vblvb_invalid_bbcodes" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[Sorry, no selected bbcodes to be chekced! You should select at least one bbcode to check, please set your bbcodes selection from <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Checked BBCodes" first and try again.]]></phrase>
+			<phrase name="phpkd_vblvb_editpost" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[There's dead links inside this post, please check & validate links first.]]></phrase>
+			<phrase name="phpkd_vblvb_newpost" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[You've dead links inside your post, please check & validate links first.]]></phrase>
+			<phrase name="phpkd_vblvb_existing_notchecked" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[You've chosen not to check existing posts. Please review the <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Existing Posts: What to check?" and make sure it's active.]]></phrase>
 		</phrasetype>
 		<phrasetype name="vBulletin Settings" fieldname="vbsettings">
 			<phrase name="setting_phpkd_vblvb_active_desc" date="1257768879" username="PHPKD" version="4.0.101"><![CDATA[Choose whether the product "PHPKD - Link Verifier Bot" is active or not.]]></phrase>
