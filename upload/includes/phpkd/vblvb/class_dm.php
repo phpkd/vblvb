@@ -225,7 +225,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 			}
 			$log .= '</ol>';
 
-			return array('all' => intval($counter), 'checked' => intval($alive + $dead + $down), 'alive' => intval($alive), 'dead' => intval($dead), 'down' => intval($down), 'log' => $log);
+			return array('all' => $counter, 'checked' => $alive + $dead + $down, 'alive' => $alive, 'dead' => $dead, 'down' => $down, 'log' => $log);
 		}
 		else
 		{
