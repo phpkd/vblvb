@@ -263,7 +263,7 @@ $phpkd_vblvb->uninstall_40101();]]></uninstallcode>
 		</phrasetype>
 		<phrasetype name="Scheduled Tasks" fieldname="cron">
 			<phrase name="task_phpkd_vblvb_desc" date="1255323188" username="PHPKD" version="4.0.101"><![CDATA[This script check posts against dead links.]]></phrase>
-			<phrase name="task_phpkd_vblvb_log" date="1255323188" username="PHPKD" version="4.0.101"><![CDATA[Links Verification Completed!]]></phrase>
+			<phrase name="task_phpkd_vblvb_log" date="1255323188" username="PHPKD" version="4.0.101"><![CDATA[PHPKD - Link Verifier Bot Executed!]]></phrase>
 			<phrase name="task_phpkd_vblvb_title" date="1255323188" username="PHPKD" version="4.0.101"><![CDATA[PHPKD - Link Verifier Bot]]></phrase>
 			<phrase name="phpkd_vblvb_scheduled_task_log" date="1266130588" username="PHPKD" version="1.0"><![CDATA[PHPKD - Link Verifier Bot - Scheduled Task Log]]></phrase>
 		</phrasetype>

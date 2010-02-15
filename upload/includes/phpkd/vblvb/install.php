@@ -109,7 +109,7 @@ class PHPKD_VBLVB_Install
 
 	function install_init()
 	{
-		if (!file_exists(DIR . '/includes/phpkd/vblvb/class_core.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dm.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dml.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/functions_databuild.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/cron.php') OR !file_exists(DIR . '/includes/xml/bitfield_phpkd_vblvb.xml')
+		if (!file_exists(DIR . '/' . $this->config['Misc']['admincpdir'] . '/phpkd_vblvb.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_core.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dm.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dml.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/functions_databuild.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/cron.php') OR !file_exists(DIR . '/includes/xml/bitfield_phpkd_vblvb.xml') OR !file_exists(DIR . '/includes/xml/cpnav_phpkd_vblvb.xml')
 		 OR !file_exists(DIR . '/includes/phpkd/vblvb/hooks/admin_options_print.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/hooks/admin_options_processing.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/hooks/editpost_update_process.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/hooks/newpost_process.php'))
 		{
 			print_dots_stop();
