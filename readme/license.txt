@@ -63,4 +63,4 @@ The License will not be governed by the United Nations Convention on Contracts f
 ----------------------------
 You acknowledge that, in providing you with the Software and/or Services, PHP KingDom has relied upon your agreement to be bound by the terms of this Agreement. You further acknowledge that you have read, understood, and agreed to be bound by the terms of the License and this Agreement, and hereby reaffirm your acceptance of those terms. You further acknowledge that this Agreement constitutes the complete statement of the agreement between you and PHP KingDom, and that this Agreement does not include any other prior or contemporaneous promises, representations, or descriptions regarding the Software. The unauthorized agents, employees or distributors of PHP KingDom or its affiliates are not authorized to make modifications to this Agreement, or to make any additional representations, commitments, or warranties binding on PHP KingDom. Accordingly, additional statements, whether oral or written, do not constitute representations or warranties by PHP KingDom and should not be relied upon.
 
-$Version: 4.0.130 $ - $Id$
+$Version: 4.0.131 $ - $Id$

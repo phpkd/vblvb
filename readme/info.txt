@@ -11,7 +11,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.0.130
+     * 4.0.131
 
 
 Description:
@@ -661,6 +661,8 @@ History:
       66. zippyshare.com
       67. zomgupload.com
       68. zshare.net
+     * v4.0.131 16/02/2010 10:00 PM UTC: Maintenance release (public)
+	1. Bug Fix: No punishments at all!! (http://forum.phpkd.net/project.php?issueid=54).
 
 
 Screen Shots:
@@ -725,4 +727,4 @@ Recent Products:
 |              Brought to you by PHP KingDom (www.phpkd.net)              |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.0.130 $ - $Id$
+$Version: 4.0.131 $ - $Id$
