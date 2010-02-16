@@ -24,12 +24,8 @@ $phpkd_vblvb = new PHPKD_VBLVB_Install($vbulletin, array('info' => $info));
 $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 		</code>
 		<code version="4.0.101">
-			<installcode><![CDATA[//require_once(DIR . '/includes/phpkd/vblvb/install.php');
-//$phpkd_vblvb = new PHPKD_VBLVB($vbulletin);
-$phpkd_vblvb->install_40101();]]></installcode>
-			<uninstallcode><![CDATA[//require_once(DIR . '/includes/phpkd/vblvb/install.php');
-//$phpkd_vblvb = new PHPKD_VBLVB($vbulletin);
-$phpkd_vblvb->uninstall_40101();]]></uninstallcode>
+			<installcode><![CDATA[$phpkd_vblvb->install_40101();]]></installcode>
+			<uninstallcode><![CDATA[$phpkd_vblvb->uninstall_40101();]]></uninstallcode>
 		</code>
 	</codes>
 	<templates>
