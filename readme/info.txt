@@ -579,7 +579,7 @@ History:
 	2. Bug Fix: Adrive.Com and Uploading.Com wrong reports in some cases (http://forum.phpkd.net/project.php?issueid=45).
 	3. Bug Fix: No reports sent when the cronjob autorun (http://forum.phpkd.net/project.php?issueid=43).
 	4. Bug Fix: "Thread Staff Reports" aren't working when the "Reply Staff Reports" turned off (http://forum.phpkd.net/project.php?issueid=40).
-	5. Bug Fix: Massive checking MegaUpload.Com Links lead to wrond dead status reports (http://forum.phpkd.net/project.php?issueid=37).
+	5. Bug Fix: Massive checking MegaUpload.Com Links lead to wrong dead status reports (http://forum.phpkd.net/project.php?issueid=37).
 	6. Bug Fix: "User PM Reports" doesn't work if "Staff PM Reports" is disabled (http://forum.phpkd.net/project.php?issueid=36).
 	7. Task Achieved: Change the default value for the setting "Powerful Usergroups" (http://forum.phpkd.net/project.php?issueid=41).
 	8. Task Achieved: URL status 'Temporary Down' is Important (http://forum.phpkd.net/project.php?issueid=38).
