@@ -390,7 +390,12 @@ Installation Procedure:
 
      6. If you are upgrading from 'Lite' edition to 'Ultimate' edition, you've to import the product "product-phpkd_vblvb_fix.xml" from AdminCP found inside "do_not_upload" folder.
 
-     7. You're Done :).
+     7. [Optional] Translations: vBulletin AdminCP » Languages & Phrases » Download / Upload Languages » Import Language XML File (Make sure that your forum's Character Set is equivalent to the imported language as follow):
+	     English, French, German, Spanish » ISO-8859-1
+	     Greek » ISO-8859-7
+	     You can change language file's encoding before import to whatever encoding you wish/your forum works on (ex: UTF-8) using Encoding Master (http://www.elfdata.com/encodingmaster/).
+
+     8. You're Done :).
 
 
 Upgrade Procedure:
@@ -663,9 +668,17 @@ Screen Shots:
      * Available in the screenshots folder.
 
 
-Notes:
+Translations:
 ~~~~~~~~~~~~~~~~~
-     * Multiple translations are available (Arabic, English, French, German, Greek, Turkish, Spanish .. and counting!).
+     * Arabic
+     * English
+     * French
+     * German
+     * Greek
+     * Turkish
+     * Spanish
+     * .. and counting!
+     * Submit new translation & get free 'Ultimate' edition!
 
 
 Technical Notes:
