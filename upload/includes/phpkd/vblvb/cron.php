@@ -245,7 +245,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 	if ($vbulletin->db->num_rows($posts))
 	{
 		// Required Initialization
-		$phpkd_vblvb->initialize(array('masks' => TRUE, 'staff_reports' => TRUE, 'user_reports' => TRUE));
+		$phpkd_vblvb->initialize(array('masks' => TRUE, 'punishments' => TRUE, 'staff_reports' => TRUE, 'user_reports' => TRUE));
 		$colors = unserialize($vbulletin->options['phpkd_vblvb_linkstatus_colors']);
 		$records['checked'] = $vbulletin->db->num_rows($posts);
 
