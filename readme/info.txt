@@ -663,6 +663,7 @@ History:
       68. zshare.net
      * v4.0.131 16/02/2010 10:00 PM UTC: Maintenance release (public)
 	1. Bug Fix: No punishments at all!! (http://forum.phpkd.net/project.php?issueid=54).
+	2. Optimization: other optimizations introduced in this maintenance release which should affect cronjob performance & decrease server load chances.
 
 
 Screen Shots:
