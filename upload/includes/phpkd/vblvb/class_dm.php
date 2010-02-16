@@ -590,7 +590,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 										$user['username'] = $post['username'];
 									}
 
-									$formatedlog .= '[*][url=' . $this->registry->options['bburl'] . '/showpost.php?p=' . $post['postid'] . ']' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '[/url]';
+									$formatedlog .= '[*][url=' . $this->registry->options['bburl'] . '/showpost.php?p=' . $postid . ']' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '[/url]';
 								}
 								$formatedlog .= '[/LIST]';
 
@@ -634,7 +634,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 										$username = ($user['username'] ? $user['username'] : $post['username']);
 										$languageid = ($user['languageid'] ? $user['languageid'] : $post['languageid']);
 					
-										$plaintextlog .= '* ' . ($post['title'] ? $post['title'] : $post['threadtitle']) . ': ' . $this->registry->options['bburl'] . '/showpost.php?p=' . $post['postid'] . "\n";
+										$plaintextlog .= '* ' . ($post['title'] ? $post['title'] : $post['threadtitle']) . ': ' . $this->registry->options['bburl'] . '/showpost.php?p=' . $postid . "\n";
 									}
 									$plaintextlog .= '';
 
@@ -679,7 +679,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 				foreach ($user AS $postid => $post)
 				{
 					$logpunish = array();
-					$punishedpost   = fetch_postinfo($post['postid']);
+					$punishedpost   = fetch_postinfo($postid);
 					$punishedthread = fetch_threadinfo($post['threadid']);
 					$punishedforum  = fetch_foruminfo($post['forumid']);
 
