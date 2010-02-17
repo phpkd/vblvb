@@ -221,7 +221,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 
 
 	$posts = $vbulletin->db->query_read("
-		SELECT user.username, user.usergroupid, user.email, user.languageid, post.userid, post.postid, post.threadid, post.dateline, post.title, post.pagetext, thread.forumid, thread.title AS threadtitle
+		SELECT user.username, user.email, user.languageid, post.userid, post.postid, post.threadid, post.title, post.pagetext, thread.forumid, thread.title AS threadtitle
 		FROM " . TABLE_PREFIX . "post AS post
 		LEFT JOIN " . TABLE_PREFIX . "user AS user ON (post.userid = user.userid)
 		LEFT JOIN " . TABLE_PREFIX . "thread AS thread ON (post.threadid = thread.threadid)
