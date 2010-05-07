@@ -20,6 +20,9 @@ if (!defined('VB_AREA'))
 	exit;
 }
 
+define('PHPKD_PRODUCT', 'phpkd_vblvb');
+define('PHPKD_VBLVB_VERSION', '4.0.131');
+
 
 /**
  * Core class

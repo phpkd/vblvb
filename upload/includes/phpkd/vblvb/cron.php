@@ -157,6 +157,12 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 
 
 	$inex_users = $inex_usergroups = $inex_forums = $cutoff = $threadmodes = $postmodes = '';
+
+	// Auto exclude report forums/threads & recycle bin forum from being checked: http://forum.phpkd.net/project.php?issueid=71
+	$forced_inex_threads = array($vbulletin->options['phpkd_vblvb_report_tid']);
+	$forced_inex_forums = array($vbulletin->options['phpkd_vblvb_report_fid'], $vbulletin->options['phpkd_vblvb_punish_fid']);
+
+
 	if (is_array($rawthreadmodes) AND !empty($rawthreadmodes))
 	{
 		$threadmodes = 'AND ' . implode(' AND ', $rawthreadmodes);
@@ -220,12 +226,14 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 	$limit = (($vbulletin->options['phpkd_vblvb_limit'] > 0) ? 'LIMIT ' . $vbulletin->options['phpkd_vblvb_limit'] : '');
 
 
-	$posts = $vbulletin->db->query_read("
+	$post_query = $vbulletin->db->query_read("
 		SELECT user.username, user.email, user.languageid, post.userid, post.postid, post.threadid, post.title, post.pagetext, thread.forumid, thread.title AS threadtitle
 		FROM " . TABLE_PREFIX . "post AS post
 		LEFT JOIN " . TABLE_PREFIX . "user AS user ON (post.userid = user.userid)
 		LEFT JOIN " . TABLE_PREFIX . "thread AS thread ON (post.threadid = thread.threadid)
 		Where 1 = 1
+			AND post.threadid NOT IN (" . @implode(',', $forced_inex_threads) . ")
+			AND thread.forumid NOT IN (" . @implode(',', $forced_inex_forums) . ")
 			$inex_users
 			$inex_usergroups
 			$inex_forums
@@ -242,12 +250,32 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 	$punished = array();
 	$records = array('checked' => 0, 'dead' => 0, 'punished' => 0);
 
-	if ($vbulletin->db->num_rows($posts))
+	if ($vbulletin->db->num_rows($post_query))
+	{
+		$posts = array();
+		while ($postitem = $vbulletin->db->fetch_array($post_query))
+		{
+			$posts[$postitem['postid']] = $postitem;
+		}
+	}
+	else
+	{
+		$log .= $vbphrase['phpkd_vblvb_nothing_checked'];
+		if (defined('IN_CONTROL_PANEL'))
+		{
+			print_stop_message('phpkd_vblvb_nothing_checked');
+			vbflush();
+		}
+	}
+	$vbulletin->db->free_result($post_query);
+
+
+	if (is_array($posts) AND count($posts) > 0)
 	{
 		// Required Initialization
 		$phpkd_vblvb->initialize(array('masks' => TRUE, 'punishments' => TRUE, 'staff_reports' => TRUE, 'user_reports' => TRUE));
 		$colors = unserialize($vbulletin->options['phpkd_vblvb_linkstatus_colors']);
-		$records['checked'] = $vbulletin->db->num_rows($posts);
+		$records['checked'] = count($posts);
 
 		$log .= '<ol class="smallfont">';
 		if (defined('IN_CONTROL_PANEL'))
@@ -256,12 +284,12 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 			vbflush();
 		}
 
-		while ($post = $vbulletin->db->fetch_array($posts))
+		foreach ($posts AS $postid => $post)
 		{
-			$log .= '<li><a href="' . $vbulletin->options['bburl'] . '/showthread.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a>';
+			$log .= '<li><a href="' . $vbulletin->options['bburl'] . '/showthread.php?p=' . $postid . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a>';
 			if (defined('IN_CONTROL_PANEL'))
 			{
-				echo '<li><a href="' . $vbulletin->options['bburl'] . '/showthread.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a>';
+				echo '<li><a href="' . $vbulletin->options['bburl'] . '/showthread.php?p=' . $postid . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a>';
 				vbflush();
 			}
 
@@ -285,33 +313,23 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 					$critical = ($links['dead'] / $links['checked']) * 100;
 					if ($critical > $vbulletin->options['phpkd_vblvb_critical'])
 					{
-						$logpunished .= '<li><a href="' . $vbulletin->options['bburl'] . '/showpost.php?p=' . intval($post['postid']) . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a></li>';
-						$punished[$post['userid']][$post['postid']] = array('threadid' => $post['threadid'], 'forumid' => $post['forumid'], 'languageid' => $post['languageid'], 'username' => $post['username'], 'title' => $post['title'], 'threadtitle' => $post['threadtitle']);
+						$logpunished .= '<li><a href="' . $vbulletin->options['bburl'] . '/showpost.php?p=' . $postid . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a></li>';
+						$punished[$post['userid']][$postid] = array('threadid' => $post['threadid'], 'forumid' => $post['forumid'], 'languageid' => $post['languageid'], 'username' => $post['username'], 'title' => $post['title'], 'threadtitle' => $post['threadtitle']);
 					}
 				}
 
 				$records['dead']++;
 			}
-
-			// Finished, now update 'post.phpkd_vblvb_lastcheck'
-			$vbulletin->db->query_write("
-				UPDATE " . TABLE_PREFIX . "post
-				SET phpkd_vblvb_lastcheck = " . TIMENOW . "
-				WHERE postid = $post[postid]
-			");
 		}
-	}
-	else
-	{
-		$log .= $vbphrase['phpkd_vblvb_nothing_checked'];
-		if (defined('IN_CONTROL_PANEL'))
-		{
-			print_stop_message('phpkd_vblvb_nothing_checked');
-			vbflush();
-		}
-	}
-	$vbulletin->db->free_result($posts);
 
+
+		// Finished, now update 'post.phpkd_vblvb_lastcheck'
+		$vbulletin->db->query_write("
+			UPDATE " . TABLE_PREFIX . "post
+			SET phpkd_vblvb_lastcheck = " . TIMENOW . "
+			WHERE postid IN(" . implode(',', array_keys($posts)) . ")
+		");
+	}
 
 	$log .= '</ol><br />';
 	if (defined('IN_CONTROL_PANEL'))

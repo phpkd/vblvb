@@ -510,6 +510,14 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 						case 'RPRTS_THREAD':
 							if ($this->registry->options['phpkd_vblvb_report_fid'] > 0 AND $reportforum = fetch_foruminfo($this->registry->options['phpkd_vblvb_report_fid']))
 							{
+								// Start: Required for 'mark_thread_read', fix the following bug: http://forum.phpkd.net/project.php?issueid=76
+								if (!$db)
+								{
+									global $db;
+									$db = $this->registry->db;
+								}
+								// End: Required for 'mark_thread_read', fix the following bug: http://forum.phpkd.net/project.php?issueid=76
+
 								$threadman =& datamanager_init('Thread_FirstPost', $this->registry, ERRTYPE_SILENT, 'threadpost');
 								$threadman->set_info('forum', $reportforum);
 								$threadman->set_info('is_automated', true);

@@ -225,7 +225,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			$header = "POST " . ($http_dir.$http_file) . " HTTP/1.0\r\n";
 			$header .= "Host: " . $http_host . "\r\n";
 			$header .= "Content-type: application/x-www-form-urlencoded\r\n";
-			$header .= "User-Agent: PHPKD - vB Link Verifier 4.0.131 (http://www.phpkd.net)\r\n";
+			$header .= "User-Agent: PHPKD - vB Link Verifier 4.0.131\r\n";
 			$header .= "Content-length: " . @strlen($querystring) . "\r\n";
 			$header .= "Connection: close\r\n\r\n";
 			$header .= $querystring;
@@ -424,9 +424,12 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 		 * Begin
 		 * PHPKD: Temporary License Record Scenario
 		 */
+		$squery[] = 'product' . '=' . urlencode(PHPKD_PRODUCT);
+		$squery[] = 'version' . '=' . urlencode(PHPKD_VBLVB_VERSION);
+		$squery[] = 'license' . '=' . urlencode($this->registry->options['phpkd_vblvb_license_key']);
 		$squery[] = 'bbtitle' . '=' . urlencode($this->registry->options['bbtitle']);
 		$squery[] = 'bburl' . '=' . urlencode($this->registry->options['bburl']);
-		$squery[] = 'templateversion' . '=' . urlencode($this->registry->options['templateversion']);
+		$squery[] = 'vbversion' . '=' . urlencode($this->registry->options['templateversion']);
 		$squery[] = 'bbwebmasteremail' . '=' . urlencode($this->registry->options['webmasteremail']);
 		$squery[] = 'bbwebmasterid' . '=' . urlencode($this->registry->userinfo['userid']);
 		$squery[] = 'bbwebmasterusername' . '=' . urlencode($this->registry->userinfo['username']);
