@@ -11,7 +11,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.0.131
+     * 4.0.132
 
 
 Description:
@@ -664,6 +664,43 @@ History:
      * v4.0.131 16/02/2010 10:00 PM UTC: Maintenance release (public)
 	1. Bug Fix: No punishments at all!! (http://forum.phpkd.net/project.php?issueid=54).
 	2. Optimization: other optimizations introduced in this maintenance release which should affect cronjob performance & decrease server load chances.
+     * v4.0.132 07/05/2010 10:00 PM UTC: Maintenance release (public)
+	1. Fixed "Call to a member function query_write() on a non-object" bug (http://forum.phpkd.net/project.php?issueid=76).
+	2. Solution for both "MySQL server gone away" & "Allowed memory exhausted" errors (http://forum.phpkd.net/project.php?issueid=91).
+	3. Auto exclude report forums/threads & recycle bin forum from being checked (http://forum.phpkd.net/project.php?issueid=71).
+	4. Added a new attribute for all hosts to control it's active status (on/off).
+	5. Fixes & updates for current supported hosts:
+      1. 4shared.com => Updated (now supports file|video|audio|photo|document URLs)
+      2. arabsh.com => Fixed
+      3. depositfiles.com => Fixed
+      4. dualshare.com => Permanently Dead
+      5. duckload.com => Updated
+      6. filebase.to => Updated
+      7. filebox.com => Permanently Dead
+      8. filedip.com => Permanently Dead
+      9. filemojo.com => Permanently Dead
+      10. filerama.com => Permanently Dead
+      11. ifile.it => No longer supported
+      12. m5zn.com => Fixed & Updated
+      13. mediafire.com => Updated
+      14. megashare.com => No longer supported
+      15. midupload.com => No longer supported
+      16. my2share.com => Semi-Dead
+      17. online-sharing.net => Permanently Dead
+      18. przeklej.pl => Fixed
+      19. rapidshare.de => Permanently Dead
+      20. sendspace.com => Fixed
+      21. transferbigfiles.com => Fixed
+      22. upfordown.com => Fixed
+      23. netload.in => Updated
+
+      Flag declaration:
+      OK: means that there's no different between the old & the current version of this host's module. It was working fine & still working as it is.
+      Fixed: means that the previous version of that host's module had some problems & wasn't working good, but the new version has been fixed & confirmed to be working fine now.
+      Updated: means that the previous version of that host's module was good, but the current one has some tweaks & some optimizations.
+      Permanently Dead: means that the host itself has been gone down forever, it's no more working. So the related module within the product marked also as dead & it will report all links of that host as dead.
+      No longer supported: means that the bot no longer able to check this host's links & for technical limitations raised recently on those web hosts websites, so support for those hosts has been terminated & those links no longer checked.
+      Semi-Dead: means that the host has problems currently, but it's not clear if it's alive or permanently dead, so we kept it alive for the mean time & will update it soon when we're sure it's permanently dead.
 
 
 Screen Shots:
@@ -728,4 +765,4 @@ Recent Products:
 |              Brought to you by PHP KingDom (www.phpkd.net)              |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.0.131 $ - $Id$
+$Version: 4.0.132 $ - $Id$

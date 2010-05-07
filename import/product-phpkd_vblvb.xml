@@ -3,7 +3,7 @@
 <product productid="phpkd_vblvb" active="1">
 	<title>PHPKD - Link Verifier Bot</title>
 	<description><![CDATA[This product extract sharing links (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...etc) from posts, then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished (Fully Customizable).]]></description>
-	<version>4.0.131</version>
+	<version>4.0.132</version>
 	<vendor><![CDATA[$Vendor: PHP KingDom $]]></vendor>
 	<author><![CDATA[$Author$]]></author>
 	<revision><![CDATA[$Revision$]]></revision>
