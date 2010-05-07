@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <product productid="phpkd_vblvb" active="1">
-	<title>PHPKD - Link Verifier Bot</title>
+	<title><![CDATA[PHPKD - Link Verifier Bot 'Ultimate']]></title>
 	<description><![CDATA[This product extract sharing links (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...etc) from posts, then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished (Fully Customizable).]]></description>
 	<version>4.0.132</version>
 	<vendor><![CDATA[$Vendor: PHP KingDom $]]></vendor>
@@ -32,7 +32,7 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 	</templates>
 	<plugins>
 		<plugin active="1" executionorder="5">
-			<title><![CDATA[PHPKD - Link Verifier Bot - [ Global Functions: Compatibility ]]]></title>
+			<title><![CDATA[PHPKD - Link Verifier Bot 'Ultimate' - [ Global Functions: Compatibility ]]]></title>
 			<hookname>admin_global</hookname>
 			<phpcode><![CDATA[if ($phpkd_vblvb = debug_backtrace(FALSE))
 {
@@ -46,7 +46,7 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 }]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
-			<title><![CDATA[PHPKD - Link Verifier Bot - [ Print Admin Options ]]]></title>
+			<title><![CDATA[PHPKD - Link Verifier Bot 'Ultimate' - [ Print Admin Options ]]]></title>
 			<hookname>admin_options_print</hookname>
 			<phpcode><![CDATA[if (in_array($setting['optioncode'], array('phpkd_vblvb_hosts', 'phpkd_vblvb_hosts2', 'phpkd_vblvb_hosts3', 'phpkd_vblvb_bbcodes', 'phpkd_vblvb_masks', 'phpkd_vblvb_rprts', 'phpkd_vblvb_rprtu', 'phpkd_vblvb_punish', 'phpkd_vblvb_protocols', 'phpkd_vblvb_threadmodes', 'phpkd_vblvb_postmodes', 'phpkd_vblvb_forums', 'phpkd_vblvb_usergroups', 'phpkd_vblvb_linkstatus_colors')))
 {
@@ -56,7 +56,7 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 }]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
-			<title><![CDATA[PHPKD - Link Verifier Bot - [ Process Admin Options ]]]></title>
+			<title><![CDATA[PHPKD - Link Verifier Bot 'Ultimate' - [ Process Admin Options ]]]></title>
 			<hookname>admin_options_processing</hookname>
 			<phpcode><![CDATA[if (in_array($oldsetting['optioncode'], array('phpkd_vblvb_forums', 'phpkd_vblvb_usergroups', 'phpkd_vblvb_linkstatus_colors')))
 {
@@ -66,7 +66,7 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 }]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
-			<title><![CDATA[PHPKD - Link Verifier Bot - [ Process Edited Posts ]]]></title>
+			<title><![CDATA[PHPKD - Link Verifier Bot 'Ultimate' - [ Process Edited Posts ]]]></title>
 			<hookname>editpost_update_process</hookname>
 			<phpcode><![CDATA[if ($vbulletin->options['phpkd_vblvb_active'])
 {
@@ -76,7 +76,7 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 }]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
-			<title><![CDATA[PHPKD - Link Verifier Bot - [ Process New Post ]]]></title>
+			<title><![CDATA[PHPKD - Link Verifier Bot 'Ultimate' - [ Process New Post ]]]></title>
 			<hookname>newpost_process</hookname>
 			<phpcode><![CDATA[if ($vbulletin->options['phpkd_vblvb_active'])
 {
@@ -259,9 +259,9 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 		</phrasetype>
 		<phrasetype name="Scheduled Tasks" fieldname="cron">
 			<phrase name="task_phpkd_vblvb_desc" date="1255323188" username="PHPKD" version="4.0.101"><![CDATA[This script check posts against dead links.]]></phrase>
-			<phrase name="task_phpkd_vblvb_log" date="1255323188" username="PHPKD" version="4.0.101"><![CDATA[PHPKD - Link Verifier Bot Executed!]]></phrase>
-			<phrase name="task_phpkd_vblvb_title" date="1255323188" username="PHPKD" version="4.0.101"><![CDATA[PHPKD - Link Verifier Bot]]></phrase>
-			<phrase name="phpkd_vblvb_scheduled_task_log" date="1266130588" username="PHPKD" version="1.0"><![CDATA[PHPKD - Link Verifier Bot - Scheduled Task Log]]></phrase>
+			<phrase name="task_phpkd_vblvb_log" date="1255323188" username="PHPKD" version="4.0.101"><![CDATA[PHPKD - Link Verifier Bot 'Ultimate' Executed!]]></phrase>
+			<phrase name="task_phpkd_vblvb_title" date="1255323188" username="PHPKD" version="4.0.101"><![CDATA[PHPKD - Link Verifier Bot 'Ultimate']]></phrase>
+			<phrase name="phpkd_vblvb_scheduled_task_log" date="1266130588" username="PHPKD" version="1.0"><![CDATA[PHPKD - Link Verifier Bot 'Ultimate' - Scheduled Task Log]]></phrase>
 		</phrasetype>
 		<phrasetype name="Email Body Text" fieldname="emailbody">
 			<phrase name="phpkd_vblvb_rprts_email" date="1256556106" username="PHPKD" version="4.0.101"><![CDATA[$plaintextlog]]></phrase>
@@ -330,7 +330,7 @@ Best Regards
 			<phrase name="phpkd_vblvb_existing_notchecked" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[You've chosen not to check existing posts. Please review the <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Existing Posts: What to check?" and make sure it's active.]]></phrase>
 		</phrasetype>
 		<phrasetype name="vBulletin Settings" fieldname="vbsettings">
-			<phrase name="setting_phpkd_vblvb_active_desc" date="1257768879" username="PHPKD" version="4.0.101"><![CDATA[Choose whether the product "PHPKD - Link Verifier Bot" is active or not.]]></phrase>
+			<phrase name="setting_phpkd_vblvb_active_desc" date="1257768879" username="PHPKD" version="4.0.101"><![CDATA[Choose whether the product "PHPKD - Link Verifier Bot 'Ultimate'" is active or not.]]></phrase>
 			<phrase name="setting_phpkd_vblvb_active_title" date="1257768879" username="PHPKD" version="4.0.101"><![CDATA[Product Active]]></phrase>
 			<phrase name="setting_phpkd_vblvb_checked_editedposts_desc" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[Which edited posts do you wish to check against dead links? You can choose between checking "All Edited Posts" or checking only "Edited Threads" (thread's header, without replies).]]></phrase>
 			<phrase name="setting_phpkd_vblvb_checked_editedposts_title" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[Edited Posts: What to check?]]></phrase>
@@ -449,7 +449,7 @@ Select "Include All Users" to check all users' posts, or select "Include Specifi
 	<li><strong>Send Only If there's Punished posts</strong> (send only if there's punished posts (checked, contains dead links and exceeds the critical limit))</li>
 </ul>]]></phrase>
 			<phrase name="setting_phpkd_vblvb_rprts_mode_title" date="1266152060" username="PHPKD" version="1.0"><![CDATA[Staff Reports Mode]]></phrase>
-			<phrase name="settinggroup_phpkd_vblvb" date="1254750170" username="PHPKD" version="4.0.101"><![CDATA[PHPKD - Link Verifier Bot]]></phrase>
+			<phrase name="settinggroup_phpkd_vblvb" date="1254750170" username="PHPKD" version="4.0.101"><![CDATA[PHPKD - Link Verifier Bot 'Ultimate']]></phrase>
 		</phrasetype>
 	</phrases>
 	<options>

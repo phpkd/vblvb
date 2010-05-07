@@ -435,24 +435,34 @@ Known Issues:
 
 Future TO-DO-LIST:
 ~~~~~~~~~~~~~~~~~~~
-     * Login to premium accounts (http://forum.phpkd.net/project.php?issueid=39).
-     * Add separate page for online bulk checking (http://forum.phpkd.net/project.php?issueid=11).
-     * Check authentication (http://forum.phpkd.net/project.php?issueid=9).
-     * Detect masked links (linksave.in, linkcrypt.ws, linkencrypter.com) (http://forum.phpkd.net/project.php?issueid=2).
-     * User Report modes (Always send/Send only if ..) (http://forum.phpkd.net/project.php?issueid=51).
-     * Run cronjob via external shceduled task services (http://forum.phpkd.net/project.php?issueid=44).
-     * Add a new thread option to enable/disable bot checking (http://forum.phpkd.net/project.php?issueid=42).
-     * Critical Limit/Red Line for each filehost in one thread (http://forum.phpkd.net/project.php?issueid=33).
-     * Detect Linkbucks Alias URLs (http://forum.phpkd.net/project.php?issueid=35).
-     * Post flag - How many dead links included (http://forum.phpkd.net/project.php?issueid=25).
-     * Administration Maintenance tools (http://forum.phpkd.net/project.php?issueid=21).
-     * Linked points system for reputation purposes (http://forum.phpkd.net/project.php?issueid=20).
-     * Modify posts & colorize Active/Dead Links (http://forum.phpkd.net/project.php?issueid=16).
-     * Archive all reports & link it to their threads & posts (http://forum.phpkd.net/project.php?issueid=19).
-     * Post flag - Last checked in Date/Time (http://forum.phpkd.net/project.php?issueid=17).
-     * Reply to thread when dead links found (http://forum.phpkd.net/project.php?issueid=18).
-     * Detailed user reports (http://forum.phpkd.net/project.php?issueid=6).
-     * Add cronjob status messages & configuration conclusion (http://forum.phpkd.net/project.php?issueid=8).
+     *  Post flag - Last checked in Date/Time (http://forum.phpkd.net/project.php?issueid=17)
+     *  Change thread title's color in forumdisplay according to it's status (alive/dead) (http://forum.phpkd.net/project.php?issueid=69)
+     *  Modify posts & colorize Active/Dead Links (http://forum.phpkd.net/project.php?issueid=16)
+     *  Reply to thread when dead links found (http://forum.phpkd.net/project.php?issueid=18)
+     *  Critical Limit/Red Line for each filehost in one thread (http://forum.phpkd.net/project.php?issueid=33)
+     *  Add cronjob status messages & configuration conclusion (http://forum.phpkd.net/project.php?issueid=8)
+     *  Administration Maintenance tools (http://forum.phpkd.net/project.php?issueid=21)
+     *  Notifier system within AdminCP for new releases (http://forum.phpkd.net/project.php?issueid=63)
+     *  Include/Exclude alive links/posts from reports (http://forum.phpkd.net/project.php?issueid=78)
+     * Post flag - How many dead links included (http://forum.phpkd.net/project.php?issueid=25)
+     * Intelligence for detecting malformed links & check them (wrong http prefix) (http://forum.phpkd.net/project.php?issueid=67)
+     * User Report modes (Always send/Send only if ..) (http://forum.phpkd.net/project.php?issueid=51)
+     * Add a new thread option to enable/disable bot checking (http://forum.phpkd.net/project.php?issueid=42)
+     * Add separate page for online bulk checking (http://forum.phpkd.net/project.php?issueid=11)
+     * Run cronjob via external shceduled task services (http://forum.phpkd.net/project.php?issueid=44)
+     * Login to premium accounts (http://forum.phpkd.net/project.php?issueid=39)
+     * Color picker for link status colors (http://forum.phpkd.net/project.php?issueid=57)
+     * Detailed user reports (http://forum.phpkd.net/project.php?issueid=6)
+     * Ability To Set Different Task Profiles (http://forum.phpkd.net/project.php?issueid=86)
+     * Support additional hosts (http://forum.phpkd.net/project.php?issueid=62)
+     * Linked points system for reputation purposes (http://forum.phpkd.net/project.php?issueid=20)
+     * Report checksum verify, prevent duplicate reports (http://forum.phpkd.net/project.php?issueid=83)
+     * Archive all reports & link it to their threads & posts (http://forum.phpkd.net/project.php?issueid=19)
+     * Add support for Private Messages, Visitor Messages, Social Group Discussions, Social Group Picture Comments, Picture Comments, Blogs (http://forum.phpkd.net/project.php?issueid=66)
+     * Check authintication (http://forum.phpkd.net/project.php?issueid=9)
+     * Setup Adviser - Auto determine recommended configurations (http://forum.phpkd.net/project.php?issueid=82)
+     * Provide seo thread links with vB4 (http://forum.phpkd.net/project.php?issueid=64)
+     * Detect Linkbucks Alias URLs (http://forum.phpkd.net/project.php?issueid=35)
      * Post your suggestions!
 
 
