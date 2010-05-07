@@ -407,6 +407,8 @@ class PHPKD_VBLVB
 		{
 			return $license->process_license();
 		}
+
+		return false;
 	}
 
 
