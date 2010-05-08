@@ -16,27 +16,27 @@
 
 $md5_sums = array(
 	'/admincp' => array(
-		'phpkd_vblvb.php'          => '6d364be32df2b6b4cc95a70cef128bac',
+		'phpkd_vblvb.php'          => '3776e5d504563e1e7c5dc86a728607f9',
 	),
 	'/includes/phpkd/vblvb' => array(
-		'class_core.php'          => 'b0a56126b57231b81abbd46209f1e02c',
-		'class_dm.php'            => '76980136831ded5a7994b73695f1d8a7',
-		'class_dml.php'           => '63d60ed382a368bda05647d1f1ade6e5',
-		'cron.php'                => '29dd50bb7fb3009abe8adf56d14e7f37',
-		'functions_databuild.php' => '96b379900f7b4d58181c3d53093ce6e2',
-		'functions.php'           => 'afd08a270da809319c82a05f23b8037d',
-		'init.php'                => 'e90891df562e118d76466704b25fa40d',
-		'install.php'             => '47dfc347539369d41593d753bf85b8d9',
+		'class_core.php'          => '97f3185585720365c161dca3c5acc0b8',
+		'class_dm.php'            => 'b12ba4a1edbf6d54cc2acd9cfc5390ad',
+		'class_dml.php'           => 'd5d9e84d155ddc2e463414e6c773ea87',
+		'cron.php'                => '479f736f66a9e8e081cf7a7c52d17a9d',
+		'functions.php'           => '6f7ee2f789b4fdfbf37acee77ff4d2c6',
+		'functions_databuild.php' => '73958735314aff208776a13471b4ad29',
+		'init.php'                => 'f61ef8d37fa6d98e3da3c57c1744f552',
+		'install.php'             => 'f345ae59d8c114f0c461f70599cb96d8',
 	),
 	'/includes/phpkd/vblvb/hooks' => array(
-		'admin_options_print.php'      => '35c80ac2514e2762cf56fd3fc8ae0fc4',
-		'admin_options_processing.php' => 'e3276a60e68b7e9c6e64457910dfcda2',
-		'editpost_update_process.php'  => '35db02fadd9d3a7a6dffc974db8238bc',
-		'newpost_process.php'          => 'fa5ea9d6a3729a15e36a0fb80d25490f',
+		'admin_options_print.php'      => '210aaeba210cff4bf63e3afc02622c2c',
+		'admin_options_processing.php' => '30b9f15f312504c02971bd8d47e8e399',
+		'editpost_update_process.php'  => '7042ad70ab7ba19ae0b1cba5cc2dde17',
+		'newpost_process.php'          => '55ef8f82cf63d4ba49606f89927f293e',
 	),
 	'/includes/xml' => array(
-		'bitfield_phpkd_vblvb.xml' => '34d3c2b1588de4c8adc1bc033bf9777b',
-		'cpnav_phpkd_vblvb.xml'    => '3cbd51415f9fc99d91b0a413e509cdad',
+		'bitfield_phpkd_vblvb.xml' => '0af0246d67fa313eb409e6587129ae83',
+		'cpnav_phpkd_vblvb.xml'    => '04d6ceafb7314df4d54b54cd38728d33',
 	),
 );
 $md5_sum_softwareid = 'phpkd_vblvb';
