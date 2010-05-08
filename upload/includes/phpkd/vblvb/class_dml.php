@@ -63,7 +63,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 
 	function get_key()
 	{
-		$data = @file("license.php");
+		$data = @file(DIR . '/includes/phpkd/vblvb/license.php');
 
 		if (!$data)
 		{
@@ -94,12 +94,12 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 
 	function parse_local_key()
 	{
-		if (!@file_exists("license.php"))
+		if (!@file_exists(DIR . '/includes/phpkd/vblvb/license.php'))
 		{
 			return false;
 		}
 
-		$raw_data = @base64_decode(get_key());
+		$raw_data = @base64_decode($this->get_key());
 		$raw_array = @explode("|", $raw_data);
 		if (@is_array($raw_array) && @count($raw_array) < 8)
 		{
@@ -164,7 +164,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 
 		if ($array['per_server'])
 		{
-			$server = phpaudit_get_mac_address();
+			$server = $this->phpaudit_get_mac_address();
 			$mac_array = @explode(",", $raw_array[6]);
 
 			if (!@in_array(@md5(PHPKD_TOCKEN . $server[0]), $mac_array))
@@ -193,7 +193,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			}
 
 			$host_array = @explode(",", $raw_array[4]);
-			$host_array = pa_wildcard($host_array);
+			$host_array = $this->pa_wildcard($host_array);
 
 			if (!@in_array(@md5(PHPKD_TOCKEN . $_SERVER['HTTP_HOST']), $host_array))
 			{
@@ -386,7 +386,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 
 		if ($per_server)
 		{
-			$server_array = phpaudit_get_mac_address();
+			$server_array = $this->phpaudit_get_mac_address();
 			$query_string .= "&access_host=" . @gethostbyaddr(@gethostbyname($server_array[1]));
 			$query_string .= "&access_mac=" . $server_array[0];
 		}

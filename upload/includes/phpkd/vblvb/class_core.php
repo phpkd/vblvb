@@ -394,25 +394,6 @@ class PHPKD_VBLVB
 
 
 	/**
-	* Verify license
-	*
-	* @return	boolean	Returns true if valid, false if not!
-	*/
-	function verify_license()
-	{
-		require_once(DIR . '/includes/phpkd/vblvb/class_dml.php');
-		$license = new PHPKD_VBLVB_DML($this->registry);
-
-		if ($license->special_token() == md5(md5(md5('7efad4a065eb29fb5ac56d57bc2c090c') . md5($this->registry->userinfo['securitytoken']) . md5(TIMENOW))))
-		{
-			return $license->process_license();
-		}
-
-		return false;
-	}
-
-
-	/**
 	* Pass through DM & execute it's functions!!
 	*
 	* @return	mixed
@@ -454,6 +435,30 @@ class PHPKD_VBLVB
 				return FALSE;
 			}
 		}
+	}
+
+
+	/**
+	* Verify license
+	*
+	* @return	boolean	Returns true if valid, false if not!
+	*/
+	function verify_license()
+	{
+		if (substr($this->registry->options['phpkd_vblvb_license_key'], 0, 5) != 'VBLVB')
+		{
+			return false;
+		}
+
+		require_once(DIR . '/includes/phpkd/vblvb/class_dml.php');
+		$license = new PHPKD_VBLVB_DML($this->registry);
+
+		if ($license->special_token() == md5(md5(md5('7efad4a065eb29fb5ac56d57bc2c090c') . md5($this->registry->userinfo['securitytoken']) . md5(TIMENOW))))
+		{
+			return $license->process_license();
+		}
+
+		return false;
 	}
 }
 
