@@ -20,9 +20,10 @@ if (!defined('VB_AREA'))
 	exit;
 }
 
-define('PHPKD_PRODUCT', 'phpkd_vblvb');
-define('PHPKD_VBLVB_VERSION', '4.0.132');
+define('PHPKD_PRODUCT',        'phpkd_vblvb');
+define('PHPKD_VBLVB_VERSION',  '4.0.132');
 define('PHPKD_VBLVB_SVERSION', '40132');
+define('PHPKD_VBLVB_TOCKEN',   '7efad4a065eb29fb5ac56d57bc2c090c');
 
 
 /**
@@ -453,7 +454,7 @@ class PHPKD_VBLVB
 		require_once(DIR . '/includes/phpkd/vblvb/class_dml.php');
 		$license = new PHPKD_VBLVB_DML($this->registry);
 
-		if ($license->special_token() == md5(md5(md5('7efad4a065eb29fb5ac56d57bc2c090c') . md5($this->registry->userinfo['securitytoken']) . md5(TIMENOW))))
+		if ($license->special_token() == md5(md5(md5(PHPKD_VBLVB_TOCKEN) . md5($this->registry->userinfo['securitytoken']) . md5(TIMENOW))))
 		{
 			return $license->process_license();
 		}

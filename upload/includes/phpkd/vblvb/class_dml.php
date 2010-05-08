@@ -21,8 +21,6 @@ if (!defined('VB_AREA') OR !defined('PHPKD_VBLVB') OR @get_class($this) != 'PHPK
 	exit;
 }
 
-define('PHPKD_TOCKEN', '7efad4a065eb29fb5ac56d57bc2c090c');
-
 
 /**
  * License Data Manager class
@@ -51,13 +49,13 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 
 	function special_token()
 	{
-		return md5(md5(md5(PHPKD_TOCKEN) . md5($this->registry->userinfo['securitytoken']) . md5(TIMENOW)));
+		return md5(md5(md5(PHPKD_VBLVB_TOCKEN) . md5($this->registry->userinfo['securitytoken']) . md5(TIMENOW)));
 	}
 
 
 	function make_token()
 	{
-		return md5(PHPKD_TOCKEN . TIMENOW);
+		return md5(PHPKD_VBLVB_TOCKEN . TIMENOW);
 	}
 
 
@@ -123,7 +121,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			$strlen = strlen($_SERVER['HTTP_HOST']);
 			$target = substr($_SERVER['HTTP_HOST'], $first_dot, $strlen);
 
-			if ($host = md5(PHPKD_TOCKEN . '*' . $target) == $access)
+			if ($host = md5(PHPKD_VBLVB_TOCKEN . '*' . $target) == $access)
 			{
 				return $host_array[] = $_SERVER['HTTP_HOST'];
 			}
@@ -142,17 +140,17 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			return "<verify status='invalid_key' message='Please contact support for a new license key.' />";
 		}
 
-		if ($raw_array[11] && @strcmp(@md5(PHPKD_TOCKEN . $raw_array[11]), $raw_array[12]) != 0)
+		if ($raw_array[11] && @strcmp(@md5(PHPKD_VBLVB_TOCKEN . $raw_array[11]), $raw_array[12]) != 0)
 		{ 
 			return "<verify status='invalid_key' message='Please contact support for a new license key.' />";
 		}
 
-		if ($raw_array[9] && @strcmp(@md5(PHPKD_TOCKEN . $raw_array[9]), $raw_array[10]) != 0)
+		if ($raw_array[9] && @strcmp(@md5(PHPKD_VBLVB_TOCKEN . $raw_array[9]), $raw_array[10]) != 0)
 		{
 			return "<verify status='invalid_key' message='Please contact support for a new license key.' />";
 		}
 
-		if (@strcmp(@md5(PHPKD_TOCKEN . $raw_array[1]), $raw_array[2]) != 0)
+		if (@strcmp(@md5(PHPKD_VBLVB_TOCKEN . $raw_array[1]), $raw_array[2]) != 0)
 		{
 			return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
 		}
@@ -167,13 +165,13 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			$server = $this->phpaudit_get_mac_address();
 			$mac_array = @explode(",", $raw_array[6]);
 
-			if (!@in_array(@md5(PHPKD_TOCKEN . $server[0]), $mac_array))
+			if (!@in_array(@md5(PHPKD_VBLVB_TOCKEN . $server[0]), $mac_array))
 			{
 				return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
 			}
 
 			$host_array = @explode(",", $raw_array[4]);
-			if (!@in_array(@md5(PHPKD_TOCKEN . @gethostbyaddr(@gethostbyname($server[1]))), $host_array))
+			if (!@in_array(@md5(PHPKD_VBLVB_TOCKEN . @gethostbyaddr(@gethostbyname($server[1]))), $host_array))
 			{
 				return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
 			}
@@ -184,7 +182,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			{
 				$directory_array = @explode(",", $raw_array[3]);
 				$valid_dir = $this->path_translated();
-				$valid_dir = @md5(PHPKD_TOCKEN . $valid_dir);
+				$valid_dir = @md5(PHPKD_VBLVB_TOCKEN . $valid_dir);
 
 				if (!@in_array($valid_dir, $directory_array))
 				{
@@ -195,14 +193,14 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			$host_array = @explode(",", $raw_array[4]);
 			$host_array = $this->pa_wildcard($host_array);
 
-			if (!@in_array(@md5(PHPKD_TOCKEN . $_SERVER['HTTP_HOST']), $host_array))
+			if (!@in_array(@md5(PHPKD_VBLVB_TOCKEN . $_SERVER['HTTP_HOST']), $host_array))
 			{
 				return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
 			}
 
 			$ip_array = @explode(",", $raw_array[5]);
 
-			if (!@in_array(@md5(PHPKD_TOCKEN . $this->server_addr()), $ip_array))
+			if (!@in_array(@md5(PHPKD_VBLVB_TOCKEN . $this->server_addr()), $ip_array))
 			{
 				return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
 			}
@@ -481,7 +479,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 		$returned['addon_array'] = @str_replace(" ", '+', @unserialize(@base64_decode($returned['addon_array'])));
 
 
-		if ((empty($returned)) OR ($returned['status'] == 'active' && strcmp(md5(PHPKD_TOCKEN . $token), $returned['access_token']) != 0 && $enable_dns_spoof == 'yes' && !$skip_dns_spoof))
+		if ((empty($returned)) OR ($returned['status'] == 'active' && strcmp(md5(PHPKD_VBLVB_TOCKEN . $token), $returned['access_token']) != 0 && $enable_dns_spoof == 'yes' && !$skip_dns_spoof))
 		{
 			$returned['status'] = "invalid"; 
 		}
