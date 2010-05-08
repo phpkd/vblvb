@@ -679,8 +679,9 @@ History:
 	2. Solution for both "MySQL server gone away" & "Allowed memory exhausted" errors (http://forum.phpkd.net/project.php?issueid=91).
 	3. Auto exclude report forums/threads & recycle bin forum from being checked (http://forum.phpkd.net/project.php?issueid=71).
 	4. Added a new attribute for all hosts to control it's active status (on/off).
-	5. Fixes & updates for current supported hosts:
-      1. 4shared.com => Updated (now supports file|video|audio|photo|document URLs)
+	5. Many other optimizations & performance tweaks.
+	6. Fixes & updates for current supported hosts:
+      1. 4shared.com => Updated (now supports -file|video|audio|photo|document- URLs)
       2. arabsh.com => Fixed
       3. depositfiles.com => Fixed
       4. dualshare.com => Permanently Dead
