@@ -430,7 +430,7 @@ Help with:
 
 Known Issues:
 ~~~~~~~~~~~~~
-     * Posts containing huge number of links may cause "MySQL gone away" error while checking specially when you're checking many posts of that kind. A new checking process by it's way to fix this issue & allow large scall checking without causing high load.
+     * None
 
 
 Future TO-DO-LIST:
