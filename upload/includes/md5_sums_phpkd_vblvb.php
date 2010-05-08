@@ -16,23 +16,23 @@
 
 $md5_sums = array(
 	'/admincp' => array(
-		'phpkd_vblvb.php'          => '41f579b675b721f31558ded2b1b0d73a',
+		'phpkd_vblvb.php'          => 'a155adf609e4c6086ef3224469438efc',
 	),
 	'/includes/phpkd/vblvb' => array(
-		'class_core.php'          => '4938ac6d68a544b935bff0db2e0ab67c',
-		'class_dm.php'            => '38481a25af09388ac9629924f527e4f7',
-		'class_dml.php'           => 'f03cc525c87fc8d59e5d75198b7f6e18',
-		'cron.php'                => '3a5d80da264d4963c9ac70de62bb0ede',
-		'functions.php'           => '064edfc3d01caa6b64d2a26c8395b755',
-		'functions_databuild.php' => '238972ad2bd0af2207b7b59473b0e945',
-		'init.php'                => '831ff08e223206b341c500a5f8696cb1',
-		'install.php'             => '32716d3faacaca4c6ad1e5d0b14d80ba',
+		'class_core.php'          => '2e4d77549654cec145649222fdc4fbc3',
+		'class_dm.php'            => '0b3006483af2f483f2957bbc41faded7',
+		'class_dml.php'           => '2bbb1ac5b2a3672ac2593883383c9c96',
+		'cron.php'                => '96b9761db9517e4bac286e99c4fffa31',
+		'functions.php'           => '29802132676150be577a6f59e1555a69',
+		'functions_databuild.php' => 'fab254ae7fffb7e401e460050e65f9d4',
+		'init.php'                => 'dea6e93c8f8f95398660085f7fd1058d',
+		'install.php'             => '469c0bf575749d97042eb1cf6bd4c7ff',
 	),
 	'/includes/phpkd/vblvb/hooks' => array(
-		'admin_options_print.php'      => 'faf14ce4fa7b76fc056f02846718ac5f',
-		'admin_options_processing.php' => 'cedf87884e78bd7e7c17a3873bb7b471',
-		'editpost_update_process.php'  => 'ce9a348634d468222a0d767494c94381',
-		'newpost_process.php'          => '81a2ad0c92983b45d89240c4204cd364',
+		'admin_options_print.php'      => '65e68deb891b8987bc7861f534997564',
+		'admin_options_processing.php' => '8c007561c6c66a8dacfadfc263db609f',
+		'editpost_update_process.php'  => '9d615fb929626a4660f9a87e6894da4b',
+		'newpost_process.php'          => '4ca9d772da311a96a79da0bfcc201cea',
 	),
 	'/includes/xml' => array(
 		'bitfield_phpkd_vblvb.xml' => '0af0246d67fa313eb409e6587129ae83',
