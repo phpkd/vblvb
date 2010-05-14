@@ -21,6 +21,14 @@ if (!is_object($vbulletin->db))
 	exit;
 }
 
+// Bypass PHP INI memory limit!
+if (($current_memory_limit = ini_size_to_bytes(@ini_get('memory_limit'))) < 128 * 1024 * 1024 AND $current_memory_limit > 0)
+{
+	@ini_set('memory_limit', 128 * 1024 * 1024);
+}
+@set_time_limit(0);
+
+
 // ########################################################################
 // ######################### START MAIN SCRIPT ############################
 // ########################################################################
@@ -40,16 +48,50 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 	require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
 	$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, array('vbphrase' => $vbphrase), $error_type);
 
-	if (!$phpkd_vblvb->verify_license())
+
+	// Check license validity
+	switch ($phpkd_vblvb->verify_license())
 	{
-		if (defined('IN_CONTROL_PANEL'))
-		{
-			print_cp_message('<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>');
-		}
-		else
-		{
-			phpkd_vblvb_cron_kill('<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>', $nextitem);
-		}
+		case 'valid':
+			// Do nothing, our license is valid; So proceed.
+			break;
+
+		// Paid product with trail key
+		case 'VBLVB':
+			if (defined('IN_CONTROL_PANEL'))
+			{
+				print_cp_message('<span class="diff-deleted">Sorry, you can\'t use a <strong>TRAIL</strong> license key with a <strong>PAID</strong> product. <strong>TRAIL license keys can run only with TRAIL products.</strong><br />Please get your paid license key from <a href="http://eshop.phpkd.net/customers/index.php" target="_blank">Customer Area</a> or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for assistance!!</span>');
+			}
+			else
+			{
+				phpkd_vblvb_cron_kill('<span class="diff-deleted">Sorry, you can\'t use a <strong>TRAIL</strong> license key with a <strong>PAID</strong> product. <strong>TRAIL license keys can run only with TRAIL products.</strong><br />Please get your paid license key from <a href="http://eshop.phpkd.net/customers/index.php" target="_blank">Customer Area</a> or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for assistance!!</span>', $nextitem);
+			}
+			break;
+
+		// Trail product with paid key
+		case 'TRAIL':
+			if (defined('IN_CONTROL_PANEL'))
+			{
+				print_cp_message('<span class="diff-deleted">Sorry, you can\'t use a <strong>PAID</strong> license key with a <strong>TRAIL</strong> product. <strong>PAID license keys can run only with PAID products.</strong><br />Please get your trail license key from <a href="http://eshop.phpkd.net/customers/index.php" target="_blank">Customer Area</a> or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for assistance!!</span>');
+			}
+			else
+			{
+				phpkd_vblvb_cron_kill('<span class="diff-deleted">Sorry, you can\'t use a <strong>PAID</strong> license key with a <strong>TRAIL</strong> product. <strong>PAID license keys can run only with PAID products.</strong><br />Please get your trail license key from <a href="http://eshop.phpkd.net/customers/index.php" target="_blank">Customer Area</a> or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for assistance!!</span>', $nextitem);
+			}
+			break;
+
+		// Invalid key
+		case 'invalid':
+		default:
+			if (defined('IN_CONTROL_PANEL'))
+			{
+				print_cp_message('<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>');
+			}
+			else
+			{
+				phpkd_vblvb_cron_kill('<span class="diff-deleted">Sorry, this isn\'t a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>', $nextitem);
+			}
+			break;
 	}
 
 
@@ -322,6 +364,106 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 			}
 		}
 
+
+		/**
+		 * Fix Bug: "MySQL server gone away" & "Allowed memory exhausted" errors
+		 * We've initiated a new DB connection with persistance allowed, so we don't get in such troubles with ongoing queries!!
+		 * 
+		 * Begin ->
+		 */
+
+		// Set persistent connection ON!
+		$vbulletin->config['MasterServer']['usepconnect'] = 1;
+
+		// load database class
+		switch (strtolower($vbulletin->config['Database']['dbtype']))
+		{
+			// load standard MySQL class
+			case 'mysql':
+			case '':
+			{
+				if ($vbulletin->debug AND ($vbulletin->input->clean_gpc('r', 'explain', TYPE_UINT) OR (defined('POST_EXPLAIN') AND !empty($_POST))))
+				{
+					// load 'explain' database class
+					require_once(DIR . '/includes/class_database_explain.php');
+					$db2 = new vB_Database_Explain($vbulletin);
+				}
+				else
+				{
+					$db2 = new vB_Database($vbulletin);
+				}
+				break;
+			}
+
+			case 'mysql_slave':
+			{
+				require_once(DIR . '/includes/class_database_slave.php');
+				$db2 = new vB_Database_Slave($vbulletin);
+				break;
+			}
+
+			// load MySQLi class
+			case 'mysqli':
+			{
+				if ($vbulletin->debug AND ($vbulletin->input->clean_gpc('r', 'explain', TYPE_UINT) OR (defined('POST_EXPLAIN') AND !empty($_POST))))
+				{
+					// load 'explain' database class
+					require_once(DIR . '/includes/class_database_explain.php');
+					$db2 = new vB_Database_MySQLi_Explain($vbulletin);
+				}
+				else
+				{
+					$db2 = new vB_Database_MySQLi($vbulletin);
+				}
+				break;
+			}
+
+			case 'mysqli_slave':
+			{
+				require_once(DIR . '/includes/class_database_slave.php');
+				$db2 = new vB_Database_Slave_MySQLi($vbulletin);
+				break;
+			}
+
+			// load extended, non MySQL class
+			default:
+			{
+				// This is not implemented fully yet
+				// $db2 = 'vB_Database_' . $vbulletin->config['Database']['dbtype'];
+				// $db2 = new $db($vbulletin);
+				die('Fatal error: Database class not found');
+			}
+		}
+
+		// Make a new database connection
+		$db2->connect(
+			$vbulletin->config['Database']['dbname'],
+			$vbulletin->config['MasterServer']['servername'],
+			$vbulletin->config['MasterServer']['port'],
+			$vbulletin->config['MasterServer']['username'],
+			$vbulletin->config['MasterServer']['password'],
+			$vbulletin->config['MasterServer']['usepconnect'],
+			$vbulletin->config['SlaveServer']['servername'],
+			$vbulletin->config['SlaveServer']['port'],
+			$vbulletin->config['SlaveServer']['username'],
+			$vbulletin->config['SlaveServer']['password'],
+			$vbulletin->config['SlaveServer']['usepconnect'],
+			$vbulletin->config['Mysqli']['ini_file'],
+			(isset($vbulletin->config['Mysqli']['charset']) ? $vbulletin->config['Mysqli']['charset'] : '')
+		);
+
+		// vBulletin doesn't work under MySQL strict mode currently, so force mode required!
+		$db2->force_sql_mode('');
+
+		// make $db2 a member of $vbulletin
+		$vbulletin->db =& $db2;
+
+		/**
+		 * -> End
+		 * 
+		 * Fix Bug: "MySQL server gone away" & "Allowed memory exhausted" errors
+		 * We've initiated a new DB connection with persistance allowed, so we don't get in such troubles with ongoing queries!!
+		 */
 
 		// Finished, now update 'post.phpkd_vblvb_lastcheck'
 		$vbulletin->db->query_write("

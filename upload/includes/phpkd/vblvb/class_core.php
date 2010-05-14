@@ -20,11 +20,11 @@ if (!defined('VB_AREA'))
 	exit;
 }
 
-define('PHPKD_PRODUCT',           'phpkd_vblvb');
-define('PHPKD_VBLVB_VERSION',     '4.0.132');
-define('PHPKD_VBLVB_SVERSION',    '40132');
-define('PHPKD_VBLVB_TOCKEN',      '7efad4a065eb29fb5ac56d57bc2c090c');
-define('PHPKD_VBLVB_LICENSE_KEY', 'VBLVB');
+define('PHPKD_PRODUCT',              'phpkd_vblvb');
+define('PHPKD_VBLVB_VERSION',        '4.0.132');
+define('PHPKD_VBLVB_SVERSION',       '40132');
+define('PHPKD_VBLVB_TOCKEN',         '7efad4a065eb29fb5ac56d57bc2c090c');
+define('PHPKD_VBLVB_LICENSE_PREFIX', 'VBLVB');
 
 
 /**
@@ -443,13 +443,13 @@ class PHPKD_VBLVB
 	/**
 	* Verify license
 	*
-	* @return	boolean	Returns true if valid, false if not!
+	* @return	string
 	*/
 	function verify_license()
 	{
-		if (substr($this->registry->options['phpkd_vblvb_license_key'], 0, 5) != PHPKD_VBLVB_LICENSE_KEY)
+		if (strtoupper(substr($this->registry->options['phpkd_vblvb_license_key'], 0, 5)) != strtoupper(PHPKD_VBLVB_LICENSE_PREFIX))
 		{
-			return false;
+			return strtoupper(PHPKD_VBLVB_LICENSE_PREFIX);
 		}
 
 		require_once(DIR . '/includes/phpkd/vblvb/class_dml.php');
@@ -460,7 +460,7 @@ class PHPKD_VBLVB
 			return $license->process_license();
 		}
 
-		return false;
+		return 'invalid';
 	}
 }
 

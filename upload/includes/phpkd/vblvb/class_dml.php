@@ -342,7 +342,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 		}
 		else
 		{
-			return FALSE;
+			return false;
 		}
 	}
 
@@ -488,11 +488,11 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 
 		if ($returned['status'] == "invalid" OR $returned['status'] == "suspended" OR $returned['status'] == "expired" OR $returned['status'] == "pending" OR $returned['status'] == "invalid_key")
 		{
-			return FALSE;
+			return 'invalid';
 		}
 		else
 		{
-			return TRUE;
+			return 'valid';
 		}
 	}
 }
