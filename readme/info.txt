@@ -381,7 +381,7 @@ Installation Procedure:
 
      4. Activate & Configure product's settings.
 
-     5. [After Successful Installation]: Download your local license file from: Customer Area » My Packages » vB Link Verifier Bot » Licenses » View » Local License Key » Click to Download
+     5. [After Successful Installation]: Run the scheduled task at least once, then you'll be able to download your local license file from: Customer Area » My Packages » vB Link Verifier Bot 'Ultimate' » Licenses » View » Local License Key » Click to Download
 	And upload it to it's appropriate location (rename it to 'license.php' if required):
 	|- includes
 	     + phpkd
@@ -391,8 +391,11 @@ Installation Procedure:
      6. If you are upgrading from 'Lite' edition to 'Ultimate' edition, you've to import the product "product-phpkd_vblvb_fix.xml" from AdminCP found inside "do_not_upload" folder.
 
      7. [Optional] Translations: vBulletin AdminCP » Languages & Phrases » Download / Upload Languages » Import Language XML File (Make sure that your forum's Character Set is equivalent to the imported language as follow):
+	     Arabic » ISO-8859-6
 	     English, French, Spanish » ISO-8859-1
 	     Greek » ISO-8859-7
+	     Russian » ISO-8859-5
+	     Turkish » ISO-8859-9
 	     You can change language file's encoding before import to whatever encoding you wish/your forum works on (ex: UTF-8) using Encoding Master (http://www.elfdata.com/encodingmaster/).
 
      8. You're Done :).
@@ -721,12 +724,13 @@ Screen Shots:
 
 Translations:
 ~~~~~~~~~~~~~~~~~
-     * Arabic
-     * English
-     * French
-     * Greek
-     * Turkish
-     * Spanish
+     1. Arabic
+     2. English
+     3. French
+     4. Greek
+     5. Turkish
+     6. Russian
+     7. Spanish
      * .. and counting!
      * Submit new translation & get free 'Ultimate' edition!
 
