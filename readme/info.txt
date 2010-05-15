@@ -11,7 +11,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.0.132
+     * 4.0.133
 
 
 Description:
@@ -396,7 +396,7 @@ Installation Procedure:
 	     Greek » ISO-8859-7
 	     Russian » ISO-8859-5
 	     Turkish » ISO-8859-9
-	     You can change language file's encoding before import to whatever encoding you wish/your forum works on (ex: UTF-8) using Encoding Master (http://www.elfdata.com/encodingmaster/).
+	     You can change language file's encoding before import to whatever encoding you wish/your forum works on (ex: UTF-8) using the wonderful applications "Encoding Master" (http://www.elfdata.com/encodingmaster/).
 
      8. You're Done :).
 
@@ -715,6 +715,16 @@ History:
       Permanently Dead: means that the host itself has been gone down forever, it's no more working. So the related module within the product marked also as dead & it will report all links of that host as dead.
       No longer supported: means that the bot no longer able to check this host's links & for technical limitations raised recently on those web hosts websites, so support for those hosts has been terminated & those links no longer checked.
       Semi-Dead: means that the host has problems currently, but it's not clear if it's alive or permanently dead, so we kept it alive for the mean time & will update it soon when we're sure it's permanently dead.
+     * v4.0.133 15/05/2010 11:11 AM UTC: Maintenance release (public)
+	1. Fixed "MySQL server gone away" & "Allowed memory exhausted" errors (http://forum.phpkd.net/project.php?issueid=91).
+	2. Added the following new translations:
+      1. Arabic
+      2. English
+      3. French
+      4. Greek
+      5. Russian
+      6. Spanish
+      7. Turkish
 
 
 Screen Shots:
@@ -779,4 +789,4 @@ Recent Products:
 |              Brought to you by PHP KingDom (www.phpkd.net)              |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.0.132 $ - $Id$
+$Version: 4.0.133 $ - $Id$
