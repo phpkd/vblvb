@@ -149,7 +149,9 @@ foreach ($initparams AS $key => $value)
 				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check regex also soon!
 				'HOSTS2_IFILE_IT'             => array('bitfield' => 1024,      'active' => 0, 'status' => 'dead', 'urlmatch' => "ifile\.it\/[0-9a-z]+",                                    'contentmatch' => "req_btn"),
 
-				'HOSTS2_IFOLDER_RU'           => array('bitfield' => 2048,      'active' => 1, 'status' => 'alive', 'urlmatch' => "ifolder\.ru\/[0-9]+",                                     'contentmatch' => "confirmed_number"),
+				// ints_code: Appears sometimes with ifolder.ru server load | confirmed_number: the normal behavior
+				'HOSTS2_IFOLDER_RU'           => array('bitfield' => 2048,      'active' => 1, 'status' => 'alive', 'urlmatch' => "ifolder\.ru\/[0-9]+",                                     'contentmatch' => "(ints_code|confirmed_number)"),
+
 				'HOSTS2_JUMBOFILES_COM'       => array('bitfield' => 4096,      'active' => 1, 'status' => 'alive', 'urlmatch' => "jumbofiles\.com\/[0-9a-z]+",                              'contentmatch' => "(download1|download2)"),
 
 				// Last sylable of the link doesn't affect URL validity ONLY ONLY if entered wrong -but not if ignored-, AND AND REQUIRES trailing '.html' after the last sylable!.
@@ -237,7 +239,7 @@ foreach ($initparams AS $key => $value)
 				'HOSTS3_USEUPLOAD_COM'        => array('bitfield' => 524288,    'active' => 1, 'status' => 'alive', 'urlmatch' => "useupload\.com\/[0-9a-z]+",                               'contentmatch' => "(download1|download2)"),
 
 				// Last sylable of the link doesn't affect URL validity ONLY ONLY if entered wrong -but not if ignored-, AND AND REQUIRES trailing '.html' after the last sylable!.
-				'HOSTS3_VIP_FILE_COM'         => array('bitfield' => 1048576,   'active' => 1, 'status' => 'alive', 'urlmatch' => "vip-file\.com\/download\/[0-9]+\.[0-9a-z]+\/[0-9a-z_-]+", 'contentmatch' => "(getfreelink|sms\/check\.php)"),
+				'HOSTS3_VIP_FILE_COM'         => array('bitfield' => 1048576,   'active' => 1, 'status' => 'alive', 'urlmatch' => "vip-file\.com\/download\/[0-9]+\.[0-9a-z]+\/[0-9a-z_-]+", 'contentmatch' => "sms\/check2\.php"),
 
 				// Only first siz characters are critical, any other added characters are ignored!!
 				'HOSTS3_X7_TO'                => array('bitfield' => 2097152,   'active' => 1, 'status' => 'alive', 'urlmatch' => "x7\.to\/[0-9a-z]+",                                       'contentmatch' => "requestTicket"),
