@@ -716,8 +716,10 @@ History:
       No longer supported: means that the bot no longer able to check this host's links & for technical limitations raised recently on those web hosts websites, so support for those hosts has been terminated & those links no longer checked.
       Semi-Dead: means that the host has problems currently, but it's not clear if it's alive or permanently dead, so we kept it alive for the mean time & will update it soon when we're sure it's permanently dead.
      * v4.0.133 15/05/2010 11:11 AM UTC: Maintenance release (public)
-	1. Fixed "MySQL server gone away" & "Allowed memory exhausted" errors (http://forum.phpkd.net/project.php?issueid=91).
-	2. Added the following new translations:
+	1. Fixed Bug: "MySQL server gone away" & "Allowed memory exhausted" errors (http://forum.phpkd.net/project.php?issueid=91).
+	2. Fixed Bug: "vip-file.com" not working well (http://forum.phpkd.net/project.php?issueid=97).
+	3. Fixed Bug: "vip-file.com" not working well (http://forum.phpkd.net/project.php?issueid=96).
+	4. Added the following new translations:
       1. Arabic
       2. English
       3. French
