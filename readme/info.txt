@@ -352,9 +352,10 @@ Translations:
      2. English .. Official
      3. French .. (by mitch84: http://forum.phpkd.net/member.php?u=19 )
      4. Greek .. (by greek-madness: http://forum.phpkd.net/member.php?u=49 )
-     5. Russian .. (by xorex: http://forum.phpkd.net/member.php?u=158 )
-     6. Spanish .. (by owned91: http://forum.phpkd.net/member.php?u=89 )
-     7. Turkish .. (by laztrix: http://forum.phpkd.net/member.php?u=34 )
+     5. Italian .. (by network: http://forum.phpkd.net/member.php?u=244 )
+     6. Russian .. (by xorex: http://forum.phpkd.net/member.php?u=158 )
+     7. Spanish .. (by owned91: http://forum.phpkd.net/member.php?u=89 )
+     8. Turkish .. (by laztrix: http://forum.phpkd.net/member.php?u=34 )
      .. .. and counting!
      .. Submit new translation & get free 'Ultimate' edition!
 
