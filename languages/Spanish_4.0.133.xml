@@ -205,7 +205,11 @@ $bbtitle]]></phrase>
 		<phrase name="phpkd_vblvb_invalid_hosts" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[Sorry, no selected hosts to be chekced! You should select at least one host to check, please set your hosts selection from <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Checked Hosts" first and try again.]]></phrase>
 		<phrase name="phpkd_vblvb_invalid_protocols" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[Sorry, no selected protocols to be chekced! You should select at least one protocol to check, please set your protocols selection from <a href="options.php?do=options&dogroup=phpkd_vblvb">product's setting</a> "Checked Protocols" first and try again.]]></phrase>
 		<phrase name="phpkd_vblvb_newpost" date="1256546122" username="PHPKD" version="4.0.101"><![CDATA[You've dead links inside your post, please check & validate links first.]]></phrase>
-		<phrase name="phpkd_vblvb_nothing_checked" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Nothing to check, no records returned from your query. Please check <a href="options.php?do=options&dogroup=phpkd_vblvb">product's settings</a> first and try again.]]></phrase>
+		<phrase name="phpkd_vblvb_nothing_checked" date="1275312192" username="PHPKD" version="4.0.133"><![CDATA[Nothing checked. No records found meets your criteria. This may be caused by one of the following reasons:
+<ol>
+	<li>All posts has been checked already, and the next successive check didn't come yet.</li>
+	<li>As per your product's settings, there isn't any posts to check currently. <a href="options.php?do=options&dogroup=phpkd_vblvb">You may wish to review your product's settings</a>.</li>
+</ol>]]></phrase>
 	</phrasetype>
 	<phrasetype name="GLOBAL" fieldname="global">
 		<phrase name="phpkd_vblvb_editpost" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[There's dead links inside this post, please check & validate links first.]]></phrase>
@@ -221,7 +225,11 @@ $bbtitle]]></phrase>
 		<phrase name="phpkd_vblvb_log_punished_posts" date="1256667949" username="PHPKD" version="4.0.101"><![CDATA[<strong>Posts Castigados:</strong>]]></phrase>
 		<phrase name="phpkd_vblvb_log_summery" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[<strong>Summery: All Links: {4}, <span style="color: blue">Checked Links: {5}</span>, <span style="color: {1}">Alive: {6}</span>, <span style="color: {2}">Dead: {7}</span>, <span style="color: {3}">Temorary Down: {8}</span>, Ignored: {9}.</strong>]]></phrase>
 		<phrase name="phpkd_vblvb_newpost" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[You've dead links inside your post, please check & validate links first.]]></phrase>
-		<phrase name="phpkd_vblvb_nothing_checked" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Nothing to check, no records returned from your query. Please check <a href="options.php?do=options&dogroup=phpkd_vblvb">product's settings</a> first and try again.]]></phrase>
+		<phrase name="phpkd_vblvb_nothing_checked" date="1275312192" username="PHPKD" version="4.0.133"><![CDATA[Nothing checked. No records found meets your criteria. This may be caused by one of the following reasons:
+<ol>
+	<li>All posts has been checked already, and the next successive check didn't come yet.</li>
+	<li>As per your product's settings, there isn't any posts to check currently. <a href="options.php?do=options&dogroup=phpkd_vblvb">You may wish to review your product's settings</a>.</li>
+</ol>]]></phrase>
 		<phrase name="phpkd_vblvb_punish_reason" date="1256737912" username="PHPKD" version="4.0.101"><![CDATA[ - Castigo de Verificador de Enlaces]]></phrase>
 		<phrase name="phpkd_vblvb_rprts_message" date="1256556785" username="PHPKD" version="4.0.101"><![CDATA[{1}]]></phrase>
 		<phrase name="phpkd_vblvb_rprts_title" date="1256556790" username="PHPKD" version="4.0.101"><![CDATA[Reporte del  Verificador de Enlaces: {1} {2}]]></phrase>

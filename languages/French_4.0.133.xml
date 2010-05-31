@@ -205,7 +205,11 @@ $bbtitle]]></phrase>
 		<phrase name="phpkd_vblvb_invalid_hosts" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[Désolé, aucun hébergeur à vérifier n'a été sélectionné! Vous devez d'abord sélectionner un hébergeur, merci de sélectionner vos hébergeurs à partir des <a href="options.php?do=options&dogroup=phpkd_vblvb">paramètres du produit</a> "Hébergeurs A Vérifier" et essayer encore.]]></phrase>
 		<phrase name="phpkd_vblvb_invalid_protocols" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[Désolé, aucun protocoles à vérifier! Vous devez d'abord sélectionner un protocole à vérifier, merci de sélectionner vos protocoles à partir des <a href="options.php?do=options&dogroup=phpkd_vblvb">paramètres du produit</a> "Protocoles A Vérifier" et essayer encore.]]></phrase>
 		<phrase name="phpkd_vblvb_newpost" date="1256546122" username="PHPKD" version="4.0.101"><![CDATA[Vous avez des liens morts à l'intérieur de votre post, please check & valider d'abord les premiers liens.]]></phrase>
-		<phrase name="phpkd_vblvb_nothing_checked" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Rien à vérifier, Aucun retour d'enregistrement de votre requête. Merci de vérifier en premier les <a href="options.php?do=options&dogroup=phpkd_vblvb">paramètres du produit</a> et essayer encore.]]></phrase>
+		<phrase name="phpkd_vblvb_nothing_checked" date="1275312192" username="PHPKD" version="4.0.133"><![CDATA[Nothing checked. No records found meets your criteria. This may be caused by one of the following reasons:
+<ol>
+	<li>All posts has been checked already, and the next successive check didn't come yet.</li>
+	<li>As per your product's settings, there isn't any posts to check currently. <a href="options.php?do=options&dogroup=phpkd_vblvb">You may wish to review your product's settings</a>.</li>
+</ol>]]></phrase>
 	</phrasetype>
 	<phrasetype name="GLOBAL" fieldname="global">
 		<phrase name="phpkd_vblvb_editpost" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[Il y a des liens morts à l'intérieur de ce post, merci de vérifier et de valider les premiers liens.]]></phrase>
@@ -221,7 +225,11 @@ $bbtitle]]></phrase>
 		<phrase name="phpkd_vblvb_log_punished_posts" date="1256667949" username="PHPKD" version="4.0.101"><![CDATA[<strong>Posts Traités:</strong>]]></phrase>
 		<phrase name="phpkd_vblvb_log_summery" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[<strong>Révision: Tous Les Liens: {4}, <span style="color: blue">Liens Vérifiés: {5}</span>, <span style="color: {1}">Actif: {6}</span>, <span style="color: {2}">Mort: {7}</span>, <span style="color: {3}">Temporairement Indisponible: {8}</span>, Ignoré: {9}.</strong>]]></phrase>
 		<phrase name="phpkd_vblvb_newpost" date="1266135257" username="PHPKD" version="4.0.130"><![CDATA[Vous avez des liens morts à l'intérieur de votre post, merci de vérifier et de valider les premiers liens.]]></phrase>
-		<phrase name="phpkd_vblvb_nothing_checked" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Rien à vérifier, Aucun retour d'enregistrement de votre requête. Merci de vérifier les <a href="options.php?do=options&dogroup=phpkd_vblvb">paramètres du produit</a> en premier et essayer encore.]]></phrase>
+		<phrase name="phpkd_vblvb_nothing_checked" date="1275312192" username="PHPKD" version="4.0.133"><![CDATA[Nothing checked. No records found meets your criteria. This may be caused by one of the following reasons:
+<ol>
+	<li>All posts has been checked already, and the next successive check didn't come yet.</li>
+	<li>As per your product's settings, there isn't any posts to check currently. <a href="options.php?do=options&dogroup=phpkd_vblvb">You may wish to review your product's settings</a>.</li>
+</ol>]]></phrase>
 		<phrase name="phpkd_vblvb_punish_reason" date="1256737912" username="PHPKD" version="4.0.101"><![CDATA[Traitement Des Liens Du Robot De Vérification]]></phrase>
 		<phrase name="phpkd_vblvb_rprts_message" date="1256556785" username="PHPKD" version="4.0.101"><![CDATA[{1}]]></phrase>
 		<phrase name="phpkd_vblvb_rprts_title" date="1256556790" username="PHPKD" version="4.0.101"><![CDATA[Rapport du Robot Vérificateur de Liens: {1} {2}]]></phrase>
