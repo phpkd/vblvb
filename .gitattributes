@@ -1,13 +1,13 @@
 * text=auto !eol
 do_not_upload/product-phpkd_vblvb_fix.xml -text
 import/product-phpkd_vblvb.xml -text
-languages/Arabic_4.0.133.xml -text svneol=unset#text/plain
-languages/English_4.0.133.xml -text svneol=unset#text/plain
-languages/French_4.0.133.xml -text svneol=unset#text/plain
-languages/Greek_4.0.133.xml -text svneol=unset#text/plain
-languages/Russian_4.0.133.xml -text svneol=unset#text/plain
-languages/Spanish_4.0.133.xml -text svneol=unset#text/plain
-languages/Turkish_4.0.133.xml -text svneol=unset#text/plain
+languages/Arabic_4.0.134.xml -text svneol=unset#text/plain
+languages/English_4.0.134.xml -text svneol=unset#text/plain
+languages/French_4.0.134.xml -text svneol=unset#text/plain
+languages/Greek_4.0.134.xml -text svneol=unset#text/plain
+languages/Russian_4.0.134.xml -text svneol=unset#text/plain
+languages/Spanish_4.0.134.xml -text svneol=unset#text/plain
+languages/Turkish_4.0.134.xml -text svneol=unset#text/plain
 readme/info.txt -text
 readme/install.txt -text
 readme/license.txt -text
