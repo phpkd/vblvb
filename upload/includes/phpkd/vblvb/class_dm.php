@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.133 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.134 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -325,7 +325,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 		$vurl->set_option(VURL_URL, $url);
 		$vurl->set_option(VURL_USERAGENT, 'vBulletin/' . FILE_VERSION);
 		$vurl->set_option(VURL_FOLLOWLOCATION, 1);
-		$vurl->set_option(VURL_MAXREDIRS, 1);
+		$vurl->set_option(VURL_MAXREDIRS, 3);
 
 		if($post != '0') 
 		{
@@ -901,7 +901,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.133
+|| # Version: 4.0.134
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

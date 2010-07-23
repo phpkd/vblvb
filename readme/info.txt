@@ -11,7 +11,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.0.133
+     * 4.0.134
 
 
 Description:
@@ -742,6 +742,29 @@ History:
       5. Russian
       6. Spanish
       7. Turkish
+     * v4.0.134 23/07/2010 10:00 AM UTC: Maintenance release (public)
+	1. Fixes & updates for current supported hosts:
+      1. 2shared.com => Fixed & updated
+      2. 4shared.com => Fixed & updated
+      3. crazyupload.com => permanently dead
+      4. divshare.com => Fixed & updated
+      5. easy-share.com => Fixed & updated
+      6. evilshare.com => permanently dead
+      7. filesovermiles.com => No longer supported
+      8. hotfile.com => Fixed & updated
+      9. hulkshare.com => Fixed & updated
+      10. ifile.it => Revived again & updated
+      11. my2share.com => permanently dead
+      12. proddl.com => permanently dead
+      13. przeslij.net => Permanently dead & No longer supported
+      14. sendspace.com => Fixed & updated
+      15. transferbigfiles.com => No longer supported
+      16. usaupload.net => Revived again & updated
+      17. useupload.com => Permanently dead
+      18. yousendit.com => No longer supported
+      19. zippyshare.com => Fixed & updated
+      20. zshare.net => Fixed & updated
+	2. Updated maximum redirects from 1 to 3.
 
 
 Screen Shots:
@@ -793,4 +816,4 @@ Recent Products:
 |              Brought to you by PHP KingDom (www.phpkd.net)              |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.0.133 $ - $Id$
+$Version: 4.0.134 $ - $Id$

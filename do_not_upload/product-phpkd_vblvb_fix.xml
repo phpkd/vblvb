@@ -3,7 +3,7 @@
 <product productid="phpkd_vblvb_fix" active="1">
 	<title>vB Link Verifier Bot Fix</title>
 	<description><![CDATA[This product just fix a transition issue for those upgrading from 'Lite' edition to 'Ultimate' edition.]]></description>
-	<version>4.0.133</version>
+	<version>4.0.134</version>
 	<url />
 	<versioncheckurl />
 	<dependencies>
