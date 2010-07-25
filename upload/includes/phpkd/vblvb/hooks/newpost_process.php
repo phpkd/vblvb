@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.134 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.135 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -58,7 +58,7 @@ if (($type == 'thread' AND ($this->registry->options['phpkd_vblvb_checked_newpos
 	{
 		$phpkd_vblvb_license_proceed = TRUE;
 	}
-	else if ($this->verify_license())
+	else if ($this->verify_license() == 'valid')
 	{
 		$phpkd_vblvb_license_proceed = TRUE;
 
@@ -102,7 +102,7 @@ else
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.134
+|| # Version: 4.0.135
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

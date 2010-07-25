@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.134 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.135 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -142,7 +142,7 @@ foreach ($initparams AS $key => $value)
 				'HOSTS2_HOSTUJE_NET'          => array('bitfield' => 128,       'active' => 1, 'status' => 'alive', 'urlmatch' => "hostuje\.net\/file\.php\?id=[0-9a-z]+",                   'contentmatch' => "obraz\.php"),
 
 				// Last sylable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT BUT REQUIRES trailing slash '/' after the second sylable if the third sylable didn't entered!.
-				'HOSTS2_HOTFILE_COM'          => array('bitfield' => 256,       'active' => 1, 'status' => 'alive', 'urlmatch' => "hotfile\.com\/dl\/[0-9]+\/[0-9a-z]+",                     'contentmatch' => "download_file"),
+				'HOSTS2_HOTFILE_COM'          => array('bitfield' => 256,       'active' => 1, 'status' => 'alive', 'urlmatch' => "hotfile\.com\/dl\/[0-9]+\/[0-9a-z]+",                     'contentmatch' => "starttimer"),
 
 				'HOSTS2_HULKSHARE_COM'        => array('bitfield' => 512,       'active' => 1, 'status' => 'alive', 'urlmatch' => "hulkshare\.com\/[0-9a-z]+",                               'contentmatch' => "download2"),
 
@@ -167,7 +167,7 @@ foreach ($initparams AS $key => $value)
 
 				// After massive checking for multiple links, megaupload restrict access for the same IP address for a specific time period, the following message displayed:
 				// We have detected an elevated number of requests from your IP address. This may be caused by improperly designed third-party software. A temporary access restriction is in place. Please check back in XX minutes or log in using your premium account. (IP: 41.196.231.1)
-				'HOSTS2_MEGAUPLOAD_COM'       => array('bitfield' => 524288,    'active' => 1, 'status' => 'alive', 'urlmatch' => "megaupload\.com\/\?d=[0-9a-z]+(&setlang=[a-z]{2}\/)?",    'contentmatch' => "(javascript:checkcaptcha|All download slots assigned to your country)",   'urlsearch' => "@&setlang=[a-z]{2}@i", 'urlreplace' => "&setlang=en", 'downmatch' => "temporary access restriction is in place"),
+				'HOSTS2_MEGAUPLOAD_COM'       => array('bitfield' => 524288,    'active' => 1, 'status' => 'alive', 'urlmatch' => "megaupload\.com\/\?d=[0-9a-z]+(&setlang=[a-z]{2}\/)?",    'contentmatch' => "(javascript:checkcaptcha|javascript:postpassword|All download slots assigned to your country|The file that you\'re trying to download is larger than 1 GB.)",   'urlsearch' => "@&setlang=[a-z]{2}@i", 'urlreplace' => "&setlang=en", 'downmatch' => "temporary access restriction is in place"),
 
 				'HOSTS2_MIDUPLOAD_COM'        => array('bitfield' => 1048576,   'active' => 0, 'status' => 'dead', 'urlmatch' => "midupload\.com\/[0-9a-z]+",                               'contentmatch' => "(download1|download2)"),
 
@@ -462,7 +462,7 @@ foreach ($initparams AS $key => $value)
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.134
+|| # Version: 4.0.135
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
