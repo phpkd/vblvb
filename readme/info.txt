@@ -11,7 +11,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.0.135
+     * 4.0.136
 
 
 Description:
@@ -773,6 +773,8 @@ History:
 	3. Bug Fix: megaupload.com 1 GB files marked as dead (http://forum.phpkd.net/project.php?issueid=105)
 	4. Bug Fix: megaupload.com password protected files marked as dead (http://forum.phpkd.net/project.php?issueid=106)
 	5. Bug Fix: new posts & edited posts no longer pre-checked (http://forum.phpkd.net/project.php?issueid=108)
+     * v4.0.136 26/07/2010 10:00 AM UTC: Maintenance release (public)
+	1. Bug Fix: Check Succession Period = 0 (http://forum.phpkd.net/project.php?issueid=104)
 
 
 Screen Shots:
@@ -824,4 +826,4 @@ Recent Products:
 |              Brought to you by PHP KingDom (www.phpkd.net)              |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.0.135 $ - $Id$
+$Version: 4.0.136 $ - $Id$
