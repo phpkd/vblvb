@@ -11,7 +11,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.0.136
+     * 4.0.137
 
 
 Description:
@@ -775,6 +775,8 @@ History:
 	5. Bug Fix: new posts & edited posts no longer pre-checked (http://forum.phpkd.net/project.php?issueid=108)
      * v4.0.136 26/07/2010 10:00 AM UTC: Maintenance release (public)
 	1. Bug Fix: Check Succession Period = 0 (http://forum.phpkd.net/project.php?issueid=104)
+     * v4.0.137 27/07/2010 10:00 AM UTC: Maintenance release (public)
+	1. Bug Fix: Check Succession Period stopped working  (http://forum.phpkd.net/project.php?issueid=111)
 
 
 Screen Shots:
@@ -826,4 +828,4 @@ Recent Products:
 |              Brought to you by PHP KingDom (www.phpkd.net)              |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.0.136 $ - $Id$
+$Version: 4.0.137 $ - $Id$
