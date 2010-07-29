@@ -353,7 +353,7 @@ if ($vbulletin->options['phpkd_vblvb_active'])
 				{
 					$records['punished']++;
 					$critical = ($links['dead'] / $links['checked']) * 100;
-					if ($critical > $vbulletin->options['phpkd_vblvb_critical'])
+					if ($critical >= $vbulletin->options['phpkd_vblvb_critical'])
 					{
 						$logpunished .= '<li><a href="' . $vbulletin->options['bburl'] . '/showpost.php?p=' . $postid . '" target="_blank">' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '</a></li>';
 						$punished[$post['userid']][$postid] = array('threadid' => $post['threadid'], 'forumid' => $post['forumid'], 'languageid' => $post['languageid'], 'username' => $post['username'], 'title' => $post['title'], 'threadtitle' => $post['threadtitle']);

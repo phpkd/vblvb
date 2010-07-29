@@ -83,7 +83,7 @@ if ($this->registry->options['phpkd_vblvb_checked_editedposts'] == 1 OR ($thread
 		if ($phpkd_vblvb_fetch_urls['dead'] > 0 AND $phpkd_vblvb_fetch_urls['checked'] > 0)
 		{
 			$phpkd_vblvb_critical = ($phpkd_vblvb_fetch_urls['dead'] / $phpkd_vblvb_fetch_urls['checked']) * 100;
-			if ($phpkd_vblvb_critical > $this->registry->options['phpkd_vblvb_critical'])
+			if ($phpkd_vblvb_critical >= $this->registry->options['phpkd_vblvb_critical'])
 			{
 				$dataman->error('phpkd_vblvb_editpost');
 			}
