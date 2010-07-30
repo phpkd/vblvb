@@ -778,7 +778,7 @@ History:
      * v4.0.137 29/07/2010 10:00 PM UTC: Maintenance release (public)
 	1. Bug Fix: Check Succession Period stopped working (http://forum.phpkd.net/project.php?issueid=111)
 	2. Bug Fix: Critical Limit/Red Line not working accurate (http://forum.phpkd.net/project.php?issueid=112)
-	3. Added new 'Italian' translations.
+	3. Added new 'Italian' translation.
 
 
 Screen Shots:
