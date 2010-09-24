@@ -1,10 +1,10 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|              Brought to you by PHP KingDom (www.phpkd.net)              |
+Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 PHPKD - vB Link Verifier Bot 'Ultimate' -- Upgrade Procedure:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      1. Upload required files to their appropriate places (allow overwrite):
 	|- admincp
 	     + phpkd_vblvb.php
@@ -56,7 +56,7 @@ PHPKD - vB Link Verifier Bot 'Ultimate' -- Upgrade Procedure:
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|              Brought to you by PHP KingDom (www.phpkd.net)              |
+Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $Version: 4.0.137 $ - $Id$
