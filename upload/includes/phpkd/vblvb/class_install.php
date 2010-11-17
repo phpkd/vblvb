@@ -2,7 +2,7 @@
 /*==================================================================================*\
 || ################################################################################ ||
 || # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.200 # ||
-|| # License Type: Commercial License                            $Revision: 151 $ # ||
+|| # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
 || #            Copyright ©2005-2010 PHP KingDom. All Rights Reserved.            # ||
@@ -87,10 +87,10 @@ class PHPKD_VBLVB_Install
 		// Import debug data in appropriate field
 		$phpkdinfo = $info;
 		unset($phpkdinfo['description']);
-		$phpkdinfo['author'] = trim(substr(substr('$Author: PHPKD $', 8), 0, -1));
+		$phpkdinfo['author'] = trim(substr(substr('$Author$', 8), 0, -1));
 		$phpkdinfo['vendor'] = trim(substr(substr('$Vendor: PHP KingDom $', 8), 0, -1));
-		$phpkdinfo['revision'] = trim(substr(substr('$Revision: 13 $', 10), 0, -1));
-		$phpkdinfo['released'] = trim(substr(substr('$Date: 2010-09-28 10:55:08 +0300 (Tue, 28 Sep 2010) $', 6), 0, -1));
+		$phpkdinfo['revision'] = trim(substr(substr('$Revision$', 10), 0, -1));
+		$phpkdinfo['released'] = trim(substr(substr('$Date$', 6), 0, -1));
 		$phpkdinfo['installdateline'] = TIMENOW;
 
 		if ($this->_vbulletin->options['phpkd_commercial40_data'])
@@ -399,7 +399,7 @@ class PHPKD_VBLVB_Install
 /*============================================================================*\
 || ########################################################################### ||
 || # Version: 4.0.200
-|| # $Revision: 151 $
-|| # Released: $Date: 2010-05-15 13:05:27 +0300 (Sat, 15 May 2010) $
+|| # $Revision$
+|| # Released: $Date$
 || ########################################################################### ||
 \*============================================================================*/
