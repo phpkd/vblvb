@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.137 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.200 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -25,192 +25,89 @@ if (!defined('VB_AREA') OR !defined('PHPKD_VBLVB') OR @get_class($this) != 'PHPK
 /**
  * License Data Manager class
  *
- * @package vB Link Verifier Bot 'Pro' Edition
- * @author PHP KingDom Development Team
- * @version $Revision$
- * @since $Date$
- * @copyright PHP KingDom (PHPKD)
+ * @category	vB Link Verifier Bot 'Ultimate'
+ * @package		PHPKD_VBLVB
+ * @subpackage	PHPKD_VBLVB_DML
+ * @copyright	Copyright ©2005-2011 PHP KingDom. All Rights Reserved. (http://www.phpkd.net)
+ * @license		http://info.phpkd.net/en/license/commercial
  */
-class PHPKD_VBLVB_DML extends PHPKD_VBLVB
+class PHPKD_VBLVB_DML
 {
 	/**
-	* Constructor - implements parents constructor & do additional initializations if required!
-	*
-	* @param	vB_Registry	Instance of the vBulletin data registry object - expected to have the database object as one of its members ($this->db).
-	* @param	array		Initialize required data (Hosts/Masks/Punishments/Reports)
-	* @param	integer		One of the ERRTYPE_x constants
-	*/
-	function PHPKD_VBLVB_DML(&$registry)
+	 * The PHPKD_VBLVB registry object
+	 *
+	 * @var	PHPKD_VBLVB
+	 */
+	private $_registry = null;
+
+	/**
+	 * Token
+	 *
+	 * @var	MD5 token
+	 */
+	private $_token = null;
+
+	/**
+	 * Constructor - checks that PHPKD_VBLVB registry object including vBulletin registry oject has been passed correctly.
+	 *
+	 * @param	PHPKD_VBLVB	Instance of the main product's data registry object - expected to have both vBulletin data registry & database object as two of its members.
+	 * @return	void
+	 */
+	public function __construct(&$registry)
 	{
-		$this->registry =& $registry;
-		// Do nothing!!
-	}
-
-
-	function special_token()
-	{
-		return md5(md5(md5(PHPKD_VBLVB_TOCKEN) . md5($this->registry->userinfo['securitytoken']) . md5(TIMENOW)));
-	}
-
-
-	function make_token()
-	{
-		return md5(PHPKD_VBLVB_TOCKEN . TIMENOW);
-	}
-
-
-	function get_key()
-	{
-		$data = @file(DIR . '/includes/phpkd/vblvb/license.php');
-
-		if (!$data)
+		if (is_object($registry))
 		{
-			return false;
-		}
+			$this->_registry =& $registry;
 
-		$buffer = false;
-		foreach ($data as $line)
-		{
-			$buffer .= $line;
-		}
-
-		if (!$buffer)
-		{
-			return false;
-		}
-
-		$buffer = @str_replace("<", "", $buffer);
-		$buffer = @str_replace(">", "", $buffer);
-		$buffer = @str_replace("?PHP", "", $buffer);
-		$buffer = @str_replace("?", "", $buffer);
-		$buffer = @str_replace("/*--", "", $buffer);
-		$buffer = @str_replace("--*/", "", $buffer);
-
-		return @str_replace("\n", "", $buffer);
-	}
-
-
-	function parse_local_key()
-	{
-		if (!@file_exists(DIR . '/includes/phpkd/vblvb/license.php'))
-		{
-			return false;
-		}
-
-		$raw_data = @base64_decode($this->get_key());
-		$raw_array = @explode("|", $raw_data);
-		if (@is_array($raw_array) && @count($raw_array) < 8)
-		{
-			return false;
-		}
-
-		return $raw_array;
-	}
-
-
-	function pa_wildcard($host_array)
-	{
-		if (!is_array($host_array))
-		{
-			return array();
-		}
-
-		foreach ($host_array as $access)
-		{
-			$first_dot = strpos($_SERVER['HTTP_HOST'], '.');
-			$strlen = strlen($_SERVER['HTTP_HOST']);
-			$target = substr($_SERVER['HTTP_HOST'], $first_dot, $strlen);
-
-			if ($host = md5(PHPKD_VBLVB_TOCKEN . '*' . $target) == $access)
+			if (is_object($registry->_vbulletin))
 			{
-				return $host_array[] = $_SERVER['HTTP_HOST'];
-			}
-		}
-
-		return $host_array;
-	}
-
-
-	function validate_local_key($array)
-	{
-		$raw_array = $this->parse_local_key();
-
-		if (!@is_array($raw_array) || $raw_array === false)
-		{
-			return "<verify status='invalid_key' message='Please contact support for a new license key.' />";
-		}
-
-		if ($raw_array[11] && @strcmp(@md5(PHPKD_VBLVB_TOCKEN . $raw_array[11]), $raw_array[12]) != 0)
-		{ 
-			return "<verify status='invalid_key' message='Please contact support for a new license key.' />";
-		}
-
-		if ($raw_array[9] && @strcmp(@md5(PHPKD_VBLVB_TOCKEN . $raw_array[9]), $raw_array[10]) != 0)
-		{
-			return "<verify status='invalid_key' message='Please contact support for a new license key.' />";
-		}
-
-		if (@strcmp(@md5(PHPKD_VBLVB_TOCKEN . $raw_array[1]), $raw_array[2]) != 0)
-		{
-			return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
-		}
-
-		if ($raw_array[1] < TIMENOW && $raw_array[1] != "never")
-		{
-			return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
-		}
-
-		if ($array['per_server'])
-		{
-			$server = $this->phpaudit_get_mac_address();
-			$mac_array = @explode(",", $raw_array[6]);
-
-			if (!@in_array(@md5(PHPKD_VBLVB_TOCKEN . $server[0]), $mac_array))
-			{
-				return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
-			}
-
-			$host_array = @explode(",", $raw_array[4]);
-			if (!@in_array(@md5(PHPKD_VBLVB_TOCKEN . @gethostbyaddr(@gethostbyname($server[1]))), $host_array))
-			{
-				return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
-			}
-		}
-		else if ($array['per_install'] || $array['per_site'])
-		{
-			if ($array['per_install'])
-			{
-				$directory_array = @explode(",", $raw_array[3]);
-				$valid_dir = $this->path_translated();
-				$valid_dir = @md5(PHPKD_VBLVB_TOCKEN . $valid_dir);
-
-				if (!@in_array($valid_dir, $directory_array))
+				if (!is_object($registry->_vbulletin->db))
 				{
-					return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
+					trigger_error('vBulletin Database object is not an object!', E_USER_ERROR);
 				}
 			}
-
-			$host_array = @explode(",", $raw_array[4]);
-			$host_array = $this->pa_wildcard($host_array);
-
-			if (!@in_array(@md5(PHPKD_VBLVB_TOCKEN . $_SERVER['HTTP_HOST']), $host_array))
+			else
 			{
-				return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
-			}
-
-			$ip_array = @explode(",", $raw_array[5]);
-
-			if (!@in_array(@md5(PHPKD_VBLVB_TOCKEN . $this->server_addr()), $ip_array))
-			{
-				return "<verify status='invalid_key' message='Please contact support for a new license key.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
+				trigger_error('vBulletin Registry object is not an object!', E_USER_ERROR);
 			}
 		}
-	
-		return "<verify status='active' message='The license key is valid.' " . $raw_array[9] . " addon_array='{$raw_array[11]}' />";
+		else
+		{
+			trigger_error('PHPKD_VBLVB Registry object is not an object!', E_USER_ERROR);
+		}
 	}
 
+	/**
+	 * Generate unique token used for integrity & license verification.
+	 *
+	 * @return	void
+	 */
+	private function setToken()
+	{
+		$this->_token = md5(md5(md5(PHPKD_VBLVB_TOCKEN) . md5($this->_registry->_vbulletin->userinfo['securitytoken']) . md5(TIMENOW)));
+	}
 
-	function phpaudit_exec_socket($http_host, $http_dir, $http_file, $querystring)
+	/**
+	 * Return token.
+	 *
+	 * @return	string	Unique MD5 hash
+	 */
+	public function getToken()
+	{
+		if (null == $this->_token)
+		{
+			$this->setToken();
+		}
+
+		return $this->_token;
+	}
+
+	/**
+	 * License remote validation
+	 *
+	 * @return	mixed	License validation result
+	 */
+	private function phpaudit_exec_socket($http_host, $http_dir, $http_file, $querystring)
 	{
 		$fp = @fsockopen($http_host, 80, $errno, $errstr, 10); // was 5
 
@@ -223,7 +120,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			$header = "POST " . ($http_dir.$http_file) . " HTTP/1.0\r\n";
 			$header .= "Host: " . $http_host . "\r\n";
 			$header .= "Content-type: application/x-www-form-urlencoded\r\n";
-			$header .= "User-Agent: PHPKD - vB Link Verifier Bot 4.0.137\r\n";
+			$header .= "User-Agent: PHPKD - vB Link Verifier Bot 4.0.200\r\n";
 			$header .= "Content-length: " . @strlen($querystring) . "\r\n";
 			$header .= "Connection: close\r\n\r\n";
 			$header .= $querystring;
@@ -232,7 +129,7 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 
 			if (@function_exists('stream_set_timeout'))
 			{
-				stream_set_timeout($fp, 20);
+				@stream_set_timeout($fp, 20);
 			}
 
 			@fputs($fp, $header);
@@ -243,23 +140,23 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			}
 			else
 			{
-				$status=true;
+				$status = true;
 			}
 
-			while (!@feof($fp) && $status) 
+			while (!@feof($fp) && $status)
 			{
 				$data .= @fgets($fp, 1024);
 
 				if (@function_exists('socket_get_status'))
 				{
 					$status = @socket_get_status($fp);
-				} 
-				else 
+				}
+				else
 				{
 				    if (@feof($fp) == true)
 					{
 				    	$status = false;
-					} 
+					}
 					else
 					{
 						$status = true;
@@ -296,45 +193,12 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 		}
 	}
 
-
-	# DOES NOT WORK FOR WINDOWS!!!!!!!
-	# No good way to get the mac address for win.
-	function phpaudit_get_mac_address()
-	{
-		$fp = @popen("/sbin/ifconfig", "r");
-
-		if (!$fp)
-		{
-			return -1;
-		} # returns invalid, cannot open ifconfig
-
-		$res = @fread($fp, 4096);
-		@pclose($fp);
-
-		$array = @explode("HWaddr", $res);
-
-		if (@count($array) < 2)
-		{
-			$array = @explode("ether", $res);
-		} # FreeBSD
-
-		$array = @explode("\n", $array[1]);
-		$buffer[] = @trim($array[0]);
-		$array = @explode("inet addr:", $res);
-
-		if (@count($array) < 2)
-		{
-			$array = @explode("inet ", $res);
-		} # FreeBSD
-
-		$array = @explode(" ", $array[1]);
-		$buffer[] = @trim($array[0]);
-
-		return $buffer;
-	}
-
-
-	function path_translated()
+	/**
+	 * Get access directory
+	 *
+	 * @return	mixed	Access directory path if successful, false if failed
+	 */
+	private function path_translated()
 	{
 		if (defined('DIR') AND strlen(DIR) > 1)
 		{
@@ -346,8 +210,12 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 		}
 	}
 
-
-	function server_addr()
+	/**
+	 * Get server address
+	 *
+	 * @return	mixed	Server IP if successful, false if failed
+	 */
+	private function server_addr()
 	{
 		$options = array('SERVER_ADDR', 'LOCAL_ADDR');
 
@@ -359,53 +227,32 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			}
 		}
 
+		// No IP could be determined
 		return false;
-		// return 'no IP could be determined.';
 	}
 
-
-	function process_license()
+	/**
+	 * Process license data
+	 *
+	 * @return	string	License status
+	 */
+	public function process_license()
 	{
 		# This file is for the license server:
 		# Default Licensing Server [Server ID: 1] [created: Sun, 08 Nov 2009 20:22:25 -0600]
 		# The $license variable.
 		# Feel free to change it as you see needed.
 
-		$license = $this->registry->options['phpkd_vblvb_license_key'];
-		$servers   = array();
-		$servers[] = 'http://eshop.phpkd.net/license_server'; // main server
-		$query_string = "license={$license}";
+		$license = $this->_registry->_vbulletin->phpkd_vblvb['general_licensekey'];
+		$servers = array('http://eshop.phpkd.net/license_server');
 
-		$per_server = false;
-		$per_install = true;
-		$per_site = false;
-		$enable_dns_spoof = 'yes';
+		$query_string  = "license={$license}";
+		$query_string .= "&access_directory=" . $this->path_translated();
+		$query_string .= "&access_ip=" . $this->server_addr();
+		$query_string .= "&access_host=" . $_SERVER['HTTP_HOST'];
+		$query_string .= '&access_token=' . $this->getToken();
 
-
-		if ($per_server)
-		{
-			$server_array = $this->phpaudit_get_mac_address();
-			$query_string .= "&access_host=" . @gethostbyaddr(@gethostbyname($server_array[1]));
-			$query_string .= "&access_mac=" . $server_array[0];
-		}
-		else if ($per_install)
-		{
-			$query_string .= "&access_directory=" . $this->path_translated();
-			$query_string .= "&access_ip=" . $this->server_addr();
-			$query_string .= "&access_host=" . $_SERVER['HTTP_HOST'];
-		}
-		else if ($per_site)
-		{
-			$query_string .= "&access_ip=" . $this->server_addr();
-			$query_string .= "&access_host=" . $_SERVER['HTTP_HOST'];
-		}
-
-
-		$query_string .= '&access_token=';
-		$query_string .= $token = $this->make_token();
-
-
-		foreach($servers as $server) 
+		foreach($servers as $server)
 		{
 			$sinfo = @parse_url($server);
 
@@ -418,20 +265,17 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 		}
 
 
-		/*
-		 * Begin
-		 * PHPKD: Temporary License Record Scenario
-		 */
-		$squery[] = 'product' . '=' . urlencode(PHPKD_PRODUCT);
-		$squery[] = 'version' . '=' . urlencode(PHPKD_VBLVB_VERSION);
-		$squery[] = 'license' . '=' . urlencode($this->registry->options['phpkd_vblvb_license_key']);
-		$squery[] = 'bbtitle' . '=' . urlencode($this->registry->options['bbtitle']);
-		$squery[] = 'bburl' . '=' . urlencode($this->registry->options['bburl']);
-		$squery[] = 'vbversion' . '=' . urlencode($this->registry->options['templateversion']);
-		$squery[] = 'bbwebmasteremail' . '=' . urlencode($this->registry->options['webmasteremail']);
-		$squery[] = 'bbwebmasterid' . '=' . urlencode($this->registry->userinfo['userid']);
-		$squery[] = 'bbwebmasterusername' . '=' . urlencode($this->registry->userinfo['username']);
-		$squery[] = 'spbastoken' . '=' . urlencode($token);
+		// Begin: PHPKD Temporary License Record Scenario
+		$squery[] = 'product'             . '=' . urlencode('phpkd_vblvb');
+		$squery[] = 'version'             . '=' . urlencode(PHPKD_VBLVB_VERSION);
+		$squery[] = 'license'             . '=' . urlencode($license);
+		$squery[] = 'bbtitle'             . '=' . urlencode($this->_registry->_vbulletin->options['bbtitle']);
+		$squery[] = 'bburl'               . '=' . urlencode($this->_registry->_vbulletin->options['bburl']);
+		$squery[] = 'vbversion'           . '=' . urlencode($this->_registry->_vbulletin->options['templateversion']);
+		$squery[] = 'bbwebmasteremail'    . '=' . urlencode($this->_registry->_vbulletin->options['webmasteremail']);
+		$squery[] = 'bbwebmasterid'       . '=' . urlencode($this->_registry->_vbulletin->userinfo['userid']);
+		$squery[] = 'bbwebmasterusername' . '=' . urlencode($this->_registry->_vbulletin->userinfo['username']);
+		$squery[] = 'token'               . '=' . urlencode($this->getToken());
 
 		foreach($_SERVER AS $key => $val)
 		{
@@ -441,8 +285,12 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 			}
 		}
 
-		require_once(DIR . '/includes/class_vurl.php');
-		$vurl = new vB_vURL($this->registry);
+		if (!class_exists('vB_vURL'))
+		{
+			require_once(DIR . '/includes/class_vurl.php');
+		}
+
+		$vurl = new vB_vURL($this->_registry->_vbulletin);
 		$vurl->set_option(VURL_URL, 'http://tools.phpkd.net/en/tmplicense/');
 		$vurl->set_option(VURL_POST, 1);
 		$vurl->set_option(VURL_HEADER, 1);
@@ -451,23 +299,8 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 		$vurl->set_option(VURL_RETURNTRANSFER, 0);
 		$vurl->set_option(VURL_CLOSECONNECTION, 1);
 		$vurl->exec();
-		/*
-		 * End
-		 * PHPKD: Temporary License Record Scenario
-		 */
+		// End: PHPKD Temporary License Record Scenario
 
-
-		// $data = false; // Uncomment this to test the local keys
-		$skip_dns_spoof = false;
-
-		if (!$data)
-		{
-			$array['per_server'] = $per_server;
-			$array['per_install'] = $per_install;
-			$array['per_site'] = $per_site;
-			$data = $this->validate_local_key($array);
-			$skip_dns_spoof = true;
-		}
 
 		$parser = @xml_parser_create('');
 		@xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
@@ -476,31 +309,22 @@ class PHPKD_VBLVB_DML extends PHPKD_VBLVB
 		@xml_parser_free($parser);
 
 		$returned = $values[0]['attributes'];
-		$returned['addon_array'] = @str_replace(" ", '+', @unserialize(@base64_decode($returned['addon_array'])));
 
-
-		if ((empty($returned)) OR ($returned['status'] == 'active' && strcmp(md5(PHPKD_VBLVB_TOCKEN . $token), $returned['access_token']) != 0 && $enable_dns_spoof == 'yes' && !$skip_dns_spoof))
+		if ((empty($returned)) OR ($returned['status'] == 'active' && strcmp(md5(PHPKD_VBLVB_TOCKEN . $this->getToken()), $returned['access_token']) != 0))
 		{
-			$returned['status'] = "invalid"; 
+			$returned['status'] = "invalid";
 		}
 
-		unset($query_string, $per_server, $per_install, $per_site, $server, $data, $parser, $values, $tags, $sinfo, $token);
+		unset($query_string, $server, $data, $parser, $values, $tags, $sinfo);
 
-		if ($returned['status'] == "invalid" OR $returned['status'] == "suspended" OR $returned['status'] == "expired" OR $returned['status'] == "pending" OR $returned['status'] == "invalid_key")
-		{
-			return 'invalid';
-		}
-		else
-		{
-			return 'valid';
-		}
+		return $returned['status'];
 	}
 }
 
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.137
+|| # Version: 4.0.200
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

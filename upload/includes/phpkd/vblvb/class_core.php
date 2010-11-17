@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.137 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.200 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -20,9 +20,11 @@ if (!defined('VB_AREA'))
 	exit;
 }
 
-define('PHPKD_PRODUCT',              'phpkd_vblvb');
-define('PHPKD_VBLVB_VERSION',        '4.0.137');
-define('PHPKD_VBLVB_SVERSION',       '40137');
+define('ERRTYPE_ECHO',               10);
+
+define('PHPKD_VBLVB_DEBUG',          false);
+define('PHPKD_VBLVB_VERSION',        '4.0.200');
+define('PHPKD_VBLVB_SVERSION',       '40200');
 define('PHPKD_VBLVB_TOCKEN',         '7efad4a065eb29fb5ac56d57bc2c090c');
 define('PHPKD_VBLVB_LICENSE_PREFIX', 'VBLVB');
 
@@ -30,258 +32,395 @@ define('PHPKD_VBLVB_LICENSE_PREFIX', 'VBLVB');
 /**
  * Core class
  *
- * @package vB Link Verifier Bot 'Pro' Edition
- * @author PHP KingDom Development Team
- * @version $Revision$
- * @since $Date$
- * @copyright PHP KingDom (PHPKD)
+ * @category	vB Link Verifier Bot 'Ultimate'
+ * @package		PHPKD_VBLVB
+ * @copyright	Copyright ©2005-2011 PHP KingDom. All Rights Reserved. (http://www.phpkd.net)
+ * @license		http://info.phpkd.net/en/license/commercial
  */
 class PHPKD_VBLVB
 {
 	/**
-	* Array of valid hosts to be checked
-	*
-	* @var	array
-	*/
-	var $hosts = array();
-
-
-	/**
-	* Array of valid masks to be detected
-	*
-	* @var	array
-	*/
-	var $masks = array();
-
+	 * Array of hosts to be checked
+	 *
+	 * @var	array
+	 */
+	public $hosts;
 
 	/**
-	* Array of valid punishment methods to be applied
-	*
-	* @var	array
-	*/
-	var $punishments = array();
-
-
-	/**
-	* Array of valid staff reports to be sent/posted
-	*
-	* @var	array
-	*/
-	var $staff_reports = array();
-
+	 * Array of protocols to be checked
+	 *
+	 * @var	array
+	 */
+	public $protocols;
 
 	/**
-	* Array of valid user reports to be sent/posted
-	*
-	* @var	array
-	*/
-	var $user_reports = array();
-
-
-	/**
-	* Array of valid protocols
-	*
-	* @var	array
-	*/
-	var $protocols = array();
-
+	 * Array of thread modes to be excluded from checking
+	 *
+	 * @var	array
+	 */
+	public $thread_modes;
 
 	/**
-	* Array of valid Thread Modes
-	*
-	* @var	array
-	*/
-	var $threadmodes = array();
-
-
-	/**
-	* Array of valid Post Modes
-	*
-	* @var	array
-	*/
-	var $postmodes = array();
-
+	 * Array of post modes to be excluded from checking
+	 *
+	 * @var	array
+	 */
+	public $post_modes;
 
 	/**
-	* Array of valid BBCodes
-	*
-	* @var	array
-	*/
-	var $bbcodes = array();
-
-
-	/**
-	* Array of valid hooks
-	*
-	* @var	array
-	*/
-	var $hooks = array();
-
+	 * Array of BBCodes to be checked
+	 *
+	 * @var	array
+	 */
+	public $bbcodes;
 
 	/**
-	* vBulletin phrases
-	*
-	* @var	array
-	*/
-	var $vbphrase = null;
-
-
-	/**
-	* The vBulletin registry object
-	*
-	* @var	vB_Registry
-	*/
-	var $registry = null;
-
+	 * Array of thread punishment methods to be applied
+	 *
+	 * @var	array
+	 */
+	public $thread_punishs;
 
 	/**
-	* The DM Object Handler
-	*
-	* @var	PHPKD_VBLVB_DM
-	*/
-	var $dmhandle = null;
-
-
-	/**
-	* Array to store any errors encountered while building data
-	*
-	* @var	array
-	*/
-	var $errors = array();
-
+	 * Array of post punishment methods to be applied
+	 *
+	 * @var	array
+	 */
+	public $post_punishs;
 
 	/**
-	* The error handler for this object
-	*
-	* @var	string
-	*/
-	var $error_handler = ERRTYPE_SILENT;
-
-
-	/**
-	* Callback to execute just before an error is logged.
-	*
-	* @var	callback
-	*/
-	var $failure_callback = null;
-
+	 * Array of valid staff reports to be sent/posted
+	 *
+	 * @var	array
+	 */
+	public $staff_reports;
 
 	/**
-	* Constructor - checks that the registry object has been passed correctly.
-	*
-	* @param	vB_Registry	Instance of the vBulletin data registry object - expected to have the database object as one of its members ($this->db).
-	* @param	array		Initialize required data (Hosts/Masks/Punishments/Reports)
-	* @param	integer		One of the ERRTYPE_x constants
-	*/
-	function PHPKD_VBLVB(&$registry, $initparams = array(), $errtype = ERRTYPE_SILENT)
+	 * Array of valid user reports to be sent
+	 *
+	 * @var	array
+	 */
+	public $user_reports;
+
+	/**
+	 * vBulletin phrases
+	 *
+	 * @var	array
+	 */
+	public $_vbphrase;
+
+	/**
+	 * The vBulletin registry object
+	 *
+	 * @var	vB_Registry
+	 */
+	public $_vbulletin = null;
+
+	/**
+	 * Array of concatenated/appended post log records as strings
+	 *
+	 * @var	array
+	 */
+	private $_postlog = array();
+
+	/**
+	 * The Initializer Object Handler
+	 *
+	 * @var	PHPKD_VBLVB_Init
+	 */
+	private $_inithandle = null;
+
+	/**
+	 * The DataManager Object Handler
+	 *
+	 * @var	PHPKD_VBLVB_DM
+	 */
+	private $_dmhandle = null;
+
+	/**
+	 * The License Object Handler
+	 *
+	 * @var	PHPKD_VBLVB_DML
+	 */
+	private $_dmlhandle = null;
+
+	/**
+	 * The Hooks Object Handler
+	 *
+	 * @var	PHPKD_VBLVB_Hooks
+	 */
+	private $_hookshandle;
+
+	/**
+	 * Array to store any errors encountered while processing data
+	 *
+	 * @var	array
+	 */
+	private $_errors = array();
+
+	/**
+	 * The error handler for this object
+	 *
+	 * @var	string
+	 */
+	private $_error_handler = ERRTYPE_SILENT;
+
+	/**
+	 * Callback to execute just before an error is logged.
+	 *
+	 * @var	callback
+	 */
+	private $_failure_callback = null;
+
+	/**
+	 * Constructor - checks that vBulletin registry object has been passed correctly, and initialize requirements.
+	 *
+	 * @param	vB_Registry	Instance of the vBulletin data registry object - expected to have the database object as one of its members ($this->db).
+	 * @param	array		vBphrase array
+	 * @param	integer		One of the ERRTYPE_x constants
+	 * @return	PHPKD_VBLVB
+	 */
+	public function __construct(&$registry, $phrases, $errtype = ERRTYPE_SILENT)
 	{
-		/*
-		 * TODO: Allow method chaining!!
-		 */
-
 		if (is_object($registry))
 		{
-			$this->registry =& $registry;
+			$this->_vbulletin =& $registry;
 
 			if (!is_object($registry->db))
 			{
-				trigger_error('Database object is not an object!', E_USER_ERROR);
+				trigger_error('vBulletin Database object is not an object!', E_USER_ERROR);
 			}
 		}
 		else
 		{
-			trigger_error('Registry object is not an object!', E_USER_ERROR);
+			trigger_error('vBulletin Registry object is not an object!', E_USER_ERROR);
 		}
 
+		$this->_vbphrase = $phrases;
 		$this->set_error_handler($errtype);
+		defined('PHPKD_VBLVB') || define('PHPKD_VBLVB', true);
+		$this->_vbulletin->datastore->fetch(array('phpkd_vblvb'));
 
-		if (!defined('PHPKD_VBLVB'))
-		{
-			define('PHPKD_VBLVB', TRUE);
-		}
-
-		$this->initialize($initparams);
+		return $this;
 	}
 
-
 	/**
-	* Initialize required fundamentals
-	*
-	* @param	array	Optional array of data describing the existing data we will be updating
-	*
-	* @return	boolean	Returns true if successful
-	*/
-	function initialize($initparams)
+	 * Initialize requirements
+	 *
+	 * @param	array		Array of data requirements to be initialized
+	 * @return	PHPKD_VBLVB
+	 */
+	public function initialize($initparams)
 	{
-		// Initialized params should be passed as array!
+		// Initialized params SHOULD be passed as an array!
 		if (is_array($initparams) AND !empty($initparams))
 		{
-			if (file_exists(DIR . '/includes/phpkd/vblvb/init.php'))
+			$initmethods = get_class_methods($this->getInithandle());
+
+			foreach ($initparams as $param)
 			{
-				return require(DIR . '/includes/phpkd/vblvb/init.php');
+				if (in_array($param, $initmethods))
+				{
+					if ($this->$param !== null)
+					{
+						continue;
+					}
+
+					$this->$param = $this->getInithandle()->$param($value);
+				}
+			}
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Initiate PHPKD_VBLVB_Init
+	 *
+	 * @return	void
+	 */
+	private function setInithandle()
+	{
+		if (!class_exists('PHPKD_VBLVB_Init'))
+		{
+			if (file_exists(DIR . '/includes/phpkd/vblvb/class_init.php'))
+			{
+				require_once(DIR . '/includes/phpkd/vblvb/class_init.php');
 			}
 			else
 			{
-				trigger_error('Required initialization failed!', E_USER_ERROR);
+				$this->seterror(array('phpkd_vblvb_initialization_failed_file', 'class_init.php'));
 			}
 		}
+
+		$this->_inithandle = new PHPKD_VBLVB_Init($this);
 	}
 
-
 	/**
-	* Verify, execute certain hook!
-	*
-	* @param	string	hookname	The name of the hook to be executed
-	* @param	array	params		Passed parameters to the called hook
-	*
-	* @void
-	*/
-	function fetch_hook($hookname, $params = array())
+	 * Return PHPKD_VBLVB_Init object
+	 *
+	 * @return	PHPKD_VBLVB_Init
+	 */
+	private function getInithandle()
 	{
-		/*
-		 * TODO: Only one call for the same file!!
-		 *
-		static $called;
+		if (null == $this->_inithandle)
+		{
+			$this->setInithandle();
+		}
 
-		if (empty($called))
-		{
-			// include the abstract base class
-			require_once(DIR . '/includes/class_dm.php');
-			$called = true;
-		}
-		*/
-
-		if (isset($this->hooks["$hookname"]) AND file_exists(DIR . '/includes/phpkd/vblvb/hooks/' . $hookname . '.php'))
-		{
-			return require(DIR . '/includes/phpkd/vblvb/hooks/' . $hookname . '.php');
-		}
-		else
-		{
-			trigger_error('Invalid hook "' . $hookname . '"!', E_USER_ERROR);
-		}
+		return $this->_inithandle;
 	}
 
-
 	/**
-	* Check if we've errors. Will kill execution if it does and $die is true.
-	*
-	* @param	bool	Whether or not to end execution if errors are found; ignored if the error type is ERRTYPE_SILENT
-	*
-	* @return	bool	True if there *are* errors, false otherwise
-	*/
-	function has_errors($die = true)
+	 * Initiate PHPKD_VBLVB_DM
+	 *
+	 * @return	void
+	 */
+	private function setDmhandle()
 	{
-		if (!empty($this->errors))
+		if (!class_exists('PHPKD_VBLVB_DM'))
 		{
-			if ($this->error_handler == ERRTYPE_SILENT OR $die == false)
+			if (file_exists(DIR . '/includes/phpkd/vblvb/class_dm.php'))
 			{
-				return true;
+				require_once(DIR . '/includes/phpkd/vblvb/class_dm.php');
 			}
 			else
 			{
-				trigger_error('<ul><li>' . implode($this->errors, '</li><li>') . '</ul>Unable to proceed with save while $errors array is not empty in class <strong>' . get_class($this) . '</strong>', E_USER_ERROR);
-				return true;
+				$this->seterror(array('phpkd_vblvb_initialization_failed_file', 'class_dm.php'));
 			}
+		}
+
+		$this->_dmhandle = new PHPKD_VBLVB_DM($this);
+	}
+
+	/**
+	 * Return PHPKD_VBLVB_DM object
+	 *
+	 * @return	PHPKD_VBLVB_DM
+	 */
+	public function getDmhandle()
+	{
+		if (null == $this->_dmhandle)
+		{
+			$this->setDmhandle();
+		}
+
+		return $this->_dmhandle;
+	}
+
+	/**
+	 * Initiate PHPKD_VBLVB_DML
+	 *
+	 * @return	void
+	 */
+	private function setDmlhandle()
+	{
+		if (!class_exists('PHPKD_VBLVB_DML'))
+		{
+			if (file_exists(DIR . '/includes/phpkd/vblvb/class_dml.php'))
+			{
+				require_once(DIR . '/includes/phpkd/vblvb/class_dml.php');
+			}
+			else
+			{
+				$this->seterror(array('phpkd_vblvb_initialization_failed_file', 'class_dml.php'));
+			}
+		}
+
+		$this->_dmlhandle = new PHPKD_VBLVB_DML($this);
+	}
+
+	/**
+	 * Return PHPKD_VBLVB_DML object
+	 *
+	 * @return	PHPKD_VBLVB_DML
+	 */
+	private function getDmlhandle()
+	{
+		if (null == $this->_dmlhandle)
+		{
+			$this->setDmlhandle();
+		}
+
+		return $this->_dmlhandle;
+	}
+
+	/**
+	 * Initiate PHPKD_VBLVB_Hooks
+	 *
+	 * @return	void
+	 */
+	private function setHookshandle()
+	{
+		if (!class_exists('PHPKD_VBLVB_Hooks'))
+		{
+			if (file_exists(DIR . '/includes/phpkd/vblvb/class_hooks.php'))
+			{
+				require_once(DIR . '/includes/phpkd/vblvb/class_hooks.php');
+			}
+			else
+			{
+				$this->seterror(array('phpkd_vblvb_initialization_failed_file', 'class_hooks.php'));
+			}
+		}
+
+		$this->_hookshandle = new PHPKD_VBLVB_Hooks($this);
+	}
+
+	/**
+	 * Return PHPKD_VBLVB_Hooks object
+	 *
+	 * @return	PHPKD_VBLVB_Hooks
+	 */
+	private function getHookshandle()
+	{
+		if (null == $this->_hookshandle)
+		{
+			$this->setHookshandle();
+		}
+
+		return $this->_hookshandle;
+	}
+
+	/**
+	 * Verify license
+	 *
+	 * @return	string
+	 */
+	public function verify_license()
+	{
+		if (empty($this->_vbulletin->phpkd_vblvb['general_licensekey']))
+		{
+			$this->seterror('phpkd_vblvb_invalid_license_key');
+		}
+		else if (strtolower(substr($this->_vbulletin->phpkd_vblvb['general_licensekey'], 0, 5)) != strtolower(PHPKD_VBLVB_LICENSE_PREFIX))
+		{
+			$this->seterror('phpkd_vblvb_invalid_license_' . strtolower(PHPKD_VBLVB_LICENSE_PREFIX));
+		}
+
+		if ($this->getDmlhandle()->getToken() == md5(md5(md5(PHPKD_VBLVB_TOCKEN) . md5($this->_vbulletin->userinfo['securitytoken']) . md5(TIMENOW))))
+		{
+			if ('active' == $this->getDmlhandle()->process_license())
+			{
+				// License valid!
+				return;
+			}
+		}
+
+		$this->seterror('phpkd_vblvb_invalid_license');
+	}
+
+	/**
+	 * Verify hook parameters
+	 *
+	 * @param	array	Input parameters
+	 * @return	boolean	Returns true if valid, false if not
+	 */
+	public function verify_hook_params($params)
+	{
+		if (is_array($params) AND count($params) > 0)
+		{
+			return true;
 		}
 		else
 		{
@@ -289,15 +428,151 @@ class PHPKD_VBLVB
 		}
 	}
 
+	/**
+	 * Fetch requested hook
+	 *
+	 * @param	string	Hook name
+	 * @param	array	Optional parameters used within the requested hook's code
+	 * @return	mixed	Return boolean if there's nothing to get back, otherwise return array
+	 */
+	public function fetch_hook($hookname, $params = array())
+	{
+		$hooksmethods = get_class_methods($this->getHookshandle());
+
+		if (in_array($hookname, $hooksmethods))
+		{
+			return $this->getHookshandle()->$hookname($params);
+		}
+	}
 
 	/**
-	* Sets the error handler for the object
-	*
-	* @param	string	Error type
-	*
-	* @return	boolean
-	*/
-	function set_error_handler($errtype = ERRTYPE_SILENT)
+	 * Process log records
+	 *
+	 * @param	string	Log record to be appended
+	 * @param	boolean	Whether or not to echo this log record to the display output
+	 * @param	mixed	Array of required post info: postid, userid, username, email, languageid |[OR]| just postid in case other post info already passed earlier
+	 * @return	void
+	 */
+	public function logstring($content, $echo = true, $post = 0)
+	{
+		if ($echo AND defined('IN_CONTROL_PANEL'))
+		{
+			echo $content;
+			vbflush();
+		}
+
+		if (!empty($post))
+		{
+			if (is_int($post))
+			{
+				$this->_postlog[$post]['logrecord'] .= $content;
+			}
+			else if (is_array($post))
+			{
+				$this->_postlog[$post['postid']]['posttitle']   = $post['posttitle'];
+				$this->_postlog[$post['postid']]['threadid']    = $post['threadid'];
+				$this->_postlog[$post['postid']]['threadtitle'] = $post['threadtitle'];
+				$this->_postlog[$post['postid']]['forumid']     = $post['forumid'];
+				$this->_postlog[$post['postid']]['forumtitle']  = $post['forumtitle'];
+				$this->_postlog[$post['postid']]['userid']      = $post['userid'];
+				$this->_postlog[$post['postid']]['username']    = $post['username'];
+				$this->_postlog[$post['postid']]['email']       = $post['email'];
+				$this->_postlog[$post['postid']]['languageid']  = $post['languageid'];
+				$this->_postlog[$post['postid']]['logrecord']  .= $content;
+			}
+		}
+	}
+
+	/**
+	 * Update punished posts
+	 *
+	 * @param	array	Array of updated post IDs
+	 * @param	string	Update type, either 'dead' or 'punished'
+	 * @return	void
+	 */
+	public function updatepostlogs($itemarray, $type)
+	{
+		foreach ($itemarray as $postid)
+		{
+			$this->_postlog[$postid][$type] = true;
+		}
+	}
+
+	/**
+	 * Return post log records
+	 *
+	 * @param	int	Optional postid
+	 * @return	array
+	 */
+	public function getPostlog($postid = 0)
+	{
+		if (!empty($postid))
+		{
+			return $this->_postlog[$postid];
+		}
+		else
+		{
+			return $this->_postlog;
+		}
+	}
+
+	/**
+	 * Commit log records & update checked posts timestamp
+	 *
+	 * @param	string	Log records and/or error messages
+	 * @param	array	Array of checked post IDs
+	 * @return	void
+	 */
+	public function commit($content = '', $postids = array())
+	{
+		if (!empty($content))
+		{
+			// We're here because there's a halting error, no checked posts!
+			$this->_vbulletin->db->query_write("
+				INSERT INTO " . TABLE_PREFIX . "phpkd_vblvb_log
+					(dateline, content, mode)
+				VALUES
+					(" . TIMENOW . ", '" . $this->_vbulletin->db->escape_string($content) . "', '" . (defined('IN_CONTROL_PANEL') ? 'manual' : 'cronjob') . "')
+			");
+		}
+		else
+		{
+			if ($postlog = $this->getPostlog())
+			{
+				$postlogarr = '';
+
+				foreach ($postlog as $postid => $postlog)
+				{
+					$postlogarr .= '(' . $postid . ', ' . TIMENOW . ', \'' . $this->_vbulletin->db->escape_string($postlog['logrecord']) . '\', \'' . (defined('IN_CONTROL_PANEL') ? 'manual' : 'cronjob') . '\', ' . (!empty($postlog['dead']) ? $postlog['dead'] : 0) . ', ' . (!empty($postlog['punished']) ? $postlog['punished'] : 0) . '), ';
+				}
+
+				// Record post reports
+				$this->_vbulletin->db->query_write("
+					INSERT INTO " . TABLE_PREFIX . "phpkd_vblvb_log
+						(postid, dateline, content, mode, dead, punished)
+					VALUES " . substr($postlogarr, 0, -2)
+				);
+			}
+
+			if (!empty($postids))
+			{
+				// Finished, now update post last check time
+				$this->_vbulletin->db->query_write("
+					UPDATE " . TABLE_PREFIX . "post AS post
+					SET post.phpkd_vblvb_lastcheck = " . TIMENOW . "
+					WHERE postid IN(" . implode(',', $postids) . ")
+				");
+			}
+		}
+	}
+
+	/**
+	 * Sets the error handler for the object
+	 *
+	 * @param	string	Error type
+	 * @return	boolean
+	 */
+	private function set_error_handler($errtype = ERRTYPE_SILENT)
 	{
 		switch ($errtype)
 		{
@@ -306,21 +581,52 @@ class PHPKD_VBLVB
 			case ERRTYPE_STANDARD:
 			case ERRTYPE_CP:
 			case ERRTYPE_SILENT:
-				$this->error_handler = $errtype;
+				$this->_error_handler = $errtype;
 				break;
 			default:
-				$this->error_handler = ERRTYPE_SILENT;
+				$this->_error_handler = ERRTYPE_SILENT;
 				break;
 		}
 	}
 
+	/**
+	 * Sets the function to call on an error.
+	 *
+	 * @param	callback	A valid callback (either a function name, or specially formed array)
+	 * @return	void
+	 */
+	private function set_failure_callback($callback)
+	{
+		$this->_failure_callback = $callback;
+	}
 
 	/**
-	* Shows an error message and halts execution - use this in the same way as print_stop_message();
-	*
-	* @param	string	Phrase name for error message
-	*/
-	function error($errorphrase)
+	 * Set error
+	 *
+	 * @param	string	Error message
+	 * @param	int		Error type
+	 * @param	int		postid
+	 * @return	void
+	 */
+	public function seterror($error, $errortype = null, $postid = 0)
+	{
+		$this->set_error_handler($errortype ? $errortype : (defined('IN_CONTROL_PANEL') ? ERRTYPE_CP : ERRTYPE_SILENT));
+		$this->error($error, $postid);
+
+		if (ERRTYPE_ECHO != $this->_error_handler)
+		{
+			exit();
+		}
+	}
+
+	/**
+	 * Shows an error message and halts execution - use this in the same way as print_stop_message();
+	 *
+	 * @param	string	Phrase name for error message
+	 * @param	int		postid
+	 * @return	void
+	 */
+	public function error($errorphrase, $postid = 0)
 	{
 		$args = func_get_args();
 
@@ -333,141 +639,70 @@ class PHPKD_VBLVB
 			$error = call_user_func_array('fetch_error', $args);
 		}
 
-		$this->errors[] = $error;
+		$this->_errors[] = $error;
 
-		if ($this->failure_callback AND is_callable($this->failure_callback))
+		if ($this->_failure_callback AND is_callable($this->_failure_callback))
 		{
-			call_user_func_array($this->failure_callback, array(&$this, $errorphrase));
+			call_user_func_array($this->_failure_callback, array(&$this, $errorphrase));
 		}
 
-		switch ($this->error_handler)
+		if (ERRTYPE_ECHO != $this->_error_handler)
+		{
+			$this->commit($error);
+		}
+
+		switch ($this->_error_handler)
 		{
 			case ERRTYPE_ECHO:
-			{
-				echo '<br />' . $error . '<br />';
-			}
-			break;
+				$this->logstring('<br />' . $error . '<br />', true, $postid);
+				break;
 
 			case ERRTYPE_ARRAY:
 			case ERRTYPE_SILENT:
-			{
 				// do nothing
-			}
-			break;
+				break;
 
 			case ERRTYPE_STANDARD:
-			{
 				eval(standard_error($error));
-			}
-			break;
+				break;
 
 			case ERRTYPE_CP:
-			{
 				print_cp_message($error);
-			}
-			break;
+				break;
 		}
 	}
 
-
 	/**
-	* Sets the function to call on an error.
-	*
-	* @param	callback	A valid callback (either a function name, or specially formed array)
-	*/
-	function set_failure_callback($callback)
+	 * Check if we've errors. Will kill execution if it does and $die is true.
+	 *
+	 * @param	boolean	Whether or not to end execution if errors are found; ignored if the error type is ERRTYPE_SILENT
+	 * @return	boolean	True if there *are* errors, false otherwise
+	 */
+	public function has_errors($die = true)
 	{
-		$this->failure_callback = $callback;
-	}
-
-
-	/**
-	* Verify hook parameters
-	*
-	* @param	array	In parameters
-	*
-	* @return	boolean	Returns true if valid, false if not
-	*/
-	function verify_hook_params($params)
-	{
-		// Do some checks if needed!
-		return TRUE;
-	}
-
-
-	/**
-	* Pass through DM & execute it's functions!!
-	*
-	* @return	mixed
-	*/
-	function dm($initparams = array())
-	{
-		if (isset($this->dmhandle))
+		if (!empty($this->_errors))
 		{
-			return $this->dmhandle;
-		}
-		else
-		{
-			if (file_exists(DIR . '/includes/phpkd/vblvb/class_dm.php'))
+			if ($this->_error_handler == ERRTYPE_SILENT OR $die == false)
 			{
-				if (is_array($initparams) AND !empty($initparams))
-				{
-					// Don't re-initialize the already initialized data!!
-					foreach ($initparams AS $key => $value)
-					{
-						if (isset($this->$key) AND is_array($initparams) AND !empty($this->$key))
-						{
-							unset($initparams[$key]);
-						}
-					}
-				}
-
-				if (is_array($initparams) AND !empty($initparams))
-				{
-					$this->initialize($initparams);
-				}
-
-
-				require_once(DIR . '/includes/phpkd/vblvb/class_dm.php');
-				$this->dmhandle = new PHPKD_VBLVB_DM($this->registry, $this);
-				return $this->dmhandle;
+				return true;
 			}
 			else
 			{
-				return FALSE;
+				trigger_error('<ul><li>' . implode($this->_errors, '</li><li>') . '</ul>Unable to proceed with save while $_errors array is not empty in class <strong>' . get_class($this) . '</strong>', E_USER_ERROR);
+				return true;
 			}
 		}
-	}
-
-
-	/**
-	* Verify license
-	*
-	* @return	string
-	*/
-	function verify_license()
-	{
-		if (strtoupper(substr($this->registry->options['phpkd_vblvb_license_key'], 0, 5)) != strtoupper(PHPKD_VBLVB_LICENSE_PREFIX))
+		else
 		{
-			return strtoupper(PHPKD_VBLVB_LICENSE_PREFIX);
+			return false;
 		}
-
-		require_once(DIR . '/includes/phpkd/vblvb/class_dml.php');
-		$license = new PHPKD_VBLVB_DML($this->registry);
-
-		if ($license->special_token() == md5(md5(md5(PHPKD_VBLVB_TOCKEN) . md5($this->registry->userinfo['securitytoken']) . md5(TIMENOW))))
-		{
-			return $license->process_license();
-		}
-
-		return 'invalid';
 	}
 }
 
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.137
+|| # Version: 4.0.200
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

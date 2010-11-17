@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.137 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.200 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -104,7 +104,7 @@ function phpkd_vblvb_fetch_coventry($returntype = 'array', $withself = false)
 			$Coventry = preg_split('#\s+#s', $vbulletin->options['globalignore'], -1, PREG_SPLIT_NO_EMPTY);
 			$Coventry_with = $Coventry;
 			$bbuserkey = array_search($vbulletin->userinfo['userid'], $Coventry);
-			if ($bbuserkey !== FALSE AND $bbuserkey !== NULL)
+			if ($bbuserkey !== false AND $bbuserkey !== null)
 			{
 				unset($Coventry["$bbuserkey"]);
 			}
@@ -527,14 +527,13 @@ function phpkd_vblvb_log_moderator_action($loginfo, $logtype, $action = '')
 		}
 		$moderatorlog['action'] = $action;
 
-		/*insert query*/
 		$vbulletin->db->query_write(fetch_query_sql($moderatorlog, 'moderatorlog'));
 	}
 }
 
 
 // ###################### Start undeletethread #######################
-function phpkd_vblvb_undelete_thread($threadid, $countposts = true, $threadinfo = NULL)
+function phpkd_vblvb_undelete_thread($threadid, $countposts = true, $threadinfo = null)
 {
 	global $vbulletin, $vbphrase;
 
@@ -611,7 +610,7 @@ function phpkd_vblvb_undelete_thread($threadid, $countposts = true, $threadinfo 
 
 
 // ###################### Start deletethread #######################
-function phpkd_vblvb_delete_thread($threadid, $countposts = true, $physicaldel = true, $delinfo = NULL, $dolog = true, $threadinfo = NULL)
+function phpkd_vblvb_delete_thread($threadid, $countposts = true, $physicaldel = true, $delinfo = null, $dolog = true, $threadinfo = null)
 {
 	global $vbulletin, $vbphrase;
 
@@ -783,7 +782,7 @@ function phpkd_vblvb_delete_thread($threadid, $countposts = true, $physicaldel =
 				vB_Bootstrap_Framework::init();
 				$types = vB_Types::instance();
 				$contenttypeid = intval($types->getContentTypeID('vBForum_Post'));
-	
+
 				$attachdata =& datamanager_init('Attachment', $vbulletin, ERRTYPE_SILENT, 'attachment');
 				$attachdata->condition = "a.contentid IN (" . implode(", ", $postids) . ") AND a.contenttypeid = " . intval($contenttypeid);
 				$attachdata->delete(true, false);
@@ -949,45 +948,6 @@ function phpkd_vblvb_fetch_phrase_group($groupname)
 }
 
 
-// #############################################################################
-/**
-* Reads settings from the settings then saves the values to the datastore
-*
-* After reading the contents of the setting table, the function will rebuild
-* the $vbulletin->options array, then serialize the array and save that serialized
-* array into the 'options' entry of the datastore in the database
-*
-* @return	array	The $vbulletin->options array
-*/
-function phpkd_vblvb_build_options()
-{
-	global $vbulletin;
-
-	$vbulletin->options = array();
-
-	$settings = $vbulletin->db->query_read("SELECT varname, value, datatype FROM " . TABLE_PREFIX . "setting");
-	while ($setting = $vbulletin->db->fetch_array($settings))
-	{
-		$vbulletin->options["$setting[varname]"] = phpkd_vblvb_validate_setting_value($setting['value'], $setting['datatype'], true, false);
-	}
-
-	if (substr($vbulletin->options['cookiepath'], -1, 1) != '/')
-	{
-		$vbulletin->options['cookiepath'] .= '/';
-		$vbulletin->db->query_write("
-			UPDATE " . TABLE_PREFIX . "setting
-			SET value = '" . $vbulletin->db->escape_string($vbulletin->options['cookiepath']) . "'
-			WHERE varname = 'cookiepath'
-		");
-	}
-
-	build_datastore('options', serialize($vbulletin->options), 1);
-
-	return $vbulletin->options;
-}
-
-
-
 /**
 * Validates the provided value of a setting against its datatype
 *
@@ -1081,7 +1041,7 @@ function phpkd_vblvb_validate_setting_value(&$value, $datatype, $bool_as_int = t
 }
 
 // ###################### Start approvethread #######################
-function phpkd_vblvb_approve_thread($threadid, $countposts = true, $dolog = true, $threadinfo = NULL)
+function phpkd_vblvb_approve_thread($threadid, $countposts = true, $dolog = true, $threadinfo = null)
 {
 	global $vbulletin, $vbphrase;
 
@@ -1182,7 +1142,7 @@ function phpkd_vblvb_approve_thread($threadid, $countposts = true, $dolog = true
 }
 
 // ###################### Start unapprovethread #######################
-function phpkd_vblvb_unapprove_thread($threadid, $countposts = true, $dolog = true, $threadinfo = NULL)
+function phpkd_vblvb_unapprove_thread($threadid, $countposts = true, $dolog = true, $threadinfo = null)
 {
 	global $vbulletin, $vbphrase;
 
@@ -1291,7 +1251,7 @@ function phpkd_vblvb_unapprove_thread($threadid, $countposts = true, $dolog = tr
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.137
+|| # Version: 4.0.200
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

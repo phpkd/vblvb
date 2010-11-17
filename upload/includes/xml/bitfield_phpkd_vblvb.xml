@@ -2,146 +2,13 @@
 
 <bitfields product="phpkd_vblvb">
 	<bitfielddefs>
-		<group name="nocache">
-			<group name="phpkd_vblvb_hosts">
-				<bitfield name="2shared_com"     >1</bitfield>
-				<bitfield name="4shared_com"     >2</bitfield>
-				<bitfield name="9q9q_net"        >4</bitfield>
-				<bitfield name="adrive_com"      >8</bitfield>
-				<bitfield name="arabsh_com"      >16</bitfield>
-				<bitfield name="axifile_com"     >32</bitfield>
-				<bitfield name="badongo_com"     >64</bitfield>
-				<bitfield name="bitroad_net"     >128</bitfield>
-				<bitfield name="box_net"         >256</bitfield>
-				<bitfield name="cocoshare_cc"    >512</bitfield>
-				<bitfield name="crazyupload_com" >1024</bitfield>
-				<bitfield name="depositfiles_com">2048</bitfield>
-				<bitfield name="divshare_com"    >4096</bitfield>
-				<bitfield name="divxden_com"     >8192</bitfield>
-				<bitfield name="dualshare_com"   >16384</bitfield>
-				<bitfield name="duckload_com"    >32768</bitfield>
-				<bitfield name="earthfilez_com"  >65536</bitfield>
-				<bitfield name="easy_share_com"  >131072</bitfield>
-				<bitfield name="egoshare_com"    >262144</bitfield>
-				<bitfield name="enterupload_com" >524288</bitfield>
-				<bitfield name="evilshare_com"   >1048576</bitfield>
-				<bitfield name="file2box_com"    >2097152</bitfield>
-				<bitfield name="filebase_to"     >4194304</bitfield>
-				<bitfield name="filebox_com"     >8388608</bitfield>
-				<bitfield name="filedip_com"     >16777216</bitfield>
-				<bitfield name="filedropper_com" >33554432</bitfield>
-				<bitfield name="filefactory_com" >67108864</bitfield>
-				<bitfield name="fileflyer_com"   >134217728</bitfield>
-				<bitfield name="filefront_com"   >268435456</bitfield>
-				<bitfield name="filemojo_com"    >536870912</bitfield>
-			</group>
-			<group name="phpkd_vblvb_hosts2">
-				<bitfield name="filerama_com"      >1</bitfield>
-				<bitfield name="fileserver_cc"     >2</bitfield>
-				<bitfield name="filesovermiles_com">4</bitfield>
-				<bitfield name="filesplash_com"    >8</bitfield>
-				<bitfield name="files_to"          >16</bitfield>
-				<bitfield name="flyupload_com"     >32</bitfield>
-				<bitfield name="gigasize_com"      >64</bitfield>
-				<bitfield name="hostuje_net"       >128</bitfield>
-				<bitfield name="hotfile_com"       >256</bitfield>
-				<bitfield name="hulkshare_com"     >512</bitfield>
-				<bitfield name="ifile_it"          >1024</bitfield>
-				<bitfield name="ifolder_ru"        >2048</bitfield>
-				<bitfield name="jumbofiles_com"    >4096</bitfield>
-				<bitfield name="letitbit_net"      >8192</bitfield>
-				<bitfield name="load_to"           >16384</bitfield>
-				<bitfield name="loombo_com"        >32768</bitfield>
-				<bitfield name="m5zn_com"          >65536</bitfield>
-				<bitfield name="mediafire_com"     >131072</bitfield>
-				<bitfield name="megashare_com"     >262144</bitfield>
-				<bitfield name="megaupload_com"    >524288</bitfield>
-				<bitfield name="midupload_com"     >1048576</bitfield>
-				<bitfield name="mlfat4arab_com"    >2097152</bitfield>
-				<bitfield name="moidisk_ru"        >4194304</bitfield>
-				<bitfield name="momupload_com"     >8388608</bitfield>
-				<bitfield name="my2share_com"      >16777216</bitfield>
-				<bitfield name="netload_in"        >33554432</bitfield>
-				<bitfield name="online_sharing_net">67108864</bitfield>
-				<bitfield name="proddl_com"        >134217728</bitfield>
-				<bitfield name="przeklej_pl"       >268435456</bitfield>
-				<bitfield name="przeslij_net"      >536870912</bitfield>
-			</group>
-			<group name="phpkd_vblvb_hosts3">
-				<bitfield name="quickupload_net"     >1</bitfield>
-				<bitfield name="rapidshare_com"      >2</bitfield>
-				<bitfield name="rapidshare_de"       >4</bitfield>
-				<bitfield name="rnbload_com"         >8</bitfield>
-				<bitfield name="savefile_com"        >16</bitfield>
-				<bitfield name="sendspace_com"       >32</bitfield>
-				<bitfield name="senduit_com"         >64</bitfield>
-				<bitfield name="speedyshare_com"     >128</bitfield>
-				<bitfield name="storage_to"          >256</bitfield>
-				<bitfield name="superfastfile_com"   >512</bitfield>
-				<bitfield name="teradepot_com"       >1024</bitfield>
-				<bitfield name="transferbigfiles_com">2048</bitfield>
-				<bitfield name="turboupload_com"     >4096</bitfield>
-				<bitfield name="upfordown_com"       >8192</bitfield>
-				<bitfield name="uploaded_to"         >16384</bitfield>
-				<bitfield name="uploading_com"       >32768</bitfield>
-				<bitfield name="uploadpalace_com"    >65536</bitfield>
-				<bitfield name="usaupload_net"       >131072</bitfield>
-				<bitfield name="usershare_net"       >262144</bitfield>
-				<bitfield name="useupload_com"       >524288</bitfield>
-				<bitfield name="vip_file_com"        >1048576</bitfield>
-				<bitfield name="x7_to"               >2097152</bitfield>
-				<bitfield name="xinony_com"          >4194304</bitfield>
-				<bitfield name="yousendit_com"       >8388608</bitfield>
-				<bitfield name="ziddu_com"           >16777216</bitfield>
-				<bitfield name="zippyshare_com"      >33554432</bitfield>
-				<bitfield name="zomgupload_com"      >67108864</bitfield>
-				<bitfield name="zshare_net"          >134217728</bitfield>
-			</group>
-			<group name="phpkd_vblvb_masks">
-				<bitfield name="anonym_to"             >1</bitfield>
-				<bitfield name="linkbucks_com"         >2</bitfield>
-				<bitfield name="lix_in"                >4</bitfield>
-				<!-- <bitfield name="rapidshare_com_folders">8</bitfield> -->
-			</group>
-			<group name="phpkd_vblvb_rprts">
-				<bitfield name="pm"    >1</bitfield>
-				<bitfield name="email" >2</bitfield>
-				<bitfield name="thread">4</bitfield>
-				<bitfield name="reply" >8</bitfield>
-			</group>
-			<group name="phpkd_vblvb_rprtu">
-				<bitfield name="pm"    >1</bitfield>
-				<bitfield name="email" >2</bitfield>
-			</group>
-			<group name="phpkd_vblvb_punish">
-				<bitfield name="moderate">1</bitfield>
-				<bitfield name="close"   >2</bitfield>
-				<bitfield name="move"    >4</bitfield>
-				<!-- <bitfield name="delete"  >8</bitfield> -->
-				<!-- <bitfield name="postwarn">16</bitfield> -->
-			</group>
-			<group name="phpkd_vblvb_protocols">
+		<group name="phpkd_vblvb">
+			<group name="protocols">
 				<bitfield name="http"  >1</bitfield>
 				<bitfield name="https" >2</bitfield>
 				<bitfield name="ftp"   >4</bitfield>
-				<!-- <bitfield name="gopher">8</bitfield> -->
-				<!-- <bitfield name="news"  >16</bitfield> -->
-				<!-- <bitfield name="telnet">32</bitfield> -->
 			</group>
-			<group name="phpkd_vblvb_threadmodes">
-				<bitfield name="opened"    >1</bitfield>
-				<bitfield name="closed"    >2</bitfield>
-				<bitfield name="moderated" >4</bitfield>
-				<bitfield name="sticky"    >8</bitfield>
-				<bitfield name="deleted"   >16</bitfield>
-				<bitfield name="redirected">32</bitfield>
-			</group>
-			<group name="phpkd_vblvb_postmodes">
-				<bitfield name="opened"   >1</bitfield>
-				<bitfield name="moderated">2</bitfield>
-				<bitfield name="deleted"  >4</bitfield>
-			</group>
-			<group name="phpkd_vblvb_bbcodes">
+			<group name="bbcodes">
 				<bitfield name="basic" >1</bitfield>
 				<bitfield name="color" >2</bitfield>
 				<bitfield name="size"  >4</bitfield>
@@ -156,8 +23,42 @@
 				<bitfield name="hide"  >2048</bitfield>
 				<bitfield name="charge">4096</bitfield>
 			</group>
+			<group name="thread_modes">
+				<bitfield name="opened"    >1</bitfield>
+				<bitfield name="closed"    >2</bitfield>
+				<bitfield name="moderated" >4</bitfield>
+				<bitfield name="sticky"    >8</bitfield>
+				<bitfield name="deleted"   >16</bitfield>
+				<bitfield name="redirected">32</bitfield>
+			</group>
+			<group name="post_modes">
+				<bitfield name="opened"   >1</bitfield>
+				<bitfield name="moderated">2</bitfield>
+				<bitfield name="deleted"  >4</bitfield>
+			</group>
+			<group name="thread_punishs">
+				<bitfield name="close"   >1</bitfield>
+				<bitfield name="unstick" >2</bitfield>
+				<bitfield name="moderate">4</bitfield>
+				<bitfield name="delete"  >8</bitfield>
+				<bitfield name="move"    >16</bitfield>
+			</group>
+			<group name="post_punishs">
+				<bitfield name="moderate">1</bitfield>
+				<bitfield name="delete"  >2</bitfield>
+			</group>
+			<group name="staff_reports">
+				<bitfield name="pm"    >1</bitfield>
+				<bitfield name="email" >2</bitfield>
+				<bitfield name="thread">4</bitfield>
+				<bitfield name="reply" >8</bitfield>
+			</group>
+			<group name="user_reports">
+				<bitfield name="pm"    >1</bitfield>
+				<bitfield name="email" >2</bitfield>
+			</group>
 		</group>
 	</bitfielddefs>
 </bitfields>
 
-<!-- SVN: $Version: 4.0.137 $ - $Id$ -->
+<!-- SVN: $Version: 4.0.200 $ - $Id$ -->

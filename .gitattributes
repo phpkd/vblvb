@@ -1,46 +1,64 @@
 * text=auto !eol
 do_not_upload/product-phpkd_vblvb_fix.xml -text
 import/product-phpkd_vblvb.xml -text
-languages/Arabic_4.0.137.xml -text svneol=unset#text/plain
-languages/English_4.0.137.xml -text svneol=unset#text/plain
-languages/French_4.0.137.xml -text svneol=unset#text/plain
-languages/Greek_4.0.137.xml -text svneol=unset#text/plain
-languages/Italian_4.0.137.xml -text svneol=unset#text/plain
-languages/Russian_4.0.137.xml -text svneol=unset#text/plain
-languages/Spanish_4.0.137.xml -text svneol=unset#text/plain
-languages/Turkish_4.0.137.xml -text svneol=unset#text/plain
+languages/English_4.0.200.xml -text svneol=unset#text/plain
 readme/info.txt -text
 readme/install.txt -text
 readme/license.txt -text
 readme/upgrade.txt -text
-screenshots/PHPKD-VBLVB-AdminCP_Cronjob_1.png -text
-screenshots/PHPKD-VBLVB-AdminCP_Cronjob_2.png -text
-screenshots/PHPKD-VBLVB-AdminCP_Settings_1.png -text
-screenshots/PHPKD-VBLVB-AdminCP_Settings_2.png -text
-screenshots/PHPKD-VBLVB-AdminCP_Settings_3.png -text
-screenshots/PHPKD-VBLVB-AdminCP_Settings_4.png -text
-screenshots/PHPKD-VBLVB-Email_Reports.png -text
-screenshots/PHPKD-VBLVB-PM_Reports.png -text
-screenshots/PHPKD-VBLVB-Staff_Email_Report.png -text
-screenshots/PHPKD-VBLVB-Staff_PM_Report.png -text
-screenshots/PHPKD-VBLVB-User_Email_Report.png -text
-screenshots/PHPKD-VBLVB-User_PM_Report.png -text
+screenshots/phpkd_vblvb_admincp_cronjob_disabled.png -text
+screenshots/phpkd_vblvb_admincp_cronjob_invalid_license.png -text
+screenshots/phpkd_vblvb_admincp_cronjob_noitems.png -text
+screenshots/phpkd_vblvb_admincp_cronjob_report.png -text
+screenshots/phpkd_vblvb_admincp_hostmanager_add.png -text
+screenshots/phpkd_vblvb_admincp_hostmanager_backup_restore.png -text
+screenshots/phpkd_vblvb_admincp_hostmanager_delete_complete.png -text
+screenshots/phpkd_vblvb_admincp_hostmanager_delete_confirm.png -text
+screenshots/phpkd_vblvb_admincp_hostmanager_edit_megaupload.png -text
+screenshots/phpkd_vblvb_admincp_hostmanager_edit_rapidshare.png -text
+screenshots/phpkd_vblvb_admincp_hostmanager_main.png -text
+screenshots/phpkd_vblvb_admincp_hostmanager_save_complete.png -text
+screenshots/phpkd_vblvb_admincp_log_noitems.png -text
+screenshots/phpkd_vblvb_admincp_log_prune_confirm.png -text
+screenshots/phpkd_vblvb_admincp_log_pruned.png -text
+screenshots/phpkd_vblvb_admincp_log_viewer.png -text
+screenshots/phpkd_vblvb_admincp_log_viewer_form.png -text
+screenshots/phpkd_vblvb_admincp_nav.png -text
+screenshots/phpkd_vblvb_admincp_settings_all.png -text
+screenshots/phpkd_vblvb_admincp_settings_backup_restore.png -text
+screenshots/phpkd_vblvb_admincp_settings_collapsed.png -text
+screenshots/phpkd_vblvb_admincp_settings_colorpicker.png -text
+screenshots/phpkd_vblvb_admincp_settings_expanded.png -text
+screenshots/phpkd_vblvb_admincp_settings_general.png -text
+screenshots/phpkd_vblvb_admincp_settings_linkdir.png -text
+screenshots/phpkd_vblvb_admincp_settings_lookfeel.png -text
+screenshots/phpkd_vblvb_admincp_settings_punishment.png -text
+screenshots/phpkd_vblvb_admincp_settings_reporting.png -text
+screenshots/phpkd_vblvb_post_checked_last_1.png -text
+screenshots/phpkd_vblvb_post_checked_last_2.png -text
+screenshots/phpkd_vblvb_post_checked_never.png -text
+screenshots/phpkd_vblvb_report_email.png -text
+screenshots/phpkd_vblvb_report_pm.png -text
+screenshots/phpkd_vblvb_staff_report_email.png -text
+screenshots/phpkd_vblvb_staff_report_pm.png -text
+screenshots/phpkd_vblvb_staff_report_post.png -text
+screenshots/phpkd_vblvb_staff_report_post_title.png -text
+screenshots/phpkd_vblvb_user_report_email.png -text
+screenshots/phpkd_vblvb_user_report_pm.png -text
 upload/admincp/phpkd_vblvb.php -text
 upload/includes/md5_sums_phpkd_vblvb.php -text
 upload/includes/phpkd/index.html -text
+upload/includes/phpkd/vblvb/adminfunctions.php -text
 upload/includes/phpkd/vblvb/class_core.php -text
 upload/includes/phpkd/vblvb/class_dm.php -text
 upload/includes/phpkd/vblvb/class_dml.php -text
+upload/includes/phpkd/vblvb/class_hooks.php -text
+upload/includes/phpkd/vblvb/class_init.php -text
+upload/includes/phpkd/vblvb/class_install.php -text
 upload/includes/phpkd/vblvb/cron.php -text
-upload/includes/phpkd/vblvb/functions.php -text
 upload/includes/phpkd/vblvb/functions_databuild.php -text
-upload/includes/phpkd/vblvb/hooks/admin_options_print.php -text
-upload/includes/phpkd/vblvb/hooks/admin_options_processing.php -text
-upload/includes/phpkd/vblvb/hooks/editpost_update_process.php -text
-upload/includes/phpkd/vblvb/hooks/index.html -text
-upload/includes/phpkd/vblvb/hooks/newpost_process.php -text
+upload/includes/phpkd/vblvb/hosts.xml -text svneol=unset#text/plain
 upload/includes/phpkd/vblvb/index.html -text
-upload/includes/phpkd/vblvb/init.php -text
-upload/includes/phpkd/vblvb/install.php -text
+upload/includes/phpkd/vblvb/settings.xml -text svneol=unset#text/plain
 upload/includes/xml/bitfield_phpkd_vblvb.xml -text
 upload/includes/xml/cpnav_phpkd_vblvb.xml -text svneol=unset#text/plain

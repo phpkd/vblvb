@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<settinggroups>
+	<settinggroup name="general" displayorder="10">
+		<setting varname="general_active" displayorder="10">
+			<datatype>boolean</datatype>
+			<optioncode>yesno</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="general_licensekey" displayorder="20">
+			<datatype>free</datatype>
+			<blacklist>1</blacklist>
+		</setting>
+		<setting varname="general_inex_users" displayorder="30">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_inex_users_all
+1|phpkd_vblvb_inex_users_in
+2|phpkd_vblvb_inex_users_ex</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="general_inex_users_ids" displayorder="40">
+			<datatype>free</datatype>
+		</setting>
+		<setting varname="general_inex_usergroups" displayorder="50">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_inex_usergroups_all
+1|phpkd_vblvb_inex_usergroups_in
+2|phpkd_vblvb_inex_usergroups_ex</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="general_inex_usergroups_ids" displayorder="60">
+			<datatype>free</datatype>
+			<optioncode>usergroup:5</optioncode>
+		</setting>
+		<setting varname="general_inex_forums" displayorder="70">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_inex_forums_all
+1|phpkd_vblvb_inex_forums_in
+2|phpkd_vblvb_inex_forums_ex</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="general_inex_forums_ids" displayorder="80">
+			<datatype>free</datatype>
+			<optioncode>forum:5</optioncode>
+		</setting>
+		<setting varname="general_cutoff_mode" displayorder="90">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_cutoff_mode_lastx
+1|phpkd_vblvb_cutoff_mode_before_specific
+2|phpkd_vblvb_cutoff_mode_after_specific
+3|phpkd_vblvb_cutoff_mode_between_specific</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="general_cutoff_value" displayorder="100">
+			<datatype>free</datatype>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="general_protocols" displayorder="110">
+			<datatype>bitfield</datatype>
+			<optioncode>bitfield:phpkd_vblvb|protocols</optioncode>
+			<defaultvalue>7</defaultvalue>
+		</setting>
+		<setting varname="general_bbcodes" displayorder="120">
+			<datatype>bitfield</datatype>
+			<optioncode>bitfield:phpkd_vblvb|bbcodes</optioncode>
+			<defaultvalue>8191</defaultvalue>
+		</setting>
+		<setting varname="general_thread_modes" displayorder="130">
+			<datatype>bitfield</datatype>
+			<optioncode>bitfield:phpkd_vblvb|thread_modes</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="general_post_modes" displayorder="140">
+			<datatype>bitfield</datatype>
+			<optioncode>bitfield:phpkd_vblvb|post_modes</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="general_checked_existingposts" displayorder="150">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_checked_none
+1|phpkd_vblvb_checked_all
+2|phpkd_vblvb_checked_first</optioncode>
+			<defaultvalue>2</defaultvalue>
+		</setting>
+		<setting varname="general_checked_newposts" displayorder="160">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_checked_none
+1|phpkd_vblvb_checked_all
+2|phpkd_vblvb_checked_first</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="general_checked_editedposts" displayorder="170">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_checked_none
+1|phpkd_vblvb_checked_all
+2|phpkd_vblvb_checked_first</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="general_maxlinks" displayorder="180">
+			<datatype>integer</datatype>
+			<defaultvalue>50</defaultvalue>
+		</setting>
+		<setting varname="general_critical_limit" displayorder="190">
+			<datatype>integer</datatype>
+			<defaultvalue>10</defaultvalue>
+		</setting>
+		<setting varname="general_succession_period" displayorder="200">
+			<datatype>integer</datatype>
+			<defaultvalue>14</defaultvalue>
+		</setting>
+		<setting varname="general_query_limit" displayorder="210">
+			<datatype>posint</datatype>
+			<defaultvalue>50</defaultvalue>
+		</setting>
+	</settinggroup>
+	<settinggroup name="reporting" displayorder="20">
+		<setting varname="reporting_reporter" displayorder="10">
+			<datatype>username</datatype>
+			<optioncode>username</optioncode>
+			<validationcode>return ($data !== false);</validationcode>
+		</setting>
+		<setting varname="reporting_staff_reports" displayorder="20">
+			<datatype>bitfield</datatype>
+			<optioncode>bitfield:phpkd_vblvb|staff_reports</optioncode>
+			<defaultvalue>3</defaultvalue>
+		</setting>
+		<setting varname="reporting_staff_reports_messaging" displayorder="30">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_staff_reports_messaging_moderators
+1|phpkd_vblvb_staff_reports_messaging_moderators_and_administrators</optioncode>
+			<defaultvalue>1</defaultvalue>
+		</setting>
+		<setting varname="reporting_staff_reports_mode" displayorder="40">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_report_mode_always
+1|phpkd_vblvb_report_mode_checked
+2|phpkd_vblvb_report_mode_dead
+3|phpkd_vblvb_report_mode_punished</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="reporting_user_reports" displayorder="50">
+			<datatype>bitfield</datatype>
+			<optioncode>bitfield:phpkd_vblvb|user_reports</optioncode>
+			<defaultvalue>3</defaultvalue>
+		</setting>
+		<setting varname="reporting_user_reports_mode" displayorder="60">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_report_mode_dead
+1|phpkd_vblvb_report_mode_punished</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="reporting_included_posts" displayorder="70">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_included_posts_both
+1|phpkd_vblvb_included_posts_checked
+2|phpkd_vblvb_included_posts_punished</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="reporting_included_links" displayorder="80">
+			<datatype>integer</datatype>
+			<optioncode>radio:piped
+0|phpkd_vblvb_included_links_all
+1|phpkd_vblvb_included_links_alive
+2|phpkd_vblvb_included_links_dead
+3|phpkd_vblvb_included_links_down
+4|phpkd_vblvb_included_links_none</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="reporting_forumid" displayorder="90">
+			<datatype>integer</datatype>
+			<optioncode>select:eval
+$options = construct_forum_chooser_options(1);</optioncode>
+		</setting>
+		<setting varname="reporting_threadid" displayorder="100">
+			<datatype>integer</datatype>
+		</setting>
+		<setting varname="reporting_phrases" displayorder="110">
+			<datatype>free</datatype>
+			<optioncode><![CDATA[<strong>Staff Reports:</strong> [<a href='phrase.php?do=edit&amp;e[emailsubject][phpkd_vblvb_staff_reports]' target='_blank'>Report Subject</a>] [<a href='phrase.php?do=edit&amp;e[emailbody][phpkd_vblvb_staff_reports]' target='_blank'>Report Message</a>]<br />
+<strong>User Reports:</strong> [<a href='phrase.php?do=edit&amp;e[emailsubject][phpkd_vblvb_user_reports]' target='_blank'>Report Subject</a>] [<a href='phrase.php?do=edit&amp;e[emailbody][phpkd_vblvb_user_reports]' target='_blank'>Report Message</a>]<br />]]></optioncode>
+		</setting>
+	</settinggroup>
+	<settinggroup name="punishment" displayorder="30">
+		<setting varname="punishment_thread_punishs" displayorder="10">
+			<datatype>bitfield</datatype>
+			<optioncode>bitfield:phpkd_vblvb|thread_punishs</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="punishment_post_punishs" displayorder="20">
+			<datatype>bitfield</datatype>
+			<optioncode>bitfield:phpkd_vblvb|post_punishs</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+		<setting varname="punishment_forumid" displayorder="30">
+			<datatype>integer</datatype>
+			<optioncode>select:eval
+$options = construct_forum_chooser_options(1);</optioncode>
+		</setting>
+		<setting varname="punishment_onedit_revert" displayorder="40">
+			<datatype>boolean</datatype>
+			<optioncode>yesno</optioncode>
+			<defaultvalue>1</defaultvalue>
+		</setting>
+		<setting varname="punishment_powerful_ugids" displayorder="50">
+			<datatype>free</datatype>
+		</setting>
+	</settinggroup>
+	<settinggroup name="lookfeel" displayorder="40">
+		<setting varname="lookfeel_linkstatus_colors" displayorder="10">
+			<datatype>free</datatype>
+			<optioncode>colors</optioncode>
+			<defaultvalue><![CDATA[a:3:{i:0;s:7:"#008000";i:1;s:7:"#FF0000";i:2;s:7:"#FFA500";}]]></defaultvalue>
+		</setting>
+		<setting varname="lookfeel_postbit_note" displayorder="20">
+			<datatype>free</datatype>
+			<optioncode>forum:5</optioncode>
+		</setting>
+	</settinggroup>
+	<settinggroup name="linkdir" displayorder="50">
+		<setting varname="linkdir_recording_active" displayorder="10">
+			<datatype>boolean</datatype>
+			<optioncode>yesno</optioncode>
+			<defaultvalue>0</defaultvalue>
+		</setting>
+	</settinggroup>
+</settinggroups>
+
+<!-- SVN: $Version: 4.0.200 $ - $Id: cpnav_phpkd_vblvb.xml 151 2010-05-15 10:05:27Z PHPKD $ -->

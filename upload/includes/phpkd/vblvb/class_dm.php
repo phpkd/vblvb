@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.137 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.200 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -21,72 +21,84 @@ if (!defined('VB_AREA') OR !defined('PHPKD_VBLVB') OR @get_class($this) != 'PHPK
 	exit;
 }
 
-// require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
-
 
 /**
  * Data Manager class
  *
- * @package vB Link Verifier Bot 'Pro' Edition
- * @author PHP KingDom Development Team
- * @version $Revision$
- * @since $Date$
- * @copyright PHP KingDom (PHPKD)
+ * @category	vB Link Verifier Bot 'Ultimate'
+ * @package		PHPKD_VBLVB
+ * @subpackage	PHPKD_VBLVB_DM
+ * @copyright	Copyright ©2005-2011 PHP KingDom. All Rights Reserved. (http://www.phpkd.net)
+ * @license		http://info.phpkd.net/en/license/commercial
  */
-class PHPKD_VBLVB_DM extends PHPKD_VBLVB
+class PHPKD_VBLVB_DM
 {
 	/**
-	* Constructor - Registers passed (pre-prepared!) values to the current object handler
+	* The PHPKD_VBLVB registry object
 	*
-	* @param	vB_Registry	Instance of the vBulletin data registry object - expected to have the database object as one of its members ($this->db).
-	* @param	array		Initialize required data (Hosts/Masks/Punishments/Reports)
-	* @param	integer		One of the ERRTYPE_x constants
+	* @var	PHPKD_VBLVB
 	*/
-	function PHPKD_VBLVB_DM(&$registry, &$parent)
-	{
-		$this->registry =& $registry;
-
-		$this->vbphrase      = $parent->vbphrase;
-		$this->error_handler = $parent->error_handler;
-		$this->hosts         = $parent->hosts;
-		$this->masks         = $parent->masks;
-		$this->protocols     = $parent->protocols;
-		$this->bbcodes       = $parent->bbcodes;
-		$this->punishments   = $parent->punishments;
-		$this->staff_reports = $parent->staff_reports;
-		$this->user_reports  = $parent->user_reports;
-		$this->threadmodes   = $parent->threadmodes;
-		$this->postmodes     = $parent->postmodes;
-		//parent::PHPKD_VBLVB($registry, $initparams);
-		// Do nothing!!
-	}
-
+	private $_registry = null;
 
 	/**
-	* Extract links from text, pass it to be verified & return log records
-	*
-	* @param	string	Message text
-	*
-	* @return	array	Returns array of numbers determines how many links (all/checked/alive/dead/down) in addition to log records
-	*/
-	function fetch_urls($messagetext)
+	 * Constructor - checks that PHPKD_VBLVB registry object including vBulletin registry oject has been passed correctly.
+	 *
+	 * @param	PHPKD_VBLVB	Instance of the main product's data registry object - expected to have both vBulletin data registry & database object as two of its members.
+	 * @return	PHPKD_VBLVB
+	 */
+	public function __construct(&$registry)
 	{
-		$tmpbbcodes1 = $tmpbbcodes2 = array();
-		foreach ($this->bbcodes AS $key => $value)
+		if (is_object($registry))
 		{
-			if ($key != 'LINK')
+			$this->_registry =& $registry;
+
+			if (is_object($registry->_vbulletin))
 			{
-				foreach ($value AS $ky => $val)
+				if (!is_object($registry->_vbulletin->db))
 				{
-					switch ($ky)
+					trigger_error('vBulletin Database object is not an object!', E_USER_ERROR);
+				}
+			}
+			else
+			{
+				trigger_error('vBulletin Registry object is not an object!', E_USER_ERROR);
+			}
+		}
+		else
+		{
+			trigger_error('PHPKD_VBLVB Registry object is not an object!', E_USER_ERROR);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Extract links from text, pass it to be verified and return report
+	 *
+	 * @param	string	Message text
+	 * @param	int		postid
+	 * @return	array	Returns array of how many (all/checked/alive/dead/down) links
+	 */
+	public function fetch_urls($messagetext, $postid = 0)
+	{
+		$opentags = $closetags = array();
+		$this->_registry->initialize(array('hosts', 'protocols', 'bbcodes'));
+
+		foreach ($this->_registry->bbcodes as $bbkey => $bbvalue)
+		{
+			if ('LINK' != $bbkey)
+			{
+				foreach ($bbvalue as $key => $value)
+				{
+					switch ($key)
 					{
 						case 'open':
-							$tmpbbcodes1[] = $value['open'];
+							$opentags[] = $value;
 							break;
 						case 'close':
-							if ($key != 'LIST')
+							if ('LIST' != $bbkey)
 							{
-								$tmpbbcodes2[] = $value['close'];
+								$closetags[] = $value;
 							}
 							break;
 					}
@@ -94,11 +106,10 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 			}
 		}
 
-
-		if (!empty($tmpbbcodes1) AND !empty($tmpbbcodes2))
+		if (!empty($opentags) AND !empty($closetags))
 		{
-			$taglist = implode('|', $tmpbbcodes1) . implode('|', $tmpbbcodes2);
-			$regex1 = '#(^|(?<=[^_a-z0-9-=\]"\'/@]|(?<=' . $taglist . ')\]))((' . implode('|', $this->protocols) . ')://|www\.)((\[(?!/)|[^\s[^$`"{}<>])+)(?!\[/url|\[/img)(?=[,.!\')]*(\)\s|\)$|[\s[]|$))#siU';
+			$taglist = implode('|', $opentags) . implode('|', $closetags);
+			$regex1 = '#(^|(?<=[^_a-z0-9-=\]"\'/@]|(?<=' . $taglist . ')\]))((' . implode('|', $this->_registry->protocols) . ')://|www\.)((\[(?!/)|[^\s[^$`"{}<>])+)(?!\[/url|\[/img)(?=[,.!\')]*(\)\s|\)$|[\s[]|$))#siU';
 			preg_match_all($regex1, $messagetext, $matches1);
 
 			if (is_array($matches1) AND !empty($matches1))
@@ -107,7 +118,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 			}
 		}
 
-		if (isset($this->bbcodes['LINK']))
+		if (isset($this->_registry->bbcodes['link']))
 		{
 			$regex2 = '#\[url=("|\'|)?(.*)\\1\](?:.*)\[/url\]|\[url\](.*)\[/url\]#siU';
 			preg_match_all($regex2, $messagetext, $matches2);
@@ -133,201 +144,216 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 		}
 		else
 		{
-			$this->error('phpkd_vblvb_invalid_criteria');
-			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0, 'log' => '<br />' . $this->vbphrase['phpkd_vblvb_invalid_criteria'] . '<br />');
+			$this->_registry->seterror('phpkd_vblvb_invalid_criteria', ERRTYPE_ECHO, $postid);
+			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0);
 		}
 
 
 		if (is_array($matches) AND !empty($matches))
 		{
 			$actualurls = array();
-			foreach ($matches AS $key => $value)
+
+			foreach ($matches as $matchvalue)
 			{
-				foreach ($value AS $singleurl)
+				foreach ($matchvalue as $singleurl)
 				{
-					if ($singleurl != '')
+					if (!empty($singleurl))
 					{
-						$actualurls[] = $singleurl;
+						$actualurls[] = trim($singleurl);
 					}
 				}
 			}
 		}
 		else
 		{
-			$this->error('phpkd_vblvb_invalid_criteria');
-			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0, 'log' => '<br />' . $this->vbphrase['phpkd_vblvb_invalid_criteria'] . '<br />');
+			$this->_registry->seterror('phpkd_vblvb_invalid_criteria', ERRTYPE_ECHO, $postid);
+			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0);
 		}
 
 
 		if (is_array($actualurls) AND !empty($actualurls))
 		{
-			$log = '';
-			$counter = 0;
-			$return = array();
+			$checked = $counter = 0;
+			$urlsreturn = array();
 
-
-			if (defined('IN_CONTROL_PANEL'))
+			foreach(array_unique($actualurls) as $url)
 			{
-				echo '<ol>';
-				vbflush();
-			}
-
-			foreach(array_unique($actualurls) AS $url)
-			{
-				if ($this->registry->options['phpkd_vblvb_maxlinks'] > 0 AND $counter >= $this->registry->options['phpkd_vblvb_maxlinks'])
+				if ($this->_registry->_vbulletin->phpkd_vblvb['general_maxlinks'] > 0 AND $checked >= $this->_registry->_vbulletin->phpkd_vblvb['general_maxlinks'])
 				{
-					continue;
+					break;
 				}
 
-				if (!empty($url))
+				// Match URLs with active hosts
+				foreach($this->_registry->hosts as $host)
 				{
-					// Detect masked links& unmask it!
-					$url = $this->unmask($url);
-
-					// Process Available Hosts
-					foreach($this->hosts AS $host)
+					if (!empty($host['urlmatch']) AND preg_match("#$host[urlmatch]#i", $url, $hostmatch))
 					{
-						if(preg_match("#$host[urlmatch]#i", $url))
+						if (0 == $checked)
 						{
-							$return[] = $this->check(trim($url), $host['status'], $host['contentmatch'], $host['urlsearch'], $host['urlreplace'], $host['downmatch']);
+							$this->_registry->logstring('<ol>', true, $postid);
 						}
+
+						if (!empty($host['apiurl']) AND count($hostmatch) > 1)
+						{
+							unset($hostmatch[0]);
+							$urlsreturn[] = ($this->_registry->_vbulletin->phpkd_vblvb['linkdir_recording_active'] ? array('host' => $host['domain'], 'url' => $url, 'lastcheck' => TIMENOW, 'hash' => md5($url), 'status' => $this->check($url, str_replace(array('{1}', '{2}'), array($hostmatch[1], $hostmatch[2]), $host['apiurl']), $host['status'], $host['contentmatch'], $host['downmatch'], $host['urlsearch'], $host['urlreplace'], $userid, $postid)) : array('status' => $this->check($url, str_replace(array('{1}', '{2}'), array($hostmatch[1], $hostmatch[2]), $host['apiurl']), $host['status'], $host['contentmatch'], $host['downmatch'], $host['urlsearch'], $host['urlreplace'], $userid, $postid)));
+						}
+						else
+						{
+							$urlsreturn[] = ($this->_registry->_vbulletin->phpkd_vblvb['linkdir_recording_active'] ? array('host' => $host['domain'], 'url' => $url, 'lastcheck' => TIMENOW, 'hash' => md5($url), 'status' => $this->check($url, '', $host['status'], $host['contentmatch'], $host['downmatch'], $host['urlsearch'], $host['urlreplace'], $userid, $postid)) : array('status' => $this->check($url, '', $host['status'], $host['contentmatch'], $host['downmatch'], $host['urlsearch'], $host['urlreplace'], $userid, $postid)));
+						}
+
+						$checked++;
 					}
-
-					$counter++;
 				}
+
+				$counter++;
 			}
 
-			if (defined('IN_CONTROL_PANEL'))
+			if (0 < $checked)
 			{
-				echo '</ol>';
-				vbflush();
+				$this->_registry->logstring('</ol>', true, $postid);
 			}
 
-
-			$log .= '<ol>';
 			$alive = $dead = $down = 0;
-			foreach ($return AS $rtrn)
+
+			foreach ($urlsreturn as $urlreturn)
 			{
-				switch ($rtrn['status'])
+				switch ($urlreturn['status'])
 				{
 					case 'alive':
 						$alive++;
 						break;
+
 					case 'dead':
 						$dead++;
 						break;
+
 					case 'down':
+					default:
 						$down++;
 						break;
 				}
-
-				$log .= $rtrn['log'];
 			}
-			$log .= '</ol>';
 
-			return array('all' => $counter, 'checked' => $alive + $dead + $down, 'alive' => $alive, 'dead' => $dead, 'down' => $down, 'log' => $log);
+			if (0 == $checked)
+			{
+				$this->_registry->seterror('phpkd_vblvb_invalid_criteria', ERRTYPE_ECHO, $postid);
+			}
+
+			return array('all' => $counter, 'checked' => $checked, 'alive' => $alive, 'dead' => $dead, 'down' => $down, 'urlrecords' => ($this->_registry->_vbulletin->phpkd_vblvb['linkdir_recording_active'] ? $urlsreturn : false));
 		}
 		else
 		{
-			$this->error('phpkd_vblvb_invalid_criteria');
-			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0, 'log' => '<br />' . $this->vbphrase['phpkd_vblvb_invalid_criteria'] . '<br />');
+			$this->_registry->seterror('phpkd_vblvb_invalid_criteria', ERRTYPE_ECHO, $postid);
+			return array('all' => 0, 'checked' => 0, 'alive' => 0, 'dead' => 0, 'down' => 0);
 		}
 	}
 
-
 	/**
-	* Returns unmasked URL
-	*
-	* @param	string	URL to be umasked
-	*
-	* @return	string	unmasked URL
-	*/
-	function unmask($url)
+	 * Verify if the supplied link is (alive/dead/down) & return it's status
+	 *
+	 * @param	string	Link to be checked
+	 * @param	string	API URL to be checked (in case of API call)
+	 * @param	string	Per Link Regex formula to be evaluated
+	 * @param	string	Regex search patern to be applied on the supplied link -if required-
+	 * @param	string	Regex replace patern to be applied on the supplied link -if required-
+	 * @param	int		userid
+	 * @param	int		postid
+	 * @return	array	Checked link status & report
+	 */
+	public function check($url, $apiurl = '', $hoststatus, $contentmatch, $downmatch, $urlsearch, $urlreplace, $userid = 0, $postid = 0)
 	{
-		static $recursive;
-		if (!$recursive)
-		{
-			$recursive = 0;
-		}
+		// Just keep the original URL as it is for the logging purposes. See ( http://forum.phpkd.net/project.php?issueid=65 )
+		$oriurl = $url;
+		$colors = unserialize($this->_registry->_vbulletin->phpkd_vblvb['lookfeel_linkstatus_colors']);
 
-		if (is_array($this->masks) AND !empty($this->masks))
+		if ('alive' == $hoststatus)
 		{
-			foreach ($this->masks AS $maskid => $maskregex)
+			if (!empty($apiurl))
 			{
-				if (preg_match($maskregex, $url))
+				$page = $this->vurl($apiurl);
+				$excontentmatch = explode('|', $contentmatch);
+				$exdownmatch = explode('|', $downmatch);
+				$expage = explode(',', $page);
+
+				if (count($excontentmatch) > 1 AND count($expage) > 1 AND $excontentmatch[1] == $expage[$excontentmatch[0] - 1])
 				{
-					switch ($maskid)
-					{
-						case 'anonym.to':
-							$url = explode('?', $url);
-							unset($url[0]);
-							$url = implode($url, '?');
-							break;
-						case 'lix.in':
-							$curlpost = 'tiny=' . trim(substr(strstr($url, 'n/'), 2)) . '&submit=continue';
-							preg_match('@name="ifram" src="(.+?)"@i', $this->vurl($url, $curlpost), $match);
-							$url = $match[1];
-							break;
-						case 'linkbucks.com':
-							$page = $this->vurl($url);
-							preg_match("/<a href=\"(.+)\" id=\"aSkipLink\">/", $page, $match);
-							$url = $match[1];
-							break;
-					}
+					$status = 'alive';
+					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $oriurl);
 				}
-			}
-
-			if ($this->registry->options['phpkd_vblvb_masks_recursion'])
-			{
-				$recursive++;
-
-				if ($this->registry->options['phpkd_vblvb_masks_recursion_level'] == 0 OR ($recursive <= $this->registry->options['phpkd_vblvb_masks_recursion_level']))
+				else if (count($exdownmatch) > 1 AND count($expage) > 1 AND $exdownmatch[1] == $expage[$exdownmatch[0] - 1])
 				{
-					if (preg_match($maskregex, $url))
-					{
-						return $this->unmask($url);
-					}
-					else
-					{
-						return $url;
-					}
+					$status = 'down';
+					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $oriurl);
 				}
 				else
 				{
-					return $url;
+					$status = 'dead';
+					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $oriurl);
 				}
 			}
 			else
 			{
-				return $url;
+				if (!empty($urlsearch) AND preg_match("#$urlsearch#i", $url))
+				{
+					$url = preg_replace("#$urlsearch#i", $urlreplace, $url);
+				}
+
+				$page = $this->vurl($url);
+
+				if (!empty($contentmatch) AND preg_match("#$contentmatch#i", $page))
+				{
+					$status = 'alive';
+					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $oriurl);
+				}
+				else if (!empty($downmatch) AND preg_match("#$downmatch#i", $page))
+				{
+					$status = 'down';
+					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $oriurl);
+				}
+				else
+				{
+					$status = 'dead';
+					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $oriurl);
+				}
 			}
+		}
+		else if ('dead' == $hoststatus)
+		{
+			$status = 'dead';
+			$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $oriurl);
 		}
 		else
 		{
-			return $url;
+			$status = 'down';
+			$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $oriurl);
 		}
+
+
+		$this->_registry->logstring($log, (($this->_registry->_vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1) AND ($this->_registry->_vbulletin->phpkd_vblvb['reporting_included_links'] == 0 OR ($this->_registry->_vbulletin->phpkd_vblvb['reporting_included_links'] == 1 AND $status == 'alive') OR ($this->_registry->_vbulletin->phpkd_vblvb['reporting_included_links'] == 2 AND $status == 'dead') OR ($this->_registry->_vbulletin->phpkd_vblvb['reporting_included_links'] == 3 AND $status == 'down'))), $postid);
+
+		return $status;
 	}
 
-
 	/**
-	* Returns content of the remotely fetched page
-	*
-	* @param	string	URL to be remotely fetched
-	* @param	string	Posted fields (string as query string, or as array)
-	*
-	* @return	string	Page Content
-	*/
-	function vurl($url, $post = '0')
+	 * Returns content of the remotely fetched page
+	 *
+	 * @param	string	URL to be remotely fetched
+	 * @param	string	Posted fields (string as query string, or as array)
+	 * @return	string	Page Content
+	 */
+	public function vurl($url, $post = null)
 	{
 		require_once(DIR . '/includes/class_vurl.php');
 
-		$vurl = new vB_vURL($this->registry);
+		$vurl = new vB_vURL($this->_registry->_vbulletin);
 		$vurl->set_option(VURL_URL, $url);
 		$vurl->set_option(VURL_USERAGENT, 'vBulletin/' . FILE_VERSION);
 		$vurl->set_option(VURL_FOLLOWLOCATION, 1);
 		$vurl->set_option(VURL_MAXREDIRS, 3);
 
-		if($post != '0') 
+		if (null !== $post)
 		{
 			$vurl->set_option(VURL_POST, 1);
 			$vurl->set_option(VURL_POSTFIELDS, $post);
@@ -335,287 +361,100 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 
 		$vurl->set_option(VURL_RETURNTRANSFER, 1);
 		$vurl->set_option(VURL_CLOSECONNECTION, 1);
+
 		return $vurl->exec();
 	}
 
-
 	/**
-	* Verify if the supplied link is (alive/dead/down) & return a report about it.
-	*
-	* @param	string	Link to be checked
-	* @param	string	Per Link Regex formula to be evaluated
-	* @param	string	Regex search patern to be applied on the supplied link -if required-
-	* @param	string	Regex replace patern to be applied on the supplied link -if required-
-	*
-	* @return	array	Checked link status & report
-	*/
-	function check($url, $status, $contentmatch, $urlsearch, $urlreplace, $downmatch)
+	 * Staff Reports
+	 *
+	 * @param	string	Concatenated string of all punished posts
+	 * @param	array	Array of checked/dead/punished post counts
+	 * @return	boolean	True on success
+	 */
+	public function staff_reports($punished_links, $records)
 	{
-		$colors = unserialize($this->registry->options['phpkd_vblvb_linkstatus_colors']);
+		$this->_registry->initialize(array('staff_reports'));
 
-		if ($status == 'alive')
-		{
-			if(!empty($urlsearch)) 
-			{
-				$url = preg_replace($urlsearch, $urlreplace, $url);
-			}
-	
-			$page = $this->vurl($url);
-			$url = htmlentities($url, ENT_QUOTES);
-	
-	
-			if($contentmatch != '' AND preg_match("#$contentmatch#i", $page)) 
-			{
-				$status = 'alive';
-				$log = construct_phrase($this->vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $url);
-			}
-			else if($downmatch != '' AND preg_match("#$downmatch#i", $page)) 
-			{
-				$status = 'down';
-				$log = construct_phrase($this->vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $url);
-			}
-			else 
-			{
-				$status = 'dead';
-				$log = construct_phrase($this->vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $url);
-			}
-		}
-		else
-		{
-			$status = 'dead';
-			$log = construct_phrase($this->vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $url);
-		}
-
-
-		if (defined('IN_CONTROL_PANEL'))
-		{
-			echo $log;
-			vbflush();
-		}
-
-
-		return array('status' => $status, 'log' => $log);
-	}
-
-
-	/**
-	* Staff Reports
-	*
-	* @param	string	Report content to be sent to staff members
-	*
-	* @return	boolean	True on success
-	*/
-	function staff_reports($log)
-	{
-		if ($this->registry->options['phpkd_vblvb_reporter'] AND $reporter = fetch_userinfo($this->registry->options['phpkd_vblvb_reporter']) AND $mods = $this->fetch_staff())
+		if (!empty($this->_registry->staff_reports) AND $this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] AND $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']) AND $mods = $this->fetch_staff() AND $postlogs = $this->_registry->getPostlog())
 		{
 			require_once(DIR . '/includes/functions_wysiwyg.php');
-			$formatedlog = convert_wysiwyg_html_to_bbcode($log);
 
-			$datenow = vbdate($this->registry->options['dateformat'], TIMENOW);
-			$timenow = vbdate($this->registry->options['timeformat'], TIMENOW);
+			$logstring = $this->_registry->_vbphrase['phpkd_vblvb_log_checked_posts'] . '<ol class="smallfont">';
 
-
-			foreach ($this->staff_reports AS $rprtsid => $rprts)
+			if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1)
 			{
-				if ($this->registry->options['phpkd_vblvb_rprts'] & $rprts)
+				$posts = array();
+				$colors = unserialize($this->_registry->_vbulletin->phpkd_vblvb['lookfeel_linkstatus_colors']);
+
+				foreach ($postlogs as $postitemid => $postitem)
 				{
-					switch ($rprtsid)
-					{
-						// Staff Reports: Send Private Messages
-						case 'RPRTS_PM':
-							if (is_array($mods) AND !empty($mods))
-							{
-								foreach ($mods AS $mod)
-								{
-									if (!empty($mod['username']))
-									{
-										cache_permissions($reporter, false);
-
-										// create the DM to do error checking and insert the new PM
-										$pmdm =& datamanager_init('PM', $this->registry, ERRTYPE_SILENT);
-										$pmdm->set_info('is_automated', true);
-										$pmdm->set('fromuserid', $reporter['userid']);
-										$pmdm->set('fromusername', $reporter['username']);
-										$pmdm->set_info('receipt', false);
-										$pmdm->set_info('savecopy', false);
-										$pmdm->set('title', construct_phrase($this->vbphrase['phpkd_vblvb_rprts_title'], $datenow, $timenow));
-										$pmdm->set('message', construct_phrase($this->vbphrase['phpkd_vblvb_rprts_message'], $formatedlog));
-										$pmdm->set_recipients(unhtmlspecialchars($mod['username']), $reporter['permissions']);
-										$pmdm->set('dateline', TIMENOW);
-										$pmdm->set('allowsmilie', true);
-
-										$pmdm->pre_save();
-										if (empty($pmdm->errors))
-										{
-											$pmdm->save();
-										}
-										unset($pmdm);
-									}
-								}
-							}
-							break;
-
-						// Staff Reports: Send E-Mails
-						case 'RPRTS_EMAIL':
-							if ($this->registry->options['enableemail'])
-							{
-								if (is_array($mods) AND count($mods) > 0)
-								{
-									require_once(DIR . '/includes/class_bbcode_alt.php');
-									$plaintext_parser = new vB_BbCodeParser_PlainText($this->registry, fetch_tag_list());
-									$plaintext_parser->set_parsing_language('1');
-									$plaintextlog = $plaintext_parser->parse($formatedlog);
-
-									foreach ($mods AS $mod)
-									{
-										if (!empty($mod['email']))
-										{
-											$email_langid = ($mod['languageid'] > 0 ? $mod['languageid'] : $this->registry->options['languageid']);
-											eval(fetch_email_phrases('phpkd_vblvb_rprts_email', $email_langid));
-											vbmail($mod['email'], $subject, $message, true);
-										}
-									}
-
-									unset($plaintext_parser);
-								}
-							}
-							break;
-
-						// Staff Reports: Post New Reply
-						case 'RPRTS_REPLY':
-							if ($this->registry->options['phpkd_vblvb_report_tid'] > 0 AND $reportthread = fetch_threadinfo($this->registry->options['phpkd_vblvb_report_tid']) AND !$reportthread['isdeleted'] AND $reportthread['visible'] == 1  AND $reportforum = fetch_foruminfo($reportthread['forumid']))
-							{
-								$postman =& datamanager_init('Post', $this->registry, ERRTYPE_STANDARD, 'threadpost');
-								$postman->set_info('thread', $reportthread);
-								$postman->set_info('forum', $reportforum);
-								$postman->set_info('is_automated', true);
-								$postman->set_info('parseurl', true);
-								$postman->set('threadid', $reportthread['threadid']);
-								$postman->set('userid', $reporter['userid']);
-								$postman->set('allowsmilie', true);
-								$postman->set('visible', true);
-								$postman->set('title', construct_phrase($this->vbphrase['phpkd_vblvb_rprts_title'], $datenow, $timenow));
-								$postman->set('pagetext', construct_phrase($this->vbphrase['phpkd_vblvb_rprts_message'], $formatedlog));
-
-								// not posting as the current user, IP won't make sense
-								$postman->set('ipaddress', '');
-
-								$postman->save();
-								unset($postman);
-							}
-							break;
-
-						// Staff Reports: Post New Thread
-						case 'RPRTS_THREAD':
-							if ($this->registry->options['phpkd_vblvb_report_fid'] > 0 AND $reportforum = fetch_foruminfo($this->registry->options['phpkd_vblvb_report_fid']))
-							{
-								// Start: Required for 'mark_thread_read', fix the following bug: http://forum.phpkd.net/project.php?issueid=76
-								if (!$db)
-								{
-									global $db;
-									$db = $this->registry->db;
-								}
-								// End: Required for 'mark_thread_read', fix the following bug: http://forum.phpkd.net/project.php?issueid=76
-
-								$threadman =& datamanager_init('Thread_FirstPost', $this->registry, ERRTYPE_SILENT, 'threadpost');
-								$threadman->set_info('forum', $reportforum);
-								$threadman->set_info('is_automated', true);
-								$threadman->set_info('skip_moderator_email', true);
-								$threadman->set_info('mark_thread_read', true);
-								$threadman->set_info('parseurl', true);
-								$threadman->set('allowsmilie', true);
-								$threadman->set('userid', $reporter['userid']);
-								$threadman->setr_info('user', $reporter);
-								$threadman->set('title', construct_phrase($this->vbphrase['phpkd_vblvb_rprts_title'], $datenow, $timenow));
-								$threadman->set('pagetext', construct_phrase($this->vbphrase['phpkd_vblvb_rprts_message'], $formatedlog));
-								$threadman->set('forumid', $reportforum['forumid']);
-								$threadman->set('visible', 1);
-
-								// not posting as the current user, IP won't make sense
-								$threadman->set('ipaddress', '');
-
-								if ($rpthreadid = $threadman->save())
-								{
-									$threadman->set_info('skip_moderator_email', false);
-									$threadman->email_moderators(array('newthreademail', 'newpostemail'));
-
-									// check the permission of the posting user
-									$userperms = fetch_permissions($reportforum['forumid'], $reporter['userid'], $reporter);
-									if (($userperms & $this->registry->bf_ugp_forumpermissions['canview']) AND ($userperms & $this->registry->bf_ugp_forumpermissions['canviewthreads']) AND $reporter['autosubscribe'] != -1)
-									{
-										$this->registry->db->query_write("
-											INSERT IGNORE INTO " . TABLE_PREFIX . "subscribethread
-												(userid, threadid, emailupdate, folderid, canview)
-											VALUES
-												(" . $reporter['userid'] . ", $rpthreadid, $reporter[autosubscribe], 0, 1)
-										");
-									}
-								}
-
-								unset($threadman);
-							}
-							break;
-					}
+					$posts[$postitem['forumid']]['forumtitle'] = $postitem['forumtitle'];
+					$posts[$postitem['forumid']][$postitem['threadid']]['threadtitle'] = $postitem['threadtitle'];
+					$posts[$postitem['forumid']][$postitem['threadid']][$postitem['postid']] = $postitem;
 				}
+
+				foreach ($posts AS $forumid => $forumposts)
+				{
+					$logstring .= '<li>' . construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_forum'], $this->_registry->_vbulletin->options['bburl'] . '/forumdisplay.php?f=' . $forumid, $forumposts['forumtitle']) . '<ol class="smallfont">';
+					unset($forumposts['forumtitle']);
+
+					foreach ($forumposts AS $threadid => $threadposts)
+					{
+						$logstring .= '<li>' . construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_thread'], $this->_registry->_vbulletin->options['bburl'] . '/showthread.php?t=' . $threadid, $threadposts['threadtitle']) . '<ol class="smallfont">';
+						unset($threadposts['threadtitle']);
+
+						foreach ($threadposts AS $postid => $post)
+						{
+							$logstring .= $post['logrecord'];
+						}
+
+						$logstring .= '</ol></li><br />';
+					}
+
+					$logstring .= '</ol></li>';
+				}
+
+				$logstring .= construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_summery_all'], $colors[0], $colors[1], $colors[2], $records['checked'], ($records['checked'] - $records['dead']), $records['dead'], $records['punished']) . '</ol><br />';
 			}
 
-			// It's OK! Return true for success
-			return TRUE;
-		}
-	}
-
-
-	/**
-	* User Reports
-	*
-	* @param	string	Report content to be sent to post author
-	*
-	* @return	boolean	True on success
-	*/
-	function user_reports($punished)
-	{
-		if ($this->registry->options['phpkd_vblvb_reporter'] AND $reporter = fetch_userinfo($this->registry->options['phpkd_vblvb_reporter']))
-		{
-			$datenow = vbdate($this->registry->options['dateformat'], TIMENOW);
-			$timenow = vbdate($this->registry->options['timeformat'], TIMENOW);
-
-			foreach ($this->user_reports AS $rprtuid => $rprtu)
+			if (!empty($punished_links) AND $this->_registry->_vbulletin->phpkd_vblvb['reporting_included_posts'] == 0 OR $this->_registry->_vbulletin->phpkd_vblvb['reporting_included_posts'] == 2)
 			{
-				if ($this->registry->options['phpkd_vblvb_rprtu'] & $rprtu)
+				$logstring .= $this->_registry->_vbphrase['phpkd_vblvb_log_punished_posts'] . '<ol class="smallfont">' . $punished_links . '</ol><br />';
+			}
+
+
+			cache_permissions($reporter, false);
+			$formatedlog = convert_wysiwyg_html_to_bbcode($logstring, false, true);
+			$datenow = vbdate($this->_registry->_vbulletin->options['dateformat'], TIMENOW);
+			$timenow = vbdate($this->_registry->_vbulletin->options['timeformat'], TIMENOW);
+
+
+			foreach ($this->_registry->staff_reports as $staff_report)
+			{
+				switch ($staff_report)
 				{
-					switch ($rprtuid)
-					{
-						// User Reports: Send Private Messages
-						case 'RPRTU_PM':
-							foreach ($punished AS $userid => $user)
+					// Staff Reports: Private Messages
+					case 'pm':
+						if (is_array($mods) AND !empty($mods))
+						{
+							foreach ($mods as $mod)
 							{
-								$formatedlog = '[LIST=1]';
-								foreach ($user AS $postid => $post)
+								if (!empty($mod['username']))
 								{
-									if (!$user['username'])
-									{
-										$user['username'] = $post['username'];
-									}
-
-									$formatedlog .= '[*][url=' . $this->registry->options['bburl'] . '/showpost.php?p=' . $postid . ']' . ($post['title'] ? $post['title'] : $post['threadtitle']) . '[/url]';
-								}
-								$formatedlog .= '[/LIST]';
-
-								if (!empty($user['username']))
-								{
-									cache_permissions($reporter, false);
+									$email_langid = ($mod['languageid'] > 0 ? $mod['languageid'] : $this->_registry->_vbulletin->options['languageid']);
+									eval(fetch_email_phrases('phpkd_vblvb_staff_reports', $email_langid));
 
 									// create the DM to do error checking and insert the new PM
-									$pmdm =& datamanager_init('PM', $this->registry, ERRTYPE_SILENT);
+									$pmdm =& datamanager_init('PM', $this->_registry->_vbulletin, ERRTYPE_SILENT);
 									$pmdm->set_info('is_automated', true);
 									$pmdm->set('fromuserid', $reporter['userid']);
 									$pmdm->set('fromusername', $reporter['username']);
 									$pmdm->set_info('receipt', false);
 									$pmdm->set_info('savecopy', false);
-									$pmdm->set('title', construct_phrase($this->vbphrase['phpkd_vblvb_rprtu_title'], $datenow, $timenow));
-									$pmdm->set('message', construct_phrase($this->vbphrase['phpkd_vblvb_rprtu_message'], $user['username'], $formatedlog, $this->registry->options['bburl'] . '/' . $this->registry->options['contactuslink'], $this->registry->options['bbtitle']));
-									$pmdm->set_recipients(unhtmlspecialchars($user['username']), $reporter['permissions']);
+									$pmdm->set('title', $subject);
+									$pmdm->set('message', $message);
+									$pmdm->set_recipients(unhtmlspecialchars($mod['username']), $reporter['permissions']);
 									$pmdm->set('dateline', TIMENOW);
 									$pmdm->set('allowsmilie', true);
 
@@ -627,34 +466,189 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 									unset($pmdm);
 								}
 							}
+						}
+						break;
+
+					// Staff Reports: E-Mails
+					case 'email':
+						if ($this->_registry->_vbulletin->options['enableemail'])
+						{
+							if (is_array($mods) AND count($mods) > 0)
+							{
+								require_once(DIR . '/includes/class_bbcode_alt.php');
+								$plaintext_parser = new vB_BbCodeParser_PlainText($this->_registry->_vbulletin, fetch_tag_list());
+
+								foreach ($mods as $mod)
+								{
+									if (!empty($mod['email']))
+									{
+										$email_langid = ($mod['languageid'] > 0 ? $mod['languageid'] : $this->_registry->_vbulletin->options['languageid']);
+										$plaintext_parser->set_parsing_language($email_langid);
+										eval(fetch_email_phrases('phpkd_vblvb_staff_reports', $email_langid));
+										vbmail($mod['email'], $subject, $plaintext_parser->parse($message), true);
+									}
+								}
+
+								unset($plaintext_parser);
+							}
+						}
+						break;
+
+					// Staff Reports: New Reply
+					case 'reply':
+						if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_threadid'] > 0 AND $reportthread = fetch_threadinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_threadid']) AND !$reportthread['isdeleted'] AND $reportthread['visible'] == 1  AND $reportforum = fetch_foruminfo($reportthread['forumid']))
+						{
+							eval(fetch_email_phrases('phpkd_vblvb_staff_reports', $this->_registry->_vbulletin->options['languageid']));
+
+							$postman =& datamanager_init('Post', $this->_registry->_vbulletin, ERRTYPE_SILENT, 'threadpost');
+							$postman->set_info('thread', $reportthread);
+							$postman->set_info('forum', $reportforum);
+							$postman->set_info('is_automated', true);
+							$postman->set_info('parseurl', true);
+							$postman->set('threadid', $reportthread['threadid']);
+							$postman->set('userid', $reporter['userid']);
+							$postman->set('allowsmilie', true);
+							$postman->set('visible', true);
+							$postman->set('title', $subject);
+							$postman->set('pagetext', $message);
+
+							// not posting as the current user, IP won't make sense
+							$postman->set('ipaddress', '');
+
+							$postman->save();
+							unset($postman);
+						}
+						break;
+
+					// Staff Reports: New Thread
+					case 'thread':
+						if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_forumid'] > 0 AND $reportforum = fetch_foruminfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_forumid']))
+						{
+							// Start: Required for 'mark_thread_read', fix the following bug: http://forum.phpkd.net/project.php?issueid=76
+							if (!$db)
+							{
+								global $db;
+								$db = $this->_registry->_vbulletin->db;
+							}
+							// End: Required for 'mark_thread_read', fix the following bug: http://forum.phpkd.net/project.php?issueid=76
+
+							eval(fetch_email_phrases('phpkd_vblvb_staff_reports', $this->_registry->_vbulletin->options['languageid']));
+
+							$threadman =& datamanager_init('Thread_FirstPost', $this->_registry->_vbulletin, ERRTYPE_SILENT, 'threadpost');
+							$threadman->set_info('forum', $reportforum);
+							$threadman->set_info('is_automated', true);
+							$threadman->set_info('skip_moderator_email', true);
+							$threadman->set_info('mark_thread_read', true);
+							$threadman->set_info('parseurl', true);
+							$threadman->set('allowsmilie', true);
+							$threadman->set('userid', $reporter['userid']);
+							$threadman->setr_info('user', $reporter);
+							$threadman->set('title', $subject);
+							$threadman->set('pagetext', $message);
+							$threadman->set('forumid', $reportforum['forumid']);
+							$threadman->set('visible', 1);
+
+							// not posting as the current user, IP won't make sense
+							$threadman->set('ipaddress', '');
+
+							if ($rpthreadid = $threadman->save())
+							{
+								$threadman->set_info('skip_moderator_email', false);
+								$threadman->email_moderators(array('newthreademail', 'newpostemail'));
+
+								// check the permission of the posting user
+								$userperms = fetch_permissions($reportforum['forumid'], $reporter['userid'], $reporter);
+
+								if (($userperms & $this->_registry->_vbulletin->bf_ugp_forumpermissions['canview']) AND ($userperms & $this->_registry->_vbulletin->bf_ugp_forumpermissions['canviewthreads']) AND $reporter['autosubscribe'] != -1)
+								{
+									$this->_registry->_vbulletin->db->query_write("
+										INSERT IGNORE INTO " . TABLE_PREFIX . "subscribethread
+											(userid, threadid, emailupdate, folderid, canview)
+										VALUES
+											(" . $reporter['userid'] . ", $rpthreadid, $reporter[autosubscribe], 0, 1)
+									");
+								}
+							}
+
+							unset($threadman);
+						}
+						break;
+				}
+			}
+
+			// It's OK! Return true for success
+			return true;
+		}
+	}
+
+	/**
+	 * User Reports
+	 *
+	 * @param	array	Array of posts to send user reports for their authors!
+	 * @return	boolean	True on success
+	 */
+	public function user_reports($postids)
+	{
+		$this->_registry->initialize(array('user_reports'));
+
+		if (!empty($this->_registry->user_reports) AND $this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] AND $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']))
+		{
+			require_once(DIR . '/includes/functions_wysiwyg.php');
+			require_once(DIR . '/includes/class_bbcode_alt.php');
+
+			cache_permissions($reporter, false);
+			$datenow = vbdate($this->_registry->_vbulletin->options['dateformat'], TIMENOW);
+			$timenow = vbdate($this->_registry->_vbulletin->options['timeformat'], TIMENOW);
+			$plaintext_parser = new vB_BbCodeParser_PlainText($this->_registry->_vbulletin, fetch_tag_list());
+			$contactuslink = $this->_registry->_vbulletin->options['bburl'] . '/' . $this->_registry->_vbulletin->options['contactuslink'];
+			$bbtitle = $this->_registry->_vbulletin->options['bbtitle'];
+
+
+			foreach ($postids as $postid)
+			{
+				$postlog = $this->_registry->getPostlog($postid);
+				$formatedlog = convert_wysiwyg_html_to_bbcode($postlog['logrecord'], false, true);
+
+				foreach ($this->_registry->user_reports as $user_report)
+				{
+					switch ($user_report)
+					{
+						// User Reports: Private Messages
+						case 'pm':
+							$email_langid = ($postlog['languageid'] > 0 ? $postlog['languageid'] : $this->_registry->_vbulletin->options['languageid']);
+							eval(fetch_email_phrases('phpkd_vblvb_user_reports', $email_langid));
+
+							// create the DM to do error checking and insert the new PM
+							$pmdm =& datamanager_init('PM', $this->_registry->_vbulletin, ERRTYPE_SILENT);
+							$pmdm->set_info('is_automated', true);
+							$pmdm->set('fromuserid', $reporter['userid']);
+							$pmdm->set('fromusername', $reporter['username']);
+							$pmdm->set_info('receipt', false);
+							$pmdm->set_info('savecopy', false);
+							$pmdm->set('title', $subject);
+							$pmdm->set('message', $message);
+							$pmdm->set_recipients(unhtmlspecialchars($postlog['username']), $reporter['permissions']);
+							$pmdm->set('dateline', TIMENOW);
+							$pmdm->set('allowsmilie', true);
+
+							$pmdm->pre_save();
+							if (empty($pmdm->errors))
+							{
+								$pmdm->save();
+							}
+							unset($pmdm);
 							break;
 
-						// User Reports: Send E-Mails
-						case 'RPRTU_EMAIL':
-							if ($this->registry->options['enableemail'])
+						// User Reports: E-Mails
+						case 'email':
+							if ($this->_registry->_vbulletin->options['enableemail'])
 							{
-								foreach ($punished AS $userid => $user)
+								if (!empty($postlog['email']))
 								{
-									$plaintextlog = '';
-									foreach ($user AS $postid => $post)
-									{
-										$email = ($user['email'] ? $user['email'] : $post['email']);
-										$username = ($user['username'] ? $user['username'] : $post['username']);
-										$languageid = ($user['languageid'] ? $user['languageid'] : $post['languageid']);
-					
-										$plaintextlog .= '* ' . ($post['title'] ? $post['title'] : $post['threadtitle']) . ': ' . $this->registry->options['bburl'] . '/showpost.php?p=' . $postid . "\n";
-									}
-									$plaintextlog .= '';
-
-									$contactuslink = $this->registry->options['bburl'] . '/' . $this->registry->options['contactuslink'];
-									$bbtitle = $this->registry->options['bbtitle'];
-
-									if (!empty($email))
-									{
-										$email_langid = ($languageid > 0 ? $languageid : $this->registry->options['languageid']);
-										eval(fetch_email_phrases('phpkd_vblvb_rprtu_email', $email_langid));
-										vbmail($email, $subject, $message, true);
-									}
+									$email_langid = ($postlog['languageid'] > 0 ? $postlog['languageid'] : $this->_registry->_vbulletin->options['languageid']);
+									$plaintext_parser->set_parsing_language($email_langid);
+									eval(fetch_email_phrases('phpkd_vblvb_user_reports', $email_langid));
+									vbmail($postlog['email'], $subject, $plaintext_parser->parse($message), true);
 								}
 							}
 							break;
@@ -662,232 +656,557 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 				}
 			}
 
+			unset($plaintext_parser);
+
 			// It's OK! Return true for success
-			return TRUE;
+			return true;
 		}
 	}
 
-
 	/**
-	* Punish bad posts
-	*
-	* @param	array	Posts to be punished
-	*
-	* @return	boolean	True on success
-	*/
-	function punish($punished)
+	 * Punish dead posts/threads
+	 *
+	 * @param	array	Posts/Threads to be punished
+	 * @return	void
+	 */
+	public function punish($punished_content)
 	{
-		if (is_array($this->punishments) AND !empty($this->punishments))
+		$logpunish = array();
+		$this->_registry->initialize(array('thread_punishs', 'post_punishs'));
+
+		require_once(DIR . '/includes/functions_log_error.php');
+		require_once(DIR . '/includes/functions_databuild.php');
+
+
+		// Punish whole threads
+		if (!empty($this->_registry->thread_punishs) AND !empty($punished_content['threads']))
 		{
-			require_once(DIR . '/includes/phpkd/vblvb/functions_databuild.php');
+			$countingthreads = $modrecords = array();
 
-
-			foreach ($punished AS $userid => $user)
+			if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] AND $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']))
 			{
-				foreach ($user AS $postid => $post)
+				foreach (array_keys($punished_content['threads']) AS $threadid)
 				{
-					$logpunish = array();
-					$punishedpost   = fetch_postinfo($postid);
-					$punishedthread = fetch_threadinfo($post['threadid']);
-					$punishedforum  = fetch_foruminfo($post['forumid']);
-
-
-					foreach ($this->punishments AS $punishment)
+					foreach ($this->_registry->thread_punishs as $punishment)
 					{
-						switch ($punishment)
+						if ('move' != $punishment)
 						{
-							case 'PUNISH_MODERATE':
-								$logpunish['moderate'] = TRUE;
-								phpkd_vblvb_unapprove_thread($punishedthread['threadid'], $punishedforum['countposts'], FALSE, $punishedthread);
-								break;
-
-
-							case 'PUNISH_CLOSE':
-								$logpunish['close'] = TRUE;
-								$threadman =& datamanager_init('Thread', $this->registry, ERRTYPE_STANDARD, 'threadpost');
-								$threadman->set_info('skip_moderator_log', true);
-								$threadman->set_existing($punishedthread);
-								$threadman->set('open', 0);
-								$threadman->save();
-								unset($threadman);
-								break;
-
-
-							case 'PUNISH_MOVE':
-								if ($this->registry->options['phpkd_vblvb_punish_fid'] > 0)
-								{
-									if ($destforum = verify_id('forum', $this->registry->options['phpkd_vblvb_punish_fid'], FALSE, TRUE))
-									{
-										if ($destforum['cancontainthreads'] AND !$destforum['link'])
-										{
-											$logpunish['move'] = array('orifid' => $punishedforum['forumid'], 'destfid' => $destforum['forumid']);
-
-											// check to see if this thread is being returned to a forum it's already been in
-											// if a redirect exists already in the destination forum, remove it
-											if ($checkprevious = $this->registry->db->query_first("SELECT threadid FROM " . TABLE_PREFIX . "thread WHERE forumid = $destforum[forumid] AND open = 10"))
-											{
-												$old_redirect =& datamanager_init('Thread', $this->registry, ERRTYPE_ARRAY, 'threadpost');
-												$old_redirect->set_existing($checkprevious);
-												$old_redirect->delete(false, true, NULL, false);
-												unset($old_redirect);
-											}
-
-											// check to see if this thread is being moved to the same forum it's already in but allow copying to the same forum
-											if ($destforum['forumid'] == $punishedforum['forumid'])
-											{
-												continue;
-											}
-
-											// update forumid/notes and unstick to prevent abuse
-											$threadman =& datamanager_init('Thread', $this->registry, ERRTYPE_STANDARD, 'threadpost');
-											$threadman->set_info('skip_moderator_log', true);
-											$threadman->set_existing($punishedthread);
-											$threadman->set('title', $punishedthread['title'], true, false);
-											$threadman->set('forumid', $destforum['forumid']);
-											$threadman->save();
-											unset($threadman);
-
-											// kill the cache for the old thread
-											phpkd_vblvb_delete_post_cache_threads(array($punishedthread['threadid']));
-
-											// Update Post Count if we move from a counting forum to a non counting or vice-versa..
-											// Source Dest  Visible Thread    Hidden Thread
-											// Yes    Yes   ~           	  ~
-											// Yes    No    -visible          ~
-											// No     Yes   +visible          ~
-											// No     No    ~                 ~
-											if ($punishedthread['visible'] AND (($punishedforum['countposts'] AND !$destforum['countposts']) OR (!$punishedforum['countposts'] AND $destforum['countposts'])))
-											{
-												$uposts = $this->registry->db->query_read("
-													SELECT userid
-													FROM " . TABLE_PREFIX . "post
-													WHERE threadid = $punishedthread[threadid]
-														AND	userid > 0
-														AND visible = 1
-												");
-
-												$userbyuserid = array();
-												while ($upost = $this->registry->db->fetch_array($uposts))
-												{
-													if (!isset($userbyuserid["$upost[userid]"]))
-													{
-														$userbyuserid["$upost[userid]"] = 1;
-													}
-													else
-													{
-														$userbyuserid["$upost[userid]"]++;
-													}
-												}
-
-												if (!empty($userbyuserid))
-												{
-													$userbypostcount = array();
-													foreach ($userbyuserid AS $postuserid => $postcount)
-													{
-														$alluserids .= ",$postuserid";
-														$userbypostcount["$postcount"] .= ",$postuserid";
-													}
-
-													foreach ($userbypostcount AS $postcount => $userids)
-													{
-														$casesql .= " WHEN userid IN (0$userids) THEN $postcount";
-													}
-
-													$operator = ($destforum['countposts'] ? '+' : '-');
-
-													$this->registry->db->query_write("
-														UPDATE " . TABLE_PREFIX . "user
-														SET posts = CAST(posts AS SIGNED) $operator
-															CASE
-																$casesql
-																ELSE 0
-															END
-														WHERE userid IN (0$alluserids)
-													");
-												}
-
-												unset($userbyuserid, $userbypostcount, $operator);
-											}
-
-											phpkd_vblvb_build_forum_counters($punishedforum['forumid']);
-											if ($punishedforum['forumid'] != $destforum['forumid'])
-											{
-												phpkd_vblvb_build_forum_counters($destforum['forumid']);
-											}
-
-											// Update canview status of thread subscriptions
-											phpkd_vblvb_update_subscriptions(array('threadids' => array($punishedthread['threadid'])));
-										}
-									}
-								}
-								break;
-
-
-							// TODO: Temporary disabled!
-							case 'PUNISH_DELETE':
-								$logpunish['delete'] = TRUE;
-								$reporter = fetch_userinfo($this->registry->options['phpkd_vblvb_reporter']);
-								$delinfo = array('userid' => $reporter['userid'], 'username' => $reporter['username'], 'reason' => $this->vbphrase['phpkd_vblvb_punish_reason'], 'keepattachments' => 1);
-								phpkd_vblvb_delete_thread($punishedthread['threadid'], $punishedforum['countposts'], FALSE, $delinfo, FALSE, $punishedthread);
-								break;
+							$logpunish['threads'][$threadid][$punishment] = true;
+							$logpunish['threads'][$threadid]['dateline'] = TIMENOW;
 						}
 					}
 
+					$modlog[] = array(
+						'userid'   =>& $reporter['userid'],
+						'forumid'  =>& $punished_content['threads']["$threadid"]['forumid'],
+						'threadid' => $threadid,
+					);
+				}
 
-					// Record Punishment Actions In Details (For Future use when editing)
-					$logpunish['dateline'] = TIMENOW;
-					$this->registry->db->query_write("
-						UPDATE " . TABLE_PREFIX . "post SET
-							phpkd_vblvb = '" . serialize($logpunish) . "'
-						WHERE postid = $postid
-							AND userid = $userid
-					");
+				$delinfo = array(
+					'userid'          => $reporter['userid'],
+					'username'        => $reporter['username'],
+					'reason'          => $this->_registry->_vbphrase['phpkd_vblvb_punish_reason'],
+					'keepattachments' => 1
+				);
+			}
+
+			foreach ($this->_registry->thread_punishs as $punishment)
+			{
+				switch ($punishment)
+				{
+					case 'close':
+						$this->_registry->_vbulletin->db->query_write("
+							UPDATE " . TABLE_PREFIX . "thread
+							SET open = 0
+							WHERE threadid IN(" . implode(',', array_keys($punished_content['threads'])) . ")
+						");
+
+						if (!empty($modlog))
+						{
+							log_moderator_action($modlog, 'closed_thread');
+						}
+						break;
+
+					case 'unstick':
+						$this->_registry->_vbulletin->db->query_write("
+							UPDATE " . TABLE_PREFIX . "thread
+							SET sticky = 0
+							WHERE threadid IN(" . implode(',', array_keys($punished_content['threads'])) . ")
+						");
+
+						if (!empty($modlog))
+						{
+							log_moderator_action($modlog, 'unstuck_thread');
+						}
+						break;
+
+					case 'moderate':
+						// Set threads hidden
+						$this->_registry->_vbulletin->db->query_write("
+							UPDATE " . TABLE_PREFIX . "thread
+							SET visible = 0
+							WHERE threadid IN(" . implode(',', array_keys($punished_content['threads'])) . ")
+						");
+
+						// Set thread redirects hidden
+						$this->_registry->_vbulletin->db->query_write("
+							UPDATE " . TABLE_PREFIX . "thread
+							SET visible = 0
+							WHERE open = 10 AND pollid IN(" . implode(',', array_keys($punished_content['threads'])) . ")
+						");
+
+						foreach ($punished_content['threads'] as $threadid => $thread)
+						{
+							// this thread is visible AND in a counting forum
+							if ($thread['visible'] AND $thread['replycount'])
+							{
+								$countingthreads[] = $threadid;
+							}
+
+							$modrecords[] = "($threadid, 'thread', " . TIMENOW . ")";
+						}
+
+						if (!empty($countingthreads))
+						{
+							// Update post count for visible posts
+							$userbyuserid = array();
+							$posts = $this->_registry->_vbulletin->db->query_read("
+								SELECT userid
+								FROM " . TABLE_PREFIX . "post
+								WHERE threadid IN(" . implode(',', $countingthreads) . ")
+									AND visible = 1
+									AND userid > 0
+							");
+							while ($post = $this->_registry->_vbulletin->db->fetch_array($posts))
+							{
+								if (!isset($userbyuserid["$post[userid]"]))
+								{
+									$userbyuserid["$post[userid]"] = -1;
+								}
+								else
+								{
+									$userbyuserid["$post[userid]"]--;
+								}
+							}
+
+							if (!empty($userbyuserid))
+							{
+								$userbypostcount = array();
+								$alluserids = '';
+
+								foreach ($userbyuserid AS $postuserid => $postcount)
+								{
+									$alluserids .= ",$postuserid";
+									$userbypostcount["$postcount"] .= ",$postuserid";
+								}
+
+								foreach($userbypostcount AS $postcount => $userids)
+								{
+									$casesql .= " WHEN userid IN (0$userids) THEN $postcount\n";
+								}
+
+								$this->_registry->_vbulletin->db->query_write("
+									UPDATE " . TABLE_PREFIX . "user
+									SET posts = CAST(posts AS SIGNED) +
+									CASE
+										$casesql
+										ELSE 0
+									END
+									WHERE userid IN (0$alluserids)
+								");
+							}
+						}
+
+						if (!empty($modrecords))
+						{
+							// Insert Moderation Records
+							$this->_registry->_vbulletin->db->query_write("
+								REPLACE INTO " . TABLE_PREFIX . "moderation
+								(primaryid, type, dateline)
+								VALUES
+								" . implode(',', $modrecords) . "
+							");
+						}
+
+						// Clean out deletionlog
+						$this->_registry->_vbulletin->db->query_write("
+							DELETE FROM " . TABLE_PREFIX . "deletionlog
+							WHERE primaryid IN(" . implode(',', array_keys($punished_content['threads'])) . ")
+								AND type = 'thread'
+						");
+
+						foreach ($punished_content['forums'] as $forumid)
+						{
+							build_forum_counters($forumid);
+						}
+
+						if (!empty($modlog))
+						{
+							log_moderator_action($modlog, 'unapproved_thread');
+						}
+						break;
+
+					case 'delete':
+						foreach ($punished_content['threads'] as $threadid => $thread)
+						{
+							$replycount = $this->_registry->_vbulletin->forumcache["$thread[forumid]"]['options'] & $this->_registry->_vbulletin->bf_misc_forumoptions['countposts'];
+
+							if (2 == $thread['visible'])
+							{
+								# Thread is already soft deleted
+								continue;
+							}
+
+							$threadman =& datamanager_init('Thread', $this->_registry->_vbulletin, ERRTYPE_SILENT, 'threadpost');
+							$threadman->set_existing($thread);
+
+							// Redirect
+							if (10 == $thread['open'])
+							{
+								$threadman->delete(false, true, ($delinfo ? $delinfo : null), ($delinfo ? true : false));
+							}
+							else
+							{
+								$threadman->delete($replycount, false, ($delinfo ? $delinfo : null), ($delinfo ? true : false));
+							}
+
+							unset($threadman);
+						}
+
+						foreach ($punished_content['forums'] as $forumid)
+						{
+							build_forum_counters($forumid);
+						}
+						break;
+
+					case 'move':
+						// check whether destination forum can contain posts
+						if ($destforuminfo = verify_id('forum', $this->_registry->_vbulletin->phpkd_vblvb['punishment_forumid'], false, true) AND $destforuminfo['cancontainthreads'] AND !$destforuminfo['link'])
+						{
+							$threadarray = $countingthreads = array();
+
+							foreach ($punished_content['threads'] as $threadid => $thread)
+							{
+								$logpunish['threads'][$threadid][$punishment] = array('orifid' => $thread['forumid'], 'destfid' => $destforuminfo['forumid']);
+
+								// Ignore all threads that are already in the destination forum
+								if ($thread['forumid'] != $destforuminfo['forumid'])
+								{
+									$threadarray["$thread[threadid]"] = $thread;
+
+									if ($thread['visible'])
+									{
+										$countingthreads[] = $threadid;
+									}
+								}
+							}
+
+							if (!empty($threadarray))
+							{
+								// Check to see if these threads are being returned to a forum they've already been in. If redirects exist in the destination forum, remove them.
+								$checkprevious = $this->_registry->_vbulletin->db->query_read("
+									SELECT threadid
+									FROM " . TABLE_PREFIX . "thread
+									WHERE forumid = $destforuminfo[forumid]
+										AND open = 10
+										AND pollid IN(" . implode(',', array_keys($threadarray)) . ")
+								");
+
+								while ($check = $this->_registry->_vbulletin->db->fetch_array($checkprevious))
+								{
+									$old_redirect =& datamanager_init('Thread', $this->_registry->_vbulletin, ERRTYPE_SILENT, 'threadpost');
+									$old_redirect->set_existing($check);
+									$old_redirect->delete(false, true, NULL, false);
+									unset($old_redirect);
+								}
+
+								// Move threads
+								$this->_registry->_vbulletin->db->query_write("
+									UPDATE " . TABLE_PREFIX . "thread
+									SET forumid = $destforuminfo[forumid]
+									WHERE threadid IN(" . implode(',', array_keys($threadarray)) . ")
+								");
+
+								require_once(DIR . '/includes/functions_prefix.php');
+								remove_invalid_prefixes(array_keys($threadarray), $destforuminfo['forumid']);
+
+								// Update canview status of thread subscriptions
+								update_subscriptions(array('threadids' => array_keys($threadarray)));
+
+								// Kill the post cache for these threads
+								delete_post_cache_threads(array_keys($threadarray));
 
 
-					unset($punishedpost, $punishedthread, $punishedforum);
+								if (!empty($countingthreads))
+								{
+									$userbyuserid = array();
+
+									$posts = $this->_registry->_vbulletin->db->query_read("
+										SELECT post.userid, post.threadid, forum.replycount
+										FROM " . TABLE_PREFIX . "post AS post
+										LEFT JOIN " . TABLE_PREFIX . "thread AS thread ON (post.threadid = thread.threadid)
+										LEFT JOIN " . TABLE_PREFIX . "forum AS forum ON (thread.forumid = forum.forumid)
+										WHERE post.threadid IN(" . implode(',', $countingthreads) . ")
+											AND post.visible = 1
+											AND	post.userid > 0
+									");
+
+									while ($post = $this->_registry->_vbulletin->db->fetch_array($posts))
+									{
+										if ($post['replycount'] AND !$destforuminfo['replycount'])
+										{
+											// Take away a post
+											if (!isset($userbyuserid["$post[userid]"]))
+											{
+												$userbyuserid["$post[userid]"] = -1;
+											}
+											else
+											{
+												$userbyuserid["$post[userid]"]--;
+											}
+										}
+										else if (!$post['replycount'] AND $destforuminfo['replycount'])
+										{
+											// Add a post
+											if (!isset($userbyuserid["$post[userid]"]))
+											{
+												$userbyuserid["$post[userid]"] = 1;
+											}
+											else
+											{
+												$userbyuserid["$post[userid]"]++;
+											}
+										}
+									}
+
+									if (!empty($userbyuserid))
+									{
+										$alluserids = '';
+										$userbypostcount = array();
+
+										foreach ($userbyuserid AS $postuserid => $postcount)
+										{
+											$alluserids .= ",$postuserid";
+											$userbypostcount["$postcount"] .= ",$postuserid";
+										}
+
+										foreach ($userbypostcount AS $postcount => $userids)
+										{
+											$casesql .= " WHEN userid IN (0$userids) THEN $postcount";
+										}
+
+										$this->_registry->_vbulletin->db->query_write("
+											UPDATE " . TABLE_PREFIX . "user
+											SET posts = CAST(posts AS SIGNED) +
+											CASE
+												$casesql
+												ELSE 0
+											END
+											WHERE userid IN (0$alluserids)
+										");
+									}
+								}
+
+								// Search index maintenance
+								require_once(DIR . '/vb/search/indexcontroller/queue.php');
+								foreach($threadarray AS $threadid => $thread)
+								{
+									vb_Search_Indexcontroller_Queue::indexQueue('vBForum', 'Post', 'thread_data_change', $threadid);
+								}
+
+								foreach($punished_content['forums'] as $forumid)
+								{
+									build_forum_counters($forumid);
+								}
+
+								build_forum_counters($destforuminfo['forumid']);
+
+
+								foreach ($threadarray as $threadid => $thread)
+								{
+									$modlog[] = array(
+										'userid'   =>& $reporter['userid'],
+										'forumid'  =>& $thread['forumid'],
+										'threadid' => $threadid,
+									);
+								}
+
+								log_moderator_action($modlog, 'thread_moved_to_x', $destforuminfo['title']);
+							}
+						}
+						break;
 				}
 			}
 		}
+
+
+		// Punish individual posts
+		if (!empty($this->_registry->post_punishs) AND !empty($punished_content['posts']))
+		{
+			$firstpost = array();
+
+			if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] AND $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']))
+			{
+				foreach (array_keys($punished_content['posts']) AS $postid)
+				{
+					foreach ($this->_registry->post_punishs as $punishment)
+					{
+						$logpunish['posts'][$postid][$punishment] = true;
+						$logpunish['posts'][$postid]['dateline'] = TIMENOW;
+					}
+				}
+
+				$delinfo = array(
+					'userid'          => $reporter['userid'],
+					'username'        => $reporter['username'],
+					'reason'          => $this->_registry->_vbphrase['phpkd_vblvb_punish_reason'],
+					'keepattachments' => 1
+				);
+			}
+
+			foreach ($punished_content['posts'] as $postid => $post)
+			{
+				if ($post['firstpostid'] == $postid AND $post['visible'] == 1)
+				{
+					// Case 'moderate': unapproving a thread so do not decremement the counters of any other posts in this thread
+					// Case 'delete': deleting a thread so do not decremement the counters of any other posts in this thread
+					$firstpost["$post[threadid]"] = true;
+				}
+				else if (!empty($firstpost["$post[threadid]"]))
+				{
+					$punished_content['posts']["$postid"]['skippostcount'] = true;
+				}
+			}
+
+			foreach ($this->_registry->post_punishs as $punishment)
+			{
+				switch ($punishment)
+				{
+					case 'moderate':
+						foreach ($punished_content['posts'] as $postid => $post)
+						{
+							$threadinfo = array(
+								'threadid'    => $post['threadid'],
+								'forumid'     => $post['forumid'],
+								'visible'     => $post['visible'],
+								'firstpostid' => $post['firstpostid']
+							);
+
+							// Can't send $thread without considering that thread_visible may change if we approve the first post of a thread
+							unapprove_post($postid, ($post['replycount'] AND !$post['skippostcount']), true, $post, $threadinfo, false);
+						}
+						break;
+
+					case 'delete':
+						foreach ($punished_content['posts'] AS $postid => $post)
+						{
+							$postman =& datamanager_init('Post', $this->_registry->_vbulletin, ERRTYPE_SILENT, 'threadpost');
+							$postman->set_existing($post);
+							$postman->delete(($post['replycount'] AND !$post['skippostcount']), $post['threadid'], false, $delinfo);
+							unset($postman);
+						}
+						break;
+				}
+			}
+
+			foreach (array_keys($punished_content['threads']) AS $threadid)
+			{
+				build_thread_counters($threadid);
+			}
+
+			foreach (array_keys($punished_content['forums']) AS $forumid)
+			{
+				build_forum_counters($forumid);
+			}
+		}
+
+
+		if (!empty($logpunish))
+		{
+			$update_lastpunish_thread = $update_lastpunish_post = '';
+
+			foreach ($logpunish as $typeid => $type)
+			{
+				switch ($typeid)
+				{
+					case 'threads':
+						foreach ($type as $threadid => $thread)
+						{
+							$update_lastpunish_thread .= ' WHEN ' . $threadid . ' THEN \'' . serialize($thread) . '\'';
+						}
+						break;
+
+					case 'posts':
+						foreach ($type as $postid => $post)
+						{
+							$update_lastpunish_post .= ' WHEN ' . $postid . ' THEN \'' . serialize($post) . '\'';
+						}
+						break;
+				}
+			}
+		}
+
+
+		// Record punishment actions in details (for future use when editing)
+		if (!empty($logpunish['threads']))
+		{
+			$this->_registry->_vbulletin->db->query_write("UPDATE " . TABLE_PREFIX . "thread SET
+				phpkd_vblvb_lastpunish = CASE threadid
+				$update_lastpunish_thread ELSE phpkd_vblvb_lastpunish END
+				WHERE threadid IN(" . implode(',', array_keys($punished_content['threads'])) . ")
+			");
+		}
+
+		// Record punishment actions in details (for future use when editing)
+		if (!empty($logpunish['posts']))
+		{
+			$this->_registry->_vbulletin->db->query_write("UPDATE " . TABLE_PREFIX . "post SET
+				phpkd_vblvb_lastpunish = CASE postid
+				$update_lastpunish_post ELSE phpkd_vblvb_lastpunish END
+				WHERE postid IN(" . implode(',', array_keys($punished_content['posts'])) . ")
+			");
+		}
 	}
 
-
 	/**
-	* Get Staff Members
-	*
-	* @return	array	Staff members to be notified
-	*/
-	function fetch_staff()
+	 * Get Staff Members
+	 *
+	 * @return	array	Staff members to be notified
+	 */
+	public function fetch_staff()
 	{
 		$mods = array();
-		if ($moderators = $this->registry->db->query_read("
+
+		if ($moderators = $this->_registry->_vbulletin->db->query_read("
 			SELECT DISTINCT user.email, user.languageid, user.userid, user.username
 			FROM " . TABLE_PREFIX . "moderator AS moderator
 			INNER JOIN " . TABLE_PREFIX . "user AS user ON (user.userid = moderator.userid)
-			WHERE moderator.permissions & " . ($this->registry->bf_misc_moderatorpermissions['canbanusers']) . "
+			WHERE moderator.permissions & " . ($this->_registry->_vbulletin->bf_misc_moderatorpermissions['canbanusers']) . "
 				AND moderator.forumid <> -1
 		"))
 		{
-			while ($moderator = $this->registry->db->fetch_array($moderators))
+			while ($moderator = $this->_registry->_vbulletin->db->fetch_array($moderators))
 			{
 				$mods["$moderator[userid]"] = $moderator;
 			}
 		}
 
-		if (empty($mods) OR $this->registry->options['phpkd_vblvb_rprts_messaging'] == 1)
+		if (empty($mods) OR $this->_registry->_vbulletin->phpkd_vblvb['reporting_staff_reports_messaging'] == 1)
 		{
-			$moderators = $this->registry->db->query_read("
+			$moderators = $this->_registry->_vbulletin->db->query_read("
 				SELECT DISTINCT user.email, user.languageid, user.username, user.userid
 				FROM " . TABLE_PREFIX . "usergroup AS usergroup
 				INNER JOIN " . TABLE_PREFIX . "user AS user ON
 					(user.usergroupid = usergroup.usergroupid OR FIND_IN_SET(usergroup.usergroupid, user.membergroupids))
 				WHERE usergroup.adminpermissions > 0
-					AND (usergroup.adminpermissions & " . $this->registry->bf_ugp_adminpermissions['ismoderator'] . ")
+					AND (usergroup.adminpermissions & " . $this->_registry->_vbulletin->bf_ugp_adminpermissions['ismoderator'] . ")
 					" . (!empty($mods) ? "AND userid NOT IN (" . implode(',', array_keys($mods)) . ")" : "") . "
 			");
 
 			if ($moderators)
 			{
-				while ($moderator = $this->registry->db->fetch_array($moderators))
+				while ($moderator = $this->_registry->_vbulletin->db->fetch_array($moderators))
 				{
 					$mods["$moderator[userid]"] = $moderator;
 				}
@@ -901,7 +1220,7 @@ class PHPKD_VBLVB_DM extends PHPKD_VBLVB
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.137
+|| # Version: 4.0.200
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
