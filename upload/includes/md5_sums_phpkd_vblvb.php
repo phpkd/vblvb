@@ -28,8 +28,6 @@ $md5_sums = array(
 		'class_install.php'        => 'c6bae854db816df452ee83e09857602a',
 		'cron.php'                 => 'eb73364c0abab5c3074393465dfe3511',
 		'functions_databuild.php'  => 'eb73364c0abab5c3074393465dfe3511',
-		'hosts.xml'                => 'eb73364c0abab5c3074393465dfe3511',
-		'settings.xml'             => 'eb73364c0abab5c3074393465dfe3511',
 	),
 	'/includes/xml' => array(
 		'bitfield_phpkd_vblvb.xml' => 'f7198b729a84d132ddca91c6e2835085',
