@@ -85,13 +85,15 @@ class PHPKD_VBLVB_Install
 		// ######################################################################
 
 		// Import debug data in appropriate field
-		$phpkdinfo = $info;
-		unset($phpkdinfo['description']);
-		$phpkdinfo['author'] = trim(substr(substr('$Author$', 8), 0, -1));
-		$phpkdinfo['vendor'] = trim(substr(substr('$Vendor: PHP KingDom $', 8), 0, -1));
+		$phpkdinfo['title'] = $info['title'];
+		$phpkdinfo['version'] = $info['version'];
 		$phpkdinfo['revision'] = trim(substr(substr('$Revision$', 10), 0, -1));
 		$phpkdinfo['released'] = trim(substr(substr('$Date$', 6), 0, -1));
 		$phpkdinfo['installdateline'] = TIMENOW;
+		$phpkdinfo['author'] = trim(substr(substr('$Author$', 8), 0, -1));
+		$phpkdinfo['vendor'] = trim(substr(substr('$Vendor: PHP KingDom $', 8), 0, -1));
+		$phpkdinfo['url'] = $info['url'];
+		$phpkdinfo['versioncheckurl'] = $info['versioncheckurl'];
 
 		if ($this->_vbulletin->options['phpkd_commercial40_data'])
 		{
