@@ -57,6 +57,7 @@ Features:
 	* Ability to check any of the following protocols (HTTP / HTTPS / FTP).
 	* Depends on & uses default vBulletin techniques with full compatibility.
 	* Board Load Zero Queries, queries executed only when the scheduled task run.
+	* Ability to set administrator permissions, so certain admins can control the product & others can't.
 	* Ability to exclude threads/posts with certain modes from being checked [opened/closed/moderated/sticky/deleted].
 	* Ability to scan links within all tags or within certain tags such as [ CODE ] & [ QIOTE ], and yes supports [ HIDE ] & [ CHARGE ].
 	* Auto generate pretty nice reports for instant/later review, these reports can be displayed in real time while running the scheduled task, sent as a private/email message, post as a thread/reply.
@@ -502,6 +503,9 @@ Upgrade Procedure:
 
 Controls:
 ~~~~~~~~~~
+     * Administrator Permissions
+	vBulletin AdminCP » Usergroups » Administrator Permissions » Select Administrator » [Edit Permissions] » Can Administer Link Verifier Bot
+
      * AdminCP Settings:
 	vBulletin AdminCP » Link Verifier Bot » Settings » General Settings
 	vBulletin AdminCP » Link Verifier Bot » Settings » Reporting Settings
