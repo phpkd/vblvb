@@ -69,7 +69,7 @@ Features:
      |- Specific Features:-
 	* General Settings:
 	     o Product Active
-	          - Choose whether "Link Verifier Bot" is active or not (global switch).
+	          - Choose whether "vB Link Verifier Bot" is active or not (global switch).
 
 	     o Include/Exclude Users
 	          - You can specify certain users to check their posts against dead links, or to exclude others' posts from being checked at all.
@@ -289,7 +289,7 @@ Features:
 	          - Checked links can be colored according to their reported status, select your preferred colors from the color picker or write down the hexadecimal code for each status.
 
 	     o Post Flag: Last Check Note
-	          - Last check note can be displayed within each post to determine whether or not it has been checked before by "Link Verifier Bot" and when, simply select in which forums' posts this note should be displayed. That note will appear in posts within those selected forums only. Note that you can select multiple options by holding "CTRL" key while selecting.
+	          - Last check note can be displayed within each post to determine whether or not it has been checked before by "vB Link Verifier Bot" and when, simply select in which forums' posts this note should be displayed. That note will appear in posts within those selected forums only. Note that you can select multiple options by holding "CTRL" key while selecting.
 
 
 	* Link Directory Settings:
@@ -477,7 +477,7 @@ Installation Procedure:
 
      3. Get you license key & enter it in your product's settings:
 	Get from: Customer Area » My Packages » vB Link Verifier Bot 'Ultimate' » Licenses » License Key
-	Enter Here: AdminCP » Link Verifier Bot » Settings » General Settings » License Key
+	Enter Here: AdminCP » vB Link Verifier Bot » Settings » General Settings » License Key
 
      4. Activate & Configure product's settings as preferred.
 
@@ -504,23 +504,23 @@ Upgrade Procedure:
 Controls:
 ~~~~~~~~~~
      * Administrator Permissions
-	vBulletin AdminCP » Usergroups » Administrator Permissions » Select Administrator » [Edit Permissions] » Can Administer Link Verifier Bot
+	vBulletin AdminCP » Usergroups » Administrator Permissions » Select Administrator » [Edit Permissions] » Can Administer vB Link Verifier Bot
 
      * AdminCP Settings:
-	vBulletin AdminCP » Link Verifier Bot » Settings » General Settings
-	vBulletin AdminCP » Link Verifier Bot » Settings » Reporting Settings
-	vBulletin AdminCP » Link Verifier Bot » Settings » Punishment Settings
-	vBulletin AdminCP » Link Verifier Bot » Settings » Look & Feel Settings
-	vBulletin AdminCP » Link Verifier Bot » Settings » Link Directory Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » General Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » Reporting Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » Punishment Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » Look & Feel Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » Link Directory Settings
 
      * Edit Scheduled Task:
-	vBulletin AdminCP » Scheduled Tasks » Scheduled Task Manager » PHPKD - Link Verifier Bot 'Ultimate'
+	vBulletin AdminCP » Scheduled Tasks » Scheduled Task Manager » PHPKD - vB Link Verifier Bot 'Ultimate'
 
      * Run Scheduled Task:
-	vBulletin AdminCP » Link Verifier Bot » Run Scheduled Task
+	vBulletin AdminCP » vB Link Verifier Bot » Run Scheduled Task
 
      * Log Viewer:
-	vBulletin AdminCP » Link Verifier Bot » Log Records
+	vBulletin AdminCP » vB Link Verifier Bot » Log Records
 
 
 License:

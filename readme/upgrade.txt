@@ -32,7 +32,7 @@ PHPKD - vB Link Verifier Bot 'Ultimate' -- Upgrade Procedure:
 
      3. Get you license key & enter it in your product's settings:
 	Get from: Customer Area » My Packages » vB Link Verifier Bot 'Ultimate' » Licenses » License Key
-	Enter Here: AdminCP » Link Verifier Bot » Settings » General Settings » License Key
+	Enter Here: AdminCP » vB Link Verifier Bot » Settings » General Settings » License Key
 
      4. Activate & Configure product's settings as preferred.
 

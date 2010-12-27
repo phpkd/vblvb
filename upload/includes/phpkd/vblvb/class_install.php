@@ -75,7 +75,7 @@ class PHPKD_VBLVB_Install
 		if (!file_exists(DIR . '/includes/phpkd/vblvb/class_core.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_init.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dm.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dml.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_hooks.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/cron.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/functions_databuild.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/adminfunctions.php') OR !file_exists(DIR . '/includes/xml/bitfield_phpkd_vblvb.xml') OR !file_exists(DIR . '/includes/xml/cpnav_phpkd_vblvb.xml'))
 		{
 			print_dots_stop();
-			print_cp_message('Please upload the files that came with "PHPKD - Link Verifier Bot" product before installing or upgrading!');
+			print_cp_message('Please upload the files that came with "PHPKD - vB Link Verifier Bot" product before installing or upgrading!');
 		}
 
 		$this->_vbulletin->db->hide_errors();
