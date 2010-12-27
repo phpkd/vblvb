@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.0.200 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.201 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -120,7 +120,7 @@ class PHPKD_VBLVB_DML
 			$header = "POST " . ($http_dir.$http_file) . " HTTP/1.0\r\n";
 			$header .= "Host: " . $http_host . "\r\n";
 			$header .= "Content-type: application/x-www-form-urlencoded\r\n";
-			$header .= "User-Agent: PHPKD - vB Link Verifier Bot 4.0.200\r\n";
+			$header .= "User-Agent: PHPKD - vB Link Verifier Bot " . PHPKD_VBLVB_VERSION . "\r\n";
 			$header .= "Content-length: " . @strlen($querystring) . "\r\n";
 			$header .= "Connection: close\r\n\r\n";
 			$header .= $querystring;
@@ -324,7 +324,7 @@ class PHPKD_VBLVB_DML
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.0.200
+|| # Version: 4.1.201
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
