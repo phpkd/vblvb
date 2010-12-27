@@ -7,7 +7,7 @@
 	<url>http://tools.phpkd.net/en/producthelp/url/vblvb/</url>
 	<versioncheckurl>http://tools.phpkd.net/en/producthelp/version/vblvb/</versioncheckurl>
 	<dependencies>
-		<dependency dependencytype="vbulletin" minversion="4.0.0" maxversion="4.0.99" />
+		<dependency dependencytype="vbulletin" minversion="4.0.0" maxversion="4.1.99" />
 	</dependencies>
 	<codes>
 		<code version="*">
