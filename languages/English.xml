@@ -5,8 +5,8 @@
 		<skippedgroup>cphelptext</skippedgroup>
 	</skippedgroups>
 	<phrasetype name="Control Panel Home Pages" fieldname="cphome">
-		<phrase name="phpkd_vblvb_nav" date="1293449707" username="PHPKD" version="4.0.211"><![CDATA[vB Link Verifier Bot]]></phrase>
-		<phrase name="phpkd_vblvb_nav_hosts" date="1293449595" username="PHPKD" version="4.0.211"><![CDATA[Modules]]></phrase>
+		<phrase name="phpkd_vblvb_nav" date="1293449707" username="PHPKD" version="4.1.201"><![CDATA[vB Link Verifier Bot]]></phrase>
+		<phrase name="phpkd_vblvb_nav_hosts" date="1293449595" username="PHPKD" version="4.1.201"><![CDATA[Modules]]></phrase>
 		<phrase name="phpkd_vblvb_nav_log" date="1266129757" username="PHPKD" version="4.0.130"><![CDATA[Log Records]]></phrase>
 		<phrase name="phpkd_vblvb_nav_run" date="1277761255" username="PHPKD" version="4.0.200"><![CDATA[Run Scheduled Task]]></phrase>
 		<phrase name="phpkd_vblvb_nav_settings" date="1266129734" username="PHPKD" version="4.0.130"><![CDATA[Settings]]></phrase>
@@ -86,12 +86,12 @@
 		<phrase name="phpkd_vblvb_user_reports_reply" date="1277773104" username="PHPKD" version="4.0.200"><![CDATA[Post New Reply]]></phrase>
 	</phrasetype>
 	<phrasetype name="Permissions" fieldname="cppermission">
-		<phrase name="can_administer_phpkd_vblvb" date="1293449718" username="PHPKD" version="4.0.211"><![CDATA[Can Administer "PHPKD - vB Link Verifier Bot"]]></phrase>
+		<phrase name="can_administer_phpkd_vblvb" date="1293449718" username="PHPKD" version="4.1.201"><![CDATA[Can Administer "PHPKD - vB Link Verifier Bot"]]></phrase>
 	</phrasetype>
 	<phrasetype name="Scheduled Tasks" fieldname="cron">
-		<phrase name="task_phpkd_vblvb_desc" date="1293450045" username="PHPKD" version="4.0.211"><![CDATA[This script check posts against dead links.]]></phrase>
-		<phrase name="task_phpkd_vblvb_log" date="1293450045" username="PHPKD" version="4.0.211"><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' Executed!]]></phrase>
-		<phrase name="task_phpkd_vblvb_title" date="1293450045" username="PHPKD" version="4.0.211"><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate']]></phrase>
+		<phrase name="task_phpkd_vblvb_desc" date="1293450045" username="PHPKD" version="4.1.201"><![CDATA[This script check posts against dead links.]]></phrase>
+		<phrase name="task_phpkd_vblvb_log" date="1293450045" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' Executed!]]></phrase>
+		<phrase name="task_phpkd_vblvb_title" date="1293450045" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate']]></phrase>
 	</phrasetype>
 	<phrasetype name="Email Body Text" fieldname="emailbody">
 		<phrase name="phpkd_vblvb_staff_reports" date="1286579895" username="PHPKD" version="4.0.200"><![CDATA[$formatedlog]]></phrase>
@@ -122,11 +122,11 @@ $bbtitle]]></phrase>
 </ol>]]></phrase>
 		<phrase name="phpkd_vblvb_developers_only" date="1277049500" username="PHPKD" version="4.0.200"><![CDATA[Sorry, this feature is available for official developers only.]]></phrase>
 		<phrase name="phpkd_vblvb_host_deleted_successfully" date="1278005341" username="PHPKD" version="4.0.200"><![CDATA[Host deleted successfully!]]></phrase>
-		<phrase name="phpkd_vblvb_inactive" date="1293449751" username="PHPKD" version="4.0.211"><![CDATA[Sorry, the product "PHPKD - vB Link Verifier Bot" is currently disabled! <a href="phpkd_vblvb.php?do=options&dogroup=general">Please activate the product first then run this scheduled task again.</a>]]></phrase>
-		<phrase name="phpkd_vblvb_initialization_failed_bbcodes" date="1293449775" username="PHPKD" version="4.0.211"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any BBCodes to be checked. Please make sure to choose at least one BBCode to be checked and try again.]]></phrase>
-		<phrase name="phpkd_vblvb_initialization_failed_file" date="1293449783" username="PHPKD" version="4.0.211"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. Please make sure that the following file already uploaded and is readable "./includes/phpkd/vblvb/{1}".]]></phrase>
-		<phrase name="phpkd_vblvb_initialization_failed_hosts" date="1293449793" username="PHPKD" version="4.0.211"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any hosts to be checked. Please make sure to choose at least one host to be checked and try again.]]></phrase>
-		<phrase name="phpkd_vblvb_initialization_failed_protocols" date="1293449803" username="PHPKD" version="4.0.211"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any protocol to be checked. Please make sure to choose at least one protocol to be checked and try again.]]></phrase>
+		<phrase name="phpkd_vblvb_inactive" date="1293449751" username="PHPKD" version="4.1.201"><![CDATA[Sorry, the product "PHPKD - vB Link Verifier Bot" is currently disabled! <a href="phpkd_vblvb.php?do=options&dogroup=general">Please activate the product first then run this scheduled task again.</a>]]></phrase>
+		<phrase name="phpkd_vblvb_initialization_failed_bbcodes" date="1293449775" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any BBCodes to be checked. Please make sure to choose at least one BBCode to be checked and try again.]]></phrase>
+		<phrase name="phpkd_vblvb_initialization_failed_file" date="1293449783" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. Please make sure that the following file already uploaded and is readable "./includes/phpkd/vblvb/{1}".]]></phrase>
+		<phrase name="phpkd_vblvb_initialization_failed_hosts" date="1293449793" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any hosts to be checked. Please make sure to choose at least one host to be checked and try again.]]></phrase>
+		<phrase name="phpkd_vblvb_initialization_failed_protocols" date="1293449803" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any protocol to be checked. Please make sure to choose at least one protocol to be checked and try again.]]></phrase>
 		<phrase name="phpkd_vblvb_invalid_criteria" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[Criteria doesn't met any matches for this post.]]></phrase>
 		<phrase name="phpkd_vblvb_invalid_domain" date="1278283828" username="PHPKD" version="4.0.200"><![CDATA[The domain name you specified for this host is invalid. You may only include a-z, A-Z, 0-9, . (dot) and - (hyphen).]]></phrase>
 		<phrase name="phpkd_vblvb_invalid_license" date="1277589284" username="PHPKD" version="4.0.200"><![CDATA[<span class="diff-deleted">Sorry, this isn't a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>]]></phrase>
@@ -148,14 +148,14 @@ $bbtitle]]></phrase>
 		<phrase name="phpkd_vblvb_log_summery_all" date="1287701928" username="PHPKD" version="4.0.200"><![CDATA[<strong>Report summery: <span style="color: blue">Checked Posts: {4}</span>, <span style="color: {1}">Alive Posts: {5}</span>, <span style="color: {2}">Dead Posts: {6}</span>, <span style="color: {3}">Punished Posts: {7}</span>.</strong>]]></phrase>
 		<phrase name="phpkd_vblvb_log_summery_post" date="1287701690" username="PHPKD" version="4.0.200"><![CDATA[<p style="padding: 0px; margin: 0px"><strong>Post summery: All Unique Links: {4}, <span style="color: blue">Checked Links: {5}</span>, <span style="color: {1}">Alive: {6}</span>, <span style="color: {2}">Dead: {7}</span>, <span style="color: {3}">Temorary Down: {8}</span>, Ignored: {9}.</strong></p>]]></phrase>
 		<phrase name="phpkd_vblvb_log_thread" date="1287701780" username="PHPKD" version="4.0.200"><![CDATA[<strong>Thread:</strong> <a href="{1}" target="_blank">{2}</a>]]></phrase>
-		<phrase name="phpkd_vblvb_punish_reason" date="1293449760" username="PHPKD" version="4.0.211"><![CDATA[PHPKD - vB Link Verifier Bot Punishment]]></phrase>
+		<phrase name="phpkd_vblvb_punish_reason" date="1293449760" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot Punishment]]></phrase>
 	</phrasetype>
 	<phrasetype name="Logging Tools" fieldname="logging">
-		<phrase name="phpkd_vblvb_are_you_sure_you_want_to_prune_x_log_entries_from_log" date="1293449659" username="PHPKD" version="4.0.211"><![CDATA[Are you sure you want to prune {1} log entries from the "PHPKD - vB Link Verifier Bot" log?]]></phrase>
-		<phrase name="phpkd_vblvb_log" date="1293449666" username="PHPKD" version="4.0.211"><![CDATA[PHPKD - vB Link Verifier Bot Log]]></phrase>
-		<phrase name="phpkd_vblvb_log_prune" date="1293449890" username="PHPKD" version="4.0.211"><![CDATA[Prune "PHPKD - vB Link Verifier Bot" Log]]></phrase>
-		<phrase name="phpkd_vblvb_log_pruned_successfully" date="1293449690" username="PHPKD" version="4.0.211"><![CDATA[Pruned "PHPKD - vB Link Verifier Bot" Log Successfully]]></phrase>
-		<phrase name="phpkd_vblvb_log_viewer" date="1293449697" username="PHPKD" version="4.0.211"><![CDATA[PHPKD - vB Link Verifier Bot Log Viewer]]></phrase>
+		<phrase name="phpkd_vblvb_are_you_sure_you_want_to_prune_x_log_entries_from_log" date="1293449659" username="PHPKD" version="4.1.201"><![CDATA[Are you sure you want to prune {1} log entries from the "PHPKD - vB Link Verifier Bot" log?]]></phrase>
+		<phrase name="phpkd_vblvb_log" date="1293449666" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot Log]]></phrase>
+		<phrase name="phpkd_vblvb_log_prune" date="1293449890" username="PHPKD" version="4.1.201"><![CDATA[Prune "PHPKD - vB Link Verifier Bot" Log]]></phrase>
+		<phrase name="phpkd_vblvb_log_pruned_successfully" date="1293449690" username="PHPKD" version="4.1.201"><![CDATA[Pruned "PHPKD - vB Link Verifier Bot" Log Successfully]]></phrase>
+		<phrase name="phpkd_vblvb_log_viewer" date="1293449697" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot Log Viewer]]></phrase>
 	</phrasetype>
 	<phrasetype name="PHPKD - vB Link Verifier Bot" fieldname="phpkd_vblvb">
 		<phrase name="phpkd_vblvb_host" date="1277963779" username="PHPKD" version="4.0.200"><![CDATA[Host]]></phrase>
@@ -166,7 +166,7 @@ $bbtitle]]></phrase>
 		<phrase name="phpkd_vblvb_host_domain" date="1277963811" username="PHPKD" version="4.0.200"><![CDATA[Domain name]]></phrase>
 		<phrase name="phpkd_vblvb_host_downmatch" date="1278451117" username="PHPKD" version="4.0.200"><![CDATA[Down Match]]></phrase>
 		<phrase name="phpkd_vblvb_host_edit" date="1277996609" username="PHPKD" version="4.0.200"><![CDATA[Edit Host]]></phrase>
-		<phrase name="phpkd_vblvb_host_manager" date="1293449588" username="PHPKD" version="4.0.211"><![CDATA[PHPKD - vB Link Verifier Bot Modules]]></phrase>
+		<phrase name="phpkd_vblvb_host_manager" date="1293449588" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot Modules]]></phrase>
 		<phrase name="phpkd_vblvb_host_new" date="1277963785" username="PHPKD" version="4.0.200"><![CDATA[Add New Host]]></phrase>
 		<phrase name="phpkd_vblvb_host_notes" date="1277964154" username="PHPKD" version="4.0.200"><![CDATA[Notes]]></phrase>
 		<phrase name="phpkd_vblvb_host_status" date="1286056386" username="PHPKD" version="4.0.200"><![CDATA[Status]]></phrase>
@@ -177,12 +177,12 @@ $bbtitle]]></phrase>
 		<phrase name="phpkd_vblvb_linkstatus_alive" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Alive]]></phrase>
 		<phrase name="phpkd_vblvb_linkstatus_dead" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Dead]]></phrase>
 		<phrase name="phpkd_vblvb_linkstatus_down" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Down]]></phrase>
-		<phrase name="phpkd_vblvb_log_viewer_page_x_y_there_are_z_total_log_entries" date="1293449616" username="PHPKD" version="4.0.211"><![CDATA[PHPKD - vB Link Verifier Bot Log Viewer (page {1}/{2}) | There are {3} total log entries.]]></phrase>
+		<phrase name="phpkd_vblvb_log_viewer_page_x_y_there_are_z_total_log_entries" date="1293449616" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot Log Viewer (page {1}/{2}) | There are {3} total log entries.]]></phrase>
 		<phrase name="phpkd_vblvb_mode" date="1288714378" username="PHPKD" version="4.0.200"><![CDATA[Mode]]></phrase>
-		<phrase name="phpkd_vblvb_options" date="1293449627" username="PHPKD" version="4.0.211"><![CDATA[PHPKD - vB Link Verifier Bot Settings]]></phrase>
+		<phrase name="phpkd_vblvb_options" date="1293449627" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot Settings]]></phrase>
 		<phrase name="phpkd_vblvb_select_forums" date="1254819786" username="PHPKD" version="4.0.101"><![CDATA[Select Forum(s)]]></phrase>
 		<phrase name="phpkd_vblvb_select_usergroups" date="1254819772" username="PHPKD" version="4.0.101"><![CDATA[Select User group(s)]]></phrase>
-		<phrase name="setting_general_active_desc" date="1293449637" username="PHPKD" version="4.0.211"><![CDATA[Choose whether "PHPKD - vB Link Verifier Bot" is active or not (global switch).]]></phrase>
+		<phrase name="setting_general_active_desc" date="1293449637" username="PHPKD" version="4.1.201"><![CDATA[Choose whether "PHPKD - vB Link Verifier Bot" is active or not (global switch).]]></phrase>
 		<phrase name="setting_general_active_title" date="1289523692" username="PHPKD" version="4.0.200"><![CDATA[Product Active]]></phrase>
 		<phrase name="setting_general_bbcodes_desc" date="1289525562" username="PHPKD" version="4.0.200"><![CDATA[Which BBCodes should be scanned & which shouldn't!? Note that URL tags are checked by default.]]></phrase>
 		<phrase name="setting_general_bbcodes_title" date="1289525562" username="PHPKD" version="4.0.200"><![CDATA[Checked BBCodes]]></phrase>
@@ -264,7 +264,7 @@ Select "Include All Users" to check all users' posts, or select "Include Specifi
 		<phrase name="setting_general_post_modes_title" date="1289526158" username="PHPKD" version="4.0.200"><![CDATA[Excluded Post Modes]]></phrase>
 		<phrase name="setting_general_protocols_desc" date="1289525529" username="PHPKD" version="4.0.200"><![CDATA[Which internet protocols should be checked?]]></phrase>
 		<phrase name="setting_general_protocols_title" date="1289525529" username="PHPKD" version="4.0.200"><![CDATA[Checked Protocols]]></phrase>
-		<phrase name="setting_general_query_limit_desc" date="1293449573" username="PHPKD" version="4.0.211"><![CDATA[It's recommended to define a specific low number of posts to process in each run to prevent any possible timeout or Memory/CPU exhausting during the execution process. <strong>A Lower Value usually recommended specially for boards that has long posts with many links. There's other important factors that have strong affect as well such as: <span class="diff-changed">"Time/Date Cutoff Mode", "Time/Date Cutoff Value", "Check existing posts", "Maximum Checked Links Per Post", "Check Succession Period"</span>; So please take care & try to set a logical acceptable value for each of these settings to avoid any expected/unexpected issues. You're the best one who knows your board & you're the one who can determine which suits you & your board according to your board's activity/content/requirements.</strong>]]></phrase>
+		<phrase name="setting_general_query_limit_desc" date="1293449573" username="PHPKD" version="4.1.201"><![CDATA[It's recommended to define a specific low number of posts to process in each run to prevent any possible timeout or Memory/CPU exhausting during the execution process. <strong>A Lower Value usually recommended specially for boards that has long posts with many links. There's other important factors that have strong affect as well such as: <span class="diff-changed">"Time/Date Cutoff Mode", "Time/Date Cutoff Value", "Check existing posts", "Maximum Checked Links Per Post", "Check Succession Period"</span>; So please take care & try to set a logical acceptable value for each of these settings to avoid any expected/unexpected issues. You're the best one who knows your board & you're the one who can determine which suits you & your board according to your board's activity/content/requirements.</strong>]]></phrase>
 		<phrase name="setting_general_query_limit_title" date="1289529207" username="PHPKD" version="4.0.200"><![CDATA[Checked Posts Per Batch]]></phrase>
 		<phrase name="setting_general_succession_period_desc" date="1289528687" username="PHPKD" version="4.0.200"><![CDATA[Successive checks for same posts can be separated by a certain period of time, so those 'checked recently' posts didn't checked every time the script runs. Same posts can be checked multiple times, but with at least 1 day between each two successive checks. Define how many days should separate each two successive checks for the same post, or enter "0" to check posts ONLY ONCE. Note: "14" means your checked posts will be checked again every fourteen days (two weeks). <strong>"0" or a high Value usually recommended specially for large boards.</strong>]]></phrase>
 		<phrase name="setting_general_succession_period_title" date="1289528687" username="PHPKD" version="4.0.200"><![CDATA[Check Succession Period]]></phrase>
@@ -275,7 +275,7 @@ Select "Include All Users" to check all users' posts, or select "Include Specifi
 		<phrase name="setting_linkdir_recording_active_title" date="1289530151" username="PHPKD" version="4.0.200"><![CDATA[Link Directory Recorder Active *(Experimental)*]]></phrase>
 		<phrase name="setting_lookfeel_linkstatus_colors_desc" date="1289529417" username="PHPKD" version="4.0.200"><![CDATA[Checked links can be colored according to their reported status, select your preferred colors from the color picker or write down the hexadecimal code for each status.]]></phrase>
 		<phrase name="setting_lookfeel_linkstatus_colors_title" date="1289529417" username="PHPKD" version="4.0.200"><![CDATA[Link Status Colors]]></phrase>
-		<phrase name="setting_lookfeel_postbit_note_desc" date="1293449645" username="PHPKD" version="4.0.211"><![CDATA[Last check note can be displayed within each post to determine whether or not it has been checked before by "PHPKD - vB Link Verifier Bot" and when, simply select in which forums' posts this note should be displayed. That note will appear in posts within those selected forums only. Note that you can select multiple options by holding "CTRL" key while selecting.<br />
+		<phrase name="setting_lookfeel_postbit_note_desc" date="1293449645" username="PHPKD" version="4.1.201"><![CDATA[Last check note can be displayed within each post to determine whether or not it has been checked before by "PHPKD - vB Link Verifier Bot" and when, simply select in which forums' posts this note should be displayed. That note will appear in posts within those selected forums only. Note that you can select multiple options by holding "CTRL" key while selecting.<br />
 <hr />
 <strong>After selecting appropriate forums, you've to do two simple manual edits as follow:<strong><br />
 In 'postbit' & 'postbit_legacy' templates search for:
@@ -370,3 +370,5 @@ You've multiple options to choose from:<br />
 		<phrase name="phpkd_vblvb_lastcheck_never" date="1289192115" username="PHPKD" version="4.0.200"><![CDATA[<div class="navlinks" style="margin: 0px">Links in this post never checked before.</div>]]></phrase>
 	</phrasetype>
 </language>
+
+<!-- SVN: $Version: 4.1.201 $ - $Id: product-phpkd_vblvb.xml 196 2010-12-27 12:15:57Z PHPKD $ -->
