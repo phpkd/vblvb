@@ -334,7 +334,7 @@
 	</host>
 	<host domain="megaupload.com" active="1" status="alive">
 		<urlmatch><![CDATA[megaupload\.com/\?d=[0-9a-z]+(&setlang=[a-z]{2}/)?]]></urlmatch>
-		<contentmatch><![CDATA[(javascript:checkcaptcha|javascript:postpassword|All download slots assigned to your country|The file that you\'re trying to download is larger than 1 GB.)]]></contentmatch>
+		<contentmatch>down_txt1|down_txt2|down_txt3</contentmatch>
 		<downmatch>(temporary access restriction is in place|The file you are trying to access is temporarily unavailable)</downmatch>
 		<urlsearch><![CDATA[&setlang=[a-z]{2}]]></urlsearch>
 		<urlreplace><![CDATA[&setlang=en]]></urlreplace>
