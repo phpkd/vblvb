@@ -51,8 +51,8 @@
 		<urlreplace>com/?</urlreplace>
 	</host>
 	<host domain="badongo.com" active="1" status="alive">
-		<urlmatch><![CDATA[badongo\.com/([a-z]{2}/)?(file|vid)/[0-9]+]]></urlmatch>
-		<contentmatch>file_fileinfo</contentmatch>
+		<urlmatch><![CDATA[badongo\.com/([a-z]{2}/)?(file|vid|audio|pic)/[0-9]+]]></urlmatch>
+		<contentmatch>(file_fileinfo|vid_fileinfo|img_fileinfo)</contentmatch>
 		<urlsearch><![CDATA[com/[a-z]{2}/]]></urlsearch>
 		<urlreplace>com/en/</urlreplace>
 	</host>
@@ -505,7 +505,7 @@
 		<urlmatch><![CDATA[speedyshare\.com/files/[0-9]+/[0-9a-z_-]+]]></urlmatch>
 		<contentmatch>/download/</contentmatch>
 	</host>
-	<host domain="storage.to" active="1" status="alive">
+	<host domain="storage.to" active="0" status="alive">
 		<urlmatch><![CDATA[storage\.to/get/[0-9a-z]+]]></urlmatch>
 		<contentmatch>download_container</contentmatch>
 		<urlsearch><![CDATA[\?language=[a-zA-Z]{2}]]></urlsearch>
