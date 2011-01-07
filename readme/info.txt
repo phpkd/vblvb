@@ -927,7 +927,7 @@ History:
 
 Screen Shots:
 ~~~~~~~~~~~~~~
-     * Available in the screenshots folder.
+     * Available at: http://product.phpkd.net/en/commercial/vblvb/
 
 
 Technical Notes:
