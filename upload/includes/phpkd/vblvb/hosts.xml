@@ -324,9 +324,10 @@
 		<contentmatch>download_code</contentmatch>
 	</host>
 	<host domain="mediafire.com" active="1" status="alive">
-		<urlmatch><![CDATA[mediafire\.com/(download\.php)?\?[0-9a-z]+]]></urlmatch>
+		<urlmatch><![CDATA[mediafire\.com/((download\.php)?\?|file/)[0-9a-z]+]]></urlmatch>
 		<contentmatch>download_file_title</contentmatch>
-		<urlsearch>download\.php</urlsearch>
+		<urlsearch>(download\.php\?|file/)</urlsearch>
+		<urlreplace>?</urlreplace>
 	</host>
 	<host domain="megashare.com" active="0" status="alive">
 		<urlmatch><![CDATA[megashare\.com/[0-9]+]]></urlmatch>
