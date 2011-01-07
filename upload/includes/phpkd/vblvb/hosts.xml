@@ -276,7 +276,7 @@
 	<host domain="hotfile.com" active="1" status="alive">
 		<urlmatch><![CDATA[hotfile\.com/dl/([0-9]+)/([0-9a-z]+)]]></urlmatch>
 		<apiurl><![CDATA[http://api.hotfile.com/?action=checklinks&ids={1}&keys={2}]]></apiurl>
-		<contentmatch>2|1</contentmatch>
+		<contentmatch>2|1,2</contentmatch>
 		<notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT REQUIRES trailing slash '/' after the second syllable if the third syllable didn't entered!.]]></notes>
 	</host>
 	<host domain="hulkshare.com" active="1" status="alive">

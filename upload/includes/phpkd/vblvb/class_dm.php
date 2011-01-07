@@ -274,10 +274,12 @@ class PHPKD_VBLVB_DM
 			{
 				$page = $this->vurl($apiurl);
 				$excontentmatch = explode('|', $contentmatch);
+				$ex2contentmatch = explode(',', $excontentmatch[1]);
 				$exdownmatch = explode('|', $downmatch);
 				$expage = explode(',', $page);
 
-				if (count($excontentmatch) > 1 AND count($expage) > 1 AND $excontentmatch[1] == $expage[$excontentmatch[0] - 1])
+				// if (count($excontentmatch) > 1 AND count($expage) > 1 AND $excontentmatch[1] == $expage[$excontentmatch[0] - 1])
+				if (count($excontentmatch) > 1 AND count($expage) > 1 AND ($ex2contentmatch[0] == $expage[$excontentmatch[0] - 1] OR $ex2contentmatch[1] == $expage[$excontentmatch[0] - 1]))
 				{
 					$status = 'alive';
 					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $oriurl);
