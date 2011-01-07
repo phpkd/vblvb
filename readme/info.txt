@@ -20,12 +20,12 @@ Description:
 
 Compatible With:
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-     * All 4.0.x vBulletin versions.
+     * All 4.0.x/4.1.x vBulletin versions.
 
 
 Requirements:
 ~~~~~~~~~~~~~~
-     * vBulletin version 4.0.x
+     * vBulletin version 4.0.x/4.1.x
 
 
 License:
@@ -915,6 +915,14 @@ History:
       51. vidxden.com
       52. wikiupload.com
       53. xfilesharing.ca
+     * v4.1.201 07/01/2011 10:00 AM UTC: Maintenance release (public)
+	1. Full vBulletin 4.0.x & 4.1.x compatibility (http://forum.phpkd.net/project.php?issueid=147)
+	2. Updated some phrases here & there for consistency.
+	3. Bug fix: megaupload.com links now falsely reported as dead (http://forum.phpkd.net/project.php?issueid=142)
+	4. Bug fix: storage.to redirects TO kickload.com (http://forum.phpkd.net/project.php?issueid=134)
+	5. Bug fix: false reports for badongo.com video links (http://forum.phpkd.net/project.php?issueid=138)
+	6. Bug fix: Some hotfile.com links falsely reported as dead (http://forum.phpkd.net/project.php?issueid=141)
+	7. Bug fix: Some mediafire.com links not checked (http://forum.phpkd.net/project.php?issueid=148)
 
 
 Screen Shots:
