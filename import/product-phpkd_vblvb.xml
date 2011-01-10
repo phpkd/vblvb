@@ -3,7 +3,7 @@
 <product productid="phpkd_vblvb" active="1">
 	<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate']]></title>
 	<description><![CDATA[This product extract sharing links of over 140+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.]]></description>
-	<version>4.1.201</version>
+	<version>4.1.202</version>
 	<url>http://tools.phpkd.net/en/producthelp/url/vblvb/</url>
 	<versioncheckurl>http://tools.phpkd.net/en/producthelp/version/vblvb/</versioncheckurl>
 	<dependencies>
@@ -25,6 +25,10 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 		<code version="4.0.200">
 			<installcode><![CDATA[$phpkd_vblvb->install_40200();]]></installcode>
 			<uninstallcode><![CDATA[$phpkd_vblvb->uninstall_40200();]]></uninstallcode>
+		</code>
+		<code version="4.1.202">
+			<installcode><![CDATA[$phpkd_vblvb->reimport_hosts();]]></installcode>
+			<uninstallcode />
 		</code>
 	</codes>
 	<templates>
@@ -533,4 +537,4 @@ You've multiple options to choose from:<br />
 	</faqentries>
 </product>
 
-<!-- SVN: $Version: 4.1.201 $ - $Id$ -->
+<!-- SVN: $Version: 4.1.202 $ - $Id$ -->

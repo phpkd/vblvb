@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.201 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.202 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -395,12 +395,29 @@ class PHPKD_VBLVB_Install
 
 		$this->_vbulletin->db->show_errors();
 	}
+
+	/**
+	 * Re-Import hosts, this step required for upgrade process!
+	 * This is a temporary way to do it, we'll replace it with versioning later in the main xml files.
+	 *
+	 * @return	void
+	 */
+	public function reimport_hosts()
+	{
+		$this->_vbulletin->db->hide_errors();
+
+		// Re-Import hosts, this step required for upgrade process!
+		require_once(DIR . '/includes/phpkd/vblvb/adminfunctions.php');
+		phpkd_vblvb_xml_restore_hosts(file_read(DIR . '/includes/phpkd/vblvb/hosts.xml'));
+
+		$this->_vbulletin->db->show_errors();
+	}
 }
 
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.201
+|| # Version: 4.1.202
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
