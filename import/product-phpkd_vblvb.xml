@@ -69,9 +69,12 @@ $phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase, ERRTYPE_CP);
 		<plugin active="1" executionorder="5">
 			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Process Records ]]]></title>
 			<hookname>global_complete</hookname>
-			<phpcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
-$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
-@extract($phpkd_vblvb->fetch_hook('global_complete', array('output' => $output)));]]></phpcode>
+			<phpcode><![CDATA[if (!defined('NOPMPOPUP'))
+{
+	require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
+	$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
+	@extract($phpkd_vblvb->fetch_hook('global_complete', array('output' => $output)));
+}]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
 			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Display last checked note ]]]></title>
