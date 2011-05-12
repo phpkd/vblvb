@@ -105,6 +105,13 @@ if (in_array($_REQUEST['do'], array('downloadsettings', 'filessettings', 'remove
 	}
 }
 
+// ########################## Run scheduled task ############################
+if ($_REQUEST['do'] == 'runcron')
+{
+	$cron = $db->query_first("SELECT cronid FROM " . TABLE_PREFIX . "cron WHERE varname = 'phpkd_vblvb'");
+	exec_header_redirect('cronadmin.php?' . $vbulletin->session->vars['sessionurl_js'] . "do=runcron&cronid=$cron[cronid]");
+}
+
 // ###################### Start download XML settings #######################
 if ($_REQUEST['do'] == 'downloadsettings')
 {
@@ -1859,13 +1866,6 @@ if ($_REQUEST['do'] == 'log')
 	print_table_header($vbphrase['phpkd_vblvb_log_prune']);
 	print_input_row($vbphrase['remove_entries_older_than_days'], 'daysprune', 30);
 	print_submit_row($vbphrase['phpkd_vblvb_log_prune'], 0);
-}
-
-// ###################### Run scheduled task #######################
-if ($_REQUEST['do'] == 'runcron')
-{
-	$cron = $db->query_first("SELECT cronid FROM " . TABLE_PREFIX . "cron WHERE varname = 'phpkd_vblvb'");
-	exec_header_redirect('cronadmin.php?' . $vbulletin->session->vars['sessionurl_js'] . "do=runcron&cronid=$cron[cronid]");
 }
 
 print_cp_footer();
