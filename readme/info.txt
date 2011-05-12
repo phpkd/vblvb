@@ -10,7 +10,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.1.202
+     * 4.1.203
 
 
 Description:
@@ -476,20 +476,20 @@ Installation Procedure:
      2. Import the product's XML file "product-phpkd_vblvb.xml" from AdminCP.
 
      3. Get you license key & enter it in your product's settings:
-	Get from: Customer Area » My Packages » vB Link Verifier Bot 'Ultimate' » Licenses » License Key
-	Enter Here: AdminCP » vB Link Verifier Bot » Settings » General Settings » License Key
+	Get from: Customer Area Â» My Packages Â» vB Link Verifier Bot 'Ultimate' Â» Licenses Â» License Key
+	Enter Here: AdminCP Â» vB Link Verifier Bot Â» Settings Â» General Settings Â» License Key
 
      4. Activate & Configure product's settings as preferred.
 
      5. If you are upgrading from 'Lite' edition to 'Ultimate' edition, you've to import the product "product-phpkd_vblvb_fix.xml" from AdminCP found inside "do_not_upload" folder (however it's recommended to uninstall 'Lite' edition first and then clean install the 'Ultimate' edition).
 
-     6. [OPTIONAL] Translations: vBulletin AdminCP » Languages & Phrases » Download / Upload Languages » Import Language XML File (Make sure that your forum's Character Set is equivalent to the imported language as follow):
-	     Arabic » ISO-8859-6
-	     English, French, Spanish » ISO-8859-1
-	     Greek » ISO-8859-7
-	     Italian » ISO-8859-16
-	     Russian » ISO-8859-5
-	     Turkish » ISO-8859-9
+     6. [OPTIONAL] Translations: vBulletin AdminCP Â» Languages & Phrases Â» Download / Upload Languages Â» Import Language XML File (Make sure that your forum's Character Set is equivalent to the imported language as follow):
+	     Arabic Â» ISO-8859-6
+	     English, French, Spanish Â» ISO-8859-1
+	     Greek Â» ISO-8859-7
+	     Italian Â» ISO-8859-16
+	     Russian Â» ISO-8859-5
+	     Turkish Â» ISO-8859-9
 	     You can change language file's encoding before import to whatever encoding you wish/your forum works on (ex: UTF-8) using the wonderful application "Encoding Master" (http://www.elfdata.com/encodingmaster/).
 
      7. You're Done :).
@@ -504,23 +504,23 @@ Upgrade Procedure:
 Controls:
 ~~~~~~~~~~
      * Administrator Permissions
-	vBulletin AdminCP » Usergroups » Administrator Permissions » Select Administrator » [Edit Permissions] » Can Administer vB Link Verifier Bot
+	vBulletin AdminCP Â» Usergroups Â» Administrator Permissions Â» Select Administrator Â» [Edit Permissions] Â» Can Administer vB Link Verifier Bot
 
      * AdminCP Settings:
-	vBulletin AdminCP » vB Link Verifier Bot » Settings » General Settings
-	vBulletin AdminCP » vB Link Verifier Bot » Settings » Reporting Settings
-	vBulletin AdminCP » vB Link Verifier Bot » Settings » Punishment Settings
-	vBulletin AdminCP » vB Link Verifier Bot » Settings » Look & Feel Settings
-	vBulletin AdminCP » vB Link Verifier Bot » Settings » Link Directory Settings
+	vBulletin AdminCP Â» vB Link Verifier Bot Â» Settings Â» General Settings
+	vBulletin AdminCP Â» vB Link Verifier Bot Â» Settings Â» Reporting Settings
+	vBulletin AdminCP Â» vB Link Verifier Bot Â» Settings Â» Punishment Settings
+	vBulletin AdminCP Â» vB Link Verifier Bot Â» Settings Â» Look & Feel Settings
+	vBulletin AdminCP Â» vB Link Verifier Bot Â» Settings Â» Link Directory Settings
 
      * Edit Scheduled Task:
-	vBulletin AdminCP » Scheduled Tasks » Scheduled Task Manager » PHPKD - vB Link Verifier Bot 'Ultimate'
+	vBulletin AdminCP Â» Scheduled Tasks Â» Scheduled Task Manager Â» PHPKD - vB Link Verifier Bot 'Ultimate'
 
      * Run Scheduled Task:
-	vBulletin AdminCP » vB Link Verifier Bot » Run Scheduled Task
+	vBulletin AdminCP Â» vB Link Verifier Bot Â» Run Scheduled Task
 
      * Log Viewer:
-	vBulletin AdminCP » vB Link Verifier Bot » Log Records
+	vBulletin AdminCP Â» vB Link Verifier Bot Â» Log Records
 
 
 License:
@@ -925,6 +925,11 @@ History:
 	7. Bug fix: Some mediafire.com links not checked (http://forum.phpkd.net/project.php?issueid=148)
      * v4.1.202 10/01/2011 10:00 AM UTC: Maintenance release (public)
 	1. Bug fix: Upgrade process does not update hosts/modules & requires manual re-import of hosts.xml (http://forum.phpkd.net/project.php?issueid=151)
+     * v4.1.203 12/05/2011 10:00 AM UTC: Maintenance release (public)
+	1. Bug fix: Conflict with hide/thank-hack addons in postbit (http://forum.phpkd.net/project.php?issueid=127)
+	2. Bug fix: "Run Scheduled Task" redirect error, Cannot modify header information (http://forum.phpkd.net/project.php?issueid=152)
+	3. Bug fix: Copyright statement appears in redirect messages (http://forum.phpkd.net/project.php?issueid=154)
+	4. Bug fix: vBCMS Fatal error: vBulletin Registry object is not an object! (http://forum.phpkd.net/project.php?issueid=153)
 
 
 Screen Shots:
@@ -976,4 +981,4 @@ Recent Products:
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.1.202 $ - $Id$
+$Version: 4.1.203 $ - $Id$
