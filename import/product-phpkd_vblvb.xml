@@ -78,7 +78,7 @@ $phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
 			<hookname>postbit_display_complete</hookname>
 			<phpcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
 $phpkd_vblvb = new PHPKD_VBLVB($this->registry, $vbphrase);
-extract($phpkd_vblvb->fetch_hook('postbit_display_complete', array('post' => $post, 'forumid' => $this->thread['forumid'], 'template_prefix' => $this->template_prefix, 'templatename' => $this->templatename, 'phpkd_vblvb_postbit' => $phpkd_vblvb_postbit)));]]></phpcode>
+extract($phpkd_vblvb->fetch_hook('postbit_display_complete', array('post' => $post, 'forumid' => $this->thread['forumid'], 'template_prefix' => $this->template_prefix, 'templatename' => $this->templatename, 'phpkd_vblvb_postbit' => $phpkd_vblvb_postbit, 'template_hook' => $template_hook)));]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
 			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Postbit required initialization ]]]></title>
