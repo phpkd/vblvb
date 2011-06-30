@@ -21,7 +21,7 @@ if (!defined('VB_AREA'))
 	exit;
 }
 
-$copyright = md5(md5('www.domain.com') . md5(PHPKD_VBLVB_TOCKEN) . md5($this->_registry->_vbulletin->userinfo['securitytoken']) . md5(TIMENOW));
+$copyright = md5(md5('www.domain.com') . md5(PHPKD_VBLVB_TOCKEN) . md5($vbulletin->userinfo['securitytoken']) . md5(TIMENOW));
 
 
 /*============================================================================*\

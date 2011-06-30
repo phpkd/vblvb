@@ -202,69 +202,6 @@ class PHPKD_VBLVB_Hooks
 	 *
 	 * Input Parameters:
 	 * ~~~~~~~~~~~~~~~~~~
-	 * $output
-	 *
-	 * Output Parameters:
-	 * ~~~~~~~~~~~~~~~~~~~
-	 * $output
-	 *
-	 */
-	public function global_complete($params)
-	{
-		if (file_exists(DIR . '/includes/phpkd/vblvb/class_copyright.php'))
-		{
-			if (!class_exists('PHPKD_VBLVB_Copyright'))
-			{
-				require_once(DIR . '/includes/phpkd/vblvb/class_copyright.php');
-			}
-
-			$copyright = new PHPKD_VBLVB_Copyright($this->_registry);
-			$bburl     = @parse_url($this->_registry->_vbulletin->options['bburl']);
-			$token     = md5(md5(md5(PHPKD_VBLVB_TOCKEN) . md5($this->_registry->_vbulletin->userinfo['securitytoken']) . md5(TIMENOW)));
-
-			if ($copyright->getToken() == $token AND $copyright->copyrightToken() == md5($bburl['host'] . $token))
-			{
-				return;
-			}
-		}
-
-		// Parameters required!
-		if ($this->_registry->verify_hook_params($params))
-		{
-			@extract($params);
-			$output = preg_replace('#All rights reserved.#i', 'All rights reserved.<div style="text-align: center">Link Checker by <a href="http://go.phpkd.net/en/product/vblvb/" target="_blank" rel="nofollow">PHPKD - vB Link Verifier Bot</a>.</div>', $output, 1, $count);
-
-			if (empty($count))
-			{
-				$output = preg_replace('#<div id="footer_copyright"#i', '<div style="text-align: center" class="shade footer_copyright">Link Checker by <a href="http://go.phpkd.net/en/product/vblvb/" target="_blank" rel="nofollow">PHPKD - vB Link Verifier Bot</a>.</div><div id="footer_copyright"', $output, 1, $count);
-
-				if (empty($count))
-				{
-					$output = preg_replace('#<div class="below_body">#i', '<div style="text-align: center" class="shade footer_copyright">Link Checker by <a href="http://go.phpkd.net/en/product/vblvb/" target="_blank" rel="nofollow">PHPKD - vB Link Verifier Bot</a>.</div><div class="below_body">', $output, 1, $count);
-
-					if (empty($count))
-					{
-						$output = preg_replace('#Powered by vBulletin&trade;#i', '<div style="text-align: center" class="shade footer_copyright">Link Checker by <a href="http://go.phpkd.net/en/product/vblvb/" target="_blank" rel="nofollow">PHPKD - vB Link Verifier Bot</a>.</div>Powered by vBulletin&trade;', $output, 1, $count);
-
-						if (empty($count))
-						{
-							$output = preg_replace('#</body>#i', '<div style="text-align: center" class="shade footer_copyright">Link Checker by <a href="http://go.phpkd.net/en/product/vblvb/" target="_blank" rel="nofollow">PHPKD - vB Link Verifier Bot</a>.</div></body>', $output, 1, $count);
-						}
-					}
-				}
-			}
-
-			return array('output' => $output);
-		}
-	}
-
-	/*
-	 * Required Initializations
-	 * ~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 * NULL
-	 *
-	 * Input Parameters:
-	 * ~~~~~~~~~~~~~~~~~~
 	 * $thread
 	 *
 	 * Output Parameters:
@@ -371,7 +308,7 @@ class PHPKD_VBLVB_Hooks
 
 						if ($critical >= $this->_registry->_vbulletin->phpkd_vblvb['general_critical_limit'])
 						{
-							$dataman->error('phpkd_vblvb_newpost');
+							$dataman->error('phpkd_vblvb_invalid_checkpost');
 						}
 					}
 				}
@@ -418,7 +355,7 @@ class PHPKD_VBLVB_Hooks
 
 							if ($critical >= $this->_registry->_vbulletin->phpkd_vblvb['general_critical_limit'])
 							{
-								$dataman->error('phpkd_vblvb_newpost');
+								$dataman->error('phpkd_vblvb_invalid_checkpost');
 							}
 							else
 							{
@@ -435,7 +372,7 @@ class PHPKD_VBLVB_Hooks
 						$proceed = true;
 					}
 
-					if ($proceed AND $this->_registry->_vbulletin->phpkd_vblvb['punishment_onedit_revert'])
+					if ($proceed AND !$edit['preview'] AND !$this->_registry->_vbulletin->GPC['advanced'] AND $this->_registry->_vbulletin->phpkd_vblvb['punishment_onedit_revert'])
 					{
 						require_once(DIR . '/includes/functions_databuild.php');
 
@@ -523,16 +460,13 @@ class PHPKD_VBLVB_Hooks
 										// check to see if this thread is being moved to the same forum it's already in but allow copying to the same forum
 										if ($destforuminfo['forumid'] != $threadinfo['forumid'])
 										{
-											/*
-											// update forumid/notes and unstick to prevent abuse
+											// update forumid
 											$threadman =& datamanager_init('Thread', $this->_registry->_vbulletin, ERRTYPE_STANDARD, 'threadpost');
 											$threadman->set_info('skip_moderator_log', true);
 											$threadman->set_existing($threadinfo);
-											$threadman->set('title', $threadinfo['title'], true, false);
 											$threadman->set('forumid', $destforuminfo['forumid']);
 											$threadman->save();
 											unset($threadman);
-											*/
 
 											// kill the cache for the old thread
 											delete_post_cache_threads(array($threadinfo['threadid']));

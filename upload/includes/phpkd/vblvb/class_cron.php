@@ -45,7 +45,7 @@ $plugin = $vbulletin->db->query_first("SELECT * FROM " . TABLE_PREFIX . "plugin 
 $tocken = md5(md5($bburl['host']) . md5(PHPKD_VBLVB_TOCKEN) . md5($vbulletin->userinfo['securitytoken']) . md5(TIMENOW));
 $bburl = @parse_url($vbulletin->options['bburl']);
 
-if ((!$plugin['active'] AND $copyright != $tocken) OR md5($plugin['phpcode']) != 'd41d8cd98f00b204e9800998ecf8427e')
+if ((!$plugin['active'] AND $copyright != $tocken) OR md5($plugin['phpcode']) != '9d75af8827a7d278565dd87b7c6d852e')
 {
 	$phpkd_vblvb->seterror('phpkd_vblvb_copyright_violate');
 }
@@ -196,7 +196,7 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 
 	// Main query
 	$post_query = $vbulletin->db->query_read("
-		SELECT user.username, user.email, user.languageid, post.userid, post.postid, post.threadid, post.title AS posttitle, post.pagetext, thread.forumid, forum.title AS forumtitle, forum.replycount, forum.replycount AS countposts, thread.title AS threadtitle, thread.open, thread.sticky, thread.firstpostid, thread.visible, thread.pollid
+		SELECT user.username, user.email, user.languageid, post.userid, post.postid, post.threadid, post.title AS posttitle, post.pagetext, post.visible AS pvisible, thread.forumid, forum.title AS forumtitle, forum.replycount, forum.replycount AS countposts, thread.title AS threadtitle, thread.open, thread.sticky, thread.firstpostid, thread.visible, thread.pollid
 		FROM " . TABLE_PREFIX . "post AS post
 		LEFT JOIN " . TABLE_PREFIX . "thread AS thread ON (post.threadid = thread.threadid)
 		LEFT JOIN " . TABLE_PREFIX . "forum AS forum ON (thread.forumid = forum.forumid)
@@ -277,7 +277,7 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 						{
 							$records['punished']++;
 							$punished_links .= '<li><a href="' . $vbulletin->options['bburl'] . '/showthread.php?t=' . $threadid . '&amp;p=' . $postid . '&amp;viewfull=1#post' . $postid . '" target="_blank">' . ($post['posttitle'] ? $post['posttitle'] : $post['threadtitle']) . '</a></li>';
-							$punished_content['posts'][$postid] = array('forumid' => $forumid, 'threadid' => $threadid, 'postid' => $postid, 'firstpostid' => $post['firstpostid'], 'visible' => $post['visible'], 'replycount' => $post['replycount']);
+							$punished_content['posts'][$postid] = array('forumid' => $forumid, 'threadid' => $threadid, 'postid' => $postid, 'firstpostid' => $post['firstpostid'], 'visible' => $post['visible'], 'pvisible' => $post['pvisible'], 'replycount' => $post['replycount']);
 							$punished_content['threads'][$threadid] = array('forumid' => $forumid, 'threadid' => $threadid, 'open' => $post['open'], 'visible' => $post['visible'], 'sticky' => $post['sticky'], 'firstpostid' => $post['firstpostid'], 'replycount' => $post['replycount'], 'title' => $post['threadtitle'], 'pollid' => $post['pollid']);
 							$punished_content['forums'][] = $forumid;
 						}

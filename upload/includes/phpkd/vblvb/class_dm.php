@@ -689,26 +689,56 @@ class PHPKD_VBLVB_DM
 		{
 			$countingthreads = array();
 			$modrecords = array();
+			$reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']);
 
-			if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] AND $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']))
+			foreach (array_keys($punished_content['threads']) AS $threadid => $thread)
 			{
-				foreach (array_keys($punished_content['threads']) AS $threadid)
+				foreach ($this->_registry->thread_punishs as $punishment)
 				{
-					foreach ($this->_registry->thread_punishs as $punishment)
+					switch ($punishment)
 					{
-						if ($punishment != 'move')
-						{
-							$logpunish['threads'][$threadid][$punishment] = TIMENOW;
-						}
-					}
+						case 'close':
+							if ($thread['open'] == 1)
+							{
+								$logpunish['threads'][$threadid]['close'] = TIMENOW;
+							}
+							break;
 
+						case 'unstick':
+							if ($thread['sticky'] == 1)
+							{
+								$logpunish['threads'][$threadid]['unstick'] = TIMENOW;
+							}
+							break;
+
+						case 'moderate':
+							if ($thread['visible'] == 1)
+							{
+								$logpunish['threads'][$threadid]['moderate'] = TIMENOW;
+							}
+							break;
+
+						case 'delete':
+							if ($thread['visible'])
+							{
+								$logpunish['threads'][$threadid]['delete'] = TIMENOW;
+							}
+							break;
+					}
+				}
+
+				if ($reporter['userid'])
+				{
 					$modlog[] = array(
 						'userid'   =>& $reporter['userid'],
 						'forumid'  =>& $punished_content['threads']["$threadid"]['forumid'],
 						'threadid' => $threadid,
 					);
 				}
+			}
 
+			if ($reporter['userid'])
+			{
 				$delinfo = array(
 					'userid'          => $reporter['userid'],
 					'username'        => $reporter['username'],
@@ -1047,17 +1077,33 @@ class PHPKD_VBLVB_DM
 		if (!empty($this->_registry->post_punishs) AND !empty($punished_content['posts']))
 		{
 			$firstpost = array();
+			$reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']);
 
-			if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] AND $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']))
+			foreach (array_keys($punished_content['posts']) AS $postid => $post)
 			{
-				foreach (array_keys($punished_content['posts']) AS $postid)
+				foreach ($this->_registry->post_punishs as $punishment)
 				{
-					foreach ($this->_registry->post_punishs as $punishment)
+					switch ($punishment)
 					{
-						$logpunish['posts'][$postid][$punishment] = TIMENOW;
+						case 'moderate':
+							if ($post['pvisible'])
+							{
+								$logpunish['posts'][$postid]['moderate'] = TIMENOW;
+							}
+							break;
+
+						case 'delete':
+							if ($post['pvisible'] == 1)
+							{
+								$logpunish['posts'][$postid]['delete'] = TIMENOW;
+							}
+							break;
 					}
 				}
+			}
 
+			if ($reporter['userid'])
+			{
 				$delinfo = array(
 					'userid'          => $reporter['userid'],
 					'username'        => $reporter['username'],

@@ -405,7 +405,7 @@ class PHPKD_VBLVB
 			if ($license['vblvb']['lc'] > (TIMENOW - 3600))
 			{
 				// Already checked within last hour, PROCEED WITHOUT VERIFICATION!
-				return;
+				return true;
 			}
 		}
 
@@ -419,7 +419,7 @@ class PHPKD_VBLVB
 
 					if ($this->_vbulletin->options['phpkd_commercial4x_license'])
 					{
-						$this->registry->db->query_write("UPDATE " . TABLE_PREFIX . "setting SET value = '" . @serialize($license) . "' WHERE varname = 'phpkd_commercial4x_license'");
+						$this->_vbulletin->db->query_write("UPDATE " . TABLE_PREFIX . "setting SET value = '" . @serialize($license) . "' WHERE varname = 'phpkd_commercial4x_license'");
 					}
 					else
 					{
@@ -444,7 +444,7 @@ class PHPKD_VBLVB
 				}
 
 				// License valid!
-				return;
+				return true;
 			}
 		}
 

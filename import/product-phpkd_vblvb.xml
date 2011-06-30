@@ -70,7 +70,7 @@ $phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase, ERRTYPE_CP);
 			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ New Post Process ]]]></title>
 			<hookname>editpost_update_process</hookname>
 			<phpcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
-$phpkd_vblvb = new PHPKD_VBLVB($this->registry, $vbphrase);
+$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
 $phpkd_vblvb->fetch_hook('editpost_update_process', array('foruminfo' => $foruminfo, 'threadinfo' => $threadinfo, 'postinfo' => $postinfo, 'edit' => $edit, 'dataman' => $dataman));]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
@@ -105,7 +105,7 @@ $phpkd_vblvb->fetch_hook('editpost_update_process', array('foruminfo' => $forumi
 			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ New Post Process ]]]></title>
 			<hookname>newpost_process</hookname>
 			<phpcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
-$phpkd_vblvb = new PHPKD_VBLVB($this->registry, $vbphrase);
+$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
 $phpkd_vblvb->fetch_hook('newpost_process', array('type' => $type, 'post' => $post, 'dataman' => $dataman));]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
@@ -314,6 +314,7 @@ $bbtitle]]></phrase>
 			<phrase name="phpkd_vblvb_initialization_failed_file" date="1293449783" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. Please make sure that the following file already uploaded and is readable "./includes/phpkd/vblvb/{1}".]]></phrase>
 			<phrase name="phpkd_vblvb_initialization_failed_hosts" date="1293449793" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any hosts to be checked. Please make sure to choose at least one host to be checked and try again.]]></phrase>
 			<phrase name="phpkd_vblvb_initialization_failed_protocols" date="1293449803" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any protocol to be checked. Please make sure to choose at least one protocol to be checked and try again.]]></phrase>
+			<phrase name="phpkd_vblvb_invalid_checkpost" date="1308855639" username="PHPKD" version="4.1.210"><![CDATA[There's dead links inside this post, please check & validate links first.]]></phrase>
 			<phrase name="phpkd_vblvb_invalid_criteria" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[Criteria doesn't met any matches for this post.]]></phrase>
 			<phrase name="phpkd_vblvb_invalid_domain" date="1278283828" username="PHPKD" version="4.0.200"><![CDATA[The domain name you specified for this host is invalid. You may only include a-z, A-Z, 0-9, . (dot) and - (hyphen).]]></phrase>
 			<phrase name="phpkd_vblvb_invalid_license" date="1277589284" username="PHPKD" version="4.0.200"><![CDATA[<span class="diff-deleted">Sorry, this isn't a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>]]></phrase>
