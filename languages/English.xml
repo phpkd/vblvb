@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<language name="MASTER LANGUAGE" vbversion="4.1.0" product="phpkd_vblvb" type="master">
+<language name="MASTER LANGUAGE" vbversion="4.1.4" product="phpkd_vblvb" type="master">
 	<skippedgroups>
 		<skippedgroup>cphelptext</skippedgroup>
 	</skippedgroups>
@@ -120,6 +120,7 @@ $bbtitle]]></phrase>
 	<li>All posts has been checked already, and the next successive check didn't come yet.</li>
 	<li>As per your product's settings, there isn't any posts to check currently. <a href="phpkd_vblvb.php?null=0">You may wish to review your product's settings</a>.</li>
 </ol>]]></phrase>
+		<phrase name="phpkd_vblvb_copyright_violate" date="1308855639" username="PHPKD" version="4.1.210"><![CDATA[<span class="diff-deleted">Sorry, copyright notice has been altered or disalbed without prior official permission. 'Branding Free' option required to do so.. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for this matter.</span>]]></phrase>
 		<phrase name="phpkd_vblvb_developers_only" date="1277049500" username="PHPKD" version="4.0.200"><![CDATA[Sorry, this feature is available for official developers only.]]></phrase>
 		<phrase name="phpkd_vblvb_host_deleted_successfully" date="1278005341" username="PHPKD" version="4.0.200"><![CDATA[Host deleted successfully!]]></phrase>
 		<phrase name="phpkd_vblvb_inactive" date="1293449751" username="PHPKD" version="4.1.201"><![CDATA[Sorry, the product "PHPKD - vB Link Verifier Bot" is currently disabled! <a href="phpkd_vblvb.php?do=options&dogroup=general">Please activate the product first then run this scheduled task again.</a>]]></phrase>

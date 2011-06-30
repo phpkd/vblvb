@@ -1,11 +1,11 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.203 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.210 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #            Copyright ©2005-2010 PHP KingDom. All Rights Reserved.            # ||
+|| #            Copyright ©2005-2011 PHP KingDom. All Rights Reserved.            # ||
 || #      This product may not be redistributed in whole or significant part.     # ||
 || # 																			  # ||
 || # ---------- "vB Link Verifier Bot 'Ultimate'" IS NOT FREE SOFTWARE ---------- # ||
@@ -23,7 +23,7 @@ if (!defined('VB_AREA'))
 define('ERRTYPE_ECHO',               10);
 
 define('PHPKD_VBLVB_DEBUG',          false);
-define('PHPKD_VBLVB_VERSION',        '4.1.203');
+define('PHPKD_VBLVB_VERSION',        '4.1.210');
 define('PHPKD_VBLVB_TOCKEN',         '7efad4a065eb29fb5ac56d57bc2c090c');
 define('PHPKD_VBLVB_LICENSE_PREFIX', 'VBLVB');
 
@@ -384,9 +384,10 @@ class PHPKD_VBLVB
 	/**
 	 * Verify license
 	 *
+	 * @param	boolean	Whether this is periodic or live verification
 	 * @return	string
 	 */
-	public function verify_license()
+	public function verify_license($periodic = false)
 	{
 		if (empty($this->_vbulletin->phpkd_vblvb['general_licensekey']))
 		{
@@ -397,10 +398,51 @@ class PHPKD_VBLVB
 			$this->seterror('phpkd_vblvb_invalid_license_' . strtolower(PHPKD_VBLVB_LICENSE_PREFIX));
 		}
 
+		if ($periodic)
+		{
+			$license = @unserialize($this->_vbulletin->options['phpkd_commercial4x_license']);
+
+			if ($license['vblvb']['lc'] > (TIMENOW - 3600))
+			{
+				// Already checked within last hour, PROCEED WITHOUT VERIFICATION!
+				return;
+			}
+		}
+
 		if ($this->getDmlhandle()->getToken() == md5(md5(md5(PHPKD_VBLVB_TOCKEN) . md5($this->_vbulletin->userinfo['securitytoken']) . md5(TIMENOW))))
 		{
-			if ('active' == $this->getDmlhandle()->process_license())
+			if ($this->getDmlhandle()->process_license() == 'active')
 			{
+				if ($periodic)
+				{
+					$license['vblvb']['lc'] = TIMENOW;
+
+					if ($this->_vbulletin->options['phpkd_commercial4x_license'])
+					{
+						$this->registry->db->query_write("UPDATE " . TABLE_PREFIX . "setting SET value = '" . @serialize($license) . "' WHERE varname = 'phpkd_commercial4x_license'");
+					}
+					else
+					{
+						$this->_vbulletin->db->query_write("
+							REPLACE INTO " . TABLE_PREFIX . "setting
+								(varname, grouptitle, value, defaultvalue, datatype, optioncode, displayorder, advanced, volatile, validationcode, blacklist, product)
+							VALUES
+								('phpkd_commercial4x_license', 'version', '" . @serialize($license) . "', '', 'free', '', '4444', '0', '1', '', '0', 'phpkd_framework')
+						");
+
+						$this->_vbulletin->db->query_write("
+							REPLACE INTO " . TABLE_PREFIX . "phrase
+								(languageid, fieldname, varname, text, product, username, dateline, version)
+							VALUES
+								('-1', 'vbsettings', 'setting_phpkd_commercial4x_license_title', 'PHP KingDom (PHPKD) Commercial Products\' License Data (4.x) [Sensitive]', 'phpkd_framework', '" . $this->_vbulletin->db->escape_string($this->_vbulletin->userinfo['username']) . "', " . TIMENOW . ", '4.x'),
+								('-1', 'vbsettings', 'setting_phpkd_commercial4x_license_desc', 'PHP KingDom (PHPKD) Commercial Products\' License Data used for processing purposes. <strong>[Sensitive Data, DON\'T ALTER]</strong>.', 'phpkd_framework', '" . $this->_vbulletin->db->escape_string($this->_vbulletin->userinfo['username']) . "', " . TIMENOW . ", '4.x')
+						");
+					}
+
+					require_once(DIR . '/includes/adminfunctions.php');
+					build_options();
+				}
+
 				// License valid!
 				return;
 			}
@@ -701,7 +743,7 @@ class PHPKD_VBLVB
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.203
+|| # Version: 4.1.210
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

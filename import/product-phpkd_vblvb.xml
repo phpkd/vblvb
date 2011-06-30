@@ -3,7 +3,7 @@
 <product productid="phpkd_vblvb" active="1">
 	<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate']]></title>
 	<description><![CDATA[This product extract sharing links of over 140+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.]]></description>
-	<version>4.1.203</version>
+	<version>4.1.210</version>
 	<url>http://tools.phpkd.net/en/producthelp/url/vblvb/</url>
 	<versioncheckurl>http://tools.phpkd.net/en/producthelp/version/vblvb/</versioncheckurl>
 	<dependencies>
@@ -67,14 +67,46 @@ $phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase, ERRTYPE_CP);
 @extract($phpkd_vblvb->fetch_hook('can_administer', array('do' => $do, 'admin' => $admin)));]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
-			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Process Records ]]]></title>
+			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ New Post Process ]]]></title>
+			<hookname>editpost_update_process</hookname>
+			<phpcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
+$phpkd_vblvb = new PHPKD_VBLVB($this->registry, $vbphrase);
+$phpkd_vblvb->fetch_hook('editpost_update_process', array('foruminfo' => $foruminfo, 'threadinfo' => $threadinfo, 'postinfo' => $postinfo, 'edit' => $edit, 'dataman' => $dataman));]]></phpcode>
+		</plugin>
+		<plugin active="1" executionorder="5">
+			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Product Copyrights ]]]></title>
 			<hookname>global_complete</hookname>
 			<phpcode><![CDATA[if (!defined('NOPMPOPUP'))
 {
-	require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
-	$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
-	@extract($phpkd_vblvb->fetch_hook('global_complete', array('output' => $output)));
+	$output = preg_replace('#All rights reserved.#i', 'All rights reserved.<div style="text-align: center">Link Checker by <a href="http://go.phpkd.net/en/product/vblvb/" target="_blank" rel="nofollow">PHPKD - vB Link Verifier Bot</a>.</div>', $output, 1, $count);
+
+	if (empty($count))
+	{
+		$output = preg_replace('#<div id="footer_copyright"#i', '<div style="text-align: center" class="shade footer_copyright">Link Checker by <a href="http://go.phpkd.net/en/product/vblvb/" target="_blank" rel="nofollow">PHPKD - vB Link Verifier Bot</a>.</div><div id="footer_copyright"', $output, 1, $count);
+
+		if (empty($count))
+		{
+			$output = preg_replace('#<div class="below_body">#i', '<div style="text-align: center" class="shade footer_copyright">Link Checker by <a href="http://go.phpkd.net/en/product/vblvb/" target="_blank" rel="nofollow">PHPKD - vB Link Verifier Bot</a>.</div><div class="below_body">', $output, 1, $count);
+
+			if (empty($count))
+			{
+				$output = preg_replace('#Powered by vBulletin&trade;#i', '<div style="text-align: center" class="shade footer_copyright">Link Checker by <a href="http://go.phpkd.net/en/product/vblvb/" target="_blank" rel="nofollow">PHPKD - vB Link Verifier Bot</a>.</div>Powered by vBulletin&trade;', $output, 1, $count);
+
+				if (empty($count))
+				{
+					$output = preg_replace('#</body>#i', '<div style="text-align: center" class="shade footer_copyright">Link Checker by <a href="http://go.phpkd.net/en/product/vblvb/" target="_blank" rel="nofollow">PHPKD - vB Link Verifier Bot</a>.</div></body>', $output, 1, $count);
+				}
+			}
+		}
+	}
 }]]></phpcode>
+		</plugin>
+		<plugin active="1" executionorder="5">
+			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ New Post Process ]]]></title>
+			<hookname>newpost_process</hookname>
+			<phpcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
+$phpkd_vblvb = new PHPKD_VBLVB($this->registry, $vbphrase);
+$phpkd_vblvb->fetch_hook('newpost_process', array('type' => $type, 'post' => $post, 'dataman' => $dataman));]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
 			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Display last checked note ]]]></title>
@@ -274,6 +306,7 @@ $bbtitle]]></phrase>
 	<li>All posts has been checked already, and the next successive check didn't come yet.</li>
 	<li>As per your product's settings, there isn't any posts to check currently. <a href="phpkd_vblvb.php?null=0">You may wish to review your product's settings</a>.</li>
 </ol>]]></phrase>
+			<phrase name="phpkd_vblvb_copyright_violate" date="1308855639" username="PHPKD" version="4.1.210"><![CDATA[<span class="diff-deleted">Sorry, copyright notice has been altered or disalbed without prior official permission. 'Branding Free' option required to do so.. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for this matter.</span>]]></phrase>
 			<phrase name="phpkd_vblvb_developers_only" date="1277049500" username="PHPKD" version="4.0.200"><![CDATA[Sorry, this feature is available for official developers only.]]></phrase>
 			<phrase name="phpkd_vblvb_host_deleted_successfully" date="1278005341" username="PHPKD" version="4.0.200"><![CDATA[Host deleted successfully!]]></phrase>
 			<phrase name="phpkd_vblvb_inactive" date="1293449751" username="PHPKD" version="4.1.201"><![CDATA[Sorry, the product "PHPKD - vB Link Verifier Bot" is currently disabled! <a href="phpkd_vblvb.php?do=options&dogroup=general">Please activate the product first then run this scheduled task again.</a>]]></phrase>
@@ -535,7 +568,7 @@ You've multiple options to choose from:<br />
 	</helptopics>
 	<cronentries>
 		<cron varname="phpkd_vblvb" active="1" loglevel="1">
-			<filename>./includes/phpkd/vblvb/cron.php</filename>
+			<filename>./includes/phpkd/vblvb/class_cron.php</filename>
 			<scheduling weekday="-1" day="-1" hour="0" minute="0" />
 		</cron>
 	</cronentries>
@@ -543,4 +576,4 @@ You've multiple options to choose from:<br />
 	</faqentries>
 </product>
 
-<!-- SVN: $Version: 4.1.203 $ - $Id$ -->
+<!-- SVN: $Version: 4.1.210 $ - $Id$ -->

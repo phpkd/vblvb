@@ -1,11 +1,11 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.203 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.210 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #            Copyright ©2005-2010 PHP KingDom. All Rights Reserved.            # ||
+|| #            Copyright ©2005-2011 PHP KingDom. All Rights Reserved.            # ||
 || #      This product may not be redistributed in whole or significant part.     # ||
 || # 																			  # ||
 || # ---------- "vB Link Verifier Bot 'Ultimate'" IS NOT FREE SOFTWARE ---------- # ||
@@ -81,7 +81,8 @@ class PHPKD_VBLVB_DM
 	 */
 	public function fetch_urls($messagetext, $postid = 0)
 	{
-		$opentags = $closetags = array();
+		$opentags = array();
+		$closetags = array();
 		$this->_registry->initialize(array('hosts', 'protocols', 'bbcodes'));
 
 		foreach ($this->_registry->bbcodes as $bbkey => $bbvalue)
@@ -173,7 +174,8 @@ class PHPKD_VBLVB_DM
 
 		if (is_array($actualurls) AND !empty($actualurls))
 		{
-			$checked = $counter = 0;
+			$checked = 0;
+			$counter = 0;
 			$urlsreturn = array();
 
 			foreach(array_unique($actualurls) as $url)
@@ -215,7 +217,9 @@ class PHPKD_VBLVB_DM
 				$this->_registry->logstring('</ol>', true, $postid);
 			}
 
-			$alive = $dead = $down = 0;
+			$alive = 0;
+			$dead = 0;
+			$down = 0;
 
 			foreach ($urlsreturn as $urlreturn)
 			{
@@ -683,7 +687,8 @@ class PHPKD_VBLVB_DM
 		// Punish whole threads
 		if (!empty($this->_registry->thread_punishs) AND !empty($punished_content['threads']))
 		{
-			$countingthreads = $modrecords = array();
+			$countingthreads = array();
+			$modrecords = array();
 
 			if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] AND $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']))
 			{
@@ -691,10 +696,9 @@ class PHPKD_VBLVB_DM
 				{
 					foreach ($this->_registry->thread_punishs as $punishment)
 					{
-						if ('move' != $punishment)
+						if ($punishment != 'move')
 						{
-							$logpunish['threads'][$threadid][$punishment] = true;
-							$logpunish['threads'][$threadid]['dateline'] = TIMENOW;
+							$logpunish['threads'][$threadid][$punishment] = TIMENOW;
 						}
 					}
 
@@ -854,7 +858,7 @@ class PHPKD_VBLVB_DM
 						{
 							$replycount = $this->_registry->_vbulletin->forumcache["$thread[forumid]"]['options'] & $this->_registry->_vbulletin->bf_misc_forumoptions['countposts'];
 
-							if (2 == $thread['visible'])
+							if ($thread['visible'] == 2)
 							{
 								# Thread is already soft deleted
 								continue;
@@ -864,7 +868,7 @@ class PHPKD_VBLVB_DM
 							$threadman->set_existing($thread);
 
 							// Redirect
-							if (10 == $thread['open'])
+							if ($thread['open'] == 10)
 							{
 								$threadman->delete(false, true, ($delinfo ? $delinfo : null), ($delinfo ? true : false));
 							}
@@ -886,7 +890,8 @@ class PHPKD_VBLVB_DM
 						// check whether destination forum can contain posts
 						if ($destforuminfo = verify_id('forum', $this->_registry->_vbulletin->phpkd_vblvb['punishment_forumid'], false, true) AND $destforuminfo['cancontainthreads'] AND !$destforuminfo['link'])
 						{
-							$threadarray = $countingthreads = array();
+							$threadarray = array();
+							$countingthreads = array();
 
 							foreach ($punished_content['threads'] as $threadid => $thread)
 							{
@@ -906,14 +911,9 @@ class PHPKD_VBLVB_DM
 
 							if (!empty($threadarray))
 							{
-								// Check to see if these threads are being returned to a forum they've already been in. If redirects exist in the destination forum, remove them.
-								$checkprevious = $this->_registry->_vbulletin->db->query_read("
-									SELECT threadid
-									FROM " . TABLE_PREFIX . "thread
-									WHERE forumid = $destforuminfo[forumid]
-										AND open = 10
-										AND pollid IN(" . implode(',', array_keys($threadarray)) . ")
-								");
+								// check to see if this thread is being returned to a forum it's already been in
+								// if a redirect exists already in the destination forum, remove it
+								$checkprevious = $this->_registry->_vbulletin->db->query_read("SELECT threadid FROM " . TABLE_PREFIX . "thread WHERE forumid = $destforuminfo[forumid] AND open = 10 AND pollid IN(" . implode(',', array_keys($threadarray)) . ")");
 
 								while ($check = $this->_registry->_vbulletin->db->fetch_array($checkprevious))
 								{
@@ -1054,8 +1054,7 @@ class PHPKD_VBLVB_DM
 				{
 					foreach ($this->_registry->post_punishs as $punishment)
 					{
-						$logpunish['posts'][$postid][$punishment] = true;
-						$logpunish['posts'][$postid]['dateline'] = TIMENOW;
+						$logpunish['posts'][$postid][$punishment] = TIMENOW;
 					}
 				}
 
@@ -1126,7 +1125,8 @@ class PHPKD_VBLVB_DM
 
 		if (!empty($logpunish))
 		{
-			$update_lastpunish_thread = $update_lastpunish_post = '';
+			$update_lastpunish_thread = '';
+			$update_lastpunish_post = '';
 
 			foreach ($logpunish as $typeid => $type)
 			{
@@ -1222,7 +1222,7 @@ class PHPKD_VBLVB_DM
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.203
+|| # Version: 4.1.210
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

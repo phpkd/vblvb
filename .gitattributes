@@ -49,14 +49,14 @@ upload/admincp/phpkd_vblvb.php -text
 upload/includes/md5_sums_phpkd_vblvb.php -text
 upload/includes/phpkd/index.html -text
 upload/includes/phpkd/vblvb/adminfunctions.php -text
+upload/includes/phpkd/vblvb/class_copyright.php -text
 upload/includes/phpkd/vblvb/class_core.php -text
+upload/includes/phpkd/vblvb/class_cron.php -text
 upload/includes/phpkd/vblvb/class_dm.php -text
 upload/includes/phpkd/vblvb/class_dml.php -text
 upload/includes/phpkd/vblvb/class_hooks.php -text
 upload/includes/phpkd/vblvb/class_init.php -text
 upload/includes/phpkd/vblvb/class_install.php -text
-upload/includes/phpkd/vblvb/cron.php -text
-upload/includes/phpkd/vblvb/functions_databuild.php -text
 upload/includes/phpkd/vblvb/hosts.xml -text svneol=unset#text/plain
 upload/includes/phpkd/vblvb/index.html -text
 upload/includes/phpkd/vblvb/settings.xml -text svneol=unset#text/plain

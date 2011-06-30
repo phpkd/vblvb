@@ -12,14 +12,14 @@ PHPKD - vB Link Verifier Bot 'Ultimate' -- Installation Procedure:
 	     + phpkd
 	          + vblvb
 		- adminfunctions.php
+		- class_copyright.php
 		- class_core.php
+		- class_cron.php
 		- class_dm.php
 		- class_dml.php
 		- class_hooks.php
 		- class_init.php
 		- class_install.php
-		- cron.php
-		- functions_databuild.php
 		- hosts.xml
 		- settings.xml
 	     - md5_sums_phpkd_vblvb.php
@@ -54,4 +54,4 @@ PHPKD - vB Link Verifier Bot 'Ultimate' -- Installation Procedure:
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.1.203 $ - $Id$
+$Version: 4.1.210 $ - $Id$

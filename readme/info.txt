@@ -10,7 +10,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.1.203
+     * 4.1.210
 
 
 Description:
@@ -458,13 +458,12 @@ Installation Procedure:
 	          + vblvb
 		- adminfunctions.php
 		- class_core.php
+		- class_cron.php
 		- class_dm.php
 		- class_dml.php
 		- class_hooks.php
 		- class_init.php
 		- class_install.php
-		- cron.php
-		- functions_databuild.php
 		- hosts.xml
 		- settings.xml
 	     - md5_sums_phpkd_vblvb.php
@@ -930,6 +929,11 @@ History:
 	2. Bug fix: "Run Scheduled Task" redirect error, Cannot modify header information (http://forum.phpkd.net/project.php?issueid=152)
 	3. Bug fix: Copyright statement appears in redirect messages (http://forum.phpkd.net/project.php?issueid=154)
 	4. Bug fix: vBCMS Fatal error: vBulletin Registry object is not an object! (http://forum.phpkd.net/project.php?issueid=153)
+     * v4.1.210 01/07/2011 10:00 AM UTC: Featured release (public)
+	1. New Feature: Check new posts.
+	2. New Feature: Check edited posts.
+	3. New Feature: Revert actions on edit.
+	4. Normalization, standardization and consintency.
 
 
 Screen Shots:
@@ -981,4 +985,4 @@ Recent Products:
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.1.203 $ - $Id$
+$Version: 4.1.210 $ - $Id$

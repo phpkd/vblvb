@@ -1,11 +1,11 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.203 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.210 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #            Copyright ©2005-2010 PHP KingDom. All Rights Reserved.            # ||
+|| #            Copyright ©2005-2011 PHP KingDom. All Rights Reserved.            # ||
 || #      This product may not be redistributed in whole or significant part.     # ||
 || # 																			  # ||
 || # ---------- "vB Link Verifier Bot 'Ultimate'" IS NOT FREE SOFTWARE ---------- # ||
@@ -38,9 +38,18 @@ if (!defined('IN_CONTROL_PANEL'))
 // ######################### START MAIN SCRIPT ############################
 // ########################################################################
 require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
-$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase, defined('IN_CONTROL_PANEL') ? ERRTYPE_CP : ERRTYPE_SILENT);
+require_once(DIR . '/includes/phpkd/vblvb/class_copyright.php');
 
-if ($vbulletin->phpkd_vblvb['general_active'])
+$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase, defined('IN_CONTROL_PANEL') ? ERRTYPE_CP : ERRTYPE_SILENT);
+$plugin = $vbulletin->db->query_first("SELECT * FROM " . TABLE_PREFIX . "plugin WHERE product = 'phpkd_vblvb' AND hookname = 'global_complete'");
+$tocken = md5(md5($bburl['host']) . md5(PHPKD_VBLVB_TOCKEN) . md5($vbulletin->userinfo['securitytoken']) . md5(TIMENOW));
+$bburl = @parse_url($vbulletin->options['bburl']);
+
+if ((!$plugin['active'] AND $copyright != $tocken) OR md5($plugin['phpcode']) != 'd41d8cd98f00b204e9800998ecf8427e')
+{
+	$phpkd_vblvb->seterror('phpkd_vblvb_copyright_violate');
+}
+else if ($vbulletin->phpkd_vblvb['general_active'])
 {
 	$phpkd_vblvb->verify_license();
 
@@ -112,7 +121,10 @@ if ($vbulletin->phpkd_vblvb['general_active'])
 	}
 
 
-	$inex_users = $inex_usergroups = $inex_forums = $cutoff = '';
+	$inex_users = '';
+	$inex_usergroups = '';
+	$inex_forums = '';
+	$cutoff = '';
 
 	// Auto exclude report forums/threads & recycle bin forum from being checked: http://forum.phpkd.net/project.php?issueid=71
 	$forced_inex_forums = ($vbulletin->phpkd_vblvb['reporting_forumid'] ? $vbulletin->phpkd_vblvb['reporting_forumid'] . ',' : '') . ($vbulletin->phpkd_vblvb['punishment_forumid'] ? $vbulletin->phpkd_vblvb['punishment_forumid'] . ',' : '') . '0';
@@ -209,7 +221,11 @@ if ($vbulletin->phpkd_vblvb['general_active'])
 		$punished_links = '';
 		$records = array('checked' => 0, 'dead' => 0, 'punished' => 0);
 		$colors = unserialize($vbulletin->phpkd_vblvb['lookfeel_linkstatus_colors']);
-		$posts = $punished_content = $urlrecords = $checkedposts = $deadposts = array();
+		$posts = array();
+		$punished_content = array();
+		$urlrecords = array();
+		$checkedposts = array();
+		$deadposts = array();
 		$phpkd_vblvb->logstring($vbphrase['phpkd_vblvb_log_checked_posts'] . '<ol class="smallfont">', ($vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1));
 
 		while ($postitem = $vbulletin->db->fetch_array($post_query))
@@ -348,7 +364,7 @@ log_cron_action('', $nextitem, 1);
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.203
+|| # Version: 4.1.210
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

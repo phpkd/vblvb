@@ -1,11 +1,11 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.203 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.210 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #            Copyright ©2005-2010 PHP KingDom. All Rights Reserved.            # ||
+|| #            Copyright ©2005-2011 PHP KingDom. All Rights Reserved.            # ||
 || #      This product may not be redistributed in whole or significant part.     # ||
 || # 																			  # ||
 || # ---------- "vB Link Verifier Bot 'Ultimate'" IS NOT FREE SOFTWARE ---------- # ||
@@ -72,7 +72,7 @@ class PHPKD_VBLVB_Install
 	 */
 	public function install_init($info)
 	{
-		if (!file_exists(DIR . '/includes/phpkd/vblvb/class_core.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_init.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dm.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dml.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_hooks.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/cron.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/functions_databuild.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/adminfunctions.php') OR !file_exists(DIR . '/includes/xml/bitfield_phpkd_vblvb.xml') OR !file_exists(DIR . '/includes/xml/cpnav_phpkd_vblvb.xml'))
+		if (!file_exists(DIR . '/includes/phpkd/vblvb/class_core.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_init.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dm.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dml.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_hooks.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_cron.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/functions_databuild.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/adminfunctions.php') OR !file_exists(DIR . '/includes/xml/bitfield_phpkd_vblvb.xml') OR !file_exists(DIR . '/includes/xml/cpnav_phpkd_vblvb.xml'))
 		{
 			print_dots_stop();
 			print_cp_message('Please upload the files that came with "PHPKD - vB Link Verifier Bot" product before installing or upgrading!');
@@ -95,15 +95,15 @@ class PHPKD_VBLVB_Install
 		$phpkdinfo['url'] = $info['url'];
 		$phpkdinfo['versioncheckurl'] = $info['versioncheckurl'];
 
-		if ($this->_vbulletin->options['phpkd_commercial40_data'])
+		if ($this->_vbulletin->options['phpkd_commercial4x_data'])
 		{
-			$holder = unserialize($this->_vbulletin->options['phpkd_commercial40_data']);
+			$holder = unserialize($this->_vbulletin->options['phpkd_commercial4x_data']);
 			$holder[$phpkdinfo['productid']] = $phpkdinfo;
 			$data = $this->_vbulletin->db->escape_string(serialize($holder));
 			$this->_vbulletin->db->query_write("
 				UPDATE " . TABLE_PREFIX . "setting
 				SET value = '$data'
-				WHERE varname = 'phpkd_commercial40_data'
+				WHERE varname = 'phpkd_commercial4x_data'
 			");
 		}
 		else
@@ -115,16 +115,16 @@ class PHPKD_VBLVB_Install
 				REPLACE INTO " . TABLE_PREFIX . "setting
 					(varname, grouptitle, value, defaultvalue, datatype, optioncode, displayorder, advanced, volatile, validationcode, blacklist, product)
 				VALUES
-					('phpkd_commercial40_data', 'version', '$data', '', 'free', '', '40100', '0', '1', '', '0', 'phpkd_framework')
+					('phpkd_commercial4x_data', 'version', '$data', '', 'free', '', '4444', '0', '1', '', '0', 'phpkd_framework')
 			");
 
 			$this->_vbulletin->db->query_write("
 				REPLACE INTO " . TABLE_PREFIX . "phrase
 					(languageid, fieldname, varname, text, product, username, dateline, version)
 				VALUES
-					('-1', 'vbsettings', 'setting_phpkd_commercial40_data_title', 'PHP KingDom (PHPKD) Commercial Products\' Data (4.0.x) [Sensitive]', 'phpkd_framework', '" . $this->_vbulletin->db->escape_string($this->_vbulletin->userinfo['username']) . "', " . TIMENOW . ", '4.0.100'),
-					('-1', 'vbsettings', 'setting_phpkd_commercial40_data_desc', 'PHP KingDom (PHPKD) Commercial Products\' Data used for debugging purposes. <strong>[Sensitive Data, DON\'T ALTER]</strong>.', 'phpkd_framework', '" . $this->_vbulletin->db->escape_string($this->_vbulletin->userinfo['username']) . "', " . TIMENOW . ", '4.0.100')
-				");
+					('-1', 'vbsettings', 'setting_phpkd_commercial4x_data_title', 'PHP KingDom (PHPKD) Commercial Products\' Data (4.x) [Sensitive]', 'phpkd_framework', '" . $this->_vbulletin->db->escape_string($this->_vbulletin->userinfo['username']) . "', " . TIMENOW . ", '4.x'),
+					('-1', 'vbsettings', 'setting_phpkd_commercial4x_data_desc', 'PHP KingDom (PHPKD) Commercial Products\' Data used for debugging purposes. <strong>[Sensitive Data, DON\'T ALTER]</strong>.', 'phpkd_framework', '" . $this->_vbulletin->db->escape_string($this->_vbulletin->userinfo['username']) . "', " . TIMENOW . ", '4.x')
+			");
 		}
 
 		build_options();
@@ -151,9 +151,9 @@ class PHPKD_VBLVB_Install
 		// ## Debug Stuff: Begin                                               ##
 		// ######################################################################
 
-		if ($this->_vbulletin->options['phpkd_commercial40_data'])
+		if ($this->_vbulletin->options['phpkd_commercial4x_data'])
 		{
-			$holder = unserialize($this->_vbulletin->options['phpkd_commercial40_data']);
+			$holder = unserialize($this->_vbulletin->options['phpkd_commercial4x_data']);
 
 			if ($holder[$this->_vbulletin->db->escape_string($this->_vbulletin->GPC['productid'])])
 			{
@@ -168,7 +168,7 @@ class PHPKD_VBLVB_Install
 				$this->_vbulletin->db->query_write("
 					UPDATE " . TABLE_PREFIX . "setting SET
 					value = '$data'
-					WHERE varname = 'phpkd_commercial40_data'
+					WHERE varname = 'phpkd_commercial4x_data'
 				");
 			}
 			else
@@ -178,11 +178,11 @@ class PHPKD_VBLVB_Install
 					DELETE FROM " . TABLE_PREFIX . "phrase
 					WHERE languageid IN (-1, 0) AND
 						fieldname = 'vbsettings' AND
-						varname IN ('setting_phpkd_commercial40_data_title', 'setting_phpkd_commercial40_data_desc')
+						varname IN ('setting_phpkd_commercial4x_data_title', 'setting_phpkd_commercial4x_data_desc')
 				");
 
 				// delete setting
-				$this->_vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "setting WHERE varname = 'phpkd_commercial40_data'");
+				$this->_vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "setting WHERE varname = 'phpkd_commercial4x_data'");
 			}
 		}
 
@@ -417,7 +417,7 @@ class PHPKD_VBLVB_Install
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.203
+|| # Version: 4.1.210
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
