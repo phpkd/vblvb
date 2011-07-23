@@ -26,7 +26,7 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 			<installcode><![CDATA[$phpkd_vblvb->install_40200();]]></installcode>
 			<uninstallcode><![CDATA[$phpkd_vblvb->uninstall_40200();]]></uninstallcode>
 		</code>
-		<code version="4.1.202">
+		<code version="4.1.999">
 			<installcode><![CDATA[$phpkd_vblvb->reimport_hosts();]]></installcode>
 			<uninstallcode />
 		</code>

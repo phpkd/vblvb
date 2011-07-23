@@ -75,8 +75,8 @@
 		<notes>Permanently dead host!</notes>
 	</host>
 	<host domain="cramit.in" active="1" status="alive">
-		<urlmatch><![CDATA[cramit\.in/[0-9a-z]+]]></urlmatch>
-		<contentmatch>(download1|download2)</contentmatch>
+		<urlmatch><![CDATA[(cramit\.in|cramit\.net|cramit\.us|cramit\.eu)/[0-9a-z]+]]></urlmatch>
+		<contentmatch>method_free</contentmatch>
 	</host>
 	<host domain="crazyupload.com" active="1" status="dead">
 		<urlmatch><![CDATA[crazyupload\.com/[0-9a-z]+]]></urlmatch>
@@ -226,7 +226,7 @@
 		<contentmatch>(download1|download2)</contentmatch>
 	</host>
 	<host domain="filesonic.com" active="1" status="alive">
-		<urlmatch><![CDATA[filesonic\.com/file/[0-9]+/]]></urlmatch>
+		<urlmatch><![CDATA[filesonic\.com/file/[0-9]+]]></urlmatch>
 		<contentmatch>filename</contentmatch>
 	</host>
 	<host domain="filesovermiles.com" active="0" status="alive">
@@ -546,7 +546,7 @@
 	</host>
 	<host domain="uploaded.to" active="1" status="alive">
 		<urlmatch><![CDATA[(uploaded\.to|ul\.to)/(\?id=|file/)?[0-9a-z]+]]></urlmatch>
-		<contentmatch>(download_form|inputActive)</contentmatch>
+		<contentmatch>Download._blink</contentmatch>
 	</host>
 	<host domain="uploading.com" active="1" status="alive">
 		<urlmatch><![CDATA[uploading\.com/files/[0-9a-z]+]]></urlmatch>

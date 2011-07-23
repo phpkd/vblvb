@@ -51,12 +51,12 @@ if ((!$plugin['active'] AND $copyright != $tocken) OR md5($plugin['phpcode']) !=
 }
 else if ($vbulletin->phpkd_vblvb['general_active'])
 {
-	$phpkd_vblvb->verify_license();
-
 	if (!$vbulletin->phpkd_vblvb['general_checked_existingposts'])
 	{
 		$phpkd_vblvb->seterror('phpkd_vblvb_checked_existing');
 	}
+
+	$phpkd_vblvb->verify_license();
 
 	// Required Initialization
 	$phpkd_vblvb->initialize(array('thread_modes', 'post_modes'));

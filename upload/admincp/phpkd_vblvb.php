@@ -1641,7 +1641,7 @@ if ($_REQUEST['do'] == 'viewlog')
 		LEFT JOIN " . TABLE_PREFIX . "post AS post USING(postid)
 		LEFT JOIN " . TABLE_PREFIX . "thread AS thread ON (post.threadid = thread.threadid)
 		LEFT JOIN " . TABLE_PREFIX . "forum AS forum ON (thread.forumid = forum.forumid)
-		INNER JOIN (SELECT DISTINCT losub.dateline FROM " . TABLE_PREFIX . "phpkd_vblvb_log AS losub $sqlconds ORDER BY losub.dateline DESC LIMIT $startat, " .  $vbulletin->GPC['perpage'] . ") AS joinedsub ON (log.dateline = joinedsub.dateline)
+		INNER JOIN (SELECT DISTINCT log.dateline FROM " . TABLE_PREFIX . "phpkd_vblvb_log AS log $sqlconds ORDER BY log.dateline DESC LIMIT $startat, " .  $vbulletin->GPC['perpage'] . ") AS joinedsub ON (log.dateline = joinedsub.dateline)
 		ORDER BY log." . $vbulletin->GPC['orderby'] . ' ' . $vbulletin->GPC['direction'] . "
 
 	");

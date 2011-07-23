@@ -930,10 +930,16 @@ History:
 	3. Bug fix: Copyright statement appears in redirect messages (http://forum.phpkd.net/project.php?issueid=154)
 	4. Bug fix: vBCMS Fatal error: vBulletin Registry object is not an object! (http://forum.phpkd.net/project.php?issueid=153)
      * v4.1.210 01/07/2011 10:00 AM UTC: Featured release (public)
-	1. New Feature: Check new posts.
-	2. New Feature: Check edited posts.
-	3. New Feature: Revert actions on edit.
-	4. Normalization, standardization and consintency.
+	1. New Feature: Check new posts
+	2. New Feature: Check edited posts
+	3. New Feature: Revert actions on edit
+	4. New Feature: Add support for cramitin.net, cramitin.us, cramitin.eu
+	5. Enhancement: Always import hosts from xml file after every upgrade to keep it up-to-date
+	6. Bug Fix: Some filesonic.com links getting ignored
+	8. Bug Fix: uploaded.to links are falsely reported
+	9. Bug Fix: cramit.in links are falsely reported
+	10. Bug Fix: Log records SQL Error - Unknown column 'log.dateline' in 'where clause'
+	11. Normalization, standardization and consintency
 
 
 Screen Shots:
