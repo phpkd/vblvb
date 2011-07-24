@@ -929,7 +929,7 @@ History:
 	2. Bug fix: "Run Scheduled Task" redirect error, Cannot modify header information (http://forum.phpkd.net/project.php?issueid=152)
 	3. Bug fix: Copyright statement appears in redirect messages (http://forum.phpkd.net/project.php?issueid=154)
 	4. Bug fix: vBCMS Fatal error: vBulletin Registry object is not an object! (http://forum.phpkd.net/project.php?issueid=153)
-     * v4.1.210 01/07/2011 10:00 AM UTC: Featured release (public)
+     * v4.1.210 24/07/2011 10:00 AM UTC: Featured release (public)
 	1. New Feature: Check new posts
 	2. New Feature: Check edited posts
 	3. New Feature: Revert actions on edit
