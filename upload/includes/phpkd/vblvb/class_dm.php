@@ -691,7 +691,7 @@ class PHPKD_VBLVB_DM
 			$modrecords = array();
 			$reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']);
 
-			foreach (array_keys($punished_content['threads']) AS $threadid => $thread)
+			foreach ($punished_content['threads'] AS $threadid => $thread)
 			{
 				foreach ($this->_registry->thread_punishs as $punishment)
 				{
@@ -730,8 +730,8 @@ class PHPKD_VBLVB_DM
 				if ($reporter['userid'])
 				{
 					$modlog[] = array(
-						'userid'   =>& $reporter['userid'],
-						'forumid'  =>& $punished_content['threads']["$threadid"]['forumid'],
+						'userid'   => $reporter['userid'],
+						'forumid'  => $punished_content['threads']["$threadid"]['forumid'],
 						'threadid' => $threadid,
 					);
 				}
@@ -1058,8 +1058,8 @@ class PHPKD_VBLVB_DM
 								foreach ($threadarray as $threadid => $thread)
 								{
 									$modlog[] = array(
-										'userid'   =>& $reporter['userid'],
-										'forumid'  =>& $thread['forumid'],
+										'userid'   => $reporter['userid'],
+										'forumid'  => $thread['forumid'],
 										'threadid' => $threadid,
 									);
 								}
@@ -1079,7 +1079,7 @@ class PHPKD_VBLVB_DM
 			$firstpost = array();
 			$reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']);
 
-			foreach (array_keys($punished_content['posts']) AS $postid => $post)
+			foreach ($punished_content['posts'] AS $postid => $post)
 			{
 				foreach ($this->_registry->post_punishs as $punishment)
 				{
