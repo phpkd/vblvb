@@ -942,6 +942,9 @@ History:
 	10. Normalization, standardization and consintency
      * v4.1.211 24/07/2011 11:00 AM UTC: Maintenance release (public)
 	1. Bug Fix: Thread punishment 'move' causes DB error
+     * v4.1.212 25/07/2011 11:00 AM UTC: Maintenance release (public)
+	1. Bug Fix: Installation/Upgrade issue
+	2. Bug Fix: Branding free issue
 
 
 Screen Shots:

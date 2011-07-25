@@ -42,8 +42,8 @@ require_once(DIR . '/includes/phpkd/vblvb/class_copyright.php');
 
 $phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase, defined('IN_CONTROL_PANEL') ? ERRTYPE_CP : ERRTYPE_SILENT);
 $plugin = $vbulletin->db->query_first("SELECT * FROM " . TABLE_PREFIX . "plugin WHERE product = 'phpkd_vblvb' AND hookname = 'global_complete'");
-$tocken = md5(md5($bburl['host']) . md5(PHPKD_VBLVB_TOCKEN) . md5($vbulletin->userinfo['securitytoken']) . md5(TIMENOW));
 $bburl = @parse_url($vbulletin->options['bburl']);
+$tocken = md5(md5($bburl['host']) . md5(PHPKD_VBLVB_TOCKEN) . md5($vbulletin->userinfo['securitytoken']) . md5(TIMENOW));
 
 if ((!$plugin['active'] AND $copyright != $tocken) OR md5($plugin['phpcode']) != '9d75af8827a7d278565dd87b7c6d852e')
 {
