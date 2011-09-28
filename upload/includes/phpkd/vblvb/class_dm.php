@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.212 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -357,7 +357,9 @@ class PHPKD_VBLVB_DM
 		$vurl->set_option(VURL_URL, $url);
 		$vurl->set_option(VURL_USERAGENT, 'vBulletin/' . FILE_VERSION);
 		$vurl->set_option(VURL_FOLLOWLOCATION, 1);
-		$vurl->set_option(VURL_MAXREDIRS, 3);
+		$vurl->set_option(VURL_MAXREDIRS, $this->_registry->_vbulletin->phpkd_vblvb['general_vurl_maxredirs']);
+		$vurl->set_option(VURL_TIMEOUT, $this->_registry->_vbulletin->phpkd_vblvb['general_vurl_timeout']);
+		$vurl->set_option(VURL_MAXSIZE, $this->_registry->_vbulletin->phpkd_vblvb['general_vurl_maxsize']);
 
 		if (null !== $post)
 		{
@@ -384,7 +386,15 @@ class PHPKD_VBLVB_DM
 
 		if (!empty($this->_registry->staff_reports) AND $this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] AND $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']) AND $mods = $this->fetch_staff() AND $postlogs = $this->_registry->getPostlog())
 		{
-			require_once(DIR . '/includes/functions_wysiwyg.php');
+			if (FILE_VERSION >= '4.1.4')
+			{
+				require_once(DIR . '/includes/class_wysiwygparser.php');
+				$html_parser = new vB_WysiwygHtmlParser($this->_registry->_vbulletin);
+			}
+			else
+			{
+				require_once(DIR . '/includes/functions_wysiwyg.php');
+			}
 
 			$logstring = $this->_registry->_vbphrase['phpkd_vblvb_log_checked_posts'] . '<ol class="smallfont">';
 
@@ -431,7 +441,16 @@ class PHPKD_VBLVB_DM
 
 
 			cache_permissions($reporter, false);
-			$formatedlog = convert_wysiwyg_html_to_bbcode($logstring, false, true);
+
+			if (FILE_VERSION >= '4.1.4')
+			{
+				$formatedlog = $html_parser->parse_wysiwyg_html_to_bbcode($logstring, false, true);
+			}
+			else
+			{
+				$formatedlog = convert_wysiwyg_html_to_bbcode($logstring, false, true);
+			}
+
 			$datenow = vbdate($this->_registry->_vbulletin->options['dateformat'], TIMENOW);
 			$timenow = vbdate($this->_registry->_vbulletin->options['timeformat'], TIMENOW);
 
@@ -599,8 +618,17 @@ class PHPKD_VBLVB_DM
 
 		if (!empty($this->_registry->user_reports) AND $this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] AND $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']))
 		{
-			require_once(DIR . '/includes/functions_wysiwyg.php');
 			require_once(DIR . '/includes/class_bbcode_alt.php');
+
+			if (FILE_VERSION >= '4.1.4')
+			{
+				require_once(DIR . '/includes/class_wysiwygparser.php');
+				$html_parser = new vB_WysiwygHtmlParser($this->_registry->_vbulletin);
+			}
+			else
+			{
+				require_once(DIR . '/includes/functions_wysiwyg.php');
+			}
 
 			cache_permissions($reporter, false);
 			$datenow = vbdate($this->_registry->_vbulletin->options['dateformat'], TIMENOW);
@@ -613,7 +641,15 @@ class PHPKD_VBLVB_DM
 			foreach ($postids as $postid)
 			{
 				$postlog = $this->_registry->getPostlog($postid);
-				$formatedlog = convert_wysiwyg_html_to_bbcode($postlog['logrecord'], false, true);
+
+				if (FILE_VERSION >= '4.1.4')
+				{
+					$formatedlog = $html_parser->parse_wysiwyg_html_to_bbcode($postlog['logrecord'], false, true);
+				}
+				else
+				{
+					$formatedlog = convert_wysiwyg_html_to_bbcode($postlog['logrecord'], false, true);
+				}
 
 				foreach ($this->_registry->user_reports as $user_report)
 				{
@@ -1268,7 +1304,7 @@ class PHPKD_VBLVB_DM
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.212
+|| # Version: 4.1.220
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

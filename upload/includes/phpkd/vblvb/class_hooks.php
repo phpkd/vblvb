@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.212 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -202,6 +202,83 @@ class PHPKD_VBLVB_Hooks
 	 *
 	 * Input Parameters:
 	 * ~~~~~~~~~~~~~~~~~~
+	 * $forumid, $hook_query_fields, $hook_query_joins
+	 *
+	 * Output Parameters:
+	 * ~~~~~~~~~~~~~~~~~~~
+	 * $phpkd_vblvb_postbit, $hook_query_fields, $hook_query_joins
+	 *
+	 */
+	public function forumdisplay_query($params)
+	{
+		// Parameters required!
+		if ($this->_registry->verify_hook_params($params))
+		{
+			@extract($params);
+
+			$phpkd_vblvb_postbit = false;
+			$lookfeel_postbit = unserialize($this->_registry->_vbulletin->phpkd_vblvb['lookfeel_postbit_note']);
+
+			if (!empty($lookfeel_postbit) AND in_array($forumid, $lookfeel_postbit))
+			{
+				$phpkd_vblvb_postbit = true;
+				$hook_query_fields .= ", phpkd_vblvb_post.phpkd_vblvb_lastcheck";
+				$hook_query_joins .= "LEFT JOIN " . TABLE_PREFIX . "post AS phpkd_vblvb_post ON(phpkd_vblvb_post.postid = thread.firstpostid)";
+			}
+
+			return array('phpkd_vblvb_postbit' => $phpkd_vblvb_postbit, 'hook_query_fields' => $hook_query_fields, 'hook_query_joins' => $hook_query_joins);
+		}
+	}
+
+	/*
+	 * Required Initializations
+	 * ~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 * NULL
+	 *
+	 * Input Parameters:
+	 * ~~~~~~~~~~~~~~~~~~
+	 * $post, $thread, $template_hook
+	 *
+	 * Output Parameters:
+	 * ~~~~~~~~~~~~~~~~~~~
+	 * $template_hook
+	 *
+	 */
+	public function threadbit_display($params)
+	{
+		// Parameters required!
+		if ($this->_registry->verify_hook_params($params))
+		{
+			@extract($params);
+			global $phpkd_vblvb_postbit;
+
+			if (!empty($phpkd_vblvb_postbit))
+			{
+				if (!empty($thread['phpkd_vblvb_lastcheck']))
+				{
+					// format date/time
+					$threaddate = vbdate($this->_registry->_vbulletin->options['dateformat'], $thread['phpkd_vblvb_lastcheck'], true);
+					$threadtime = vbdate($this->_registry->_vbulletin->options['timeformat'], $thread['phpkd_vblvb_lastcheck']);
+
+					$template_hook['postbit_phpkd_vblvb'] = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_lastcheck'], $threaddate, $threadtime);
+				}
+				else
+				{
+					$template_hook['postbit_phpkd_vblvb'] = $this->_registry->_vbphrase['phpkd_vblvb_lastcheck_never'];
+				}
+			}
+
+			return array('template_hook' => $template_hook);
+		}
+	}
+
+	/*
+	 * Required Initializations
+	 * ~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 * NULL
+	 *
+	 * Input Parameters:
+	 * ~~~~~~~~~~~~~~~~~~
 	 * $thread
 	 *
 	 * Output Parameters:
@@ -235,7 +312,7 @@ class PHPKD_VBLVB_Hooks
 	 *
 	 * Input Parameters:
 	 * ~~~~~~~~~~~~~~~~~~
-	 * $post, $forumid, $template_prefix, $templatename
+	 * $post, $thread, $template_hook
 	 *
 	 * Output Parameters:
 	 * ~~~~~~~~~~~~~~~~~~~
@@ -250,24 +327,27 @@ class PHPKD_VBLVB_Hooks
 			@extract($params);
 			global $phpkd_vblvb_postbit;
 
-			if (!empty($phpkd_vblvb_postbit))
+			if (!$this->_registry->_vbulletin->phpkd_vblvb['lookfeel_postbit_note_firstpost'] OR ($this->_registry->_vbulletin->phpkd_vblvb['lookfeel_postbit_note_firstpost'] AND $post['postid'] == $thread['firstpostid']))
 			{
-				if (!empty($post['phpkd_vblvb_lastcheck']))
+				if (!empty($phpkd_vblvb_postbit))
 				{
-					// format date/time
-					$postdate = vbdate($this->_registry->_vbulletin->options['dateformat'], $post['phpkd_vblvb_lastcheck'], true);
-					$posttime = vbdate($this->_registry->_vbulletin->options['timeformat'], $post['phpkd_vblvb_lastcheck']);
+					if (!empty($post['phpkd_vblvb_lastcheck']))
+					{
+						// format date/time
+						$postdate = vbdate($this->_registry->_vbulletin->options['dateformat'], $post['phpkd_vblvb_lastcheck'], true);
+						$posttime = vbdate($this->_registry->_vbulletin->options['timeformat'], $post['phpkd_vblvb_lastcheck']);
 
-					$template_hook['postbit_phpkd_vblvb'] .= construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_lastcheck'], $postdate, $posttime);
+						$template_hook['postbit_phpkd_vblvb'] .= construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_lastcheck'], $postdate, $posttime);
+					}
+					else
+					{
+						$template_hook['postbit_phpkd_vblvb'] .= $this->_registry->_vbphrase['phpkd_vblvb_lastcheck_never'];
+					}
 				}
 				else
 				{
-					$template_hook['postbit_phpkd_vblvb'] .= $this->_registry->_vbphrase['phpkd_vblvb_lastcheck_never'];
+					$template_hook['postbit_phpkd_vblvb'] .= $this->_registry->_vbphrase['phpkd_vblvb_lastcheck_disabled'];
 				}
-			}
-			else
-			{
-				$template_hook['postbit_phpkd_vblvb'] .= $this->_registry->_vbphrase['phpkd_vblvb_lastcheck_disabled'];
 			}
 
 			return array('template_hook' => $template_hook);
@@ -561,7 +641,7 @@ class PHPKD_VBLVB_Hooks
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.212
+|| # Version: 4.1.220
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

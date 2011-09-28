@@ -3,7 +3,7 @@
 <product productid="phpkd_vblvb" active="1">
 	<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate']]></title>
 	<description><![CDATA[This product extract sharing links of over 140+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.]]></description>
-	<version>4.1.212</version>
+	<version>4.1.220</version>
 	<url>http://tools.phpkd.net/en/producthelp/url/vblvb/</url>
 	<versioncheckurl>http://tools.phpkd.net/en/producthelp/version/vblvb/</versioncheckurl>
 	<dependencies>
@@ -25,6 +25,10 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 		<code version="4.0.200">
 			<installcode><![CDATA[$phpkd_vblvb->install_40200();]]></installcode>
 			<uninstallcode><![CDATA[$phpkd_vblvb->uninstall_40200();]]></uninstallcode>
+		</code>
+		<code version="4.1.220">
+			<installcode><![CDATA[$phpkd_vblvb->install_41220();]]></installcode>
+			<uninstallcode><![CDATA[$phpkd_vblvb->uninstall_41220();]]></uninstallcode>
 		</code>
 		<code version="4.1.999">
 			<installcode><![CDATA[$phpkd_vblvb->reimport_hosts();]]></installcode>
@@ -74,6 +78,13 @@ $phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
 $phpkd_vblvb->fetch_hook('editpost_update_process', array('foruminfo' => $foruminfo, 'threadinfo' => $threadinfo, 'postinfo' => $postinfo, 'edit' => $edit, 'dataman' => $dataman));]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
+			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Forumdisplay required initialization ]]]></title>
+			<hookname>forumdisplay_query</hookname>
+			<phpcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
+$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
+extract($phpkd_vblvb->fetch_hook('forumdisplay_query', array('forumid' => $forumid, 'hook_query_fields' => $hook_query_fields, 'hook_query_joins' => $hook_query_joins)));]]></phpcode>
+		</plugin>
+		<plugin active="1" executionorder="5">
 			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Product Copyrights ]]]></title>
 			<hookname>global_complete</hookname>
 			<phpcode><![CDATA[if (!defined('NOPMPOPUP'))
@@ -113,7 +124,7 @@ $phpkd_vblvb->fetch_hook('newpost_process', array('type' => $type, 'post' => $po
 			<hookname>postbit_display_complete</hookname>
 			<phpcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
 $phpkd_vblvb = new PHPKD_VBLVB($this->registry, $vbphrase);
-extract($phpkd_vblvb->fetch_hook('postbit_display_complete', array('post' => $post, 'forumid' => $this->thread['forumid'], 'template_prefix' => $this->template_prefix, 'templatename' => $this->templatename, 'phpkd_vblvb_postbit' => $phpkd_vblvb_postbit, 'template_hook' => $template_hook)));]]></phpcode>
+extract($phpkd_vblvb->fetch_hook('postbit_display_complete', array('post' => $post, 'thread' => $thread, 'template_hook' => $template_hook)));]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
 			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Postbit required initialization ]]]></title>
@@ -124,6 +135,13 @@ extract($phpkd_vblvb->fetch_hook('postbit_display_complete', array('post' => $po
 	$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
 	extract($phpkd_vblvb->fetch_hook('showthread_postbit_create', array('thread' => $thread)));
 }]]></phpcode>
+		</plugin>
+		<plugin active="1" executionorder="5">
+			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Forumdisplay last checked note ]]]></title>
+			<hookname>threadbit_display</hookname>
+			<phpcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
+$phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
+extract($phpkd_vblvb->fetch_hook('threadbit_display', array('post' => $post, 'thread' => $thread, 'template_hook' => $template_hook)));]]></phpcode>
 		</plugin>
 	</plugins>
 	<phrases>
@@ -325,6 +343,10 @@ $bbtitle]]></phrase>
 			<phrase name="phpkd_vblvb_saved_hosts_successfully" date="1278003858" username="PHPKD" version="4.0.200"><![CDATA[Saved Hosts Successfully]]></phrase>
 			<phrase name="phpkd_vblvb_there_is_already_host_named_x" date="1277964653" username="PHPKD" version="4.0.200"><![CDATA[There is already a host named '{1}'. You may not create duplicate hosts.]]></phrase>
 		</phrasetype>
+		<phrasetype name="Forum Display" fieldname="forumdisplay">
+			<phrase name="phpkd_vblvb_lastcheck" date="1315071078" username="PHPKD" version="4.1.220"><![CDATA[<div style="float: right; padding-right: 10px">Links last checked on: <span class="date">{1}&nbsp;<span class="time">{2}</span></span></div>]]></phrase>
+			<phrase name="phpkd_vblvb_lastcheck_never" date="1315071046" username="PHPKD" version="4.1.220"><![CDATA[<div style="float: right; padding-right: 10px">Links in this thread never checked before.</div>]]></phrase>
+		</phrasetype>
 		<phrasetype name="GLOBAL" fieldname="global">
 			<phrase name="phpkd_vblvb_log_checked_posts" date="1279061986" username="PHPKD" version="4.0.200"><![CDATA[<strong>Checked Posts:</strong>]]></phrase>
 			<phrase name="phpkd_vblvb_log_forum" date="1287701812" username="PHPKD" version="4.0.200"><![CDATA[<strong>Forum:</strong> <a href="{1}" target="_blank">{2}</a>]]></phrase>
@@ -458,6 +480,12 @@ Select "Include All Users" to check all users' posts, or select "Include Specifi
 			<phrase name="setting_general_succession_period_title" date="1289528687" username="PHPKD" version="4.0.200"><![CDATA[Check Succession Period]]></phrase>
 			<phrase name="setting_general_thread_modes_desc" date="1289526117" username="PHPKD" version="4.0.200"><![CDATA[Specific thread modes can be excluded from being checked. By default all threads are checked regardless of it's mode. To exclude certain thread mode, choose it from the list.]]></phrase>
 			<phrase name="setting_general_thread_modes_title" date="1289526117" username="PHPKD" version="4.0.200"><![CDATA[Excluded Thread Modes]]></phrase>
+			<phrase name="setting_general_vurl_maxredirs_desc" date="1315059583" username="PHPKD" version="4.1.220"><![CDATA[The maximum amount of HTTP redirections to follow.]]></phrase>
+			<phrase name="setting_general_vurl_maxredirs_title" date="1315059583" username="PHPKD" version="4.1.220"><![CDATA[Remote Functions Maximum Redirections]]></phrase>
+			<phrase name="setting_general_vurl_maxsize_desc" date="1315059583" username="PHPKD" version="4.1.220"><![CDATA[The maximum allowed size of response to accept, enter value in bytes.]]></phrase>
+			<phrase name="setting_general_vurl_maxsize_title" date="1315059583" username="PHPKD" version="4.1.220"><![CDATA[Remote Functions Maximum Response Size]]></phrase>
+			<phrase name="setting_general_vurl_timeout_desc" date="1315059588" username="PHPKD" version="4.1.220"><![CDATA[The maximum number of seconds to allow remote functions to execute.]]></phrase>
+			<phrase name="setting_general_vurl_timeout_title" date="1315059588" username="PHPKD" version="4.1.220"><![CDATA[Remote Functions Execution Timeout]]></phrase>
 			<phrase name="setting_linkdir_recording_active_desc" date="1289530151" username="PHPKD" version="4.0.200"><![CDATA[When active, all checked links will be recorded in a central database table for further display in "Link Directory Browser". However it will add some performance overhead.<br />
 <strong>This feature is highly experimental in it's nature, and not complete yet. This part is working anyway.</strong>]]></phrase>
 			<phrase name="setting_linkdir_recording_active_title" date="1289530151" username="PHPKD" version="4.0.200"><![CDATA[Link Directory Recorder Active *(Experimental)*]]></phrase>
@@ -468,23 +496,15 @@ Select "Include All Users" to check all users' posts, or select "Include Specifi
 <strong>After selecting appropriate forums, you've to do two simple manual edits as follow:<strong><br />
 In 'postbit' & 'postbit_legacy' templates search for:
 <pre>
-&lt;div class="cleardiv"&gt;&lt;/div&gt;
+&lt;div class="postfoot"&gt;
 </pre>
-And put after it directly the following code<br />
+And put before it directly the following code<br />
 This is where the "Last Check Note" will be displayed, so you can choose another place as preferred
 <pre>
 {vb:raw template_hook.postbit_phpkd_vblvb}
-</pre>
-<hr />
-Also in 'postbit' & 'postbit_legacy' templates search for<br />
-This edit only required if you need the default display layout, and it's just presentational in it's nature
-<pre>
-&lt;div class="postbody"&gt;
-</pre>
-And replace it with the following code:
-<pre>
-&lt;div class="postbody" style="padding-bottom: 0px; margin-bottom: 0px"&gt;
 </pre>]]></phrase>
+			<phrase name="setting_lookfeel_postbit_note_firstpost_desc" date="1315057457" username="PHPKD" version="4.1.220"><![CDATA[Post Flag: Last Check Note can be displayed either in thread's head (first post) only, or in every post in the thread. That's depends on your usage & your product's settings.]]></phrase>
+			<phrase name="setting_lookfeel_postbit_note_firstpost_title" date="1315057457" username="PHPKD" version="4.1.220"><![CDATA[Post Flag: Last Check Note in first post only]]></phrase>
 			<phrase name="setting_lookfeel_postbit_note_title" date="1289529943" username="PHPKD" version="4.0.200"><![CDATA[Post Flag: Last Check Note]]></phrase>
 			<phrase name="setting_punishment_forumid_desc" date="1289546711" username="PHPKD" version="4.0.200"><![CDATA[If "Move Thread" method is selected in "Thread Punishment Methods" then a forum should be selected to move punished threads to it. Select preferred forum from the list.]]></phrase>
 			<phrase name="setting_punishment_forumid_title" date="1289546711" username="PHPKD" version="4.0.200"><![CDATA[Punishment Recycle Bin Forum]]></phrase>
@@ -577,4 +597,4 @@ You've multiple options to choose from:<br />
 	</faqentries>
 </product>
 
-<!-- SVN: $Version: 4.1.212 $ - $Id$ -->
+<!-- SVN: $Version: 4.1.220 $ - $Id$ -->

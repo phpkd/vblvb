@@ -119,6 +119,18 @@
 			<datatype>posint</datatype>
 			<defaultvalue>50</defaultvalue>
 		</setting>
+		<setting varname="general_vurl_maxredirs" displayorder="220">
+			<datatype>posint</datatype>
+			<defaultvalue>5</defaultvalue>
+		</setting>
+		<setting varname="general_vurl_timeout" displayorder="230">
+			<datatype>posint</datatype>
+			<defaultvalue>15</defaultvalue>
+		</setting>
+		<setting varname="general_vurl_maxsize" displayorder="240">
+			<datatype>posint</datatype>
+			<defaultvalue>512000</defaultvalue>
+		</setting>
 	</settinggroup>
 	<settinggroup name="reporting" displayorder="20">
 		<setting varname="reporting_reporter" displayorder="10">
@@ -226,6 +238,11 @@ $options = construct_forum_chooser_options(1);</optioncode>
 			<datatype>free</datatype>
 			<optioncode>forum:5</optioncode>
 		</setting>
+		<setting varname="lookfeel_postbit_note_firstpost" displayorder="30">
+			<datatype>boolean</datatype>
+			<optioncode>yesno</optioncode>
+			<defaultvalue>1</defaultvalue>
+		</setting>
 	</settinggroup>
 	<settinggroup name="linkdir" displayorder="50">
 		<setting varname="linkdir_recording_active" displayorder="10">
@@ -236,4 +253,4 @@ $options = construct_forum_chooser_options(1);</optioncode>
 	</settinggroup>
 </settinggroups>
 
-<!-- SVN: $Version: 4.1.212 $ - $Id$ -->
+<!-- SVN: $Version: 4.1.220 $ - $Id$ -->

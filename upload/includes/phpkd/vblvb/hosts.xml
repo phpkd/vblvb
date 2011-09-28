@@ -175,7 +175,7 @@
 	</host>
 	<host domain="filefactory.com" active="1" status="alive">
 		<urlmatch><![CDATA[filefactory\.com/file/[0-9a-z]+]]></urlmatch>
-		<contentmatch>metadata</contentmatch>
+		<contentmatch>greyDownload</contentmatch>
 		<notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check REGEX!]]></notes>
 	</host>
 	<host domain="fileflyer.com" active="1" status="alive">
@@ -391,7 +391,7 @@
 		<notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity ONLY & ONLY if not included, BUT not if entered wrong, so we can make it optional in the check REGEX!]]></notes>
 	</host>
 	<host domain="oron.com" active="1" status="alive">
-		<urlmatch><![CDATA[oron\.com/[0-9a-z]+/]]></urlmatch>
+		<urlmatch><![CDATA[oron\.com/[0-9a-z]+]]></urlmatch>
 		<contentmatch>(download1|download2)</contentmatch>
 	</host>
 	<host domain="proddl.com" active="1" status="dead">
@@ -426,7 +426,7 @@
 	</host>
 	<host domain="rapidshare.com" active="1" status="alive">
 		<urlmatch><![CDATA[rapidshare\.com/files/([0-9]+)/([0-9a-z_.-]+)]]></urlmatch>
-		<apiurl><![CDATA[http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles_v1&files={1}&filenames={2}]]></apiurl>
+		<apiurl><![CDATA[http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles&files={1}&filenames={2}]]></apiurl>
 		<contentmatch>5|1</contentmatch>
 		<downmatch>5|3</downmatch>
 	</host>
@@ -637,4 +637,4 @@
 	</host>
 </hosts>
 
-<!-- SVN: $Version: 4.1.212 $ - $Id$ -->
+<!-- SVN: $Version: 4.1.220 $ - $Id$ -->

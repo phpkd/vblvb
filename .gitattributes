@@ -2,6 +2,7 @@
 do_not_upload/product-phpkd_vblvb_fix.xml -text
 import/product-phpkd_vblvb.xml -text
 languages/English.xml -text svneol=unset#text/plain
+languages/French.xml -text svneol=unset#text/plain
 readme/info.txt -text
 readme/install.txt -text
 readme/license.txt -text

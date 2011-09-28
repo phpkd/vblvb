@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.212 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -397,6 +397,43 @@ class PHPKD_VBLVB_Install
 	}
 
 	/**
+	 * Install v4.1.220
+	 *
+	 * @return	void
+	 */
+	public function install_41220()
+	{
+		$this->_vbulletin->db->hide_errors();
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('lookfeel_postbit_note_firstpost', 'lookfeel', '0', '1', 'yesno', 30, 0, 1, 'boolean', '', 0)");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('general_vurl_maxredirs', 'general', '5', '5', '', 220, 0, 1, 'posint', '', 0)");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('general_vurl_timeout', 'general', '15', '15', '', 230, 0, 1, 'posint', '', 0)");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('general_vurl_maxsize', 'general', '512000', '512000', '', 240, 0, 1, 'posint', '', 0)");
+
+		$this->_vbulletin->db->show_errors();
+	}
+
+	/**
+	 * Uninstall v4.1.220
+	 *
+	 * @return	void
+	 */
+	function uninstall_41220()
+	{
+		$this->_vbulletin->db->hide_errors();
+
+		$this->_vbulletin->db->query_write("DELETE FROM `" . TABLE_PREFIX . "phpkd_vblvb_setting` WHERE `varname` = 'lookfeel_postbit_note_firstpost'");
+		$this->_vbulletin->db->query_write("DELETE FROM `" . TABLE_PREFIX . "phpkd_vblvb_setting` WHERE `varname` = 'general_vurl_maxredirs'");
+		$this->_vbulletin->db->query_write("DELETE FROM `" . TABLE_PREFIX . "phpkd_vblvb_setting` WHERE `varname` = 'general_vurl_timeout'");
+		$this->_vbulletin->db->query_write("DELETE FROM `" . TABLE_PREFIX . "phpkd_vblvb_setting` WHERE `varname` = 'general_vurl_maxsize'");
+
+		$this->_vbulletin->db->show_errors();
+	}
+
+	/**
 	 * Re-Import hosts, this step required for upgrade process!
 	 * This is a temporary way to do it, we'll replace it with versioning later in the main xml files.
 	 *
@@ -417,7 +454,7 @@ class PHPKD_VBLVB_Install
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.212
+|| # Version: 4.1.220
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

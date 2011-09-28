@@ -10,7 +10,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.1.212
+     * 4.1.220
 
 
 Description:
@@ -196,6 +196,15 @@ Features:
 	     o Checked Posts Per Batch
 	          - It's recommended to define a specific low number of posts to process in each run to prevent any possible timeout or Memory/CPU exhausting during the execution process. A Lower Value usually recommended specially for boards that has long posts with many links. There's other important factors that have strong affect as well such as: "Time/Date Cutoff Mode", "Time/Date Cutoff Value", "Check existing posts", "Maximum Checked Links Per Post", "Check Succession Period"; So please take care & try to set a logical acceptable value for each of these settings/options to avoid any expected/unexpected issues. You're the best one who knows your board & you're the one who can determine which suits you & your board according to your board's activity/content/requirements.
 
+	     o Remote Functions Maximum Redirections
+	          - The maximum amount of HTTP redirections to follow.
+
+	     o Remote Functions Execution Timeout
+	          - The maximum number of seconds to allow remote functions to execute.
+
+	     o Remote Functions Maximum Response Size
+	          - The maximum allowed size of response to accept, enter value in bytes.
+
 
 	* Reporting Settings:
 	     o Reports Staff Handler
@@ -290,6 +299,9 @@ Features:
 
 	     o Post Flag: Last Check Note
 	          - Last check note can be displayed within each post to determine whether or not it has been checked before by "vB Link Verifier Bot" and when, simply select in which forums' posts this note should be displayed. That note will appear in posts within those selected forums only. Note that you can select multiple options by holding "CTRL" key while selecting.
+
+	     o Post Flag: Last Check Note in first post only
+	          - Post Flag: Last Check Note can be displayed either in thread's head (first post) only, or in every post in the thread. That's depends on your usage & your product's settings.
 
 
 	* Link Directory Settings:
@@ -475,20 +487,20 @@ Installation Procedure:
      2. Import the product's XML file "product-phpkd_vblvb.xml" from AdminCP.
 
      3. Get you license key & enter it in your product's settings:
-	Get from: Customer Area Â» My Packages Â» vB Link Verifier Bot 'Ultimate' Â» Licenses Â» License Key
-	Enter Here: AdminCP Â» vB Link Verifier Bot Â» Settings Â» General Settings Â» License Key
+	Get from: Customer Area » My Packages » vB Link Verifier Bot 'Ultimate' » Licenses » License Key
+	Enter Here: AdminCP » vB Link Verifier Bot » Settings » General Settings » License Key
 
      4. Activate & Configure product's settings as preferred.
 
      5. If you are upgrading from 'Lite' edition to 'Ultimate' edition, you've to import the product "product-phpkd_vblvb_fix.xml" from AdminCP found inside "do_not_upload" folder (however it's recommended to uninstall 'Lite' edition first and then clean install the 'Ultimate' edition).
 
-     6. [OPTIONAL] Translations: vBulletin AdminCP Â» Languages & Phrases Â» Download / Upload Languages Â» Import Language XML File (Make sure that your forum's Character Set is equivalent to the imported language as follow):
-	     Arabic Â» ISO-8859-6
-	     English, French, Spanish Â» ISO-8859-1
-	     Greek Â» ISO-8859-7
-	     Italian Â» ISO-8859-16
-	     Russian Â» ISO-8859-5
-	     Turkish Â» ISO-8859-9
+     6. [OPTIONAL] Translations: vBulletin AdminCP » Languages & Phrases » Download / Upload Languages » Import Language XML File (Make sure that your forum's Character Set is equivalent to the imported language as follow):
+	     Arabic » ISO-8859-6
+	     English, French, Spanish » ISO-8859-1
+	     Greek » ISO-8859-7
+	     Italian » ISO-8859-16
+	     Russian » ISO-8859-5
+	     Turkish » ISO-8859-9
 	     You can change language file's encoding before import to whatever encoding you wish/your forum works on (ex: UTF-8) using the wonderful application "Encoding Master" (http://www.elfdata.com/encodingmaster/).
 
      7. You're Done :).
@@ -503,23 +515,23 @@ Upgrade Procedure:
 Controls:
 ~~~~~~~~~~
      * Administrator Permissions
-	vBulletin AdminCP Â» Usergroups Â» Administrator Permissions Â» Select Administrator Â» [Edit Permissions] Â» Can Administer vB Link Verifier Bot
+	vBulletin AdminCP » Usergroups » Administrator Permissions » Select Administrator » [Edit Permissions] » Can Administer vB Link Verifier Bot
 
      * AdminCP Settings:
-	vBulletin AdminCP Â» vB Link Verifier Bot Â» Settings Â» General Settings
-	vBulletin AdminCP Â» vB Link Verifier Bot Â» Settings Â» Reporting Settings
-	vBulletin AdminCP Â» vB Link Verifier Bot Â» Settings Â» Punishment Settings
-	vBulletin AdminCP Â» vB Link Verifier Bot Â» Settings Â» Look & Feel Settings
-	vBulletin AdminCP Â» vB Link Verifier Bot Â» Settings Â» Link Directory Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » General Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » Reporting Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » Punishment Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » Look & Feel Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » Link Directory Settings
 
      * Edit Scheduled Task:
-	vBulletin AdminCP Â» Scheduled Tasks Â» Scheduled Task Manager Â» PHPKD - vB Link Verifier Bot 'Ultimate'
+	vBulletin AdminCP » Scheduled Tasks » Scheduled Task Manager » PHPKD - vB Link Verifier Bot 'Ultimate'
 
      * Run Scheduled Task:
-	vBulletin AdminCP Â» vB Link Verifier Bot Â» Run Scheduled Task
+	vBulletin AdminCP » vB Link Verifier Bot » Run Scheduled Task
 
      * Log Viewer:
-	vBulletin AdminCP Â» vB Link Verifier Bot Â» Log Records
+	vBulletin AdminCP » vB Link Verifier Bot » Log Records
 
 
 License:
@@ -945,6 +957,18 @@ History:
      * v4.1.212 25/07/2011 11:00 AM UTC: Maintenance release (public)
 	1. Bug Fix: Installation/Upgrade issue
 	2. Bug Fix: Branding free issue
+     * v4.1.220 28/09/2011 10:00 AM UTC: Featured release (public)
+	1. Bug Fix: vBulletin 4.1.4+ editor functions incompatibility
+	2. Bug Fix: Some direct download links get stuck & keep loading so far
+	3. Bug Fix: filefactory.com links falsely reported
+	4. Bug Fix: oron.com links falsely reported
+	5. Bug Fix: Rapidshare.com links falsely reported
+	6. New Feature: Thread description style checked status
+	7. New Feature: Post Flag: Last Check Note - Only in first post
+	8. New Feature: Per link check timeout
+	9. New Feature: Configurable maximum redirections setting
+	10. New Language: French
+	11. Enhancement: multiple enhancements here & there
 
 
 Screen Shots:
@@ -954,14 +978,14 @@ Screen Shots:
 
 Technical Notes:
 ~~~~~~~~~~~~~~~~~
-     * New Plugins: 7
-     * New Phrases: 237
+     * New Plugins: 11
+     * New Phrases: 249
      * New Templates: 0
      * Manual Template changes: 1 (optional)
-     * Auto Template changes: 0
+     * Auto Template changes: 2
      * New Files: 17
      * Manual File Changes: 0
-     * New vBulletin Settings: 40
+     * New vBulletin Settings: 0
      * New Usergroup Permissions: 0
      * New Moderator Permissions: 0
      * New Administrator Permissions: 1
@@ -969,6 +993,8 @@ Technical Notes:
      * New DB Tables: 5
      * DB Alterations: 4
      * New Cronjobs: 1
+     * Product Specific Settings: 44
+     * Product Specific Modules: 141
         --------------------------
      * Installation Level: Easy
      * Installation Time: ~20 seconds
@@ -982,18 +1008,12 @@ Reference Links:
 Recent Products:
 ~~~~~~~~~~~~~~~~~
 
-     * Advanced Quick Reply [ Attachments - Smilie box / menu - Thread Management - AJAX ]
-	http://go.phpkd.net/en/product/vbaqr/
-
-     * Advanced Quick Edit [ All Built-In BBCodes ]
-	http://go.phpkd.net/en/product/vbaqe/
-
-     * Periodic Prune Pms [ Cronjob - Fully Controlable ]
-	http://go.phpkd.net/en/product/vbppp/
+     * vB Automated Bookie Center 'Ultimate'
+	http://go.phpkd.net/en/product/vbabc/
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.1.212 $ - $Id$
+$Version: 4.1.220 $ - $Id$
