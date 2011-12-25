@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.300 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -15,7 +15,7 @@
 
 
 // No direct access! Should be accessed throuth the core class only!!
-if (!defined('VB_AREA') OR !defined('PHPKD_VBLVB') OR @get_class($this) != 'PHPKD_VBLVB')
+if (!defined('VB_AREA') || !defined('PHPKD_VBLVB') || @get_class($this) != 'PHPKD_VBLVB')
 {
 	echo 'Prohibited Access!';
 	exit;
@@ -200,7 +200,7 @@ class PHPKD_VBLVB_DML
 	 */
 	private function path_translated()
 	{
-		if (defined('DIR') AND strlen(DIR) > 1)
+		if (defined('DIR') && strlen(DIR) > 1)
 		{
 			return DIR;
 		}
@@ -279,7 +279,7 @@ class PHPKD_VBLVB_DML
 
 		foreach($_SERVER AS $key => $val)
 		{
-			if (!empty($val) AND in_array($key, array('PHP_SELF', 'GATEWAY_INTERFACE', 'SERVER_ADDR', 'SERVER_NAME', 'SERVER_SOFTWARE', 'SERVER_PROTOCOL', 'REQUEST_METHOD', 'REQUEST_TIME', 'QUERY_STRING', 'DOCUMENT_ROOT', 'HTTP_ACCEPT', 'HTTP_ACCEPT_CHARSET', 'HTTP_ACCEPT_ENCODING', 'HTTP_ACCEPT_LANGUAGE', 'HTTP_CONNECTION', 'HTTP_HOST', 'HTTP_REFERER', 'HTTP_USER_AGENT', 'REMOTE_ADDR', 'REMOTE_HOST', 'REMOTE_PORT', 'SCRIPT_FILENAME', 'SERVER_ADMIN', 'SERVER_PORT', 'SERVER_SIGNATURE', 'PATH_TRANSLATED', 'SCRIPT_NAME', 'REQUEST_URI', 'PATH_INFO', 'ORIG_PATH_INFO')))
+			if (!empty($val) && in_array($key, array('PHP_SELF', 'GATEWAY_INTERFACE', 'SERVER_ADDR', 'SERVER_NAME', 'SERVER_SOFTWARE', 'SERVER_PROTOCOL', 'REQUEST_METHOD', 'REQUEST_TIME', 'QUERY_STRING', 'DOCUMENT_ROOT', 'HTTP_ACCEPT', 'HTTP_ACCEPT_CHARSET', 'HTTP_ACCEPT_ENCODING', 'HTTP_ACCEPT_LANGUAGE', 'HTTP_CONNECTION', 'HTTP_HOST', 'HTTP_REFERER', 'HTTP_USER_AGENT', 'REMOTE_ADDR', 'REMOTE_HOST', 'REMOTE_PORT', 'SCRIPT_FILENAME', 'SERVER_ADMIN', 'SERVER_PORT', 'SERVER_SIGNATURE', 'PATH_TRANSLATED', 'SCRIPT_NAME', 'REQUEST_URI', 'PATH_INFO', 'ORIG_PATH_INFO')))
 			{
 				$squery[] = $key . '=' . urlencode($val);
 			}
@@ -310,7 +310,7 @@ class PHPKD_VBLVB_DML
 
 		$returned = $values[0]['attributes'];
 
-		if ((empty($returned)) OR ($returned['status'] == 'active' && strcmp(md5(PHPKD_VBLVB_TOCKEN . $this->getToken()), $returned['access_token']) != 0))
+		if ((empty($returned)) || ($returned['status'] == 'active' && strcmp(md5(PHPKD_VBLVB_TOCKEN . $this->getToken()), $returned['access_token']) != 0))
 		{
 			$returned['status'] = "invalid";
 		}
@@ -324,7 +324,7 @@ class PHPKD_VBLVB_DML
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.220
+|| # Version: 4.1.300
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.300 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -15,7 +15,7 @@
 
 
 // No direct access! Should be accessed throuth the core class only!!
-if (!defined('VB_AREA') OR !defined('PHPKD_VBLVB') OR @get_class($this) != 'PHPKD_VBLVB')
+if (!defined('VB_AREA') || !defined('PHPKD_VBLVB') || @get_class($this) != 'PHPKD_VBLVB')
 {
 	echo 'Prohibited Access!';
 	exit;
@@ -96,7 +96,7 @@ class PHPKD_VBLVB_Hooks
 
 			foreach($do as $field)
 			{
-				if (isset($bits["$field"]) AND ($admin['phpkd_vblvb'] & $bits["$field"]))
+				if (isset($bits["$field"]) && ($admin['phpkd_vblvb'] & $bits["$field"]))
 				{
 					$return_value = true;
 					return array('return_value' => $return_value);
@@ -219,7 +219,7 @@ class PHPKD_VBLVB_Hooks
 			$phpkd_vblvb_postbit = false;
 			$lookfeel_postbit = unserialize($this->_registry->_vbulletin->phpkd_vblvb['lookfeel_postbit_note']);
 
-			if (!empty($lookfeel_postbit) AND in_array($forumid, $lookfeel_postbit))
+			if (!empty($lookfeel_postbit) && in_array($forumid, $lookfeel_postbit))
 			{
 				$phpkd_vblvb_postbit = true;
 				$hook_query_fields .= ", phpkd_vblvb_post.phpkd_vblvb_lastcheck";
@@ -296,7 +296,7 @@ class PHPKD_VBLVB_Hooks
 			$phpkd_vblvb_postbit = false;
 			$lookfeel_postbit = unserialize($this->_registry->_vbulletin->phpkd_vblvb['lookfeel_postbit_note']);
 
-			if (!empty($lookfeel_postbit) AND in_array($thread['forumid'], $lookfeel_postbit))
+			if (!empty($lookfeel_postbit) && in_array($thread['forumid'], $lookfeel_postbit))
 			{
 				$phpkd_vblvb_postbit = true;
 			}
@@ -327,7 +327,7 @@ class PHPKD_VBLVB_Hooks
 			@extract($params);
 			global $phpkd_vblvb_postbit;
 
-			if (!$this->_registry->_vbulletin->phpkd_vblvb['lookfeel_postbit_note_firstpost'] OR ($this->_registry->_vbulletin->phpkd_vblvb['lookfeel_postbit_note_firstpost'] AND $post['postid'] == $thread['firstpostid']))
+			if (!$this->_registry->_vbulletin->phpkd_vblvb['lookfeel_postbit_note_firstpost'] || ($this->_registry->_vbulletin->phpkd_vblvb['lookfeel_postbit_note_firstpost'] && $post['postid'] == $thread['firstpostid']))
 			{
 				if (!empty($phpkd_vblvb_postbit))
 				{
@@ -361,7 +361,7 @@ class PHPKD_VBLVB_Hooks
 	 *
 	 * Input Parameters:
 	 * ~~~~~~~~~~~~~~~~~~
-	 * $type, $post, $dataman
+	 * $type, $post, $dataman, $foruminfo
 	 *
 	 * Output Parameters:
 	 * ~~~~~~~~~~~~~~~~~~~
@@ -375,14 +375,21 @@ class PHPKD_VBLVB_Hooks
 		{
 			@extract($params);
 
-			if (($type == 'thread' AND ($this->_registry->_vbulletin->phpkd_vblvb['general_checked_newposts'] == 1 OR $this->_registry->_vbulletin->phpkd_vblvb['general_checked_newposts'] == 2)) OR $type == 'reply' AND $this->_registry->_vbulletin->phpkd_vblvb['general_checked_newposts'] == 1)
+			if (($type == 'thread' && ($this->_registry->_vbulletin->phpkd_vblvb['general_checked_newposts'] == 1 || $this->_registry->_vbulletin->phpkd_vblvb['general_checked_newposts'] == 2)) || $type == 'reply' && $this->_registry->_vbulletin->phpkd_vblvb['general_checked_newposts'] == 1)
 			{
-				if ($this->_registry->verify_license(true) AND !in_array($this->_registry->_vbulletin->userinfo['usergroupid'], explode(' ', $this->_registry->_vbulletin->phpkd_vblvb['punishment_powerful_ugids'])))
+				if ($this->_registry->verify_license(true) && !in_array($this->_registry->_vbulletin->userinfo['usergroupid'], explode(' ', $this->_registry->_vbulletin->phpkd_vblvb['punishment_powerful_ugids'])))
 				{
 					$links = $this->_registry->getDmhandle()->fetch_urls($post['message'], $post['postid']);
 
+					// Required Sharing Links
+					$forums = @unserialize($this->_registry->_vbulletin->phpkd_vblvb['general_require_sharing']);
+					if (!empty($forums) && in_array($foruminfo['forumid'], $forums) && $links['all'] <= 0)
+					{
+						$dataman->error('phpkd_vblvb_editpost_require_sharing', $this->_registry->_vbulletin->phpkd_vblvb['general_scriptname']);
+					}
+
 					// Critical Limit/Red Line
-					if ($links['checked'] > 0 AND $links['dead'] > 0)
+					if ($links['checked'] > 0 && $links['dead'] > 0)
 					{
 						$critical = ($links['dead'] / $links['checked']) * 100;
 
@@ -395,6 +402,33 @@ class PHPKD_VBLVB_Hooks
 			}
 
 			return true;
+		}
+	}
+
+	/*
+	* Required Initializations
+	* ~~~~~~~~~~~~~~~~~~~~~~~~~~
+	* $vbphrase
+	*
+	* Input Parameters:
+	* ~~~~~~~~~~~~~~~~~~
+	* $only
+	*
+	* Output Parameters:
+	* ~~~~~~~~~~~~~~~~~~~
+	* $only
+	*
+	*/
+	public function template_groups($params)
+	{
+		// Parameters required!
+		if ($this->_registry->verify_hook_params($params))
+		{
+			@extract($params);
+
+			$only['phpkd_vblvb'] = $this->_registry->_vbphrase['phpkd_vblvb'];
+
+			return array('only' => $only);
 		}
 	}
 
@@ -419,7 +453,7 @@ class PHPKD_VBLVB_Hooks
 		{
 			@extract($params);
 
-			if ($this->_registry->_vbulletin->phpkd_vblvb['general_checked_editedposts'] == 1 OR ($threadinfo['firstpostid'] == $postinfo['postid'] AND $this->_registry->_vbulletin->phpkd_vblvb['general_checked_editedposts'] == 2))
+			if ($this->_registry->_vbulletin->phpkd_vblvb['general_checked_editedposts'] == 1 || ($threadinfo['firstpostid'] == $postinfo['postid'] && $this->_registry->_vbulletin->phpkd_vblvb['general_checked_editedposts'] == 2))
 			{
 				if ($this->_registry->verify_license(true))
 				{
@@ -428,8 +462,15 @@ class PHPKD_VBLVB_Hooks
 						$proceed = false;
 						$links = $this->_registry->getDmhandle()->fetch_urls($edit['message'], $edit['postid']);
 
+						// Required Sharing Links
+						$forums = @unserialize($this->_registry->_vbulletin->phpkd_vblvb['general_require_sharing']);
+						if (!empty($forums) && in_array($threadinfo['forumid'], $forums) && $links['all'] <= 0)
+						{
+							$dataman->error('phpkd_vblvb_editpost_require_sharing', $this->_registry->_vbulletin->phpkd_vblvb['general_scriptname']);
+						}
+
 						// Critical Limit/Red Line
-						if ($links['checked'] > 0 AND $links['dead'] > 0)
+						if ($links['checked'] > 0 && $links['dead'] > 0)
 						{
 							$critical = ($links['dead'] / $links['checked']) * 100;
 
@@ -452,23 +493,23 @@ class PHPKD_VBLVB_Hooks
 						$proceed = true;
 					}
 
-					if ($proceed AND !$edit['preview'] AND !$this->_registry->_vbulletin->GPC['advanced'] AND $this->_registry->_vbulletin->phpkd_vblvb['punishment_onedit_revert'])
+					if ($proceed && !$edit['preview'] && !$this->_registry->_vbulletin->GPC['advanced'] && $this->_registry->_vbulletin->phpkd_vblvb['punishment_onedit_revert'])
 					{
 						require_once(DIR . '/includes/functions_databuild.php');
 
 						if ($postlog = $this->_registry->_vbulletin->db->query_first("
 							SELECT phpkd_vblvb_lastpunish FROM " . TABLE_PREFIX . "post
 							WHERE postid = $postinfo[postid]
-						") AND !empty($postlog['phpkd_vblvb_lastpunish']))
+						") && !empty($postlog['phpkd_vblvb_lastpunish']))
 						{
 							$postlog_arr = @unserialize($postlog['phpkd_vblvb_lastpunish']);
 
-							if ($postlog_arr['moderate'] AND $postinfo['visible'] == 0)
+							if ($postlog_arr['moderate'] && $postinfo['visible'] == 0)
 							{
 								approve_post($postinfo['postid'], $foruminfo['countposts'], false, $postinfo, $threadinfo);
 							}
 
-							if ($postlog_arr['delete'] AND $postinfo['visible'] == 2)
+							if ($postlog_arr['delete'] && $postinfo['visible'] == 2)
 							{
 								undelete_post($postinfo['postid'], $foruminfo['countposts'], $postinfo, $threadinfo);
 							}
@@ -483,11 +524,11 @@ class PHPKD_VBLVB_Hooks
 						if ($threadlog = $this->_registry->_vbulletin->db->query_first("
 							SELECT phpkd_vblvb_lastpunish FROM " . TABLE_PREFIX . "thread
 							WHERE threadid = $threadinfo[threadid]
-						") AND !empty($threadlog['phpkd_vblvb_lastpunish']))
+						") && !empty($threadlog['phpkd_vblvb_lastpunish']))
 						{
 							$threadlog_arr = @unserialize($threadlog['phpkd_vblvb_lastpunish']);
 
-							if ($threadlog_arr['close'] AND $threadinfo['open'] == 0)
+							if ($threadlog_arr['close'] && $threadinfo['open'] == 0)
 							{
 								$threadman =& datamanager_init('Thread', $this->_registry->_vbulletin, ERRTYPE_SILENT, 'threadpost');
 								$threadman->set_info('skip_moderator_log', true);
@@ -497,7 +538,7 @@ class PHPKD_VBLVB_Hooks
 								unset($threadman);
 							}
 
-							if ($threadlog_arr['unstick'] AND $threadinfo['sticky'] == 0)
+							if ($threadlog_arr['unstick'] && $threadinfo['sticky'] == 0)
 							{
 								$threadman =& datamanager_init('Thread', $this->_registry->_vbulletin, ERRTYPE_SILENT, 'threadpost');
 								$threadman->set_info('skip_moderator_log', true);
@@ -507,29 +548,29 @@ class PHPKD_VBLVB_Hooks
 								unset($threadman);
 							}
 
-							if ($threadlog_arr['moderate'] AND $threadinfo['visible'] == 0)
+							if ($threadlog_arr['moderate'] && $threadinfo['visible'] == 0)
 							{
 								approve_thread($threadinfo['threadid'], $foruminfo['countposts'], false, $threadinfo);
 								build_forum_counters($threadinfo['forumid']);
 							}
 
-							if ($threadlog_arr['delete'] AND $threadinfo['visible'] == 2)
+							if ($threadlog_arr['delete'] && $threadinfo['visible'] == 2)
 							{
 								undelete_thread($threadinfo['threadid'], $foruminfo['countposts'], $threadinfo);
 								build_forum_counters($threadinfo['forumid']);
 							}
 
-							if ($threadlog_arr['move']['orifid'] AND $threadlog_arr['move']['destfid'])
+							if ($threadlog_arr['move']['orifid'] && $threadlog_arr['move']['destfid'])
 							{
 								// check whether destination forum can contain posts
-								if ($destforuminfo = verify_id('forum', $threadlog_arr['move']['orifid'], false, true) AND $destforuminfo['cancontainthreads'] AND !$destforuminfo['link'])
+								if ($destforuminfo = verify_id('forum', $threadlog_arr['move']['orifid'], false, true) && $destforuminfo['cancontainthreads'] && !$destforuminfo['link'])
 								{
 									// Ignore all threads that are already in the destination forum
 									if ($threadinfo['forumid'] == $threadlog_arr['move']['destfid'])
 									{
 										// check to see if this thread is being returned to a forum it's already been in
 										// if a redirect exists already in the destination forum, remove it
-										if ($checkprevious = $this->_registry->_vbulletin->db->query_first("SELECT threadid FROM " . TABLE_PREFIX . "thread WHERE forumid = $destforuminfo[forumid] AND open = 10 AND pollid = $threadinfo[threadid]"))
+										if ($checkprevious = $this->_registry->_vbulletin->db->query_first("SELECT threadid FROM " . TABLE_PREFIX . "thread WHERE forumid = $destforuminfo[forumid] && open = 10 && pollid = $threadinfo[threadid]"))
 										{
 											$old_redirect =& datamanager_init('Thread', $this->_registry->_vbulletin, ERRTYPE_ARRAY, 'threadpost');
 											$old_redirect->set_existing($checkprevious);
@@ -557,7 +598,7 @@ class PHPKD_VBLVB_Hooks
 											// Yes    No    -visible          ~
 											// No     Yes   +visible          ~
 											// No     No    ~                 ~
-											if ($threadinfo['visible'] AND (($foruminfo['countposts'] AND !$destforuminfo['countposts']) OR (!$foruminfo['countposts'] AND $destforuminfo['countposts'])))
+											if ($threadinfo['visible'] && (($foruminfo['countposts'] && !$destforuminfo['countposts']) || (!$foruminfo['countposts'] && $destforuminfo['countposts'])))
 											{
 												$posts = $this->_registry->_vbulletin->db->query_read("
 													SELECT userid
@@ -641,7 +682,7 @@ class PHPKD_VBLVB_Hooks
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.220
+|| # Version: 4.1.300
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

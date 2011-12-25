@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.300 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -22,7 +22,7 @@ if (!is_object($vbulletin->db))
 }
 
 // Bypass PHP INI memory limit!
-if (($current_memory_limit = ini_size_to_bytes(@ini_get('memory_limit'))) < 128 * 1024 * 1024 AND $current_memory_limit > 0)
+if (($current_memory_limit = ini_size_to_bytes(@ini_get('memory_limit'))) < 128 * 1024 * 1024 && $current_memory_limit > 0)
 {
 	@ini_set('memory_limit', 128 * 1024 * 1024);
 }
@@ -39,13 +39,14 @@ if (!defined('IN_CONTROL_PANEL'))
 // ########################################################################
 require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
 require_once(DIR . '/includes/phpkd/vblvb/class_copyright.php');
+require_once(DIR . '/includes/class_taggablecontent.php');
 
 $phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase, defined('IN_CONTROL_PANEL') ? ERRTYPE_CP : ERRTYPE_SILENT);
-$plugin = $vbulletin->db->query_first("SELECT * FROM " . TABLE_PREFIX . "plugin WHERE product = 'phpkd_vblvb' AND hookname = 'global_complete'");
+$plugin = $vbulletin->db->query_first("SELECT * FROM " . TABLE_PREFIX . "plugin WHERE product = 'phpkd_vblvb' && hookname = 'global_complete'");
 $bburl = @parse_url($vbulletin->options['bburl']);
 $tocken = md5(md5($bburl['host']) . md5(PHPKD_VBLVB_TOCKEN) . md5($vbulletin->userinfo['securitytoken']) . md5(TIMENOW));
 
-if ((!$plugin['active'] AND $copyright != $tocken) OR md5($plugin['phpcode']) != '9d75af8827a7d278565dd87b7c6d852e')
+if ((!$plugin['active'] && $copyright != $tocken) || md5($plugin['phpcode']) != '9d75af8827a7d278565dd87b7c6d852e')
 {
 	$phpkd_vblvb->seterror('phpkd_vblvb_copyright_violate');
 }
@@ -59,10 +60,10 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 	$phpkd_vblvb->verify_license();
 
 	// Required Initialization
-	$phpkd_vblvb->initialize(array('thread_modes', 'post_modes'));
+	$phpkd_vblvb->initialize(array('thread_modes' => array(), 'post_modes' => array()));
 
 
-	if (is_array($phpkd_vblvb->thread_modes) AND !empty($phpkd_vblvb->thread_modes))
+	if (is_array($phpkd_vblvb->thread_modes) && !empty($phpkd_vblvb->thread_modes))
 	{
 		$thread_modes = '';
 
@@ -97,7 +98,7 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 		}
 	}
 
-	if (is_array($phpkd_vblvb->post_modes) AND !empty($phpkd_vblvb->post_modes))
+	if (is_array($phpkd_vblvb->post_modes) && !empty($phpkd_vblvb->post_modes))
 	{
 		$post_modes = '';
 
@@ -183,7 +184,7 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 
 		case 3:
 			$cutoff_value = @explode('|', $vbulletin->phpkd_vblvb['general_cutoff_value']);
-			$cutoff = ((!empty($vbulletin->phpkd_vblvb['general_cutoff_value']) AND count($cutoff_value) == 2) ? 'AND post.dateline > UNIX_TIMESTAMP(\'' . $vbulletin->db->escape_string($cutoff_value[0]) . '\') AND post.dateline < UNIX_TIMESTAMP(\'' . $vbulletin->db->escape_string($cutoff_value[1]) . '\')' : '');
+			$cutoff = ((!empty($vbulletin->phpkd_vblvb['general_cutoff_value']) && count($cutoff_value) == 2) ? 'AND post.dateline > UNIX_TIMESTAMP(\'' . $vbulletin->db->escape_string($cutoff_value[0]) . '\') && post.dateline < UNIX_TIMESTAMP(\'' . $vbulletin->db->escape_string($cutoff_value[1]) . '\')' : '');
 			break;
 	}
 
@@ -225,6 +226,7 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 		$punished_content = array();
 		$urlrecords = array();
 		$checkedposts = array();
+		$taggedthreads = array();
 		$deadposts = array();
 		$phpkd_vblvb->logstring($vbphrase['phpkd_vblvb_log_checked_posts'] . '<ol class="smallfont">', ($vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1));
 
@@ -243,6 +245,12 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 
 			foreach ($forumposts AS $threadid => $threadposts)
 			{
+				// Tag Threads - Reported Status
+				if ($vbulletin->phpkd_vblvb['tagging_status'])
+				{
+					$taggedthreads[$threadid][0] = $vbphrase['phpkd_vblvb_tagging_status_alive'];
+				}
+
 				$phpkd_vblvb->logstring('<li>' . construct_phrase($vbphrase['phpkd_vblvb_log_thread'], $vbulletin->options['bburl'] . '/showthread.php?t=' . $threadid, $threadposts['threadtitle']) . '<ol class="smallfont">', ($vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1));
 				unset($threadposts['threadtitle']);
 
@@ -252,17 +260,29 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 
 					$links = $phpkd_vblvb->getDmhandle()->fetch_urls($post['pagetext'], $postid);
 
+					if (!empty($links['urlrecords']))
+					{
+						// Tag Threads - Included Hosts
+						if ($vbulletin->phpkd_vblvb['tagging_host'])
+						{
+							foreach ($links['urlrecords'] as $urlrecord)
+							{
+								$taggedthreads[$threadid][] = $urlrecord['host'];
+							}
+						}
+
+						// Link directory stuff!
+						if ($vbulletin->phpkd_vblvb['linkdir_recording_active'])
+						{
+							$urlrecords[$postid] = $links['urlrecords'];
+						}
+					}
+
 					$phpkd_vblvb->logstring(construct_phrase($vbphrase['phpkd_vblvb_log_summery_post'], $colors[0], $colors[1], $colors[2], $links['all'], $links['checked'], $links['alive'], $links['dead'], $links['down'], ($links['all'] - $links['checked'])) . '</li><br />', ($vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1), $postid);
 
 
-					// Link directory stuff!
-					if ($vbulletin->phpkd_vblvb['linkdir_recording_active'])
-					{
-						$urlrecords[$postid] = $links['urlrecords'];
-					}
-
 					// Dead posts
-					if ($links['checked'] > 0 AND $links['dead'] > 0)
+					if ($links['checked'] > 0 && $links['dead'] > 0)
 					{
 						$records['dead']++;
 						$critical = ($links['dead'] / $links['checked']) * 100;
@@ -286,6 +306,7 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 					$records['checked']++;
 				}
 
+
 				$phpkd_vblvb->logstring('</ol></li><br />', ($vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1));
 			}
 
@@ -295,7 +316,7 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 		$phpkd_vblvb->logstring(construct_phrase($vbphrase['phpkd_vblvb_log_summery_all'], $colors[0], $colors[1], $colors[2], $records['checked'], ($records['checked'] - $records['dead']), $records['dead'], $records['punished']) . '</ol><br />', ($vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1));
 
 
-		if ($vbulletin->phpkd_vblvb['linkdir_recording_active'] AND !empty($urlrecords))
+		if ($vbulletin->phpkd_vblvb['linkdir_recording_active'] && !empty($urlrecords))
 		{
 			$urlrecords_query = '';
 
@@ -321,8 +342,49 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 		}
 
 
+		if ($vbulletin->options['threadtagging'] && !empty($taggedthreads))
+		{
+			// Tag Threads - Reported Status
+			if ($vbulletin->phpkd_vblvb['tagging_status'] && !empty($punished_content['threads']))
+			{
+				foreach ($punished_content['threads'] as $threadid => $threadarray)
+				{
+					$taggedthreads[$threadid][0] = $vbphrase['phpkd_vblvb_tagging_status_dead'];
+				}
+			}
+
+			foreach ($taggedthreads as $taggedthreadid => $tags)
+			{
+				$ourtags = array_unique($tags);
+				$content = vB_Taggable_Content_Item::create($vbulletin, vB_Types::instance()->getContentTypeID("vBForum_Thread"), $taggedthreadid);
+
+				if ($content)
+				{
+					foreach ($ourtags as $tagid => $tag)
+					{
+						if (!in_array($tag, array($vbphrase['phpkd_vblvb_tagging_status_alive'], $vbphrase['phpkd_vblvb_tagging_status_dead'])))
+						{
+							if (!in_array($tag, array_keys($phpkd_vblvb->hosts)) || (in_array($tag, array_keys($phpkd_vblvb->hosts)) && !$phpkd_vblvb->hosts[$tag]['taggable']))
+							{
+								unset($ourtags[$tagid]);
+							}
+							else
+							{
+								$ourtags[$tagid] = $phpkd_vblvb->hosts[$tag]['tagtext'];
+							}
+						}
+					}
+
+					$content->add_tags_to_content($ourtags, array('content_limit' => $vbulletin->options['tagmaxthread']));
+				}
+
+				unset($content);
+			}
+		}
+
+
 		// Punish Dead Posts (only those over critical limit)
-		if ($records['punished'] > 0 AND ($vbulletin->phpkd_vblvb['reporting_included_posts'] == 0 OR $vbulletin->phpkd_vblvb['reporting_included_posts'] == 2))
+		if ($records['punished'] > 0 && ($vbulletin->phpkd_vblvb['reporting_included_posts'] == 0 || $vbulletin->phpkd_vblvb['reporting_included_posts'] == 2))
 		{
 			$phpkd_vblvb->logstring($vbphrase['phpkd_vblvb_log_punished_posts'] . '<ol class="smallfont">' . $punished_links . '</ol><br />');
 			$phpkd_vblvb->updatepostlogs(array_keys($punished_content['posts']), 'punished');
@@ -330,14 +392,14 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 		}
 
 		// Send User Reports
-		if (!empty($deadposts) OR ($vbulletin->phpkd_vblvb['reporting_user_reports_mode'] AND !empty($punished_content['posts'])))
+		if (!empty($deadposts) || ($vbulletin->phpkd_vblvb['reporting_user_reports_mode'] && !empty($punished_content['posts'])))
 		{
 			$phpkd_vblvb->getDmhandle()->user_reports(!empty($deadposts) ? $deadposts : array_keys($punished_content['posts']));
 			$phpkd_vblvb->updatepostlogs($deadposts, 'dead');
 		}
 
 		// Send Staff Reports
-		if ($vbulletin->phpkd_vblvb['reporting_staff_reports_mode'] == 0 OR ($vbulletin->phpkd_vblvb['reporting_staff_reports_mode'] == 1 AND $records['checked'] > 0) OR ($vbulletin->phpkd_vblvb['reporting_staff_reports_mode'] == 2 AND $records['dead'] > 0) OR ($vbulletin->phpkd_vblvb['reporting_staff_reports_mode'] == 3 AND $records['punished'] > 0))
+		if ($vbulletin->phpkd_vblvb['reporting_staff_reports_mode'] == 0 || ($vbulletin->phpkd_vblvb['reporting_staff_reports_mode'] == 1 && $records['checked'] > 0) || ($vbulletin->phpkd_vblvb['reporting_staff_reports_mode'] == 2 && $records['dead'] > 0) || ($vbulletin->phpkd_vblvb['reporting_staff_reports_mode'] == 3 && $records['punished'] > 0))
 		{
 			$phpkd_vblvb->getDmhandle()->staff_reports($punished_links, $records);
 		}
@@ -364,7 +426,7 @@ log_cron_action('', $nextitem, 1);
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.220
+|| # Version: 4.1.300
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

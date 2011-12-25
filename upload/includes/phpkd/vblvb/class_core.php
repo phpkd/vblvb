@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.300 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -23,7 +23,7 @@ if (!defined('VB_AREA'))
 define('ERRTYPE_ECHO',               10);
 
 define('PHPKD_VBLVB_DEBUG',          false);
-define('PHPKD_VBLVB_VERSION',        '4.1.220');
+define('PHPKD_VBLVB_VERSION',        '4.1.300');
 define('PHPKD_VBLVB_TOCKEN',         '7efad4a065eb29fb5ac56d57bc2c090c');
 define('PHPKD_VBLVB_LICENSE_PREFIX', 'VBLVB');
 
@@ -212,20 +212,20 @@ class PHPKD_VBLVB
 	public function initialize($initparams)
 	{
 		// Initialized params SHOULD be passed as an array!
-		if (is_array($initparams) AND !empty($initparams))
+		if (is_array($initparams) && !empty($initparams))
 		{
 			$initmethods = get_class_methods($this->getInithandle());
 
-			foreach ($initparams as $param)
+			foreach ($initparams as $method => $params)
 			{
-				if (in_array($param, $initmethods))
+				if (in_array($method, $initmethods))
 				{
-					if ($this->$param !== null)
+					if ($this->$method !== null)
 					{
 						continue;
 					}
 
-					$this->$param = $this->getInithandle()->$param($value);
+					$this->$method = $this->getInithandle()->$method($params);
 				}
 			}
 		}
@@ -459,7 +459,7 @@ class PHPKD_VBLVB
 	 */
 	public function verify_hook_params($params)
 	{
-		if (is_array($params) AND count($params) > 0)
+		if (is_array($params) && count($params) > 0)
 		{
 			return true;
 		}
@@ -496,7 +496,7 @@ class PHPKD_VBLVB
 	 */
 	public function logstring($content, $echo = true, $post = 0)
 	{
-		if ($echo AND defined('IN_CONTROL_PANEL'))
+		if ($echo && defined('IN_CONTROL_PANEL'))
 		{
 			echo $content;
 			vbflush();
@@ -682,7 +682,7 @@ class PHPKD_VBLVB
 
 		$this->_errors[] = $error;
 
-		if ($this->_failure_callback AND is_callable($this->_failure_callback))
+		if ($this->_failure_callback && is_callable($this->_failure_callback))
 		{
 			call_user_func_array($this->_failure_callback, array(&$this, $errorphrase));
 		}
@@ -723,7 +723,7 @@ class PHPKD_VBLVB
 	{
 		if (!empty($this->_errors))
 		{
-			if ($this->_error_handler == ERRTYPE_SILENT OR $die == false)
+			if ($this->_error_handler == ERRTYPE_SILENT || $die == false)
 			{
 				return true;
 			}
@@ -743,7 +743,7 @@ class PHPKD_VBLVB
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.220
+|| # Version: 4.1.300
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

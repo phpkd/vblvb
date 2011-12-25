@@ -10,12 +10,12 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.1.220
+     * 4.1.300
 
 
 Description:
 ~~~~~~~~~~~~~
-     * This product extract sharing links of over 140+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.
+     * This product extract sharing links of over 175+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.
 
 
 Compatible With:
@@ -51,25 +51,24 @@ Features:
 	* Professionally Coded.
 	* Detailed Documentation.
 	* Doesn't require any manual edits.
-	* Supports more than 140+ sharing hosts by default.
-	* Ability to check threads/posts in certain date range.
-	* Ability to detect masked links even if it's recursively masked.
-	* Ability to check any of the following protocols (HTTP / HTTPS / FTP).
+	* Supports more than 175+ sharing hosts by default.
 	* Depends on & uses default vBulletin techniques with full compatibility.
 	* Board Load Zero Queries, queries executed only when the scheduled task run.
-	* Ability to set administrator permissions, so certain admins can control the product & others can't.
-	* Ability to exclude threads/posts with certain modes from being checked [opened/closed/moderated/sticky/deleted].
-	* Ability to scan links within all tags or within certain tags such as [ CODE ] & [ QIOTE ], and yes supports [ HIDE ] & [ CHARGE ].
-	* Auto generate pretty nice reports for instant/later review, these reports can be displayed in real time while running the scheduled task, sent as a private/email message, post as a thread/reply.
-	* The product's code base is very solid, and is very rich as well with a 'plug-and-play' architecture for easier expansion & for much more flexibility.
 	* The cronjob (scheduled Task) logs every run details in "Scheduled Task Log", so you can review it later within the log viewer.
-	* Ability to follow redirected pages till reaching the actual download page & verify it.
+	* The product's code base is very solid, and is very rich as well with a 'plug-and-play' architecture for easier expansion & for much more flexibility.
+	* Auto generate pretty nice reports for instant/later review, these reports can be displayed in real time while running the scheduled task, sent as a private/email message, post as a thread/reply.
 
 
      |- Specific Features:-
 	* General Settings:
 	     o Product Active
 	          - Choose whether "vB Link Verifier Bot" is active or not (global switch).
+
+	     o Public Script Name
+	          - The public script name available for users, this script displays list of supported hosts, allow users to live check sharing links on the fly, etc..
+
+	     o Public Script Title
+	          - The public script title available for users, this script displays list of supported hosts, allow users to live check sharing links on the fly, etc..
 
 	     o Include/Exclude Users
 	          - You can specify certain users to check their posts against dead links, or to exclude others' posts from being checked at all.
@@ -194,7 +193,7 @@ Features:
 	          - Successive checks for same posts can be separated by a certain period of time, so those 'checked recently' posts didn't checked every time the script runs. Same posts can be checked multiple times, but with at least 1 day between each two successive checks. Define how many days should separate each two successive checks for the same post, or enter "0" to check posts ONLY ONCE. Note: "14" means your checked posts will be checked again every fourteen days (two weeks). "0" or a high Value usually recommended specially for large boards.
 
 	     o Checked Posts Per Batch
-	          - It's recommended to define a specific low number of posts to process in each run to prevent any possible timeout or Memory/CPU exhausting during the execution process. A Lower Value usually recommended specially for boards that has long posts with many links. There's other important factors that have strong affect as well such as: "Time/Date Cutoff Mode", "Time/Date Cutoff Value", "Check existing posts", "Maximum Checked Links Per Post", "Check Succession Period"; So please take care & try to set a logical acceptable value for each of these settings/options to avoid any expected/unexpected issues. You're the best one who knows your board & you're the one who can determine which suits you & your board according to your board's activity/content/requirements.
+	          - It's recommended to define a specific low number of posts to process in each run to prevent any possible timeout or Memory/CPU exhausting during the execution process. A Lower Value usually recommended specially for boards that has long posts with many links. There's other important factors that have strong affect as well such as: "Time/Date Cutoff Mode", "Time/Date Cutoff Value", "Check existing posts", "Maximum Checked Links Per Post", "Check Succession Period"; So please take care & try to set a logical acceptable value for each of these settings to avoid any expected/unexpected issues. You're the best one who knows your board & you're the one who can determine which suits you & your board according to your board's activity/content/requirements.
 
 	     o Remote Functions Maximum Redirections
 	          - The maximum amount of HTTP redirections to follow.
@@ -204,6 +203,10 @@ Features:
 
 	     o Remote Functions Maximum Response Size
 	          - The maximum allowed size of response to accept, enter value in bytes.
+
+	     o Required Sharing Links
+	          - You may force users to post 'supported' sharing links within their posts in order to submit their posts, otherwise they will get an error message.
+	          - You can select which forums would you like to force users include 'supported' sharing links within their posts.
 
 
 	* Reporting Settings:
@@ -265,6 +268,8 @@ Features:
 
 	     o Reports Phrases
 	          - Modify and localize reports' subject & message as preferred.
+		+ Staff Reports: [Report Subject] [Report Message]
+		+ User Reports: [Report Subject] [Report Message]
 
 
 	* Punishment Settings:
@@ -293,6 +298,20 @@ Features:
 	          - Note: This powerful ability doesn't affect only posts for those powerful user groups, but affects also any post for any user that's edited by those powerful user groups. It means they can overcome limits when posting/editing their own or others posts as well (They should have permissions to do so of course).
 
 
+	* Tagging Settings Settings:
+	     o Tag Threads - Reported Status
+	          - After checking a thread, threads can be tagged according to it's reported status: (ex: Alive, Dead).
+
+	     o Tag Threads - Reported Status - Phrases
+	          - Modify and localize status tags' text for tagged threads as preferred.
+		+ Status: [Alive] [Dead]
+
+	     o Tag Threads - Included Hosts
+	          - After checking a thread, threads can be tagged according to included hosts: (ex: HF, RS, MU) OR (ex: Hotfile, Rapidshare, Megaupload).
+	          - This setting has a global effect, turning it off disables this feature globally regardless the per host/module settings.
+	          - You can control this feature per host/module & set host tag's text as well.
+
+
 	* Look & Feel Settings:
 	     o Link Status Colors
 	          - Checked links can be colored according to their reported status, select your preferred colors from the color picker or write down the hexadecimal code for each status.
@@ -310,8 +329,13 @@ Features:
 	          - This feature is highly experimental in it's nature, and not complete yet. This part is working anyway.
 
 
+	* Administrator Permissions:
+	     o Can Administer "PHPKD - vB Link Verifier Bot"
+
+
      |- Supported Hosts:-
 	* 10upload.com
+	* 1fichier.com
 	* 2giga.com
 	* 2shared.com
 	* 4shared.com
@@ -319,20 +343,28 @@ Features:
 	* 9q9q.net
 	* adigashare.com
 	* adrive.com
+	* alterupload.com
 	* amonshare.com
 	* arabsh.com
 	* axifile.com
 	* badongo.com
 	* banashare.com
 	* bitroad.net
+	* bitshare.com
 	* box.net
+	* cjoint.net
 	* cocoshare.cc
 	* cramit.in
 	* crazyupload.com
 	* dataup.to
+	* datei.to
 	* depositfiles.com
+	* desfichiers.com
+	* dfichiers.com
 	* divshare.com
 	* divxden.com
+	* divxstage.eu
+	* dl4free.com
 	* dualshare.com
 	* duckload.com
 	* earthfilez.com
@@ -342,31 +374,43 @@ Features:
 	* evilshare.com
 	* extabit.com
 	* filaty.com
+	* file-upload.net
 	* file2box.com
 	* file2box.net
 	* filebase.to
 	* filebox.com
+	* filedino.com
 	* filedip.com
 	* filedropper.com
+	* filedude.com
 	* filefactory.com
+	* filefat.com
 	* fileflyer.com
 	* filefront.com
+	* filejungle.com
 	* filemo.com
 	* filemojo.com
+	* fileover.net
+	* filepost.com
 	* filerama.com
+	* filerio.com
 	* files.to
+	* filesafekeep.com
 	* filesavr.com
 	* filesend.net
 	* fileserve.com
 	* fileserver.cc
 	* filesift.com
+	* filesmonster.com
 	* filesonic.com
 	* filesovermiles.com
 	* filesplash.com
 	* filestab.com
 	* filethe.net
 	* flyupload.com
-	* freakshare.net
+	* freakshare.com
+	* fshare.vn
+	* furk.net
 	* gigasize.com
 	* goldfile.eu
 	* gotupload.com
@@ -374,6 +418,7 @@ Features:
 	* hostuje.net
 	* hotfile.com
 	* hulkshare.com
+	* i-filez.com
 	* ifile.it
 	* ifolder.ru
 	* ju7ju7.com
@@ -384,9 +429,11 @@ Features:
 	* loombo.com
 	* m5zn.com
 	* mediafire.com
+	* megadl.fr
 	* megashare.com
 	* megaupload.com
 	* megavideo.com
+	* mesfichiers.org
 	* midupload.com
 	* mlfat4arab.com
 	* moidisk.ru
@@ -395,11 +442,17 @@ Features:
 	* my2share.com
 	* netload.in
 	* nonstopshare.com
+	* novamov.com
+	* novaup.com
 	* online-sharing.net
 	* oron.com
+	* piecejointe.net
+	* pjointe.com
+	* plunder.com
 	* proddl.com
 	* przeklej.pl
 	* przeslij.net
+	* putlocker.com
 	* putshare.com
 	* q4share.com
 	* quickupload.net
@@ -418,6 +471,7 @@ Features:
 	* share-online.com
 	* share.cx
 	* shareator.net
+	* shareflare.net
 	* shareswift.com
 	* sharingmatrix.com
 	* shragle.com
@@ -427,23 +481,29 @@ Features:
 	* storage.to
 	* storedfiles.me
 	* superfastfile.com
+	* supershare.pl
+	* tenvoi.com
 	* teradepot.com
 	* transferbigfiles.com
 	* turbobit.net
 	* turboupload.com
+	* ul.to
 	* upfordown.com
+	* uploadbox.com
 	* uploaded.to
 	* uploading.com
 	* uploadking.biz
 	* uploadmachine.com
 	* uploadpalace.com
 	* uploadspace.pl
+	* uploadstation.com
 	* usaupload.net
 	* usershare.net
 	* useupload.com
 	* vidxden.com
 	* vip-file.com
 	* wikiupload.com
+	* wupload.com
 	* x7.to
 	* xfilesharing.ca
 	* xinony.com
@@ -463,12 +523,13 @@ Translations:
 Installation Procedure:
 ~~~~~~~~~~~~~~~~~~~~~~~~
      1. Upload required files to their appropriate places:
-	|- admincp
+	|- /admincp
 	     + phpkd_vblvb.php
-	|- includes
-	     + phpkd
-	          + vblvb
+	|- /includes
+	     + /phpkd
+	          + /vblvb
 		- adminfunctions.php
+		- class_copyright.php
 		- class_core.php
 		- class_cron.php
 		- class_dm.php
@@ -478,11 +539,14 @@ Installation Procedure:
 		- class_install.php
 		- hosts.xml
 		- settings.xml
-	     - md5_sums_phpkd_vblvb.php
 
-	     + xml
+	     + /xml
 	          - bitfield_phpkd_vblvb.xml
 	          - cpnav_phpkd_vblvb.xml
+
+	     - md5_sums_phpkd_vblvb.php
+	|- /
+	     + phpkd_vblvb.php
 
      2. Import the product's XML file "product-phpkd_vblvb.xml" from AdminCP.
 
@@ -497,6 +561,7 @@ Installation Procedure:
      6. [OPTIONAL] Translations: vBulletin AdminCP » Languages & Phrases » Download / Upload Languages » Import Language XML File (Make sure that your forum's Character Set is equivalent to the imported language as follow):
 	     Arabic » ISO-8859-6
 	     English, French, Spanish » ISO-8859-1
+	     Croatian » ISO-8859-2
 	     Greek » ISO-8859-7
 	     Italian » ISO-8859-16
 	     Russian » ISO-8859-5
@@ -521,8 +586,12 @@ Controls:
 	vBulletin AdminCP » vB Link Verifier Bot » Settings » General Settings
 	vBulletin AdminCP » vB Link Verifier Bot » Settings » Reporting Settings
 	vBulletin AdminCP » vB Link Verifier Bot » Settings » Punishment Settings
+	vBulletin AdminCP » vB Link Verifier Bot » Settings » Tagging Settings
 	vBulletin AdminCP » vB Link Verifier Bot » Settings » Look & Feel Settings
 	vBulletin AdminCP » vB Link Verifier Bot » Settings » Link Directory Settings
+
+     * Edit Hosts/Modules:
+	vBulletin AdminCP » vB Link Verifier Bot » Modules
 
      * Edit Scheduled Task:
 	vBulletin AdminCP » Scheduled Tasks » Scheduled Task Manager » PHPKD - vB Link Verifier Bot 'Ultimate'
@@ -969,6 +1038,53 @@ History:
 	9. New Feature: Configurable maximum redirections setting
 	10. New Language: French
 	11. Enhancement: multiple enhancements here & there
+     * v4.1.300 26/12/2011 10:00 AM UTC: Featured release (public)
+	1. New Feature: Tag Threads - Reported Status
+	2. New Feature: Tag Threads - Included Hosts
+	3. New Feature: Sharing links required for posts
+	4. New Feature: Public Script Displays supported hosts for users
+	5. Bug Fix: megaupload.com links falsely reported
+	6. Bug Fix: freakshare.com
+	7. Bug Fix: uploaded.to
+	8. Enhancement: multiple enhancements around the product
+	9. New Language: Croatian
+	10. Newly supported hosts (36 new):
+      1. 1fichier.com
+      2. alterupload.com
+      3. bitshare.com
+      4. cjoint.net
+      5. datei.to
+      6. desfichiers.com
+      7. dfichiers.com
+      8. divxstage.eu
+      9. dl4free.com
+      10. file-upload.net
+      11. filedino.com
+      12. filedude.com
+      13. filefat.com
+      14. filejungle.com
+      15. fileover.net
+      16. filepost.com
+      17. filerio.com
+      18. filesafekeep.com
+      19. filesmonster.com
+      20. fshare.vn
+      21. furk.net
+      22. i-filez.com
+      23. megadl.fr
+      24. mesfichiers.org
+      25. novamov.com
+      26. piecejointe.net
+      27. pjointe.com
+      28. plunder.com
+      29. putlocker.com
+      30. shareflare.net
+      31. supershare.pl
+      32. tenvoi.com
+      33. ul.to
+      34. uploadbox.com
+      35. uploadstation.com
+      36. wupload.com
 
 
 Screen Shots:
@@ -979,11 +1095,11 @@ Screen Shots:
 Technical Notes:
 ~~~~~~~~~~~~~~~~~
      * New Plugins: 11
-     * New Phrases: 249
-     * New Templates: 0
+     * New Phrases: 271
+     * New Templates: 3
      * Manual Template changes: 1 (optional)
      * Auto Template changes: 2
-     * New Files: 17
+     * New Files: 18
      * Manual File Changes: 0
      * New vBulletin Settings: 0
      * New Usergroup Permissions: 0
@@ -993,8 +1109,8 @@ Technical Notes:
      * New DB Tables: 5
      * DB Alterations: 4
      * New Cronjobs: 1
-     * Product Specific Settings: 44
-     * Product Specific Modules: 141
+     * Product Specific Settings: 50
+     * Product Specific Modules: 178
         --------------------------
      * Installation Level: Easy
      * Installation Time: ~20 seconds
@@ -1016,4 +1132,4 @@ Recent Products:
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.1.220 $ - $Id$
+$Version: 4.1.300 $ - $Id$

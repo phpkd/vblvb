@@ -2,7 +2,6 @@
 do_not_upload/product-phpkd_vblvb_fix.xml -text
 import/product-phpkd_vblvb.xml -text
 languages/English.xml -text svneol=unset#text/plain
-languages/French.xml -text svneol=unset#text/plain
 readme/info.txt -text
 readme/install.txt -text
 readme/license.txt -text
@@ -25,6 +24,7 @@ screenshots/phpkd_vblvb_admincp_log_pruned.png -text
 screenshots/phpkd_vblvb_admincp_log_viewer.png -text
 screenshots/phpkd_vblvb_admincp_log_viewer_form.png -text
 screenshots/phpkd_vblvb_admincp_nav.png -text
+screenshots/phpkd_vblvb_admincp_perms.png -text
 screenshots/phpkd_vblvb_admincp_settings_all.png -text
 screenshots/phpkd_vblvb_admincp_settings_backup_restore.png -text
 screenshots/phpkd_vblvb_admincp_settings_collapsed.png -text
@@ -35,11 +35,14 @@ screenshots/phpkd_vblvb_admincp_settings_linkdir.png -text
 screenshots/phpkd_vblvb_admincp_settings_lookfeel.png -text
 screenshots/phpkd_vblvb_admincp_settings_punishment.png -text
 screenshots/phpkd_vblvb_admincp_settings_reporting.png -text
+screenshots/phpkd_vblvb_admincp_settings_tagging.png -text
+screenshots/phpkd_vblvb_error_dead_links.png -text
 screenshots/phpkd_vblvb_post_checked_last_1.png -text
 screenshots/phpkd_vblvb_post_checked_last_2.png -text
 screenshots/phpkd_vblvb_post_checked_never.png -text
 screenshots/phpkd_vblvb_report_email.png -text
 screenshots/phpkd_vblvb_report_pm.png -text
+screenshots/phpkd_vblvb_sharing_links_required.png -text
 screenshots/phpkd_vblvb_staff_report_email.png -text
 screenshots/phpkd_vblvb_staff_report_pm.png -text
 screenshots/phpkd_vblvb_staff_report_post.png -text
@@ -63,3 +66,4 @@ upload/includes/phpkd/vblvb/index.html -text
 upload/includes/phpkd/vblvb/settings.xml -text svneol=unset#text/plain
 upload/includes/xml/bitfield_phpkd_vblvb.xml -text
 upload/includes/xml/cpnav_phpkd_vblvb.xml -text svneol=unset#text/plain
+upload/phpkd_vblvb.php -text

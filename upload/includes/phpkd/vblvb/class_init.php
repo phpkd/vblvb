@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.300 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -15,7 +15,7 @@
 
 
 // No direct access! Should be accessed throuth the core class only!!
-if (!defined('VB_AREA') OR !defined('PHPKD_VBLVB') OR @get_class($this) != 'PHPKD_VBLVB')
+if (!defined('VB_AREA') || !defined('PHPKD_VBLVB') || @get_class($this) != 'PHPKD_VBLVB')
 {
 	echo 'Prohibited Access!';
 	exit;
@@ -92,7 +92,7 @@ class PHPKD_VBLVB_Init
 	public function hosts()
 	{
 		$hosts = array();
-		$hosts_query = $this->_registry->_vbulletin->db->query_read("SELECT domain, active, status, urlmatch, apiurl, contentmatch, downmatch, urlsearch, urlreplace FROM " . TABLE_PREFIX . "phpkd_vblvb_host WHERE active = 1");
+		$hosts_query = $this->_registry->_vbulletin->db->query_read("SELECT * FROM " . TABLE_PREFIX . "phpkd_vblvb_host ORDER BY domain ASC");
 
 		if ($this->_registry->_vbulletin->db->num_rows($hosts_query) > 0)
 		{
@@ -298,7 +298,7 @@ class PHPKD_VBLVB_Init
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.220
+|| # Version: 4.1.300
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

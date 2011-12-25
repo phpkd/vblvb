@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.300 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -45,7 +45,7 @@ $vbulletin->input->clean_array_gpc('r', array(
 ));
 
 // intercept direct call to do=options with $varname specified instead of $dogroup
-if ($_REQUEST['do'] == 'options' AND !empty($vbulletin->GPC['varname']))
+if ($_REQUEST['do'] == 'options' && !empty($vbulletin->GPC['varname']))
 {
 	if ($vbulletin->GPC['varname'] == '[all]')
 	{
@@ -97,9 +97,9 @@ if (empty($_REQUEST['do']))
 	$_REQUEST['do'] = 'options';
 }
 
-if (in_array($_REQUEST['do'], array('downloadsettings', 'filessettings', 'removesetting', 'editgroup', 'addgroup', 'removegroup')) OR in_array($_POST['do'], array('updatesetting', 'insertsetting', 'killsetting', 'updategroup', 'insertgroup', 'killgroup')) OR ($_POST['do'] == 'doimportsetting' AND !$_POST['restore']))
+if (in_array($_REQUEST['do'], array('downloadsettings', 'filessettings', 'removesetting', 'editgroup', 'addgroup', 'removegroup')) || in_array($_POST['do'], array('updatesetting', 'insertsetting', 'killsetting', 'updategroup', 'insertgroup', 'killgroup')) || ($_POST['do'] == 'doimportsetting' && !$_POST['restore']))
 {
-	if (!$vbulletin->debug OR !PHPKD_VBLVB_DEBUG)
+	if (!$vbulletin->debug || !PHPKD_VBLVB_DEBUG)
 	{
 		print_stop_message('phpkd_vblvb_developers_only');
 	}
@@ -296,7 +296,7 @@ if ($_REQUEST['do'] == 'backuphosts')
 
 	while ($host = $db->fetch_array($hosts))
 	{
-		$arr = array('domain' => $host['domain'], 'active' => $host['active'], 'status' => $host['status']);
+		$arr = array('domain' => $host['domain'], 'active' => $host['active'], 'status' => $host['status'], 'taggable' => $host['taggable']);
 		$xml->add_group('host', $arr);
 
 		if ($host['urlmatch'] != '')
@@ -329,6 +329,11 @@ if ($_REQUEST['do'] == 'backuphosts')
 			$xml->add_tag('urlreplace', $host['urlreplace']);
 		}
 
+		if ($host['tagtext'] != '')
+		{
+			$xml->add_tag('tagtext', $host['tagtext']);
+		}
+
 		if ($host['notes'] != '')
 		{
 			$xml->add_tag('notes', $host['notes']);
@@ -349,19 +354,19 @@ if ($_REQUEST['do'] == 'backuphosts')
 }
 
 // ***********************************************************************
-if (in_array($_REQUEST['do'], array('viewlog', 'prunelog', 'log')) OR $_POST['do'] == 'doprunelog')
+if (in_array($_REQUEST['do'], array('viewlog', 'prunelog', 'log')) || $_POST['do'] == 'doprunelog')
 {
 	print_cp_header($vbphrase['phpkd_vblvb_log']);
 }
-else if (in_array($_REQUEST['do'], array('hosts', 'addhost', 'edithost', 'deletehost', 'backuprestorehosts', 'backuphosts')) OR in_array($_POST['do'], array('inserthost', 'updatehost', 'killhost', 'deletehost', 'doimporthosts', 'quickupdatehosts')))
+else if (in_array($_REQUEST['do'], array('hosts', 'addhost', 'edithost', 'deletehost', 'backuprestorehosts', 'backuphosts')) || in_array($_POST['do'], array('inserthost', 'updatehost', 'killhost', 'deletehost', 'doimporthosts', 'quickupdatehosts')))
 {
 	print_cp_header($vbphrase['phpkd_vblvb_host_manager']);
 }
 else
 {
-	print_cp_header($vbphrase['phpkd_vblvb_options'], iif($vbulletin->GPC['dogroup'] == 'lookfeel' OR $vbulletin->GPC['dogroup'] == '[all]', 'init_color_preview()'));
+	print_cp_header($vbphrase['phpkd_vblvb_options'], iif($vbulletin->GPC['dogroup'] == 'lookfeel' || $vbulletin->GPC['dogroup'] == '[all]', 'init_color_preview()'));
 
-	if ($vbulletin->GPC['dogroup'] == 'lookfeel' OR $vbulletin->GPC['dogroup'] == '[all]')
+	if ($vbulletin->GPC['dogroup'] == 'lookfeel' || $vbulletin->GPC['dogroup'] == '[all]')
 	{
 		echo '<script type="text/javascript" src="../clientscript/vbulletin_cpcolorpicker.js?v=' . SIMPLE_VERSION . '"></script>';
 	}
@@ -603,7 +608,7 @@ if ($_POST['do'] == 'updategroup')
 				version = '" . $db->escape_string(PHPKD_VBLVB_VERSION) . "'
 			WHERE varname IN(
 				" . implode(",\n				", $phrasenames) . "
-			) AND fieldname = 'phpkd_vblvb'
+			) && fieldname = 'phpkd_vblvb'
 		";
 
 		$db->query_write($q2);
@@ -614,7 +619,7 @@ if ($_POST['do'] == 'updategroup')
 }
 
 // ###################### Start edit setting group #######################
-if ($_REQUEST['do'] == 'editgroup' OR $_REQUEST['do'] == 'addgroup')
+if ($_REQUEST['do'] == 'editgroup' || $_REQUEST['do'] == 'addgroup')
 {
 	$vbulletin->input->clean_array_gpc('r', array(
 		'grouptitle' => TYPE_STR,
@@ -648,7 +653,7 @@ if ($_REQUEST['do'] == 'editgroup' OR $_REQUEST['do'] == 'addgroup')
 
 		$group = array(
 			'displayorder' => $ordercheck['displayorder'] + 10,
-			'volatile' => iif($vbulletin->debug AND PHPKD_VBLVB_DEBUG, 1, 0)
+			'volatile' => iif($vbulletin->debug && PHPKD_VBLVB_DEBUG, 1, 0)
 		);
 
 		$pagetitle = $vbphrase['add_new_setting_group'];
@@ -671,7 +676,7 @@ if ($_REQUEST['do'] == 'editgroup' OR $_REQUEST['do'] == 'addgroup')
 	print_input_row($vbphrase['title'], 'group[title]', $group['title']);
 	print_input_row($vbphrase['display_order'], 'group[displayorder]', $group['displayorder']);
 
-	if ($vbulletin->debug AND PHPKD_VBLVB_DEBUG)
+	if ($vbulletin->debug && PHPKD_VBLVB_DEBUG)
 	{
 		print_yes_no_row($vbphrase['vbulletin_default'], 'group[volatile]', $group['volatile']);
 	}
@@ -884,7 +889,7 @@ if ($_POST['do'] == 'updatesetting')
 }
 
 // ###################### Start edit / add setting #######################
-if ($_REQUEST['do'] == 'editsetting' OR $_REQUEST['do'] == 'addsetting')
+if ($_REQUEST['do'] == 'editsetting' || $_REQUEST['do'] == 'addsetting')
 {
 	$vbulletin->input->clean_array_gpc('r', array(
 		'grouptitle' => TYPE_STR
@@ -944,7 +949,7 @@ if ($_REQUEST['do'] == 'editsetting' OR $_REQUEST['do'] == 'addsetting')
 		$setting = array(
 			'grouptitle'   => $vbulletin->GPC['grouptitle'],
 			'displayorder' => $ordercheck['displayorder'] + 10,
-			'volatile'     => ($vbulletin->debug AND PHPKD_VBLVB_DEBUG) ? 1 : 0
+			'volatile'     => ($vbulletin->debug && PHPKD_VBLVB_DEBUG) ? 1 : 0
 		);
 
 		$pagetitle = $vbphrase['add_new_setting'];
@@ -1015,7 +1020,7 @@ if ($_REQUEST['do'] == 'editsetting' OR $_REQUEST['do'] == 'addsetting')
 	print_input_row($vbphrase['display_order'], 'displayorder', $setting['displayorder']);
 	print_yes_no_row($vbphrase['blacklist'], 'blacklist', $setting['blacklist']);
 
-	if ($vbulletin->debug AND PHPKD_VBLVB_DEBUG)
+	if ($vbulletin->debug && PHPKD_VBLVB_DEBUG)
 	{
 		print_yes_no_row($vbphrase['vbulletin_default'], 'volatile', $setting['volatile']);
 	}
@@ -1069,11 +1074,11 @@ if ($_REQUEST['do'] == 'options')
 		SELECT setting.*, settinggroup.grouptitle
 		FROM " . TABLE_PREFIX . "phpkd_vblvb_settinggroup AS settinggroup
 		LEFT JOIN " . TABLE_PREFIX . "phpkd_vblvb_setting AS setting USING(grouptitle)
-		" . iif($vbulletin->debug AND PHPKD_VBLVB_DEBUG, '', 'WHERE settinggroup.displayorder <> 0') . "
+		" . iif($vbulletin->debug && PHPKD_VBLVB_DEBUG, '', 'WHERE settinggroup.displayorder <> 0') . "
 		ORDER BY settinggroup.displayorder, setting.displayorder
 	");
 
-	if (empty($vbulletin->GPC['dogroup']) AND $vbulletin->GPC['expand'])
+	if (empty($vbulletin->GPC['dogroup']) && $vbulletin->GPC['expand'])
 	{
 		while ($setting = $db->fetch_array($settings))
 		{
@@ -1121,7 +1126,7 @@ if ($_REQUEST['do'] == 'options')
 	{
 		print_table_header($vbphrase['phpkd_vblvb_options']);
 		print_label_row($vbphrase['settings_to_edit'] .
-			iif($vbulletin->debug AND PHPKD_VBLVB_DEBUG,
+			iif($vbulletin->debug && PHPKD_VBLVB_DEBUG,
 				'<br /><table><tr><td><fieldset><legend>Developer Options</legend>
 				<div style="padding: 2px"><a href="phpkd_vblvb.php?' . $vbulletin->session->vars['sessionurl'] . 'do=addgroup">' . $vbphrase['add_new_setting_group'] . '</a></div>
 				<div style="padding: 2px"><a href="phpkd_vblvb.php?' . $vbulletin->session->vars['sessionurl'] . 'do=filessettings">' . $vbphrase['download_upload_settings'] . '</a></div>' .
@@ -1171,7 +1176,7 @@ if ($_REQUEST['do'] == 'options')
 	}
 
 	// build color picker if necessary
-	if ($vbulletin->GPC['dogroup'] == 'lookfeel' OR $vbulletin->GPC['dogroup'] == '[all]')
+	if ($vbulletin->GPC['dogroup'] == 'lookfeel' || $vbulletin->GPC['dogroup'] == '[all]')
 	{
 		echo phpkd_vblvb_color_picker(11);
 		echo '<script type="text/javascript">
@@ -1310,6 +1315,8 @@ if ($_POST['do'] == 'inserthost')
 		'downmatch'    => TYPE_STR,
 		'urlsearch'    => TYPE_STR,
 		'urlreplace'   => TYPE_STR,
+		'taggable'     => TYPE_BOOL,
+		'tagtext'      => TYPE_STR,
 		'notes'        => TYPE_STR
 	));
 
@@ -1337,14 +1344,15 @@ if ($_POST['do'] == 'inserthost')
 	$downmatch    = $db->escape_string(trim($vbulletin->GPC['downmatch']));
 	$urlsearch    = $db->escape_string(trim($vbulletin->GPC['urlsearch']));
 	$urlreplace   = $db->escape_string(trim($vbulletin->GPC['urlreplace']));
+	$tagtext      = $db->escape_string(trim($vbulletin->GPC['tagtext']));
 	$notes        = $db->escape_string(trim($vbulletin->GPC['notes']));
 
 	// insert host place-holder
 	$db->query_write("
 		INSERT INTO " . TABLE_PREFIX . "phpkd_vblvb_host
-			(domain, active, status, urlmatch, apiurl, contentmatch, downmatch, urlsearch, urlreplace, notes)
+			(domain, active, status, urlmatch, apiurl, contentmatch, downmatch, urlsearch, urlreplace, taggable, tagtext, notes)
 		VALUES
-			('" . $db->escape_string(trim($vbulletin->GPC['domain'])) . "', " . $vbulletin->GPC['active'] . ", '" . $db->escape_string(trim($vbulletin->GPC['status'])) . "', '" . $db->escape_string(trim($vbulletin->GPC['urlmatch'])) . "', " . (!empty($apiurl) ? '\'' . $apiurl . '\'' : 'NULL') . ", " . (!empty($contentmatch) ? '\'' . $contentmatch . '\'' : 'NULL') . ", " . (!empty($downmatch) ? '\'' . $downmatch . '\'' : 'NULL') . ", " . (!empty($urlsearch) ? '\'' . $urlsearch . '\'' : 'NULL') . ", " . (!empty($urlreplace) ? '\'' . $urlreplace . '\'' : 'NULL') . ", " . (!empty($notes) ? '\'' . $notes . '\'' : 'NULL') . ")
+			('" . $db->escape_string(trim($vbulletin->GPC['domain'])) . "', " . $vbulletin->GPC['active'] . ", '" . $db->escape_string(trim($vbulletin->GPC['status'])) . "', '" . $db->escape_string(trim($vbulletin->GPC['urlmatch'])) . "', " . (!empty($apiurl) ? '\'' . $apiurl . '\'' : 'NULL') . ", " . (!empty($contentmatch) ? '\'' . $contentmatch . '\'' : 'NULL') . ", " . (!empty($downmatch) ? '\'' . $downmatch . '\'' : 'NULL') . ", " . (!empty($urlsearch) ? '\'' . $urlsearch . '\'' : 'NULL') . ", " . (!empty($urlreplace) ? '\'' . $urlreplace . '\'' : 'NULL') . ", " . $vbulletin->GPC['taggable'] . ", " . (!empty($tagtext) ? '\'' . $tagtext . '\'' : 'NULL') . ", " . (!empty($notes) ? '\'' . $notes . '\'' : 'NULL') . ")
 	");
 
 	define('CP_REDIRECT', 'phpkd_vblvb.php?do=hosts');
@@ -1366,6 +1374,8 @@ if ($_POST['do'] == 'updatehost')
 		'downmatch'    => TYPE_STR,
 		'urlsearch'    => TYPE_STR,
 		'urlreplace'   => TYPE_STR,
+		'taggable'     => TYPE_BOOL,
+		'tagtext'      => TYPE_STR,
 		'notes'        => TYPE_STR
 	));
 
@@ -1374,7 +1384,7 @@ if ($_POST['do'] == 'updatehost')
 		print_cp_message('This function is disabled within demo mode');
 	}
 
-	if ($vbulletin->GPC['domain'] != $vbulletin->GPC['olddomain'] AND $s = $db->query_first("
+	if ($vbulletin->GPC['domain'] != $vbulletin->GPC['olddomain'] && $s = $db->query_first("
 		SELECT domain
 		FROM " . TABLE_PREFIX . "phpkd_vblvb_host
 		WHERE domain = '" . $db->escape_string($vbulletin->GPC['domain']) . "'
@@ -1393,6 +1403,7 @@ if ($_POST['do'] == 'updatehost')
 	$downmatch    = $db->escape_string(trim($vbulletin->GPC['downmatch']));
 	$urlsearch    = $db->escape_string(trim($vbulletin->GPC['urlsearch']));
 	$urlreplace   = $db->escape_string(trim($vbulletin->GPC['urlreplace']));
+	$tagtext      = $db->escape_string(trim($vbulletin->GPC['tagtext']));
 	$notes        = $db->escape_string(trim($vbulletin->GPC['notes']));
 
 	$db->query_write("
@@ -1406,6 +1417,8 @@ if ($_POST['do'] == 'updatehost')
 			downmatch    = " . (!empty($downmatch) ? '\'' . $downmatch . '\'' : 'NULL') . ",
 			urlsearch    = " . (!empty($urlsearch) ? '\'' . $urlsearch . '\'' : 'NULL') . ",
 			urlreplace   = " . (!empty($urlreplace) ? '\'' . $urlreplace . '\'' : 'NULL') . ",
+			taggable     = " . $vbulletin->GPC['taggable'] . ",
+			tagtext      = " . (!empty($tagtext) ? '\'' . $tagtext . '\'' : 'NULL') . ",
 			notes        = " . (!empty($notes) ? '\'' . $notes . '\'' : 'NULL') . "
 		WHERE id = " . $vbulletin->GPC['id'] . "
 	");
@@ -1415,7 +1428,7 @@ if ($_POST['do'] == 'updatehost')
 }
 
 // ###################### Start edit / add host #######################
-if ($_REQUEST['do'] == 'edithost' OR $_REQUEST['do'] == 'addhost')
+if ($_REQUEST['do'] == 'edithost' || $_REQUEST['do'] == 'addhost')
 {
 	$vbulletin->input->clean_array_gpc('r', array(
 		'id' => TYPE_UINT
@@ -1440,7 +1453,8 @@ if ($_REQUEST['do'] == 'edithost' OR $_REQUEST['do'] == 'addhost')
 	{
 		$host = array(
 			'active'       => 1,
-			'status'       => 'alive'
+			'status'       => 'alive',
+			'taggable'     => 1
 		);
 
 		$pagetitle = $vbphrase['phpkd_vblvb_host_new'];
@@ -1465,6 +1479,8 @@ if ($_REQUEST['do'] == 'edithost' OR $_REQUEST['do'] == 'addhost')
 	print_input_row($vbphrase['phpkd_vblvb_host_downmatch'], 'downmatch', $host['downmatch']);
 	print_input_row($vbphrase['phpkd_vblvb_host_urlsearch'], 'urlsearch', $host['urlsearch']);
 	print_input_row($vbphrase['phpkd_vblvb_host_urlreplace'], 'urlreplace', $host['urlreplace']);
+	print_yes_no_row($vbphrase['phpkd_vblvb_host_taggable'], 'taggable', $host['taggable']);
+	print_input_row($vbphrase['phpkd_vblvb_host_tagtext'], 'tagtext', $host['tagtext']);
 	print_textarea_row($vbphrase['phpkd_vblvb_host_notes'], 'notes', $host['notes']);
 	print_submit_row($vbphrase['save']);
 }
@@ -1514,7 +1530,7 @@ if ($_POST['do'] == 'quickupdatehosts')
 	$hosts = $db->query_read("SELECT id, active, status FROM " . TABLE_PREFIX . "phpkd_vblvb_host");
 	while ($host = $db->fetch_array($hosts))
 	{
-		if (intval($host['active']) != $vbulletin->GPC['active']["$host[id]"] OR $host['status'] != $vbulletin->GPC['status']["$host[id]"])
+		if (intval($host['active']) != $vbulletin->GPC['active']["$host[id]"] || $host['status'] != $vbulletin->GPC['status']["$host[id]"])
 		{
 			$update_ids .= ",$host[id]";
 			$update_active .= " WHEN $host[id] THEN " . intval($vbulletin->GPC['active']["$host[id]"]);
@@ -1592,18 +1608,18 @@ if ($_REQUEST['do'] == 'viewlog')
 		'enddate'   => TYPE_UNIXTIME
 	));
 
-	if ($vbulletin->GPC['startdate'] OR $vbulletin->GPC['enddate'])
+	if ($vbulletin->GPC['startdate'] || $vbulletin->GPC['enddate'])
 	{
 		$sqlconds = 'WHERE 1 = 1 ';
 
 		if ($vbulletin->GPC['startdate'])
 		{
-			$sqlconds .= " AND log.dateline >= " . $vbulletin->GPC['startdate'];
+			$sqlconds .= " && log.dateline >= " . $vbulletin->GPC['startdate'];
 		}
 
 		if ($vbulletin->GPC['enddate'])
 		{
-			$sqlconds .= " AND log.dateline <= " . $vbulletin->GPC['enddate'];
+			$sqlconds .= " && log.dateline <= " . $vbulletin->GPC['enddate'];
 		}
 	}
 	else
@@ -1625,12 +1641,12 @@ if ($_REQUEST['do'] == 'viewlog')
 	$counter = $db->query_first("SELECT COUNT(DISTINCT dateline) AS total FROM " . TABLE_PREFIX . "phpkd_vblvb_log AS log $sqlconds");
 	$totalpages = ceil($counter['total'] / $vbulletin->GPC['perpage']);
 
-	if (empty($vbulletin->GPC['orderby']) OR !in_array($vbulletin->GPC['orderby'], array('postid', 'date', 'mode')))
+	if (empty($vbulletin->GPC['orderby']) || !in_array($vbulletin->GPC['orderby'], array('postid', 'date', 'mode')))
 	{
 		$vbulletin->GPC['orderby'] = 'dateline';
 	}
 
-	if (empty($vbulletin->GPC['direction']) OR !in_array($vbulletin->GPC['direction'], array('ASC', 'DESC')))
+	if (empty($vbulletin->GPC['direction']) || !in_array($vbulletin->GPC['direction'], array('ASC', 'DESC')))
 	{
 		$vbulletin->GPC['direction'] = 'ASC';
 	}
@@ -1873,7 +1889,7 @@ print_cp_footer();
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.220
+|| # Version: 4.1.300
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

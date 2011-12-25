@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.300 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -14,7 +14,7 @@
 \*==================================================================================*/
 
 
-if (!defined('VB_AREA') OR !defined('IN_CONTROL_PANEL'))
+if (!defined('VB_AREA') || !defined('IN_CONTROL_PANEL'))
 {
 	echo 'Can not be called from outside vBulletin Framework AdminCP!';
 	exit;
@@ -72,9 +72,8 @@ class PHPKD_VBLVB_Install
 	 */
 	public function install_init($info)
 	{
-		if (!file_exists(DIR . '/includes/phpkd/vblvb/adminfunctions.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_copyright.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_core.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_cron.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dm.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_dml.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_hooks.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/class_init.php') OR !file_exists(DIR . '/includes/phpkd/vblvb/hosts.xml') OR !file_exists(DIR . '/includes/phpkd/vblvb/settings.xml') OR !file_exists(DIR . '/includes/xml/bitfield_phpkd_vblvb.xml') OR !file_exists(DIR . '/includes/xml/cpnav_phpkd_vblvb.xml'))
+		if (!file_exists(DIR . '/includes/phpkd/vblvb/adminfunctions.php') || !file_exists(DIR . '/includes/phpkd/vblvb/class_copyright.php') || !file_exists(DIR . '/includes/phpkd/vblvb/class_core.php') || !file_exists(DIR . '/includes/phpkd/vblvb/class_cron.php') || !file_exists(DIR . '/includes/phpkd/vblvb/class_dm.php') || !file_exists(DIR . '/includes/phpkd/vblvb/class_dml.php') || !file_exists(DIR . '/includes/phpkd/vblvb/class_hooks.php') || !file_exists(DIR . '/includes/phpkd/vblvb/class_init.php') || !file_exists(DIR . '/includes/phpkd/vblvb/hosts.xml') || !file_exists(DIR . '/includes/phpkd/vblvb/settings.xml') || !file_exists(DIR . '/includes/xml/bitfield_phpkd_vblvb.xml') || !file_exists(DIR . '/includes/xml/cpnav_phpkd_vblvb.xml'))
 		{
-			print_dots_stop();
 			print_cp_message('Please upload the files that came with "PHPKD - vB Link Verifier Bot" product before installing or upgrading!');
 		}
 
@@ -94,6 +93,8 @@ class PHPKD_VBLVB_Install
 		$phpkdinfo['vendor'] = trim(substr(substr('$Vendor: PHP KingDom $', 8), 0, -1));
 		$phpkdinfo['url'] = $info['url'];
 		$phpkdinfo['versioncheckurl'] = $info['versioncheckurl'];
+
+		print_dots_start('Installing: "' . $phpkdinfo['title'] . '"<br />Version: ' . $phpkdinfo['version'] . ', Revision: ' . $phpkdinfo['revision'] . ', Released: ' . $phpkdinfo['released'] . '.<br />Thanks for choosing PHP KingDom\'s Products. If you need any help or wish to try any other products we have, just give us a visit at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a>. You are always welcomed.<br />Please Wait...', ':', 'phpkd_vbaddon_install_info');
 
 		if ($this->_vbulletin->options['phpkd_commercial4x_data'])
 		{
@@ -128,7 +129,6 @@ class PHPKD_VBLVB_Install
 		}
 
 		build_options();
-		print_dots_start("Installing: \"" . $phpkdinfo['title'] . "\"<br />Version: " . $phpkdinfo['version'] . ", Revision: " . $phpkdinfo['revision'] . ", Released: " . $phpkdinfo['released'] . ".<br />Thanks for choosing PHP KingDom's Products. If you need any help or wish to try any other products we have, just give us a visit at <a href=\"http://www.phpkd.net\" target=\"_blank\">www.phpkd.net</a>. You are always welcomed.<br />Please Wait...", ':', 'phpkd_vbaddon_install_info');
 		print_dots_stop();
 
 		// ######################################################################
@@ -158,11 +158,12 @@ class PHPKD_VBLVB_Install
 			if ($holder[$this->_vbulletin->db->escape_string($this->_vbulletin->GPC['productid'])])
 			{
 				$phpkdinfo = $holder[$this->_vbulletin->db->escape_string($this->_vbulletin->GPC['productid'])];
-				print_dots_start("Un-installing: \"" . $phpkdinfo['title'] . "\"<br />Version: " . $phpkdinfo['version'] . ", Revision: " . $phpkdinfo['revision'] . ", Released: " . $phpkdinfo['released'] . ".<br />We are sad to see you un-installing '" . $phpkdinfo['title'] . "'. Please if there is any thing we can do to keep you using this software product, just tell us at <a href=\"http://www.phpkd.net\" target=\"_blank\">www.phpkd.net</a>.<br />Please Wait...", ':', 'phpkd_vbaddon_uninstall_info');
+				print_dots_start('Un-installing: "' . $phpkdinfo['title'] . '"<br />Version: ' . $phpkdinfo['version'] . ', Revision: ' . $phpkdinfo['revision'] . ', Released: ' . $phpkdinfo['released'] . '.<br />We are sad to see you un-installing "' . $phpkdinfo['title'] . '". Please if there is any thing we can do to keep you using this software product, just tell us at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a>.<br />Please Wait...', ':', 'phpkd_vbaddon_uninstall_info');
+				print_dots_stop();
 				unset($holder[$this->_vbulletin->db->escape_string($this->_vbulletin->GPC['productid'])]);
 			}
 
-			if (is_array($holder) AND !empty($holder))
+			if (is_array($holder) && !empty($holder))
 			{
 				$data = $this->_vbulletin->db->escape_string(serialize($holder));
 				$this->_vbulletin->db->query_write("
@@ -203,6 +204,9 @@ class PHPKD_VBLVB_Install
 	public function install_40101()
 	{
 		$this->_vbulletin->db->hide_errors();
+
+		print_dots_start('Installing v4.0.101 updates...', ':', 'phpkd_vbaddon_install_40101');
+
 		require_once(DIR . '/includes/class_dbalter.php');
 		$db_alter = new vB_Database_Alter_MySQL($this->_vbulletin->db);
 
@@ -222,6 +226,8 @@ class PHPKD_VBLVB_Install
 			));
 		}
 
+		print_dots_stop();
+
 		$this->_vbulletin->db->show_errors();
 	}
 
@@ -233,6 +239,9 @@ class PHPKD_VBLVB_Install
 	public function uninstall_40101()
 	{
 		$this->_vbulletin->db->hide_errors();
+
+		print_dots_start('Un-installing v4.0.101 updates...', ':', 'phpkd_vbaddon_uninstall_40101');
+
 		require_once(DIR . '/includes/class_dbalter.php');
 		$db_alter = new vB_Database_Alter_MySQL($this->_vbulletin->db);
 
@@ -241,6 +250,8 @@ class PHPKD_VBLVB_Install
 			$db_alter->drop_field('phpkd_vblvb');
 			$db_alter->drop_field('phpkd_vblvb_lastcheck');
 		}
+
+		print_dots_stop();
 
 		$this->_vbulletin->db->show_errors();
 	}
@@ -253,6 +264,9 @@ class PHPKD_VBLVB_Install
 	public function install_40200()
 	{
 		$this->_vbulletin->db->hide_errors();
+
+		print_dots_start('Installing v4.0.200 updates...', ':', 'phpkd_vbaddon_install_40200');
+
 		require_once(DIR . '/includes/class_dbalter.php');
 		$db_alter = new vB_Database_Alter_MySQL($this->_vbulletin->db);
 
@@ -353,10 +367,11 @@ class PHPKD_VBLVB_Install
 			)
 		");
 
+		print_dots_stop();
+
 		// Import settings & hosts
 		require_once(DIR . '/includes/phpkd/vblvb/adminfunctions.php');
 		phpkd_vblvb_xml_import_settings(file_read(DIR . '/includes/phpkd/vblvb/settings.xml'));
-		phpkd_vblvb_xml_restore_hosts(file_read(DIR . '/includes/phpkd/vblvb/hosts.xml'));
 
 		$this->_vbulletin->db->show_errors();
 	}
@@ -369,6 +384,9 @@ class PHPKD_VBLVB_Install
 	function uninstall_40200()
 	{
 		$this->_vbulletin->db->hide_errors();
+
+		print_dots_start('Un-installing v4.0.200 updates...', ':', 'phpkd_vbaddon_uninstall_40200');
+
 		require_once(DIR . '/includes/class_dbalter.php');
 		$db_alter = new vB_Database_Alter_MySQL($this->_vbulletin->db);
 
@@ -393,6 +411,8 @@ class PHPKD_VBLVB_Install
 		$this->_vbulletin->db->query_write("DROP TABLE IF EXISTS " . TABLE_PREFIX . "phpkd_vblvb_log");
 		$this->_vbulletin->db->query_write("DROP TABLE IF EXISTS " . TABLE_PREFIX . "phpkd_vblvb_link");
 
+		print_dots_stop();
+
 		$this->_vbulletin->db->show_errors();
 	}
 
@@ -405,6 +425,8 @@ class PHPKD_VBLVB_Install
 	{
 		$this->_vbulletin->db->hide_errors();
 
+		print_dots_start('Installing v4.1.220 updates...', ':', 'phpkd_vbaddon_install_41220');
+
 		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('lookfeel_postbit_note_firstpost', 'lookfeel', '0', '1', 'yesno', 30, 0, 1, 'boolean', '', 0)");
 
 		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('general_vurl_maxredirs', 'general', '5', '5', '', 220, 0, 1, 'posint', '', 0)");
@@ -412,6 +434,8 @@ class PHPKD_VBLVB_Install
 		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('general_vurl_timeout', 'general', '15', '15', '', 230, 0, 1, 'posint', '', 0)");
 
 		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('general_vurl_maxsize', 'general', '512000', '512000', '', 240, 0, 1, 'posint', '', 0)");
+
+		print_dots_stop();
 
 		$this->_vbulletin->db->show_errors();
 	}
@@ -423,14 +447,55 @@ class PHPKD_VBLVB_Install
 	 */
 	function uninstall_41220()
 	{
+		// Nothing!
+	}
+
+	/**
+	 * Install v4.1.300
+	 *
+	 * @return	void
+	 */
+	public function install_41300()
+	{
 		$this->_vbulletin->db->hide_errors();
 
-		$this->_vbulletin->db->query_write("DELETE FROM `" . TABLE_PREFIX . "phpkd_vblvb_setting` WHERE `varname` = 'lookfeel_postbit_note_firstpost'");
-		$this->_vbulletin->db->query_write("DELETE FROM `" . TABLE_PREFIX . "phpkd_vblvb_setting` WHERE `varname` = 'general_vurl_maxredirs'");
-		$this->_vbulletin->db->query_write("DELETE FROM `" . TABLE_PREFIX . "phpkd_vblvb_setting` WHERE `varname` = 'general_vurl_timeout'");
-		$this->_vbulletin->db->query_write("DELETE FROM `" . TABLE_PREFIX . "phpkd_vblvb_setting` WHERE `varname` = 'general_vurl_maxsize'");
+		print_dots_start('Installing v4.1.300 updates...', ':', 'phpkd_vbaddon_install_41300');
+
+		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_setting` SET `displayorder` = `displayorder` + 20 WHERE `grouptitle` = 'general' && `displayorder` > 20");
+
+		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` SET `displayorder` = `displayorder` + 10 WHERE `displayorder` >= 40");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` (`grouptitle`, `displayorder`, `volatile`) VALUES('tagging', 40, 1)");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('general_scriptname', 'general', 'phpkd_vblvb.php', 'phpkd_vblvb.php', '', 30, 0, 1, 'free', '', 0)");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('general_scripttitle', 'general', 'vB Link Verifier Bot', 'vB Link Verifier Bot', '', 40, 0, 1, 'free', '', 0)");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('general_require_sharing', 'general', '', '', 'forum:5', 270, 0, 1, 'free', '', 0)");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('tagging_status', 'tagging', '1', '1', 'yesno', 10, 0, 1, 'boolean', '', 0)");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('tagging_status_phrases', 'tagging', '', '', '<strong>Status:</strong> [<a href=\'phrase.php?do=edit&amp;e[global][phpkd_vblvb_tagging_status_alive]\' target=\'_blank\'>Alive</a>] [<a href=\'phrase.php?do=edit&amp;e[global][phpkd_vblvb_tagging_status_dead]\' target=\'_blank\'>Dead</a>]<br />', 20, 0, 1, 'free', '', 0)");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('tagging_host', 'tagging', '1', '1', 'yesno', 30, 0, 1, 'boolean', '', 0)");
+
+		$this->_vbulletin->db->query_write("ALTER TABLE `" . TABLE_PREFIX . "phpkd_vblvb_host` ADD `taggable` SMALLINT(5) UNSIGNED NOT NULL DEFAULT '1' AFTER `downmatch`");
+
+		$this->_vbulletin->db->query_write("ALTER TABLE `" . TABLE_PREFIX . "phpkd_vblvb_host` ADD `tagtext` VARCHAR(250) NULL DEFAULT NULL AFTER `taggable`");
+
+		print_dots_stop();
 
 		$this->_vbulletin->db->show_errors();
+	}
+
+	/**
+	 * Uninstall v4.1.300
+	 *
+	 * @return	void
+	 */
+	function uninstall_41300()
+	{
+		// Nothing!
 	}
 
 	/**
@@ -439,7 +504,7 @@ class PHPKD_VBLVB_Install
 	 *
 	 * @return	void
 	 */
-	public function reimport_hosts()
+	public function import_hosts()
 	{
 		$this->_vbulletin->db->hide_errors();
 
@@ -454,7 +519,7 @@ class PHPKD_VBLVB_Install
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.220
+|| # Version: 4.1.300
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

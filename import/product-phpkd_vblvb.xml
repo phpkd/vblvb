@@ -3,7 +3,7 @@
 <product productid="phpkd_vblvb" active="1">
 	<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate']]></title>
 	<description><![CDATA[This product extract sharing links of over 140+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.]]></description>
-	<version>4.1.220</version>
+	<version>4.1.300</version>
 	<url>http://tools.phpkd.net/en/producthelp/url/vblvb/</url>
 	<versioncheckurl>http://tools.phpkd.net/en/producthelp/version/vblvb/</versioncheckurl>
 	<dependencies>
@@ -30,12 +30,86 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 			<installcode><![CDATA[$phpkd_vblvb->install_41220();]]></installcode>
 			<uninstallcode><![CDATA[$phpkd_vblvb->uninstall_41220();]]></uninstallcode>
 		</code>
+		<code version="4.1.300">
+			<installcode><![CDATA[$phpkd_vblvb->install_41300();]]></installcode>
+			<uninstallcode><![CDATA[$phpkd_vblvb->uninstall_41300();]]></uninstallcode>
+		</code>
 		<code version="4.1.999">
-			<installcode><![CDATA[$phpkd_vblvb->reimport_hosts();]]></installcode>
+			<installcode><![CDATA[$phpkd_vblvb->import_hosts();]]></installcode>
 			<uninstallcode />
 		</code>
 	</codes>
 	<templates>
+		<template name="phpkd_vblvb_hostbit" templatetype="template" date="1324766121" username="PHPKD" version="4.1.300"><![CDATA[<li class="blockrow attachmentrow floatcontainer" id="attachments{vb:raw info.attachmentid}">
+	<div>
+		<h3 class="attachment_title">{vb:raw host.domain}</h3>
+		<dl class="stats">
+			<dt>{vb:rawphrase phpkd_vblvb_host_active}</dt>
+				<dd><vb:if condition="$host['active']">{vb:rawphrase yes}<vb:else />{vb:rawphrase no}</vb:if></dd>
+			<dt>{vb:rawphrase phpkd_vblvb_host_status}</dt>
+				<dd>{vb:raw host.status}</dd>
+			<dt>{vb:rawphrase phpkd_vblvb_host_taggable}</dt>
+				<dd><vb:if condition="$host['taggable']">{vb:rawphrase yes}<vb:else />{vb:rawphrase no}</vb:if></dd>
+			<dt>{vb:rawphrase phpkd_vblvb_host_tagtext}</dt>
+				<dd><vb:if condition="$host['tagtext']">{vb:raw host.tagtext}<vb:else />{vb:rawphrase n_a}</vb:if></dd>
+		</dl>
+	</div>
+</li>]]></template>
+		<template name="phpkd_vblvb_hosts" templatetype="template" date="1324766394" username="PHPKD" version="4.1.300"><![CDATA[<div>
+	<div class="blockhead">
+		<h2>{vb:rawphrase phpkd_vblvb_nav_hosts}</h2>
+	</div>
+	<ol class="blockbody settings_form_border">
+		{vb:raw hostbits}
+	</ol>
+</div>]]></template>
+		<template name="PHPKD_VBLVB_SHELL" templatetype="template" date="1324775372" username="PHPKD" version="4.1.300"><![CDATA[{vb:stylevar htmldoctype}
+<html xmlns="http://www.w3.org/1999/xhtml"<vb:if condition="$vboptions['enablefacebookconnect']"> xmlns:fb="http://www.facebook.com/2008/fbml"</vb:if> dir="{vb:stylevar textdirection}" lang="{vb:stylevar languagecode}" id="vbulletin_html">
+<head>
+	{vb:raw headinclude}
+
+	<vb:if condition="$vboptions['storecssasfile']">
+		{vb:cssfile usercp-rollup.css}
+		<vb:if condition="$includecss">
+			<vb:each from="includecss" value="file">
+				{vb:cssfile {vb:raw file}}
+			</vb:each>
+		</vb:if>
+	<vb:else />
+		{vb:cssfile usercp.css,{vb:raw includecss}}
+	</vb:if>
+
+	<title>{vb:raw pagetitle} - {vb:raw vboptions.bbtitle}</title>
+
+	{vb:raw headinclude_bottom}
+</head>
+<body>
+
+{vb:raw header}
+
+{vb:raw navbar}
+
+<div id="usercp_content">
+	<div class="cp_content">
+		{vb:raw HTML}
+	</div>
+</div>
+
+<div id="usercp_nav">
+	<div class="block">
+		<h2 class="blockhead">{vb:rawphrase phpkd_vblvb_nav}</h2>
+		<div class="blockbody">
+			<ul class="blockrow">
+				<li class="{vb:raw navclass.hosts}"><a href="phpkd_vblvb.php?do=hosts">{vb:rawphrase phpkd_vblvb_nav_hosts}</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+{vb:raw footer}
+
+</body>
+</html>]]></template>
 	</templates>
 	<stylevardfns>
 	</stylevardfns>
@@ -117,7 +191,7 @@ extract($phpkd_vblvb->fetch_hook('forumdisplay_query', array('forumid' => $forum
 			<hookname>newpost_process</hookname>
 			<phpcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
 $phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase);
-$phpkd_vblvb->fetch_hook('newpost_process', array('type' => $type, 'post' => $post, 'dataman' => $dataman));]]></phpcode>
+$phpkd_vblvb->fetch_hook('newpost_process', array('type' => $type, 'post' => $post, 'dataman' => $dataman, 'foruminfo' => $foruminfo));]]></phpcode>
 		</plugin>
 		<plugin active="1" executionorder="5">
 			<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate' - [ Display last checked note ]]]></title>
@@ -326,6 +400,7 @@ $bbtitle]]></phrase>
 </ol>]]></phrase>
 			<phrase name="phpkd_vblvb_copyright_violate" date="1308855639" username="PHPKD" version="4.1.210"><![CDATA[<span class="diff-deleted">Sorry, copyright notice has been altered or disalbed without prior official permission. 'Branding Free' option required to do so.. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for this matter.</span>]]></phrase>
 			<phrase name="phpkd_vblvb_developers_only" date="1277049500" username="PHPKD" version="4.0.200"><![CDATA[Sorry, this feature is available for official developers only.]]></phrase>
+			<phrase name="phpkd_vblvb_editpost_require_sharing" date="1324480635" username="PHPKD" version="4.1.300"><![CDATA[Sorry, you should include some 'supported' sharing links within your post in order to submit it. Sharing links required in this forum. <a href="{1}?do=hosts">Supported Hosts</a>]]></phrase>
 			<phrase name="phpkd_vblvb_host_deleted_successfully" date="1278005341" username="PHPKD" version="4.0.200"><![CDATA[Host deleted successfully!]]></phrase>
 			<phrase name="phpkd_vblvb_inactive" date="1293449751" username="PHPKD" version="4.1.201"><![CDATA[Sorry, the product "PHPKD - vB Link Verifier Bot" is currently disabled! <a href="phpkd_vblvb.php?do=options&dogroup=general">Please activate the product first then run this scheduled task again.</a>]]></phrase>
 			<phrase name="phpkd_vblvb_initialization_failed_bbcodes" date="1293449775" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any BBCodes to be checked. Please make sure to choose at least one BBCode to be checked and try again.]]></phrase>
@@ -339,6 +414,7 @@ $bbtitle]]></phrase>
 			<phrase name="phpkd_vblvb_invalid_license_key" date="1286037223" username="PHPKD" version="4.0.200"><![CDATA[<span class="diff-deleted">Sorry, this isn't a valid license key, please enter a correct license key or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>]]></phrase>
 			<phrase name="phpkd_vblvb_invalid_license_trail" date="1277589319" username="PHPKD" version="4.0.200"><![CDATA[<span class="diff-deleted">Sorry, you can't use a <strong>PAID</strong> license key with a <strong>TRAIL</strong> product. <strong>PAID license keys can run only with PAID products.</strong><br />Please get your trail license key from <a href="http://eshop.phpkd.net/customers/index.php" target="_blank">Customer Area</a> or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for assistance!!</span>]]></phrase>
 			<phrase name="phpkd_vblvb_invalid_license_vblvb" date="1278004295" username="PHPKD" version="4.0.200"><![CDATA[<span class="diff-deleted">Sorry, you can't use a <strong>TRAIL</strong> license key with a <strong>PAID</strong> product. <strong>TRAIL license keys can run only with TRAIL products.</strong><br />Please get your paid license key from <a href="http://eshop.phpkd.net/customers/index.php" target="_blank">Customer Area</a> or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for assistance!!</span>]]></phrase>
+			<phrase name="phpkd_vblvb_newpost_require_sharing" date="1324477435" username="PHPKD" version="4.1.300"><![CDATA[Sorry, you should include some 'supported' sharing links within your post in order to submit it. Sharing links required in this forum. <a href="{1}?do=hosts">Supported Hosts</a>]]></phrase>
 			<phrase name="phpkd_vblvb_saved_host_x_successfully" date="1277965175" username="PHPKD" version="4.0.200"><![CDATA[Saved Host <i>{1}</i> Successfully]]></phrase>
 			<phrase name="phpkd_vblvb_saved_hosts_successfully" date="1278003858" username="PHPKD" version="4.0.200"><![CDATA[Saved Hosts Successfully]]></phrase>
 			<phrase name="phpkd_vblvb_there_is_already_host_named_x" date="1277964653" username="PHPKD" version="4.0.200"><![CDATA[There is already a host named '{1}'. You may not create duplicate hosts.]]></phrase>
@@ -359,6 +435,8 @@ $bbtitle]]></phrase>
 			<phrase name="phpkd_vblvb_log_summery_post" date="1287701690" username="PHPKD" version="4.0.200"><![CDATA[<p style="padding: 0px; margin: 0px"><strong>Post summery: All Unique Links: {4}, <span style="color: blue">Checked Links: {5}</span>, <span style="color: {1}">Alive: {6}</span>, <span style="color: {2}">Dead: {7}</span>, <span style="color: {3}">Temorary Down: {8}</span>, Ignored: {9}.</strong></p>]]></phrase>
 			<phrase name="phpkd_vblvb_log_thread" date="1287701780" username="PHPKD" version="4.0.200"><![CDATA[<strong>Thread:</strong> <a href="{1}" target="_blank">{2}</a>]]></phrase>
 			<phrase name="phpkd_vblvb_punish_reason" date="1293449760" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot Punishment]]></phrase>
+			<phrase name="phpkd_vblvb_tagging_status_alive" date="1324473875" username="PHPKD" version="4.1.300"><![CDATA[Alive]]></phrase>
+			<phrase name="phpkd_vblvb_tagging_status_dead" date="1324473885" username="PHPKD" version="4.1.300"><![CDATA[Dead]]></phrase>
 		</phrasetype>
 		<phrasetype name="Logging Tools" fieldname="logging">
 			<phrase name="phpkd_vblvb_are_you_sure_you_want_to_prune_x_log_entries_from_log" date="1293449659" username="PHPKD" version="4.1.201"><![CDATA[Are you sure you want to prune {1} log entries from the "PHPKD - vB Link Verifier Bot" log?]]></phrase>
@@ -380,6 +458,8 @@ $bbtitle]]></phrase>
 			<phrase name="phpkd_vblvb_host_new" date="1277963785" username="PHPKD" version="4.0.200"><![CDATA[Add New Host]]></phrase>
 			<phrase name="phpkd_vblvb_host_notes" date="1277964154" username="PHPKD" version="4.0.200"><![CDATA[Notes]]></phrase>
 			<phrase name="phpkd_vblvb_host_status" date="1286056386" username="PHPKD" version="4.0.200"><![CDATA[Status]]></phrase>
+			<phrase name="phpkd_vblvb_host_taggable" date="1324558246" username="PHPKD" version="4.1.300"><![CDATA[Taggable]]></phrase>
+			<phrase name="phpkd_vblvb_host_tagtext" date="1324558196" username="PHPKD" version="4.1.300"><![CDATA[Tag Text]]></phrase>
 			<phrase name="phpkd_vblvb_host_urlmatch" date="1277963922" username="PHPKD" version="4.0.200"><![CDATA[URL Match]]></phrase>
 			<phrase name="phpkd_vblvb_host_urlreplace" date="1277964099" username="PHPKD" version="4.0.200"><![CDATA[URL Replace]]></phrase>
 			<phrase name="phpkd_vblvb_host_urlsearch" date="1277964111" username="PHPKD" version="4.0.200"><![CDATA[URL Search]]></phrase>
@@ -389,6 +469,8 @@ $bbtitle]]></phrase>
 			<phrase name="phpkd_vblvb_linkstatus_down" date="1266074342" username="PHPKD" version="4.0.130"><![CDATA[Down]]></phrase>
 			<phrase name="phpkd_vblvb_log_viewer_page_x_y_there_are_z_total_log_entries" date="1293449616" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot Log Viewer (page {1}/{2}) | There are {3} total log entries.]]></phrase>
 			<phrase name="phpkd_vblvb_mode" date="1288714378" username="PHPKD" version="4.0.200"><![CDATA[Mode]]></phrase>
+			<phrase name="phpkd_vblvb_nav" date="1324656025" username="PHPKD" version="4.1.300"><![CDATA[Navigation]]></phrase>
+			<phrase name="phpkd_vblvb_nav_hosts" date="1324656856" username="PHPKD" version="4.1.300"><![CDATA[Supported Hosts]]></phrase>
 			<phrase name="phpkd_vblvb_options" date="1293449627" username="PHPKD" version="4.1.201"><![CDATA[PHPKD - vB Link Verifier Bot Settings]]></phrase>
 			<phrase name="phpkd_vblvb_select_forums" date="1254819786" username="PHPKD" version="4.0.101"><![CDATA[Select Forum(s)]]></phrase>
 			<phrase name="phpkd_vblvb_select_usergroups" date="1254819772" username="PHPKD" version="4.0.101"><![CDATA[Select User group(s)]]></phrase>
@@ -476,6 +558,13 @@ Select "Include All Users" to check all users' posts, or select "Include Specifi
 			<phrase name="setting_general_protocols_title" date="1289525529" username="PHPKD" version="4.0.200"><![CDATA[Checked Protocols]]></phrase>
 			<phrase name="setting_general_query_limit_desc" date="1293449573" username="PHPKD" version="4.1.201"><![CDATA[It's recommended to define a specific low number of posts to process in each run to prevent any possible timeout or Memory/CPU exhausting during the execution process. <strong>A Lower Value usually recommended specially for boards that has long posts with many links. There's other important factors that have strong affect as well such as: <span class="diff-changed">"Time/Date Cutoff Mode", "Time/Date Cutoff Value", "Check existing posts", "Maximum Checked Links Per Post", "Check Succession Period"</span>; So please take care & try to set a logical acceptable value for each of these settings to avoid any expected/unexpected issues. You're the best one who knows your board & you're the one who can determine which suits you & your board according to your board's activity/content/requirements.</strong>]]></phrase>
 			<phrase name="setting_general_query_limit_title" date="1289529207" username="PHPKD" version="4.0.200"><![CDATA[Checked Posts Per Batch]]></phrase>
+			<phrase name="setting_general_require_sharing_desc" date="1324476117" username="PHPKD" version="4.1.300"><![CDATA[You may force users to post 'supported' sharing links within their posts in order to submit their posts, otherwise they will get an error message.<br />
+You can select which forums would you like to force users include 'supported' sharing links within their posts.]]></phrase>
+			<phrase name="setting_general_require_sharing_title" date="1324476117" username="PHPKD" version="4.1.300"><![CDATA[Required Sharing Links]]></phrase>
+			<phrase name="setting_general_scriptname_desc" date="1324477869" username="PHPKD" version="4.1.300"><![CDATA[The public script name available for users, this script displays list of supported hosts, allow users to live check sharing links on the fly, etc..]]></phrase>
+			<phrase name="setting_general_scriptname_title" date="1324477869" username="PHPKD" version="4.1.300"><![CDATA[Public Script Name]]></phrase>
+			<phrase name="setting_general_scripttitle_desc" date="1324477937" username="PHPKD" version="4.1.300"><![CDATA[The public script title available for users, this script displays list of supported hosts, allow users to live check sharing links on the fly, etc..]]></phrase>
+			<phrase name="setting_general_scripttitle_title" date="1324477937" username="PHPKD" version="4.1.300"><![CDATA[Public Script Title]]></phrase>
 			<phrase name="setting_general_succession_period_desc" date="1289528687" username="PHPKD" version="4.0.200"><![CDATA[Successive checks for same posts can be separated by a certain period of time, so those 'checked recently' posts didn't checked every time the script runs. Same posts can be checked multiple times, but with at least 1 day between each two successive checks. Define how many days should separate each two successive checks for the same post, or enter "0" to check posts ONLY ONCE. Note: "14" means your checked posts will be checked again every fourteen days (two weeks). <strong>"0" or a high Value usually recommended specially for large boards.</strong>]]></phrase>
 			<phrase name="setting_general_succession_period_title" date="1289528687" username="PHPKD" version="4.0.200"><![CDATA[Check Succession Period]]></phrase>
 			<phrase name="setting_general_thread_modes_desc" date="1289526117" username="PHPKD" version="4.0.200"><![CDATA[Specific thread modes can be excluded from being checked. By default all threads are checked regardless of it's mode. To exclude certain thread mode, choose it from the list.]]></phrase>
@@ -566,16 +655,28 @@ You've multiple options to choose from:<br />
 <strong>Note:</strong> Punished posts implicitly included within dead posts.]]></phrase>
 			<phrase name="setting_reporting_user_reports_mode_title" date="1289542136" username="PHPKD" version="4.0.200"><![CDATA[User Reports Mode]]></phrase>
 			<phrase name="setting_reporting_user_reports_title" date="1289541195" username="PHPKD" version="4.0.200"><![CDATA[User Reports]]></phrase>
+			<phrase name="setting_tagging_host_desc" date="1324490744" username="PHPKD" version="4.1.300"><![CDATA[After checking a thread, threads can be tagged according to included hosts: (ex: HF, RS, MU) OR (ex: Hotfile, Rapidshare, Megaupload).<br />
+This setting has a global effect, turning it off disables this feature globally regardless the per host/module settings.<br />
+You can control this feature per host/module & set host tag's text as well. <a href="phpkd_vblvb.php?do=hosts">Click Here to Proceed</a>]]></phrase>
+			<phrase name="setting_tagging_host_title" date="1324490744" username="PHPKD" version="4.1.300"><![CDATA[Tag Threads - Included Hosts]]></phrase>
+			<phrase name="setting_tagging_status_desc" date="1324471899" username="PHPKD" version="4.1.300"><![CDATA[After checking a thread, threads can be tagged according to it's reported status: (ex: Alive, Dead).]]></phrase>
+			<phrase name="setting_tagging_status_phrases_desc" date="1324473910" username="PHPKD" version="4.1.300"><![CDATA[Modify and localize status tags' text for tagged threads as preferred.]]></phrase>
+			<phrase name="setting_tagging_status_phrases_title" date="1324473910" username="PHPKD" version="4.1.300"><![CDATA[Tag Threads - Reported Status - Phrases]]></phrase>
+			<phrase name="setting_tagging_status_title" date="1324471899" username="PHPKD" version="4.1.300"><![CDATA[Tag Threads - Reported Status]]></phrase>
 			<phrase name="settinggroup_general" date="1277873745" username="PHPKD" version="4.0.133"><![CDATA[General Settings]]></phrase>
 			<phrase name="settinggroup_linkdir" date="1287282017" username="PHPKD" version="4.0.200"><![CDATA[Link Directory Settings]]></phrase>
 			<phrase name="settinggroup_lookfeel" date="1277930949" username="PHPKD" version="4.0.133"><![CDATA[Look & Feel Settings]]></phrase>
 			<phrase name="settinggroup_punishment" date="1277881025" username="PHPKD" version="4.0.133"><![CDATA[Punishment Settings]]></phrase>
 			<phrase name="settinggroup_reporting" date="1277873734" username="PHPKD" version="4.0.133"><![CDATA[Reporting Settings]]></phrase>
+			<phrase name="settinggroup_tagging" date="1324470451" username="PHPKD" version="4.1.300"><![CDATA[Tagging Settings]]></phrase>
 		</phrasetype>
 		<phrasetype name="Postbit" fieldname="postbit">
 			<phrase name="phpkd_vblvb_lastcheck" date="1289190816" username="PHPKD" version="4.0.200"><![CDATA[<div class="navlinks" style="margin: 0px">Links last checked on: <span class="date">{1}&nbsp;<span class="time">{2}</span></span></div>]]></phrase>
 			<phrase name="phpkd_vblvb_lastcheck_disabled" date="1289243367" username="PHPKD" version="4.0.200"><![CDATA[<div style="padding: 5px"></div>]]></phrase>
 			<phrase name="phpkd_vblvb_lastcheck_never" date="1289192115" username="PHPKD" version="4.0.200"><![CDATA[<div class="navlinks" style="margin: 0px">Links in this post never checked before.</div>]]></phrase>
+		</phrasetype>
+		<phrasetype name="Style Tools" fieldname="style">
+			<phrase name="phpkd_vblvb" date="1324776926" username="PHPKD" version="4.1.300"><![CDATA[PHPKD - vB Link Verifier Bot]]></phrase>
 		</phrasetype>
 	</phrases>
 	<options>
@@ -597,4 +698,4 @@ You've multiple options to choose from:<br />
 	</faqentries>
 </product>
 
-<!-- SVN: $Version: 4.1.220 $ - $Id$ -->
+<!-- SVN: $Version: 4.1.300 $ - $Id$ -->

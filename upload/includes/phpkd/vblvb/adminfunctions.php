@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.220 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.300 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -37,7 +37,7 @@ function phpkd_vblvb_settinggroup($dogroup, $advanced = 0)
 
 	print_table_header(
 		$settingphrase["settinggroup_$grouptitlecache[$dogroup]"]
-		 . iif($vbulletin->debug AND PHPKD_VBLVB_DEBUG,
+		 . iif($vbulletin->debug && PHPKD_VBLVB_DEBUG,
 			'<span class="normal">' .
 			construct_link_code($vbphrase['edit'], "phpkd_vblvb.php?" . $vbulletin->session->vars['sessionurl'] . "do=editgroup&amp;grouptitle=$dogroup") .
 			construct_link_code($vbphrase['delete'], "phpkd_vblvb.php?" . $vbulletin->session->vars['sessionurl'] . "do=removegroup&amp;grouptitle=$dogroup") .
@@ -52,7 +52,7 @@ function phpkd_vblvb_settinggroup($dogroup, $advanced = 0)
 
 	foreach ($settingscache["$dogroup"] AS $settingid => $setting)
 	{
-		if (($advanced OR !$setting['advanced']) AND !empty($setting['varname']))
+		if (($advanced || !$setting['advanced']) && !empty($setting['varname']))
 		{
 			phpkd_vblvb_setting($setting, $settingphrase);
 		}
@@ -73,16 +73,16 @@ function phpkd_vblvb_setting($setting, $settingphrase)
 
 	echo '<tbody>';
 	print_description_row(
-		iif($vbulletin->debug AND PHPKD_VBLVB_DEBUG, '<div class="smallfont" style="float:' . vB_Template_Runtime::fetchStyleVar('right') . '">' . construct_link_code($vbphrase['edit'], "phpkd_vblvb.php?" . $vbulletin->session->vars['sessionurl'] . "do=editsetting&amp;varname=$setting[varname]") . construct_link_code($vbphrase['delete'], "phpkd_vblvb.php?" . $vbulletin->session->vars['sessionurl'] . "do=removesetting&amp;varname=$setting[varname]") . '</div>') .
+		iif($vbulletin->debug && PHPKD_VBLVB_DEBUG, '<div class="smallfont" style="float:' . vB_Template_Runtime::fetchStyleVar('right') . '">' . construct_link_code($vbphrase['edit'], "phpkd_vblvb.php?" . $vbulletin->session->vars['sessionurl'] . "do=editsetting&amp;varname=$setting[varname]") . construct_link_code($vbphrase['delete'], "phpkd_vblvb.php?" . $vbulletin->session->vars['sessionurl'] . "do=removesetting&amp;varname=$setting[varname]") . '</div>') .
 		'<div>' . $settingphrase["setting_$setting[varname]_title"] . "<a name=\"$setting[varname]\"></a></div>",
-		0, 2, 'optiontitle' . (($vbulletin->debug AND PHPKD_VBLVB_DEBUG) ? "\" title=\"\$vbulletin->phpkd_vblvb['" . $setting['varname'] . "']" : '')
+		0, 2, 'optiontitle' . (($vbulletin->debug && PHPKD_VBLVB_DEBUG) ? "\" title=\"\$vbulletin->phpkd_vblvb['" . $setting['varname'] . "']" : '')
 	);
 	echo "</tbody><tbody id=\"tbody_$settingid\">\r\n";
 
 	// make sure all rows use the alt1 class
 	$bgcounter--;
 
-	$description = "<div class=\"smallfont\"" . (($vbulletin->debug AND PHPKD_VBLVB_DEBUG) ? "title=\"\$vbulletin->phpkd_vblvb['$setting[varname]']\"" : '') . ">" . $settingphrase["setting_$setting[varname]_desc"] . '</div>';
+	$description = "<div class=\"smallfont\"" . (($vbulletin->debug && PHPKD_VBLVB_DEBUG) ? "title=\"\$vbulletin->phpkd_vblvb['$setting[varname]']\"" : '') . ">" . $settingphrase["setting_$setting[varname]_desc"] . '</div>';
 	$name = "setting[$setting[varname]]";
 	$right = "<span class=\"smallfont\">$vbphrase[error]</span>";
 	$width = 40;
@@ -202,7 +202,7 @@ function phpkd_vblvb_setting($setting, $settingphrase)
 
 			eval($setting['optiondata']);
 
-			if (is_array($options) AND !empty($options))
+			if (is_array($options) && !empty($options))
 			{
 				print_select_row($description, $name, $options, $setting['value']);
 			}
@@ -220,7 +220,7 @@ function phpkd_vblvb_setting($setting, $settingphrase)
 
 			eval($setting['optiondata']);
 
-			if (is_array($options) AND !empty($options))
+			if (is_array($options) && !empty($options))
 			{
 				print_select_row($description, $name . '[]', $options, $setting['value'], false, 5, true);
 			}
@@ -238,7 +238,7 @@ function phpkd_vblvb_setting($setting, $settingphrase)
 
 			eval($setting['optiondata']);
 
-			if (is_array($options) AND !empty($options))
+			if (is_array($options) && !empty($options))
 			{
 				print_radio_row($description, $name, $options, $setting['value'], 'smallfont');
 			}
@@ -251,7 +251,7 @@ function phpkd_vblvb_setting($setting, $settingphrase)
 
 		case 'username':
 		{
-			if (intval($setting['value']) AND $userinfo = $vbulletin->db->query_first("SELECT username FROM " . TABLE_PREFIX . "user WHERE userid = " . intval($setting['value'])))
+			if (intval($setting['value']) && $userinfo = $vbulletin->db->query_first("SELECT username FROM " . TABLE_PREFIX . "user WHERE userid = " . intval($setting['value'])))
 			{
 				print_input_row($description, $name, $userinfo['username'], false);
 			}
@@ -379,7 +379,7 @@ function phpkd_vblvb_setting($setting, $settingphrase)
 
 	$valid = phpkd_vblvb_validation_code($setting['varname'], $setting['value'], $setting['validationcode']);
 
-	echo "<tbody id=\"tbody_error_$settingid\" style=\"display:" . (($valid === 1 OR $valid === true) ? 'none' : '') . "\"><tr><td class=\"alt1 smallfont\" colspan=\"2\"><div style=\"padding:4px; border:solid 1px red; background-color:white; color:black\"><strong>$vbphrase[error]</strong>:<div id=\"span_error_$settingid\">$valid</div></div></td></tr></tbody>";
+	echo "<tbody id=\"tbody_error_$settingid\" style=\"display:" . (($valid === 1 || $valid === true) ? 'none' : '') . "\"><tr><td class=\"alt1 smallfont\" colspan=\"2\"><div style=\"padding:4px; border:solid 1px red; background-color:white; color:black\"><strong>$vbphrase[error]</strong>:<div id=\"span_error_$settingid\">$valid</div></div></td></tr></tbody>";
 }
 
 /**
@@ -409,7 +409,7 @@ function phpkd_vblvb_save($settings)
 
 	while ($oldsetting = $vbulletin->db->fetch_array($oldsettings))
 	{
-		if ($oldsetting['optioncode'] == 'multiinput' OR $oldsetting['optioncode'] == 'colors')
+		if ($oldsetting['optioncode'] == 'multiinput' || $oldsetting['optioncode'] == 'colors')
 		{
 			$store = array();
 
@@ -431,7 +431,7 @@ function phpkd_vblvb_save($settings)
 				 $settings["$oldsetting[varname]"] = array();
 			}
 
-			if (count($settings["$oldsetting[varname]"]) > 1 AND $settings["$oldsetting[varname]"][0] == 0)
+			if (count($settings["$oldsetting[varname]"]) > 1 && $settings["$oldsetting[varname]"][0] == 0)
 			{
 				unset($settings["$oldsetting[varname]"][0]);
 			}
@@ -479,11 +479,11 @@ function phpkd_vblvb_validation_code($varname, $value, $validation_code, $raw_va
 		$validation_function = create_function('&$data, $raw_data', $validation_code);
 		$validation_result = $validation_function($value, $raw_value);
 
-		if ($validation_result === false OR $validation_result === null)
+		if ($validation_result === false || $validation_result === null)
 		{
 			$valid = fetch_error("setting_validation_error_$varname");
 
-			if (preg_match('#^Could#i', $valid) AND preg_match("#'" . preg_quote("setting_validation_error_$varname", '#') . "'#i", $valid))
+			if (preg_match('#^Could#i', $valid) && preg_match("#'" . preg_quote("setting_validation_error_$varname", '#') . "'#i", $valid))
 			{
 				$valid = fetch_error("you_did_not_enter_a_valid_value");
 			}
@@ -664,8 +664,8 @@ function phpkd_vblvb_xml_import_settings($xml = false)
 	}
 
 	// delete old volatile settings and settings that might conflict with new ones...
-	$vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "phpkd_vblvb_settinggroup WHERE volatile = 1 AND grouptitle IN('" . implode('\',\'', $settinggroups) . "')");
-	$vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "phpkd_vblvb_setting WHERE volatile = 1 AND grouptitle IN('" . implode('\',\'', $settinggroups) . "')");
+	$vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "phpkd_vblvb_settinggroup WHERE volatile = 1 && grouptitle IN('" . implode('\',\'', $settinggroups) . "')");
+	$vbulletin->db->query_write("DELETE FROM " . TABLE_PREFIX . "phpkd_vblvb_setting WHERE volatile = 1 && grouptitle IN('" . implode('\',\'', $settinggroups) . "')");
 
 	// run through imported array
 	if (!is_array($arr['settinggroup'][0]))
@@ -804,13 +804,15 @@ function phpkd_vblvb_xml_restore_hosts($xml = false)
 			'" . $vbulletin->db->escape_string(trim($host['downmatch'])) . "',
 			'" . $vbulletin->db->escape_string(trim($host['urlsearch'])) . "',
 			'" . $vbulletin->db->escape_string(trim($host['urlreplace'])) . "',
+			" . intval($host['taggable']) . ",
+			'" . $vbulletin->db->escape_string(trim($host['tagtext'])) . "',
 			'" . $vbulletin->db->escape_string(trim($host['notes'])) . "'\n\t)";
 	}
 
 	// run hosts insert query
 	$vbulletin->db->query_write("
 		INSERT IGNORE INTO " . TABLE_PREFIX . "phpkd_vblvb_host
-		(domain, active, status, urlmatch, apiurl, contentmatch, downmatch, urlsearch, urlreplace, notes)
+		(domain, active, status, urlmatch, apiurl, contentmatch, downmatch, urlsearch, urlreplace, taggable, tagtext, notes)
 		VALUES
 		" . implode(",\n\t", $qBits));
 
@@ -1014,17 +1016,17 @@ function phpkd_vblvb_delete_confirmation($table, $itemid, $phpscript, $do, $item
 			break;
 	}
 
-	if ($encodehtml AND (strcspn($item['title'], '<>"') < strlen($item['title']) OR (strpos($item['title'], '&') !== false AND !preg_match('/&(#[0-9]+|amp|lt|gt|quot);/si', $item['title']))))
+	if ($encodehtml && (strcspn($item['title'], '<>"') < strlen($item['title']) || (strpos($item['title'], '&') !== false && !preg_match('/&(#[0-9]+|amp|lt|gt|quot);/si', $item['title']))))
 	{
 		// title contains html entities that should be encoded
 		$item['title'] = htmlspecialchars_uni($item['title']);
 	}
 
-	if ($item["$idfield"] == $itemid AND !empty($itemid))
+	if ($item["$idfield"] == $itemid && !empty($itemid))
 	{
 		echo "<p>&nbsp;</p><p>&nbsp;</p>";
 		print_form_header($phpscript, $do, 0, 1, '', '75%');
-		construct_hidden_code(($idfield == 'styleid' OR $idfield == 'languageid') ? 'do' . $idfield : $idfield, $itemid);
+		construct_hidden_code(($idfield == 'styleid' || $idfield == 'languageid') ? 'do' . $idfield : $idfield, $itemid);
 
 		if (is_array($hiddenfields))
 		{
@@ -1228,7 +1230,7 @@ function phpkd_vblvb_fix_wait_timeout()
 		case 'mysql':
 		case '':
 		{
-			if ($vbulletin->debug AND ($vbulletin->input->clean_gpc('r', 'explain', TYPE_UINT) OR (defined('POST_EXPLAIN') AND !empty($_POST))))
+			if ($vbulletin->debug && ($vbulletin->input->clean_gpc('r', 'explain', TYPE_UINT) || (defined('POST_EXPLAIN') && !empty($_POST))))
 			{
 				// load 'explain' database class
 				require_once(DIR . '/includes/class_database_explain.php');
@@ -1251,7 +1253,7 @@ function phpkd_vblvb_fix_wait_timeout()
 		// load MySQLi class
 		case 'mysqli':
 		{
-			if ($vbulletin->debug AND ($vbulletin->input->clean_gpc('r', 'explain', TYPE_UINT) OR (defined('POST_EXPLAIN') AND !empty($_POST))))
+			if ($vbulletin->debug && ($vbulletin->input->clean_gpc('r', 'explain', TYPE_UINT) || (defined('POST_EXPLAIN') && !empty($_POST))))
 			{
 				// load 'explain' database class
 				require_once(DIR . '/includes/class_database_explain.php');
@@ -1308,7 +1310,7 @@ function phpkd_vblvb_fix_wait_timeout()
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.220
+|| # Version: 4.1.300
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
