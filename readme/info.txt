@@ -1015,39 +1015,39 @@ History:
 	2. New Feature: Check edited posts
 	3. New Feature: Revert actions on edit
 	4. New Feature: Add support for cramitin.net, cramitin.us, cramitin.eu
-	5. Enhancement: Always import hosts from xml file after every upgrade to keep it up-to-date
-	6. Bug Fix: Some filesonic.com links getting ignored
-	7. Bug Fix: uploaded.to links are falsely reported
-	8. Bug Fix: cramit.in links are falsely reported
-	9. Bug Fix: Log records SQL Error - Unknown column 'log.dateline' in 'where clause'
+	5. Enhancement: Always import hosts from xml file after every upgrade to keep it up-to-date (http://forum.phpkd.net/project.php?issueid=159)
+	6. Bug Fix: Some filesonic.com links getting ignored (http://forum.phpkd.net/project.php?issueid=158)
+	7. Bug Fix: uploaded.to links are falsely reported (http://forum.phpkd.net/project.php?issueid=160)
+	8. Bug Fix: cramit.in links are falsely reported (http://forum.phpkd.net/project.php?issueid=161)
+	9. Bug Fix: Log records SQL Error - Unknown column 'log.dateline' in 'where clause' (http://forum.phpkd.net/project.php?issueid=155)
 	10. Normalization, standardization and consintency
      * v4.1.211 24/07/2011 11:00 AM UTC: Maintenance release (public)
-	1. Bug Fix: Thread punishment 'move' causes DB error
+	1. Bug Fix: Thread punishment 'move' causes DB error (http://forum.phpkd.net/project.php?issueid=162)
      * v4.1.212 25/07/2011 11:00 AM UTC: Maintenance release (public)
 	1. Bug Fix: Installation/Upgrade issue
 	2. Bug Fix: Branding free issue
      * v4.1.220 28/09/2011 10:00 AM UTC: Featured release (public)
-	1. Bug Fix: vBulletin 4.1.4+ editor functions incompatibility
-	2. Bug Fix: Some direct download links get stuck & keep loading so far
-	3. Bug Fix: filefactory.com links falsely reported
-	4. Bug Fix: oron.com links falsely reported
-	5. Bug Fix: Rapidshare.com links falsely reported
-	6. New Feature: Thread description style checked status
-	7. New Feature: Post Flag: Last Check Note - Only in first post
-	8. New Feature: Per link check timeout
-	9. New Feature: Configurable maximum redirections setting
-	10. New Language: French
+	1. Bug Fix: vBulletin 4.1.4+ editor functions incompatibility (http://forum.phpkd.net/project.php?issueid=164)
+	2. Bug Fix: Some direct download links get stuck & keep loading so far (http://forum.phpkd.net/project.php?issueid=149)
+	3. Bug Fix: filefactory.com links falsely reported (http://forum.phpkd.net/project.php?issueid=166)
+	4. Bug Fix: oron.com links falsely reported (http://forum.phpkd.net/project.php?issueid=167)
+	5. Bug Fix: Rapidshare.com links falsely reported (http://forum.phpkd.net/project.php?issueid=163)
+	6. New Feature: Thread description style checked status (http://forum.phpkd.net/project.php?issueid=157)
+	7. New Feature: Post Flag: Last Check Note - Only in first post (http://forum.phpkd.net/project.php?issueid=144)
+	8. New Feature: Per link check timeout (http://forum.phpkd.net/project.php?issueid=135)
+	9. New Feature: Configurable maximum redirections setting (http://forum.phpkd.net/project.php?issueid=165)
+	10. New Language: French ( by: fxwoody )
 	11. Enhancement: multiple enhancements here & there
      * v4.1.300 26/12/2011 10:00 AM UTC: Featured release (public)
-	1. New Feature: Tag Threads - Reported Status
-	2. New Feature: Tag Threads - Included Hosts
-	3. New Feature: Sharing links required for posts
-	4. New Feature: Public Script Displays supported hosts for users
-	5. Bug Fix: megaupload.com links falsely reported
+	1. New Feature: Tag Threads - Reported Status (http://forum.phpkd.net/project.php?issueid=172)
+	2. New Feature: Tag Threads - Included Hosts (http://forum.phpkd.net/project.php?issueid=173)
+	3. New Feature: Sharing links required for posts (http://forum.phpkd.net/project.php?issueid=145)
+	4. New Feature: Public Script Displays supported hosts for users (http://forum.phpkd.net/project.php?issueid=174)
+	5. Bug Fix: megaupload.com links falsely reported (http://forum.phpkd.net/project.php?issueid=171)
 	6. Bug Fix: freakshare.com
 	7. Bug Fix: uploaded.to
 	8. Enhancement: multiple enhancements around the product
-	9. New Language: Croatian
+	9. New Language: Croatian ( by: JohnnyBoy )
 	10. Newly supported hosts (36 new):
       1. 1fichier.com
       2. alterupload.com
@@ -1118,7 +1118,7 @@ Technical Notes:
 
 Reference Links:
 ~~~~~~~~~~~~~~~~~
-     * PHPKD.NET: http://go.phpkd.net/en/product/vblvb/
+     * PHPKD.NET: http://product.phpkd.net/en/commercial/vblvb/
 
 
 Recent Products:
