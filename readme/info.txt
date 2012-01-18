@@ -10,12 +10,12 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.1.300
+     * 4.1.310
 
 
 Description:
 ~~~~~~~~~~~~~
-     * This product extract sharing links of over 175+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.
+     * This product extract sharing links of over 190+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.
 
 
 Compatible With:
@@ -51,7 +51,7 @@ Features:
 	* Professionally Coded.
 	* Detailed Documentation.
 	* Doesn't require any manual edits.
-	* Supports more than 175+ sharing hosts by default.
+	* Supports hundreds of sharing hosts by default.
 	* Depends on & uses default vBulletin techniques with full compatibility.
 	* Board Load Zero Queries, queries executed only when the scheduled task run.
 	* The cronjob (scheduled Task) logs every run details in "Scheduled Task Log", so you can review it later within the log viewer.
@@ -1085,7 +1085,29 @@ History:
       34. uploadbox.com
       35. uploadstation.com
       36. wupload.com
-
+     * v4.1.310 18/01/2012 10:00 AM UTC: Featured release (public)
+	1. Enhancement: The core product's code
+	2. Enhancement: The default English language file
+	3. Bug fix: Wrong layout when activating "Punished Posts Only" in reports (http://forum.phpkd.net/project.php?issueid=177)
+	4. Bug fix: filesonic.com falsely dead reports (http://forum.phpkd.net/project.php?issueid=176)
+	5. Bug fix: No punishments + Warning: Can not use a scalar value as array (http://forum.phpkd.net/project.php?issueid=175)
+	6. Bug fix: vBulletin 4.1.4+ editor functions incompatibility (forum.phpkd.net/project.php?issueid=164)
+	7. Newly supported hosts (36 new):
+      1. 1-upload.com
+      2. 1clickshare.net
+      3. 4fastfile.com
+      4. annonhost.net
+      5. asixfiles.com
+      6. boosterking.com
+      7. bulletupload.com
+      8. cobrashare.sk
+      9. coolshare.cz
+      10. czshare.com
+      11. easybytez.com
+      12. edisk.cz
+      13. euroshare.eu
+      14. eyvx.com
+      15. filesflash.com
 
 Screen Shots:
 ~~~~~~~~~~~~~~
@@ -1110,7 +1132,7 @@ Technical Notes:
      * DB Alterations: 4
      * New Cronjobs: 1
      * Product Specific Settings: 50
-     * Product Specific Modules: 178
+     * Product Specific Modules: 193
         --------------------------
      * Installation Level: Easy
      * Installation Time: ~20 seconds
@@ -1132,4 +1154,4 @@ Recent Products:
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.1.300 $ - $Id$
+$Version: 4.1.310 $ - $Id$

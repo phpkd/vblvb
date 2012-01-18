@@ -1,11 +1,11 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.300 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.310 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #            Copyright ©2005-2011 PHP KingDom. All Rights Reserved.            # ||
+|| #            Copyright ©2005-2012 PHP KingDom. All Rights Reserved.            # ||
 || #      This product may not be redistributed in whole or significant part.     # ||
 || # 																			  # ||
 || # ---------- "vB Link Verifier Bot 'Ultimate'" IS NOT FREE SOFTWARE ---------- # ||
@@ -23,7 +23,7 @@ if (!defined('VB_AREA'))
 define('ERRTYPE_ECHO',               10);
 
 define('PHPKD_VBLVB_DEBUG',          false);
-define('PHPKD_VBLVB_VERSION',        '4.1.300');
+define('PHPKD_VBLVB_VERSION',        '4.1.310');
 define('PHPKD_VBLVB_TOCKEN',         '7efad4a065eb29fb5ac56d57bc2c090c');
 define('PHPKD_VBLVB_LICENSE_PREFIX', 'VBLVB');
 
@@ -743,7 +743,7 @@ class PHPKD_VBLVB
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.300
+|| # Version: 4.1.310
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

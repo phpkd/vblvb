@@ -2,7 +2,7 @@
 
 <product productid="phpkd_vblvb" active="1">
 	<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate']]></title>
-	<description><![CDATA[This product extract sharing links of over 175+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.]]></description>
+	<description><![CDATA[This product extract sharing links of over 190+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.]]></description>
 	<version>4.1.300</version>
 	<url>http://tools.phpkd.net/en/producthelp/url/vblvb/</url>
 	<versioncheckurl>http://tools.phpkd.net/en/producthelp/version/vblvb/</versioncheckurl>

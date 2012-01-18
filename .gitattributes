@@ -2,6 +2,7 @@
 do_not_upload/product-phpkd_vblvb_fix.xml -text
 import/product-phpkd_vblvb.xml -text
 languages/English.xml -text svneol=unset#text/plain
+languages/translations.txt -text svneol=unset#text/plain
 readme/info.txt -text
 readme/install.txt -text
 readme/license.txt -text
@@ -49,6 +50,7 @@ screenshots/phpkd_vblvb_staff_report_post.png -text
 screenshots/phpkd_vblvb_staff_report_post_title.png -text
 screenshots/phpkd_vblvb_user_report_email.png -text
 screenshots/phpkd_vblvb_user_report_pm.png -text
+screenshots/preview.txt -text svneol=unset#text/plain
 upload/admincp/phpkd_vblvb.php -text
 upload/includes/md5_sums_phpkd_vblvb.php -text
 upload/includes/phpkd/index.html -text

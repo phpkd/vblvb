@@ -1,11 +1,11 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.300 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.310 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #            Copyright ©2005-2011 PHP KingDom. All Rights Reserved.            # ||
+|| #            Copyright ©2005-2012 PHP KingDom. All Rights Reserved.            # ||
 || #      This product may not be redistributed in whole or significant part.     # ||
 || # 																			  # ||
 || # ---------- "vB Link Verifier Bot 'Ultimate'" IS NOT FREE SOFTWARE ---------- # ||
@@ -519,7 +519,7 @@ class PHPKD_VBLVB_Install
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.300
+|| # Version: 4.1.310
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
