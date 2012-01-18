@@ -22,7 +22,7 @@ if (!is_object($vbulletin->db))
 }
 
 // Bypass PHP INI memory limit!
-if (($current_memory_limit = ini_size_to_bytes(@ini_get('memory_limit'))) < 128 * 1024 * 1024 && $current_memory_limit > 0)
+if (($current_memory_limit = ini_size_to_bytes(@ini_get('memory_limit'))) < (128 * 1024 * 1024) && $current_memory_limit > 0)
 {
 	@ini_set('memory_limit', 128 * 1024 * 1024);
 }

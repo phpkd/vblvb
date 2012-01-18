@@ -190,7 +190,7 @@ class PHPKD_VBLVB_DM
 				{
 					if ($host['active'] && !empty($host['urlmatch']) && preg_match("#$host[urlmatch]#i", $url, $hostmatch))
 					{
-						if (0 == $checked)
+						if ($checked == 0 && $this->_registry->_vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1)
 						{
 							$this->_registry->logstring('<ol>', true, $postid);
 						}
@@ -212,7 +212,7 @@ class PHPKD_VBLVB_DM
 				$counter++;
 			}
 
-			if (0 < $checked)
+			if ($checked > 0 && $this->_registry->_vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1)
 			{
 				$this->_registry->logstring('</ol>', true, $postid);
 			}
@@ -240,7 +240,7 @@ class PHPKD_VBLVB_DM
 				}
 			}
 
-			if (0 == $checked)
+			if ($checked == 0)
 			{
 				$this->_registry->seterror('phpkd_vblvb_invalid_criteria', ERRTYPE_ECHO, $postid);
 			}
@@ -272,7 +272,7 @@ class PHPKD_VBLVB_DM
 		$oriurl = $url;
 		$colors = unserialize($this->_registry->_vbulletin->phpkd_vblvb['lookfeel_linkstatus_colors']);
 
-		if ('alive' == $hoststatus)
+		if ($hoststatus == 'alive')
 		{
 			if (!empty($apiurl))
 			{
@@ -325,7 +325,7 @@ class PHPKD_VBLVB_DM
 				}
 			}
 		}
-		else if ('dead' == $hoststatus)
+		else if ($hoststatus == 'dead')
 		{
 			$status = 'dead';
 			$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $oriurl);
@@ -361,7 +361,7 @@ class PHPKD_VBLVB_DM
 		$vurl->set_option(VURL_TIMEOUT, $this->_registry->_vbulletin->phpkd_vblvb['general_vurl_timeout']);
 		$vurl->set_option(VURL_MAXSIZE, $this->_registry->_vbulletin->phpkd_vblvb['general_vurl_maxsize']);
 
-		if (null !== $post)
+		if ($post !== null)
 		{
 			$vurl->set_option(VURL_POST, 1);
 			$vurl->set_option(VURL_POSTFIELDS, $post);
@@ -384,9 +384,9 @@ class PHPKD_VBLVB_DM
 	{
 		$this->_registry->initialize(array('staff_reports' => array()));
 
-		if (!empty($this->_registry->staff_reports) && $this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] && $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']) && $mods = $this->fetch_staff() && $postlogs = $this->_registry->getPostlog())
+		if (!empty($this->_registry->staff_reports) && $this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] && ($reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'])) && ($mods = $this->fetch_staff()) && ($postlogs = $this->_registry->getPostlog()))
 		{
-			if (FILE_VERSION >= '4.1.4')
+			if (intval(SIMPLE_VERSION) >= '414')
 			{
 				require_once(DIR . '/includes/class_wysiwygparser.php');
 				$html_parser = new vB_WysiwygHtmlParser($this->_registry->_vbulletin);
@@ -396,12 +396,13 @@ class PHPKD_VBLVB_DM
 				require_once(DIR . '/includes/functions_wysiwyg.php');
 			}
 
-			$logstring = $this->_registry->_vbphrase['phpkd_vblvb_log_checked_posts'] . '<ol class="smallfont">';
+			$logstring = '';
 
 			if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_included_posts'] <= 1)
 			{
 				$posts = array();
 				$colors = unserialize($this->_registry->_vbulletin->phpkd_vblvb['lookfeel_linkstatus_colors']);
+				$logstring .= $this->_registry->_vbphrase['phpkd_vblvb_log_checked_posts'] . '<ol class="smallfont">';
 
 				foreach ($postlogs as $postitemid => $postitem)
 				{
@@ -442,7 +443,7 @@ class PHPKD_VBLVB_DM
 
 			cache_permissions($reporter, false);
 
-			if (FILE_VERSION >= '4.1.4')
+			if (intval(SIMPLE_VERSION) >= '414')
 			{
 				$formatedlog = $html_parser->parse_wysiwyg_html_to_bbcode($logstring, false, true);
 			}
@@ -521,7 +522,7 @@ class PHPKD_VBLVB_DM
 
 					// Staff Reports: New Reply
 					case 'reply':
-						if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_threadid'] > 0 && $reportthread = fetch_threadinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_threadid']) && !$reportthread['isdeleted'] && $reportthread['visible'] == 1  && $reportforum = fetch_foruminfo($reportthread['forumid']))
+						if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_threadid'] > 0 && ($reportthread = fetch_threadinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_threadid'])) && !$reportthread['isdeleted'] && $reportthread['visible'] == 1  && ($reportforum = fetch_foruminfo($reportthread['forumid'])))
 						{
 							eval(fetch_email_phrases('phpkd_vblvb_staff_reports', $this->_registry->_vbulletin->options['languageid']));
 
@@ -547,7 +548,7 @@ class PHPKD_VBLVB_DM
 
 					// Staff Reports: New Thread
 					case 'thread':
-						if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_forumid'] > 0 && $reportforum = fetch_foruminfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_forumid']))
+						if ($this->_registry->_vbulletin->phpkd_vblvb['reporting_forumid'] > 0 && ($reportforum = fetch_foruminfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_forumid'])))
 						{
 							// Start: Required for 'mark_thread_read', fix the following bug: http://forum.phpkd.net/project.php?issueid=76
 							if (!$db)
@@ -616,11 +617,11 @@ class PHPKD_VBLVB_DM
 	{
 		$this->_registry->initialize(array('user_reports' => array()));
 
-		if (!empty($this->_registry->user_reports) && $this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] && $reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter']))
+		if (!empty($this->_registry->user_reports) && $this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'] && ($reporter = fetch_userinfo($this->_registry->_vbulletin->phpkd_vblvb['reporting_reporter'])))
 		{
 			require_once(DIR . '/includes/class_bbcode_alt.php');
 
-			if (FILE_VERSION >= '4.1.4')
+			if (intval(SIMPLE_VERSION) >= '414')
 			{
 				require_once(DIR . '/includes/class_wysiwygparser.php');
 				$html_parser = new vB_WysiwygHtmlParser($this->_registry->_vbulletin);
@@ -642,7 +643,7 @@ class PHPKD_VBLVB_DM
 			{
 				$postlog = $this->_registry->getPostlog($postid);
 
-				if (FILE_VERSION >= '4.1.4')
+				if (intval(SIMPLE_VERSION) >= '414')
 				{
 					$formatedlog = $html_parser->parse_wysiwyg_html_to_bbcode($postlog['logrecord'], false, true);
 				}
@@ -954,7 +955,7 @@ class PHPKD_VBLVB_DM
 
 					case 'move':
 						// check whether destination forum can contain posts
-						if ($destforuminfo = verify_id('forum', $this->_registry->_vbulletin->phpkd_vblvb['punishment_forumid'], false, true) && $destforuminfo['cancontainthreads'] && !$destforuminfo['link'])
+						if (($destforuminfo = verify_id('forum', $this->_registry->_vbulletin->phpkd_vblvb['punishment_forumid'], false, true)) && $destforuminfo['cancontainthreads'] && !$destforuminfo['link'])
 						{
 							$threadarray = array();
 							$countingthreads = array();

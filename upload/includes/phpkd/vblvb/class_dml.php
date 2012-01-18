@@ -94,7 +94,7 @@ class PHPKD_VBLVB_DML
 	 */
 	public function getToken()
 	{
-		if (null == $this->_token)
+		if ($this->_token == null)
 		{
 			$this->setToken();
 		}
@@ -310,7 +310,7 @@ class PHPKD_VBLVB_DML
 
 		$returned = $values[0]['attributes'];
 
-		if ((empty($returned)) || ($returned['status'] == 'active' && strcmp(md5(PHPKD_VBLVB_TOCKEN . $this->getToken()), $returned['access_token']) != 0))
+		if (empty($returned) || ($returned['status'] == 'active' && strcmp(md5(PHPKD_VBLVB_TOCKEN . $this->getToken()), $returned['access_token']) != 0))
 		{
 			$returned['status'] = "invalid";
 		}

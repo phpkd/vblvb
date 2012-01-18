@@ -157,7 +157,7 @@ function phpkd_vblvb_setting($setting, $settingphrase)
 			$setting['value'] = intval($setting['value']);
 			$setting['html'] = '';
 
-			if ($setting['bitfield'] === NULL)
+			if ($setting['bitfield'] === null)
 			{
 				print_label_row($description, construct_phrase("<strong>$vbphrase[settings_bitfield_error]</strong>", implode(',', vB_Bitfield_Builder::fetch_errors())), '', 'top', $name, 40);
 			}
@@ -251,7 +251,7 @@ function phpkd_vblvb_setting($setting, $settingphrase)
 
 		case 'username':
 		{
-			if (intval($setting['value']) && $userinfo = $vbulletin->db->query_first("SELECT username FROM " . TABLE_PREFIX . "user WHERE userid = " . intval($setting['value'])))
+			if (intval($setting['value']) && ($userinfo = $vbulletin->db->query_first("SELECT username FROM " . TABLE_PREFIX . "user WHERE userid = " . intval($setting['value']))))
 			{
 				print_input_row($description, $name, $userinfo['username'], false);
 			}

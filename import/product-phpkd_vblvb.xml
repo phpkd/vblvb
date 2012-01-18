@@ -220,7 +220,7 @@ extract($phpkd_vblvb->fetch_hook('threadbit_display', array('post' => $post, 'th
 	</plugins>
 	<phrases>
 		<phrasetype name="Control Panel Help Text" fieldname="cphelptext">
-			<phrase name="phpkd_vblvb_options_punishment_thread_punishs_text" date="1289618474" username="PHPKD" version="4.0.200"><![CDATA[<strong>This is a pure technical facts, if you don't know what is this (simply if you are NOT an advanced coder) then ignore it</strong><br />
+			<phrase name="phpkd_vblvb_options_punishment_thread_punishs_text" date="1289618474" username="PHPKD" version="4.0.200"><![CDATA[<strong>This is a pure technical facts, if you do not know what is this (simply if you are NOT an advanced coder) then ignore it</strong><br />
 *Please note that all info mentioned here is a general case study analysis, and it may be far from accuracy. It may differ as well from your own case study.*<br /><br />
 
 <strong>Database queries cost for each scheduled task execution:</strong><br />
@@ -241,9 +241,9 @@ extract($phpkd_vblvb->fetch_hook('threadbit_display', array('post' => $post, 'th
 	<li><strong>Move Thread Punishment Method:</strong> ~2100 KB as a base usage for all punished threads in total + ~2 KB per punished thread</li>
 </ul><br /><br />
 
-Note that in regard to memory usage, there's a basic normal absolute memory usage for each post, measured as ~15 KB for a single simple post with just a single link inside, and that link is moderate in it's length! That's what we call standard post's weight in this context, and it will differ according to post's checked links. To get the approximate total memory usage calculation, add those posts weights together and then add the result to the specific reporting method memory usage.]]></phrase>
+Note that in regard to memory usage, there is a basic normal absolute memory usage for each post, measured as ~15 KB for a single simple post with just a single link inside, and that link is moderate in it is length! That is what we call standard post's weight in this context, and it will differ according to post's checked links. To get the approximate total memory usage calculation, add those posts weights together and then add the result to the specific reporting method memory usage.]]></phrase>
 			<phrase name="phpkd_vblvb_options_punishment_thread_punishs_title" date="1289618474" username="PHPKD" version="4.0.200"><![CDATA[Thread Punishment Methods Technical Facts]]></phrase>
-			<phrase name="phpkd_vblvb_options_reporting_staff_reports_text" date="1289541636" username="PHPKD" version="4.0.200"><![CDATA[<strong>This is a pure technical facts, if you don't know what is this (simply if you are NOT an advanced coder) then ignore it</strong><br />
+			<phrase name="phpkd_vblvb_options_reporting_staff_reports_text" date="1289541636" username="PHPKD" version="4.0.200"><![CDATA[<strong>This is a pure technical facts, if you do not know what is this (simply if you are NOT an advanced coder) then ignore it</strong><br />
 *Please note that all info mentioned here is a general case study analysis, and it may be far from accuracy. It may differ as well from your own case study.*<br /><br />
 
 <strong>Database queries cost for each scheduled task execution:</strong><br />
@@ -262,9 +262,9 @@ Note that in regard to memory usage, there's a basic normal absolute memory usag
 	<li><strong>Staff Post Thread Report:</strong> ~5260 KB as a base usage for all posts in total + ~7 KB per simple post with one link inside</li>
 </ul><br /><br />
 
-Note that in regard to memory usage, there's a basic normal absolute memory usage for each post, measured as ~15 KB for a single simple post with just a single link inside, and that link is moderate in it's length! That's what we call standard post's weight in this context, and it will differ according to post's checked links. To get the approximate total memory usage calculation, add those posts weights together and then add the result to the specific reporting method memory usage.]]></phrase>
+Note that in regard to memory usage, there is a basic normal absolute memory usage for each post, measured as ~15 KB for a single simple post with just a single link inside, and that link is moderate in it is length! That is what we call standard post's weight in this context, and it will differ according to post's checked links. To get the approximate total memory usage calculation, add those posts weights together and then add the result to the specific reporting method memory usage.]]></phrase>
 			<phrase name="phpkd_vblvb_options_reporting_staff_reports_title" date="1289539906" username="PHPKD" version="4.0.200"><![CDATA[Staff Reports Technical Facts]]></phrase>
-			<phrase name="phpkd_vblvb_options_reporting_user_reports_text" date="1289541628" username="PHPKD" version="4.0.200"><![CDATA[<strong>This is a pure technical facts, if you don't know what is this (simply if you are NOT an advanced coder) then ignore it</strong><br />
+			<phrase name="phpkd_vblvb_options_reporting_user_reports_text" date="1289541628" username="PHPKD" version="4.0.200"><![CDATA[<strong>This is a pure technical facts, if you do not know what is this (simply if you are NOT an advanced coder) then ignore it</strong><br />
 *Please note that all info mentioned here is a general case study analysis, and it may be far from accuracy. It may differ as well from your own case study.*<br /><br />
 
 <strong>Database queries cost for each scheduled task execution:</strong><br />
@@ -279,7 +279,7 @@ Note that in regard to memory usage, there's a basic normal absolute memory usag
 	<li><strong>User PM Report:</strong> ~1700 KB as a base usage for all posts in total + ~7 KB per simple post with one link inside</li>
 </ul><br /><br />
 
-Note that in regard to memory usage, there's a basic normal absolute memory usage for each post, measured as ~15 KB for a single simple post with just a single link inside, and that link is moderate in it's length! That's what we call standard post's weight in this context, and it will differ according to post's checked links. To get the approximate total memory usage calculation, add those posts weights together and then add the result to the specific reporting method memory usage.]]></phrase>
+Note that in regard to memory usage, there is a basic normal absolute memory usage for each post, measured as ~15 KB for a single simple post with just a single link inside, and that link is moderate in it is length! That is what we call standard post's weight in this context, and it will differ according to post's checked links. To get the approximate total memory usage calculation, add those posts weights together and then add the result to the specific reporting method memory usage.]]></phrase>
 			<phrase name="phpkd_vblvb_options_reporting_user_reports_title" date="1289541628" username="PHPKD" version="4.0.200"><![CDATA[User Reports Technical Facts]]></phrase>
 		</phrasetype>
 		<phrasetype name="Control Panel Home Pages" fieldname="cphome">
@@ -324,9 +324,9 @@ Note that in regard to memory usage, there's a basic normal absolute memory usag
 			<phrase name="phpkd_vblvb_inex_forums_all" date="1254877204" username="PHPKD" version="4.0.101"><![CDATA[Include All Forums]]></phrase>
 			<phrase name="phpkd_vblvb_inex_forums_ex" date="1254877329" username="PHPKD" version="4.0.101"><![CDATA[Exclude Specific Forums]]></phrase>
 			<phrase name="phpkd_vblvb_inex_forums_in" date="1254877283" username="PHPKD" version="4.0.101"><![CDATA[Include Specific Forums]]></phrase>
-			<phrase name="phpkd_vblvb_inex_usergroups_all" date="1254877192" username="PHPKD" version="4.0.101"><![CDATA[Include All User Groups]]></phrase>
-			<phrase name="phpkd_vblvb_inex_usergroups_ex" date="1254877347" username="PHPKD" version="4.0.101"><![CDATA[Exclude Specific User Groups]]></phrase>
-			<phrase name="phpkd_vblvb_inex_usergroups_in" date="1254877294" username="PHPKD" version="4.0.101"><![CDATA[Include Specific User Groups]]></phrase>
+			<phrase name="phpkd_vblvb_inex_usergroups_all" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Include All Usergroups]]></phrase>
+			<phrase name="phpkd_vblvb_inex_usergroups_ex" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Exclude Specific Usergroups]]></phrase>
+			<phrase name="phpkd_vblvb_inex_usergroups_in" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Include Specific Usergroups]]></phrase>
 			<phrase name="phpkd_vblvb_inex_users_all" date="1254877175" username="PHPKD" version="4.0.101"><![CDATA[Include All Users]]></phrase>
 			<phrase name="phpkd_vblvb_inex_users_ex" date="1254877337" username="PHPKD" version="4.0.101"><![CDATA[Exclude Specific Users]]></phrase>
 			<phrase name="phpkd_vblvb_inex_users_in" date="1254877308" username="PHPKD" version="4.0.101"><![CDATA[Include Specific Users]]></phrase>
@@ -392,28 +392,28 @@ $bbtitle]]></phrase>
 			<phrase name="phpkd_vblvb_user_reports" date="1288083372" username="PHPKD" version="4.0.200"><![CDATA[Link Verifier Bot User Report: "$postlog[posttitle]" $datenow $timenow]]></phrase>
 		</phrasetype>
 		<phrasetype name="Error Messages" fieldname="error">
-			<phrase name="phpkd_vblvb_checked_existing" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[You've chosen not to check existing posts. Please review the <a href="phpkd_vblvb.php?null=0">product's setting</a> "Check Existing Posts" and make sure it's active.]]></phrase>
-			<phrase name="phpkd_vblvb_checked_nothing" date="1275312192" username="PHPKD" version="4.0.133"><![CDATA[Nothing checked. No records found meets your criteria. This may be caused by one of the following reasons:
+			<phrase name="phpkd_vblvb_checked_existing" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[You have chosen not to check existing posts. Please review the <a href="phpkd_vblvb.php?null=0">product's setting</a> "Check Existing Posts" and make sure it is active.]]></phrase>
+			<phrase name="phpkd_vblvb_checked_nothing" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Nothing checked. No records found meets your criteria. This may be caused by one of the following reasons:
 <ol>
-	<li>All posts has been checked already, and the next successive check didn't come yet.</li>
-	<li>As per your product's settings, there isn't any posts to check currently. <a href="phpkd_vblvb.php?null=0">You may wish to review your product's settings</a>.</li>
+	<li>All posts has been checked already, and the next successive check did not come yet.</li>
+	<li>As per your product's settings, there is not any posts to check currently. <a href="phpkd_vblvb.php?null=0">You may wish to review your product's settings</a>.</li>
 </ol>]]></phrase>
 			<phrase name="phpkd_vblvb_copyright_violate" date="1308855639" username="PHPKD" version="4.1.210"><![CDATA[<span class="diff-deleted">Sorry, copyright notice has been altered or disalbed without prior official permission. 'Branding Free' option required to do so.. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for this matter.</span>]]></phrase>
 			<phrase name="phpkd_vblvb_developers_only" date="1277049500" username="PHPKD" version="4.0.200"><![CDATA[Sorry, this feature is available for official developers only.]]></phrase>
 			<phrase name="phpkd_vblvb_editpost_require_sharing" date="1324480635" username="PHPKD" version="4.1.300"><![CDATA[Sorry, you should include some 'supported' sharing links within your post in order to submit it. Sharing links required in this forum. <a href="{1}?do=hosts">Supported Hosts</a>]]></phrase>
 			<phrase name="phpkd_vblvb_host_deleted_successfully" date="1278005341" username="PHPKD" version="4.0.200"><![CDATA[Host deleted successfully!]]></phrase>
 			<phrase name="phpkd_vblvb_inactive" date="1293449751" username="PHPKD" version="4.1.201"><![CDATA[Sorry, the product "PHPKD - vB Link Verifier Bot" is currently disabled! <a href="phpkd_vblvb.php?do=options&dogroup=general">Please activate the product first then run this scheduled task again.</a>]]></phrase>
-			<phrase name="phpkd_vblvb_initialization_failed_bbcodes" date="1293449775" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any BBCodes to be checked. Please make sure to choose at least one BBCode to be checked and try again.]]></phrase>
+			<phrase name="phpkd_vblvb_initialization_failed_bbcodes" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you have not chosen any BBCodes to be checked. Please make sure to choose at least one BBCode to be checked and try again.]]></phrase>
 			<phrase name="phpkd_vblvb_initialization_failed_file" date="1293449783" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. Please make sure that the following file already uploaded and is readable "./includes/phpkd/vblvb/{1}".]]></phrase>
-			<phrase name="phpkd_vblvb_initialization_failed_hosts" date="1293449793" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any hosts to be checked. Please make sure to choose at least one host to be checked and try again.]]></phrase>
-			<phrase name="phpkd_vblvb_initialization_failed_protocols" date="1293449803" username="PHPKD" version="4.1.201"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you haven't chosen any protocol to be checked. Please make sure to choose at least one protocol to be checked and try again.]]></phrase>
-			<phrase name="phpkd_vblvb_invalid_checkpost" date="1308855639" username="PHPKD" version="4.1.210"><![CDATA[There's dead links inside this post, please check & validate links first.]]></phrase>
-			<phrase name="phpkd_vblvb_invalid_criteria" date="1266127622" username="PHPKD" version="4.0.130"><![CDATA[Criteria doesn't met any matches for this post.]]></phrase>
+			<phrase name="phpkd_vblvb_initialization_failed_hosts" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you have not chosen any hosts to be checked. Please make sure to choose at least one host to be checked and try again.]]></phrase>
+			<phrase name="phpkd_vblvb_initialization_failed_protocols" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Sorry, required initialization for "PHPKD - vB Link Verifier Bot" failed. It seems that you have not chosen any protocol to be checked. Please make sure to choose at least one protocol to be checked and try again.]]></phrase>
+			<phrase name="phpkd_vblvb_invalid_checkpost" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[There is dead links inside this post, please check & validate links first.]]></phrase>
+			<phrase name="phpkd_vblvb_invalid_criteria" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Criteria does not met any matches for this post.]]></phrase>
 			<phrase name="phpkd_vblvb_invalid_domain" date="1278283828" username="PHPKD" version="4.0.200"><![CDATA[The domain name you specified for this host is invalid. You may only include a-z, A-Z, 0-9, . (dot) and - (hyphen).]]></phrase>
-			<phrase name="phpkd_vblvb_invalid_license" date="1277589284" username="PHPKD" version="4.0.200"><![CDATA[<span class="diff-deleted">Sorry, this isn't a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>]]></phrase>
-			<phrase name="phpkd_vblvb_invalid_license_key" date="1286037223" username="PHPKD" version="4.0.200"><![CDATA[<span class="diff-deleted">Sorry, this isn't a valid license key, please enter a correct license key or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>]]></phrase>
-			<phrase name="phpkd_vblvb_invalid_license_trail" date="1277589319" username="PHPKD" version="4.0.200"><![CDATA[<span class="diff-deleted">Sorry, you can't use a <strong>PAID</strong> license key with a <strong>TRAIL</strong> product. <strong>PAID license keys can run only with PAID products.</strong><br />Please get your trail license key from <a href="http://eshop.phpkd.net/customers/index.php" target="_blank">Customer Area</a> or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for assistance!!</span>]]></phrase>
-			<phrase name="phpkd_vblvb_invalid_license_vblvb" date="1278004295" username="PHPKD" version="4.0.200"><![CDATA[<span class="diff-deleted">Sorry, you can't use a <strong>TRAIL</strong> license key with a <strong>PAID</strong> product. <strong>TRAIL license keys can run only with TRAIL products.</strong><br />Please get your paid license key from <a href="http://eshop.phpkd.net/customers/index.php" target="_blank">Customer Area</a> or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for assistance!!</span>]]></phrase>
+			<phrase name="phpkd_vblvb_invalid_license" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[<span class="diff-deleted">Sorry, this is not a valid license. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>]]></phrase>
+			<phrase name="phpkd_vblvb_invalid_license_key" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[<span class="diff-deleted">Sorry, this is not a valid license key, please enter a correct license key or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for a valid license!!</span>]]></phrase>
+			<phrase name="phpkd_vblvb_invalid_license_trail" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[<span class="diff-deleted">Sorry, you can not use a <strong>PAID</strong> license key with a <strong>TRAIL</strong> product. <strong>PAID license keys can run only with PAID products.</strong><br />Please get your trail license key from <a href="http://eshop.phpkd.net/customers/index.php" target="_blank">Customer Area</a> or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for assistance!!</span>]]></phrase>
+			<phrase name="phpkd_vblvb_invalid_license_vblvb" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[<span class="diff-deleted">Sorry, you can not use a <strong>TRAIL</strong> license key with a <strong>PAID</strong> product. <strong>TRAIL license keys can run only with TRAIL products.</strong><br />Please get your paid license key from <a href="http://eshop.phpkd.net/customers/index.php" target="_blank">Customer Area</a> or contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for assistance!!</span>]]></phrase>
 			<phrase name="phpkd_vblvb_newpost_require_sharing" date="1324477435" username="PHPKD" version="4.1.300"><![CDATA[Sorry, you should include some 'supported' sharing links within your post in order to submit it. Sharing links required in this forum. <a href="{1}?do=hosts">Supported Hosts</a>]]></phrase>
 			<phrase name="phpkd_vblvb_saved_host_x_successfully" date="1277965175" username="PHPKD" version="4.0.200"><![CDATA[Saved Host <i>{1}</i> Successfully]]></phrase>
 			<phrase name="phpkd_vblvb_saved_hosts_successfully" date="1278003858" username="PHPKD" version="4.0.200"><![CDATA[Saved Hosts Successfully]]></phrase>
@@ -476,7 +476,7 @@ $bbtitle]]></phrase>
 			<phrase name="phpkd_vblvb_select_usergroups" date="1254819772" username="PHPKD" version="4.0.101"><![CDATA[Select User group(s)]]></phrase>
 			<phrase name="setting_general_active_desc" date="1293449637" username="PHPKD" version="4.1.201"><![CDATA[Choose whether "PHPKD - vB Link Verifier Bot" is active or not (global switch).]]></phrase>
 			<phrase name="setting_general_active_title" date="1289523692" username="PHPKD" version="4.0.200"><![CDATA[Product Active]]></phrase>
-			<phrase name="setting_general_bbcodes_desc" date="1289525562" username="PHPKD" version="4.0.200"><![CDATA[Which BBCodes should be scanned & which shouldn't!? Note that URL tags are checked by default.]]></phrase>
+			<phrase name="setting_general_bbcodes_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Select which BBCodes should be scanned. Note that <strong>URL</strong> tags are checked by default.]]></phrase>
 			<phrase name="setting_general_bbcodes_title" date="1289525562" username="PHPKD" version="4.0.200"><![CDATA[Checked BBCodes]]></phrase>
 			<phrase name="setting_general_checked_editedposts_desc" date="1289529126" username="PHPKD" version="4.0.200"><![CDATA[Should edited posts be checked live (on real time)? If yes, then which of it should be? Only thread's head (first post), or all replies as well?<br />
 <em><u>Turning this option 'ON' may cause users with low/limited internet connections to have some issues and may not be able to post, specially if their post contains many links to be checked.</u></em>]]></phrase>
@@ -487,24 +487,24 @@ $bbtitle]]></phrase>
 			<phrase name="setting_general_checked_newposts_desc" date="1289529119" username="PHPKD" version="4.0.200"><![CDATA[Should new posts be checked live (on real time)? If yes, then which of it should be? Only thread's head (first post), or all replies as well?<br />
 <em><u>Turning this option 'ON' may cause users with low/limited internet connections to have some issues and may not be able to post, specially if their post contains many links to be checked.</u></em>]]></phrase>
 			<phrase name="setting_general_checked_newposts_title" date="1289529119" username="PHPKD" version="4.0.200"><![CDATA[Check New Posts]]></phrase>
-			<phrase name="setting_general_critical_limit_desc" date="1289528062" username="PHPKD" version="4.0.200"><![CDATA[Posts can be punished because of high percentage of dead links within. Define the "Critical Limit/Red Line" percentage here as a positive integer value (without any symbols). This "Critical Limit/Red Line" is the percentage that if dead links reaches or exceeded within a post, then that post will be punished.<br /><br />
+			<phrase name="setting_general_critical_limit_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Posts can be punished because of high percentage of dead links within. Define the "Critical Limit/Red Line" percentage here as a positive integer value (without any symbols). This "Critical Limit/Red Line" is the percentage that if dead links reaches or exceeded within a post, then that post will be punished.<br /><br />
 <strong>Notes & Examples:</strong><br />
 <ul class="smallfont">
 	<li>"10" means if dead links within a post reaches or exceeded 10% of all included links it will be punished. If a post has less than 10% of dead links, then it will pass as valid without punishment.</li>
 	<li>"0" means that all links per post should be valid & alive (no dead links allowed, if just one link is dead the post will be punished); While "100" means the opposite, it means that all links within a post should be dead to be punished, that means if there is only one link alive & the rest are dead, the post will pass as valid without punishment.</li>
-	<li>If any post has only 5 links within it to be checked, that means each link represents 20% from all checked links. It means also if only one link is dead & you've set this setting to '10%' the expression will evaluate as true & will punish that post since it has 20% of dead links.</li>
+	<li>If any post has only 5 links within it to be checked, that means each link represents 20% from all checked links. It means also if only one link is dead & you have set this setting to '10%' the expression will evaluate as true & will punish that post since it has 20% of dead links.</li>
 </ul>]]></phrase>
 			<phrase name="setting_general_critical_limit_title" date="1289528062" username="PHPKD" version="4.0.200"><![CDATA[Critical Limit/Red Line]]></phrase>
-			<phrase name="setting_general_cutoff_mode_desc" date="1289525208" username="PHPKD" version="4.0.200"><![CDATA[You can force this product to process only posts in a specific time frame.<br />
-You've multiple modes to choose from:<br />
+			<phrase name="setting_general_cutoff_mode_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[You can force this product to process only posts in a specific time frame.<br />
+Select the appropriate option:<br />
 <ul class="smallfont">
 	<li><strong>Last X Days:</strong> This mode will check all posts posted only in the last X days.</li>
 	<li><strong>Before Specific Date:</strong> This mode will check all posts posted before that specific date.</li>
 	<li><strong>After Specific Date:</strong> This mode will check all posts posted after that specific date.</li>
 	<li><strong>Between Two Specific Dates:</strong> This mode will check all posts posted between those two specific dates.</li>
 </ul>
-After choosing your preferred mode, you've to enter the appropriate value in the following setting according to the declaration defined down there.<br /><br />
-<em><u>If you don't want to use the Cutoff feature at all then enter "0" in the following setting's field "Time/Date Cutoff Value".</u></em>]]></phrase>
+After choosing your preferred mode, you have to enter the appropriate value in the following setting according to the declaration defined down there.<br /><br />
+<em><u>If you do not want to use the Cutoff feature at all then enter "0" in the following setting's field "Time/Date Cutoff Value".</u></em>]]></phrase>
 			<phrase name="setting_general_cutoff_mode_title" date="1289525208" username="PHPKD" version="4.0.200"><![CDATA[Time/Date Cutoff Mode]]></phrase>
 			<phrase name="setting_general_cutoff_value_desc" date="1289525475" username="PHPKD" version="4.0.200"><![CDATA[To force this product to process only posts in a specific time frame, choose your preferred mode in the above setting, then enter the appropriate value here in this setting's field according to the following definition:<br />
 <ul class="smallfont">
@@ -515,48 +515,30 @@ After choosing your preferred mode, you've to enter the appropriate value in the
 </ul>
 <em><u>To turn off the "Time/Date Cutoff Mode" feature totally, enter "0" in this setting's field.</u></em>]]></phrase>
 			<phrase name="setting_general_cutoff_value_title" date="1289525475" username="PHPKD" version="4.0.200"><![CDATA[Time/Date Cutoff Value]]></phrase>
-			<phrase name="setting_general_inex_forums_desc" date="1289524929" username="PHPKD" version="4.0.200"><![CDATA[You can specify certain forums to check their posts against dead links, or to exclude others' posts from being checked at all.<br />
-You've multiple options to choose from:<br />
-<ul class="smallfont">
-	<li><strong>Include All Forums</strong></li>
-	<li><strong>Include Specific Forums</strong></li>
-	<li><strong>Exclude Specific Forums</strong></li>
-</ul>
+			<phrase name="setting_general_inex_forums_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[You can specify certain forums to check their posts against dead links, or to exclude others' posts from being checked at all.<br /><br />
 Select "Include All Forums" to check all forums' posts, or select "Include Specific Forums" to check only those specific forums' posts -defined in the following setting-, or select "Exclude Specific Forums" to check all forums' posts <strong>except</strong> those specific forums' posts -defined in the following setting-.]]></phrase>
-			<phrase name="setting_general_inex_forums_ids_desc" date="1289524975" username="PHPKD" version="4.0.200"><![CDATA[If you've chosen "Include Specific Forums" OR "Exclude Specific Forums" from the above setting, then you've to choose those specified forums from the list displayed. Note that you can select multiple options by holding "CTRL" key while selecting.]]></phrase>
+			<phrase name="setting_general_inex_forums_ids_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[If you have chosen "Include Specific Forums" OR "Exclude Specific Forums" from the above setting, then you have to choose those specified forums from the list displayed. Note that you can select multiple options by holding "CTRL" key while selecting.]]></phrase>
 			<phrase name="setting_general_inex_forums_ids_title" date="1289524975" username="PHPKD" version="4.0.200"><![CDATA[Included/Excluded Forums]]></phrase>
 			<phrase name="setting_general_inex_forums_title" date="1289524929" username="PHPKD" version="4.0.200"><![CDATA[Include/Exclude Forums]]></phrase>
-			<phrase name="setting_general_inex_usergroups_desc" date="1289526170" username="PHPKD" version="4.0.200"><![CDATA[You can specify certain user groups to check their posts against dead links, or to exclude others' posts from being checked at all.<br />
-You've multiple options to choose from:<br />
-<ul class="smallfont">
-	<li><strong>Include All User Groups</strong></li>
-	<li><strong>Include Specific User Groups</strong></li>
-	<li><strong>Exclude Specific User Groups</strong></li>
-</ul>
-Select "Include All User Groups" to check all user groups' posts, or select "Include Specific User Groups" to check only those specific user groups' posts -defined in the following setting-, or select "Exclude Specific User Groups" to check all user groups' posts <strong>except</strong> those specific user groups' posts -defined in the following setting-.]]></phrase>
-			<phrase name="setting_general_inex_usergroups_ids_desc" date="1289524892" username="PHPKD" version="4.0.200"><![CDATA[If you've chosen "Include Specific User Groups" OR "Exclude Specific User Groups" from the above setting, then you've to choose those specified user groups from the list displayed. Note that you can select multiple options by holding "CTRL" key while selecting.]]></phrase>
-			<phrase name="setting_general_inex_usergroups_ids_title" date="1289524892" username="PHPKD" version="4.0.200"><![CDATA[Included/Excluded User Groups]]></phrase>
-			<phrase name="setting_general_inex_usergroups_title" date="1289526170" username="PHPKD" version="4.0.200"><![CDATA[Include/Exclude User Groups]]></phrase>
-			<phrase name="setting_general_inex_users_desc" date="1289524703" username="PHPKD" version="4.0.200"><![CDATA[You can specify certain users to check their posts against dead links, or to exclude others' posts from being checked at all.<br />
-You've multiple options to choose from:<br />
-<ul class="smallfont">
-	<li><strong>Include All Users</strong></li>
-	<li><strong>Include Specific Users</strong></li>
-	<li><strong>Exclude Specific Users</strong></li>
-</ul>
+			<phrase name="setting_general_inex_usergroups_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[You can specify certain usergroups to check their posts against dead links, or to exclude others' posts from being checked at all.<br /><br />
+Select "Include All Usergroups" to check all usergroups' posts, or select "Include Specific Usergroups" to check only those specific usergroups' posts -defined in the following setting-, or select "Exclude Specific Usergroups" to check all usergroups' posts <strong>except</strong> those specific usergroups' posts -defined in the following setting-.]]></phrase>
+			<phrase name="setting_general_inex_usergroups_ids_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[If you have chosen "Include Specific Usergroups" OR "Exclude Specific Usergroups" from the above setting, then you have to choose those specified usergroups from the list displayed. Note that you can select multiple options by holding "CTRL" key while selecting.]]></phrase>
+			<phrase name="setting_general_inex_usergroups_ids_title" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Included/Excluded Usergroups]]></phrase>
+			<phrase name="setting_general_inex_usergroups_title" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Include/Exclude Usergroups]]></phrase>
+			<phrase name="setting_general_inex_users_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[You can specify certain users to check their posts against dead links, or to exclude others' posts from being checked at all.<br /><br />
 Select "Include All Users" to check all users' posts, or select "Include Specific Users" to check only those specific users' posts -defined in the following setting-, or select "Exclude Specific Users" to check all users' posts <strong>except</strong> those specific users' posts -defined in the following setting-.]]></phrase>
-			<phrase name="setting_general_inex_users_ids_desc" date="1289525051" username="PHPKD" version="4.0.200"><![CDATA[If you've chosen "Include Specific Users" OR "Exclude Specific Users" from the above setting, then you've to enter those specified user IDs here in this setting's field. Separate user IDs by normal English comma.]]></phrase>
+			<phrase name="setting_general_inex_users_ids_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[If you have chosen "Include Specific Users" OR "Exclude Specific Users" from the above setting, then you have to enter those specified user IDs here in this setting's field. Separate user IDs by normal English comma.]]></phrase>
 			<phrase name="setting_general_inex_users_ids_title" date="1289525051" username="PHPKD" version="4.0.200"><![CDATA[Included/Excluded Users]]></phrase>
 			<phrase name="setting_general_inex_users_title" date="1289524703" username="PHPKD" version="4.0.200"><![CDATA[Include/Exclude Users]]></phrase>
-			<phrase name="setting_general_licensekey_desc" date="1289523764" username="PHPKD" version="4.0.200"><![CDATA[Enter license key you've received, you can always obtain a copy of it from your customer area at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a>. Note that "License Key" is sensitive, so make sure to copy & past it exactly.]]></phrase>
+			<phrase name="setting_general_licensekey_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Enter license key you have received, you can always obtain a copy of it from your customer area at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a>. Note that "License Key" is sensitive, so make sure to copy & past it exactly.]]></phrase>
 			<phrase name="setting_general_licensekey_title" date="1289523764" username="PHPKD" version="4.0.200"><![CDATA[License Key]]></phrase>
 			<phrase name="setting_general_maxlinks_desc" date="1289529080" username="PHPKD" version="4.0.200"><![CDATA[How many links should be checked per post? If any post contains more than that defined limit, then those 'over limit' links will be ignored & will not be checked; only the first X links (as defined here) will be checked. Enter "0" for UNLIMITED.]]></phrase>
 			<phrase name="setting_general_maxlinks_title" date="1289529080" username="PHPKD" version="4.0.200"><![CDATA[Maximum Checked Links Per Post]]></phrase>
-			<phrase name="setting_general_post_modes_desc" date="1289526158" username="PHPKD" version="4.0.200"><![CDATA[Specific post modes can be excluded from being checked. By default all posts are checked regardless of it's mode. To exclude certain post mode, choose it from the list.]]></phrase>
+			<phrase name="setting_general_post_modes_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Specific post modes can be excluded from being checked. By default all posts are checked regardless of it is mode. To exclude certain post mode, choose it from the list.]]></phrase>
 			<phrase name="setting_general_post_modes_title" date="1289526158" username="PHPKD" version="4.0.200"><![CDATA[Excluded Post Modes]]></phrase>
 			<phrase name="setting_general_protocols_desc" date="1289525529" username="PHPKD" version="4.0.200"><![CDATA[Which internet protocols should be checked?]]></phrase>
 			<phrase name="setting_general_protocols_title" date="1289525529" username="PHPKD" version="4.0.200"><![CDATA[Checked Protocols]]></phrase>
-			<phrase name="setting_general_query_limit_desc" date="1293449573" username="PHPKD" version="4.1.201"><![CDATA[It's recommended to define a specific low number of posts to process in each run to prevent any possible timeout or Memory/CPU exhausting during the execution process. <strong>A Lower Value usually recommended specially for boards that has long posts with many links. There's other important factors that have strong affect as well such as: <span class="diff-changed">"Time/Date Cutoff Mode", "Time/Date Cutoff Value", "Check existing posts", "Maximum Checked Links Per Post", "Check Succession Period"</span>; So please take care & try to set a logical acceptable value for each of these settings to avoid any expected/unexpected issues. You're the best one who knows your board & you're the one who can determine which suits you & your board according to your board's activity/content/requirements.</strong>]]></phrase>
+			<phrase name="setting_general_query_limit_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[It is recommended to define a specific low number of posts to process in each run to prevent any possible timeout or Memory/CPU exhausting during the execution process. <strong>A Lower Value usually recommended specially for boards that has long posts with many links. There is other important factors that have strong affect as well such as: <span class="diff-changed">"Time/Date Cutoff Mode", "Time/Date Cutoff Value", "Check existing posts", "Maximum Checked Links Per Post", "Check Succession Period"</span>; So please take care & try to set a logical acceptable value for each of these settings to avoid any expected/unexpected issues. You are the best one who knows your board & you are the one who can determine which suits you & your board according to your board's activity/content/requirements.</strong>]]></phrase>
 			<phrase name="setting_general_query_limit_title" date="1289529207" username="PHPKD" version="4.0.200"><![CDATA[Checked Posts Per Batch]]></phrase>
 			<phrase name="setting_general_require_sharing_desc" date="1324476117" username="PHPKD" version="4.1.300"><![CDATA[You may force users to post 'supported' sharing links within their posts in order to submit their posts, otherwise they will get an error message.<br />
 You can select which forums would you like to force users include 'supported' sharing links within their posts.]]></phrase>
@@ -565,9 +547,9 @@ You can select which forums would you like to force users include 'supported' sh
 			<phrase name="setting_general_scriptname_title" date="1324477869" username="PHPKD" version="4.1.300"><![CDATA[Public Script Name]]></phrase>
 			<phrase name="setting_general_scripttitle_desc" date="1324477937" username="PHPKD" version="4.1.300"><![CDATA[The public script title available for users, this script displays list of supported hosts, allow users to live check sharing links on the fly, etc..]]></phrase>
 			<phrase name="setting_general_scripttitle_title" date="1324477937" username="PHPKD" version="4.1.300"><![CDATA[Public Script Title]]></phrase>
-			<phrase name="setting_general_succession_period_desc" date="1289528687" username="PHPKD" version="4.0.200"><![CDATA[Successive checks for same posts can be separated by a certain period of time, so those 'checked recently' posts didn't checked every time the script runs. Same posts can be checked multiple times, but with at least 1 day between each two successive checks. Define how many days should separate each two successive checks for the same post, or enter "0" to check posts ONLY ONCE. Note: "14" means your checked posts will be checked again every fourteen days (two weeks). <strong>"0" or a high Value usually recommended specially for large boards.</strong>]]></phrase>
+			<phrase name="setting_general_succession_period_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Successive checks for same posts can be separated by a certain period of time, so those 'checked recently' posts did not checked every time the script runs. Same posts can be checked multiple times, but with at least 1 day between each two successive checks. Define how many days should separate each two successive checks for the same post, or enter "0" to check posts ONLY ONCE. Note: "14" means your checked posts will be checked again every fourteen days (two weeks). <strong>"0" or a high Value usually recommended specially for large boards.</strong>]]></phrase>
 			<phrase name="setting_general_succession_period_title" date="1289528687" username="PHPKD" version="4.0.200"><![CDATA[Check Succession Period]]></phrase>
-			<phrase name="setting_general_thread_modes_desc" date="1289526117" username="PHPKD" version="4.0.200"><![CDATA[Specific thread modes can be excluded from being checked. By default all threads are checked regardless of it's mode. To exclude certain thread mode, choose it from the list.]]></phrase>
+			<phrase name="setting_general_thread_modes_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Specific thread modes can be excluded from being checked. By default all threads are checked regardless of it is mode. To exclude certain thread mode, choose it from the list.]]></phrase>
 			<phrase name="setting_general_thread_modes_title" date="1289526117" username="PHPKD" version="4.0.200"><![CDATA[Excluded Thread Modes]]></phrase>
 			<phrase name="setting_general_vurl_maxredirs_desc" date="1315059583" username="PHPKD" version="4.1.220"><![CDATA[The maximum amount of HTTP redirections to follow.]]></phrase>
 			<phrase name="setting_general_vurl_maxredirs_title" date="1315059583" username="PHPKD" version="4.1.220"><![CDATA[Remote Functions Maximum Redirections]]></phrase>
@@ -575,14 +557,14 @@ You can select which forums would you like to force users include 'supported' sh
 			<phrase name="setting_general_vurl_maxsize_title" date="1315059583" username="PHPKD" version="4.1.220"><![CDATA[Remote Functions Maximum Response Size]]></phrase>
 			<phrase name="setting_general_vurl_timeout_desc" date="1315059588" username="PHPKD" version="4.1.220"><![CDATA[The maximum number of seconds to allow remote functions to execute.]]></phrase>
 			<phrase name="setting_general_vurl_timeout_title" date="1315059588" username="PHPKD" version="4.1.220"><![CDATA[Remote Functions Execution Timeout]]></phrase>
-			<phrase name="setting_linkdir_recording_active_desc" date="1289530151" username="PHPKD" version="4.0.200"><![CDATA[When active, all checked links will be recorded in a central database table for further display in "Link Directory Browser". However it will add some performance overhead.<br />
-<strong>This feature is highly experimental in it's nature, and not complete yet. This part is working anyway.</strong>]]></phrase>
+			<phrase name="setting_linkdir_recording_active_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[When active, all checked links will be recorded in a central database table for further display in "Link Directory Browser". However it will add some performance overhead.<br />
+<strong>This feature is highly experimental in it is nature, and not complete yet. This part is working anyway.</strong>]]></phrase>
 			<phrase name="setting_linkdir_recording_active_title" date="1289530151" username="PHPKD" version="4.0.200"><![CDATA[Link Directory Recorder Active *(Experimental)*]]></phrase>
 			<phrase name="setting_lookfeel_linkstatus_colors_desc" date="1289529417" username="PHPKD" version="4.0.200"><![CDATA[Checked links can be colored according to their reported status, select your preferred colors from the color picker or write down the hexadecimal code for each status.]]></phrase>
 			<phrase name="setting_lookfeel_linkstatus_colors_title" date="1289529417" username="PHPKD" version="4.0.200"><![CDATA[Link Status Colors]]></phrase>
-			<phrase name="setting_lookfeel_postbit_note_desc" date="1293449645" username="PHPKD" version="4.1.201"><![CDATA[Last check note can be displayed within each post to determine whether or not it has been checked before by "PHPKD - vB Link Verifier Bot" and when, simply select in which forums' posts this note should be displayed. That note will appear in posts within those selected forums only. Note that you can select multiple options by holding "CTRL" key while selecting.<br />
+			<phrase name="setting_lookfeel_postbit_note_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Last check note can be displayed within each post to determine whether or not it has been checked before by "PHPKD - vB Link Verifier Bot" and when, simply select in which forums' posts this note should be displayed. That note will appear in posts within those selected forums only. Note that you can select multiple options by holding "CTRL" key while selecting.<br />
 <hr />
-<strong>After selecting appropriate forums, you've to do two simple manual edits as follow:<strong><br />
+<strong>After selecting appropriate forums, you have to do two simple manual edits as follow:<strong><br />
 In 'postbit' & 'postbit_legacy' templates search for:
 <pre>
 &lt;div class="postfoot"&gt;
@@ -592,33 +574,27 @@ This is where the "Last Check Note" will be displayed, so you can choose another
 <pre>
 {vb:raw template_hook.postbit_phpkd_vblvb}
 </pre>]]></phrase>
-			<phrase name="setting_lookfeel_postbit_note_firstpost_desc" date="1315057457" username="PHPKD" version="4.1.220"><![CDATA[Post Flag: Last Check Note can be displayed either in thread's head (first post) only, or in every post in the thread. That's depends on your usage & your product's settings.]]></phrase>
+			<phrase name="setting_lookfeel_postbit_note_firstpost_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Post Flag: Last Check Note can be displayed either in thread's head (first post) only, or in every post in the thread. That is depends on your usage & your product's settings.]]></phrase>
 			<phrase name="setting_lookfeel_postbit_note_firstpost_title" date="1315057457" username="PHPKD" version="4.1.220"><![CDATA[Post Flag: Last Check Note in first post only]]></phrase>
 			<phrase name="setting_lookfeel_postbit_note_title" date="1289529943" username="PHPKD" version="4.0.200"><![CDATA[Post Flag: Last Check Note]]></phrase>
 			<phrase name="setting_punishment_forumid_desc" date="1289546711" username="PHPKD" version="4.0.200"><![CDATA[If "Move Thread" method is selected in "Thread Punishment Methods" then a forum should be selected to move punished threads to it. Select preferred forum from the list.]]></phrase>
 			<phrase name="setting_punishment_forumid_title" date="1289546711" username="PHPKD" version="4.0.200"><![CDATA[Punishment Recycle Bin Forum]]></phrase>
-			<phrase name="setting_punishment_onedit_revert_desc" date="1289547210" username="PHPKD" version="4.0.200"><![CDATA[If this option is enabled & if edited posts is being checked, and there were a past punishment for that specific post, then it can be reverted if the new check reports it as 'passed' (no dead links or few dead links under the critical limit). Suppose that the edited post was previously punished with (Close Thread - Move Thread - Moderate Post), after a valid check those past punishment actions can be reverted to (Open Thread - Move Thread back to it's original forum - Approve Post).]]></phrase>
+			<phrase name="setting_punishment_onedit_revert_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[If this option is enabled & if edited posts is being checked, and there were a past punishment for that specific post, then it can be reverted if the new check reports it as 'passed' (no dead links or few dead links under the critical limit). Suppose that the edited post was previously punished with (Close Thread - Move Thread - Moderate Post), after a valid check those past punishment actions can be reverted to (Open Thread - Move Thread back to it is original forum - Approve Post).]]></phrase>
 			<phrase name="setting_punishment_onedit_revert_title" date="1289547210" username="PHPKD" version="4.0.200"><![CDATA[On Edit: Revert Actions]]></phrase>
-			<phrase name="setting_punishment_post_punishs_desc" date="1289546524" username="PHPKD" version="4.0.200"><![CDATA[Multiple "Post Punishment Methods" are available to choose from. Select preferred "Post Punishment Methods" to apply. Note that "Post Punishment Methods" are applied on individual posts.<br />
-While it may be more logical to apply "Post Punishment Methods" on individual posts rather than applying "Thread Punishment Methods", it's recommended to use "<strong>Thread Punishment Methods</strong>" for technical reasons. At the mean time "Post Punishment Methods" isn't as stable/solid as "Thread Punishment Methods", however both are using default vBulletin scenarios in applying their actions -exactly as normal moderation actions-.]]></phrase>
+			<phrase name="setting_punishment_post_punishs_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Multiple "Post Punishment Methods" are available to choose from. Select preferred "Post Punishment Methods" to apply. Note that "Post Punishment Methods" are applied on individual posts.<br />
+While it may be more logical to apply "Post Punishment Methods" on individual posts rather than applying "Thread Punishment Methods", it is recommended to use "<strong>Thread Punishment Methods</strong>" for technical reasons. At the mean time "Post Punishment Methods" is not as stable/solid as "Thread Punishment Methods", however both are using default vBulletin scenarios in applying their actions -exactly as normal moderation actions-.]]></phrase>
 			<phrase name="setting_punishment_post_punishs_title" date="1289546524" username="PHPKD" version="4.0.200"><![CDATA[Post Punishment Methods]]></phrase>
-			<phrase name="setting_punishment_powerful_ugids_desc" date="1289547354" username="PHPKD" version="4.0.200"><![CDATA[Powerful User Groups are those user groups that can override/overcome the "Critical Limit/Red Line" & force their posts to be posted despite of having dead links. Enter User Group IDs separated by normal English comma.<br /><br />
-<strong>Note:</strong> This powerful ability doesn't affect only posts for those powerful user groups, but affects also any post for any user that's edited by those powerful user groups. It means they can overcome limits when posting/editing their own or others posts as well (They should have permissions to do so of course).]]></phrase>
-			<phrase name="setting_punishment_powerful_ugids_title" date="1289547354" username="PHPKD" version="4.0.200"><![CDATA[Powerful User Groups]]></phrase>
-			<phrase name="setting_punishment_thread_punishs_desc" date="1289546474" username="PHPKD" version="4.0.200"><![CDATA[Multiple "Thread Punishment Methods" are available to choose from. Select preferred "Thread Punishment Methods" to apply. Note that "Thread Punishment Methods" are applied on <strong>Threads</strong>, regardless the checked post is the thread's header (first post) or not. If multiple posts in a thread were checked and any of these posts had dead links that exceeds the critical limit (has been flagged for punishment), and there's selected "Thread Punishment Methods", then the whole thread will be punished.]]></phrase>
+			<phrase name="setting_punishment_powerful_ugids_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Powerful Usergroups are those usergroups that can override/overcome the "Critical Limit/Red Line" & force their posts to be posted despite of having dead links. Enter User Group IDs separated by normal English comma.<br /><br />
+<strong>Note:</strong> This powerful ability does not affect only posts for those powerful usergroups, but affects also any post for any user that is edited by those powerful usergroups. It means they can overcome limits when posting/editing their own or others posts as well (They should have permissions to do so of course).]]></phrase>
+			<phrase name="setting_punishment_powerful_ugids_title" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Powerful Usergroups]]></phrase>
+			<phrase name="setting_punishment_thread_punishs_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Multiple "Thread Punishment Methods" are available to choose from. Select preferred "Thread Punishment Methods" to apply. Note that "Thread Punishment Methods" are applied on <strong>Threads</strong>, regardless the checked post is the thread's header (first post) or not. If multiple posts in a thread were checked and any of these posts had dead links that exceeds the critical limit (has been flagged for punishment), and there is selected "Thread Punishment Methods", then the whole thread will be punished.]]></phrase>
 			<phrase name="setting_punishment_thread_punishs_title" date="1289546474" username="PHPKD" version="4.0.200"><![CDATA[Thread Punishment Methods]]></phrase>
 			<phrase name="setting_reporting_forumid_desc" date="1289542888" username="PHPKD" version="4.0.200"><![CDATA[If "Post New Thread" staff report method is enabled, then a forum should be selected to post those threads in.]]></phrase>
 			<phrase name="setting_reporting_forumid_title" date="1289542888" username="PHPKD" version="4.0.200"><![CDATA[Staff Report Forum]]></phrase>
-			<phrase name="setting_reporting_included_links_desc" date="1279073819" username="PHPKD" version="4.0.133"><![CDATA[Which links to include in the generated reports? You've multiple options to choose from:
-<ul class="smallfont">
-	<li><strong>All Links</strong></li>
-	<li><strong>Alive Links</strong></li>
-	<li><strong>Dead Links</strong></li>
-	<li><strong>Down Links</strong></li>
-	<li><strong>None</strong></li>
-</ul>]]></phrase>
+			<phrase name="setting_reporting_included_links_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Which links to include in the generated reports?]]></phrase>
 			<phrase name="setting_reporting_included_links_title" date="1279073819" username="PHPKD" version="4.0.133"><![CDATA[Reports: Included Links]]></phrase>
-			<phrase name="setting_reporting_included_posts_desc" date="1289542061" username="PHPKD" version="4.0.200"><![CDATA[Which posts to include in the generated reports? You've multiple options to choose from:
+			<phrase name="setting_reporting_included_posts_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Which posts to include in the generated reports?<br />
+Select the appropriate option:<br />
 <ul class="smallfont">
 	<li><strong>Checked Posts Only:</strong> include checked Posts, ignore punished posts.</li>
 	<li><strong>Punished Posts Only:</strong> include punished Posts, ignore checked posts.</li>
@@ -627,30 +603,30 @@ While it may be more logical to apply "Post Punishment Methods" on individual po
 			<phrase name="setting_reporting_included_posts_title" date="1289542061" username="PHPKD" version="4.0.200"><![CDATA[Reports: Included Posts]]></phrase>
 			<phrase name="setting_reporting_phrases_desc" date="1289543393" username="PHPKD" version="4.0.200"><![CDATA[Modify and localize reports' subject & message as preferred.]]></phrase>
 			<phrase name="setting_reporting_phrases_title" date="1289543393" username="PHPKD" version="4.0.200"><![CDATA[Reports Phrases]]></phrase>
-			<phrase name="setting_reporting_reporter_desc" date="1289537591" username="PHPKD" version="4.0.200"><![CDATA[Reports posted in forums or sent as PMs to both staff and normal users requires a valid staff member <strong>username</strong> to use as a poster & sender for these reports. Enter a valid staff member <strong>username</strong> with appropriate privileges here in this setting's field. Note: If this username is invalid or doesn't has appropriate privileges, then all "PM/Reply/Thread Reports" will not work until it's corrected, however "Email Reports" doesn't affected by this option and will keep working regardless of this option's value.]]></phrase>
+			<phrase name="setting_reporting_reporter_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Reports posted in forums or sent as PMs to both staff and normal users requires a valid staff member <strong>username</strong> to use as a poster & sender for these reports. Enter a valid staff member <strong>username</strong> with appropriate privileges here in this setting's field. Note: If this username is invalid or does not has appropriate privileges, then all "PM/Reply/Thread Reports" will not work until it is corrected, however "Email Reports" does not affected by this option and will keep working regardless of this option's value.]]></phrase>
 			<phrase name="setting_reporting_reporter_title" date="1289537591" username="PHPKD" version="4.0.200"><![CDATA[Reports Staff Handler]]></phrase>
-			<phrase name="setting_reporting_staff_reports_desc" date="1289539598" username="PHPKD" version="4.0.200"><![CDATA[After each run of the script, it's possible to auto generate final reports for staff using any of the following methods: (PM, Email, New Reply, New Thread). Select your preferred methods.]]></phrase>
-			<phrase name="setting_reporting_staff_reports_messaging_desc" date="1277874672" username="PHPKD" version="4.0.133"><![CDATA[In case you want to send reports to staff via PM or Email, you've the ability to choose which staff should receive those reports.]]></phrase>
+			<phrase name="setting_reporting_staff_reports_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[After each run of the script, it is possible to auto generate final reports for staff using any of the following methods: (PM, Email, New Reply, New Thread). Select your preferred methods.]]></phrase>
+			<phrase name="setting_reporting_staff_reports_messaging_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[In case you want to send reports to staff via PM or Email, you have the ability to choose which staff should receive those reports.]]></phrase>
 			<phrase name="setting_reporting_staff_reports_messaging_title" date="1277874672" username="PHPKD" version="4.0.133"><![CDATA[Sending Staff Reports]]></phrase>
-			<phrase name="setting_reporting_staff_reports_mode_desc" date="1289542106" username="PHPKD" version="4.0.200"><![CDATA[Staff reports can be sent in certain conditions, which conditions should staff reports sent in?<br />
-You've multiple options to choose from:<br />
+			<phrase name="setting_reporting_staff_reports_mode_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Staff reports can be sent in certain conditions, which conditions should staff reports sent in?<br />
+Select the appropriate option:<br />
 <ul class="smallfont">
-	<li><strong>Always send:</strong> always send regardless there's checked/dead/punished posts or not.</li>
-	<li><strong>Send Only If There's Checked Posts:</strong> send only if there's checked posts, regardless there's dead/punished posts or not.</li>
-	<li><strong>Send Only If There's Dead Posts:</strong> send only if there's checked posts with dead links regardless it exceeds the critical limit or not -punished or not-.</li>
-	<li><strong>Send Only If There's Punished Posts:</strong> send only if there's checked posts with dead links that exceeds the critical limit, and thus punished.</li>
+	<li><strong>Always send:</strong> always send regardless there is checked/dead/punished posts or not.</li>
+	<li><strong>Send Only If There is Checked Posts:</strong> send only if there is checked posts, regardless there is dead/punished posts or not.</li>
+	<li><strong>Send Only If There is Dead Posts:</strong> send only if there is checked posts with dead links regardless it exceeds the critical limit or not -punished or not-.</li>
+	<li><strong>Send Only If There is Punished Posts:</strong> send only if there is checked posts with dead links that exceeds the critical limit, and thus punished.</li>
 </ul>
 <strong>Note:</strong> Punished posts implicitly included within dead posts.]]></phrase>
 			<phrase name="setting_reporting_staff_reports_mode_title" date="1289542106" username="PHPKD" version="4.0.200"><![CDATA[Staff Reports Mode]]></phrase>
 			<phrase name="setting_reporting_staff_reports_title" date="1289539598" username="PHPKD" version="4.0.200"><![CDATA[Staff Reports]]></phrase>
 			<phrase name="setting_reporting_threadid_desc" date="1289542879" username="PHPKD" version="4.0.200"><![CDATA[If "Post New Reply" staff report method is enabled, then a thread should be selected to post those replies in. Valid thread ID is required.]]></phrase>
 			<phrase name="setting_reporting_threadid_title" date="1289542879" username="PHPKD" version="4.0.200"><![CDATA[Staff Report Thread]]></phrase>
-			<phrase name="setting_reporting_user_reports_desc" date="1289541195" username="PHPKD" version="4.0.200"><![CDATA[After each run of the script, if there is punished posts: it's possible to auto generate simple reports to their owners using any of the following methods: (PM, Email) telling them that some of their posts contains some dead links. Select your preferred methods.]]></phrase>
-			<phrase name="setting_reporting_user_reports_mode_desc" date="1289542136" username="PHPKD" version="4.0.200"><![CDATA[User reports can be sent in certain conditions, which conditions should user reports sent in?<br />
-You've multiple options to choose from:<br />
+			<phrase name="setting_reporting_user_reports_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[After each run of the script, if there is punished posts: it is possible to auto generate simple reports to their owners using any of the following methods: (PM, Email) telling them that some of their posts contains some dead links. Select your preferred methods.]]></phrase>
+			<phrase name="setting_reporting_user_reports_mode_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[User reports can be sent in certain conditions, which conditions should user reports sent in?<br />
+Select the appropriate option:<br />
 <ul class="smallfont">
-	<li><strong>Send Only If There's Dead Posts:</strong> send only if there's checked posts with dead links regardless it exceeds the critical limit or not -punished or not-.</li>
-	<li><strong>Send Only If There's Punished Posts:</strong> send only if there's checked posts with dead links that exceeds the critical limit, and thus punished.</li>
+	<li><strong>Send Only If There is Dead Posts:</strong> send only if there is checked posts with dead links regardless it exceeds the critical limit or not -punished or not-.</li>
+	<li><strong>Send Only If There is Punished Posts:</strong> send only if there is checked posts with dead links that exceeds the critical limit, and thus punished.</li>
 </ul>
 <strong>Note:</strong> Punished posts implicitly included within dead posts.]]></phrase>
 			<phrase name="setting_reporting_user_reports_mode_title" date="1289542136" username="PHPKD" version="4.0.200"><![CDATA[User Reports Mode]]></phrase>
@@ -659,7 +635,7 @@ You've multiple options to choose from:<br />
 This setting has a global effect, turning it off disables this feature globally regardless the per host/module settings.<br />
 You can control this feature per host/module & set host tag's text as well. <a href="phpkd_vblvb.php?do=hosts">Click Here to Proceed</a>]]></phrase>
 			<phrase name="setting_tagging_host_title" date="1324490744" username="PHPKD" version="4.1.300"><![CDATA[Tag Threads - Included Hosts]]></phrase>
-			<phrase name="setting_tagging_status_desc" date="1324471899" username="PHPKD" version="4.1.300"><![CDATA[After checking a thread, threads can be tagged according to it's reported status: (ex: Alive, Dead).]]></phrase>
+			<phrase name="setting_tagging_status_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[After checking a thread, threads can be tagged according to it is reported status: (ex: Alive, Dead).]]></phrase>
 			<phrase name="setting_tagging_status_phrases_desc" date="1324473910" username="PHPKD" version="4.1.300"><![CDATA[Modify and localize status tags' text for tagged threads as preferred.]]></phrase>
 			<phrase name="setting_tagging_status_phrases_title" date="1324473910" username="PHPKD" version="4.1.300"><![CDATA[Tag Threads - Reported Status - Phrases]]></phrase>
 			<phrase name="setting_tagging_status_title" date="1324471899" username="PHPKD" version="4.1.300"><![CDATA[Tag Threads - Reported Status]]></phrase>

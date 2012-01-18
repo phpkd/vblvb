@@ -262,7 +262,7 @@ class PHPKD_VBLVB
 	 */
 	private function getInithandle()
 	{
-		if (null == $this->_inithandle)
+		if ($this->_inithandle == null)
 		{
 			$this->setInithandle();
 		}
@@ -299,7 +299,7 @@ class PHPKD_VBLVB
 	 */
 	public function getDmhandle()
 	{
-		if (null == $this->_dmhandle)
+		if ($this->_dmhandle == null)
 		{
 			$this->setDmhandle();
 		}
@@ -336,7 +336,7 @@ class PHPKD_VBLVB
 	 */
 	private function getDmlhandle()
 	{
-		if (null == $this->_dmlhandle)
+		if ($this->_dmlhandle == null)
 		{
 			$this->setDmlhandle();
 		}
@@ -373,7 +373,7 @@ class PHPKD_VBLVB
 	 */
 	private function getHookshandle()
 	{
-		if (null == $this->_hookshandle)
+		if ($this->_hookshandle == null)
 		{
 			$this->setHookshandle();
 		}
@@ -654,7 +654,7 @@ class PHPKD_VBLVB
 		$this->set_error_handler($errortype ? $errortype : (defined('IN_CONTROL_PANEL') ? ERRTYPE_CP : ERRTYPE_SILENT));
 		$this->error($error, $postid);
 
-		if (ERRTYPE_ECHO != $this->_error_handler)
+		if ($this->_error_handler != ERRTYPE_ECHO)
 		{
 			exit();
 		}
@@ -687,7 +687,7 @@ class PHPKD_VBLVB
 			call_user_func_array($this->_failure_callback, array(&$this, $errorphrase));
 		}
 
-		if (ERRTYPE_ECHO != $this->_error_handler)
+		if ($this->_error_handler != ERRTYPE_ECHO)
 		{
 			$this->commit($error);
 		}

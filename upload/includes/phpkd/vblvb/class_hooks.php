@@ -497,10 +497,10 @@ class PHPKD_VBLVB_Hooks
 					{
 						require_once(DIR . '/includes/functions_databuild.php');
 
-						if ($postlog = $this->_registry->_vbulletin->db->query_first("
+						if (($postlog = $this->_registry->_vbulletin->db->query_first("
 							SELECT phpkd_vblvb_lastpunish FROM " . TABLE_PREFIX . "post
 							WHERE postid = $postinfo[postid]
-						") && !empty($postlog['phpkd_vblvb_lastpunish']))
+						")) && !empty($postlog['phpkd_vblvb_lastpunish']))
 						{
 							$postlog_arr = @unserialize($postlog['phpkd_vblvb_lastpunish']);
 
@@ -521,10 +521,10 @@ class PHPKD_VBLVB_Hooks
 							");
 						}
 
-						if ($threadlog = $this->_registry->_vbulletin->db->query_first("
+						if (($threadlog = $this->_registry->_vbulletin->db->query_first("
 							SELECT phpkd_vblvb_lastpunish FROM " . TABLE_PREFIX . "thread
 							WHERE threadid = $threadinfo[threadid]
-						") && !empty($threadlog['phpkd_vblvb_lastpunish']))
+						")) && !empty($threadlog['phpkd_vblvb_lastpunish']))
 						{
 							$threadlog_arr = @unserialize($threadlog['phpkd_vblvb_lastpunish']);
 
@@ -563,7 +563,7 @@ class PHPKD_VBLVB_Hooks
 							if ($threadlog_arr['move']['orifid'] && $threadlog_arr['move']['destfid'])
 							{
 								// check whether destination forum can contain posts
-								if ($destforuminfo = verify_id('forum', $threadlog_arr['move']['orifid'], false, true) && $destforuminfo['cancontainthreads'] && !$destforuminfo['link'])
+								if (($destforuminfo = verify_id('forum', $threadlog_arr['move']['orifid'], false, true)) && $destforuminfo['cancontainthreads'] && !$destforuminfo['link'])
 								{
 									// Ignore all threads that are already in the destination forum
 									if ($threadinfo['forumid'] == $threadlog_arr['move']['destfid'])
