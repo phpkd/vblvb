@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.310 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.320 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -326,7 +326,7 @@ else if ($vbulletin->phpkd_vblvb['general_active'])
 				{
 					foreach ($urlrecord as $reckey => $recvalue)
 					{
-						$urlrecords_query .= '(\'' . $recvalue['host'] . '\', \'' . $recvalue['url'] . '\', ' . $postid . ', ' . $recvalue['lastcheck'] . ', \'' . $recvalue['hash'] . '\', \'' . $recvalue['status'] . '\'), ';
+						$urlrecords_query .= "('{$vbulletin->db->escape_string($recvalue['host'])}', '{$vbulletin->db->escape_string($recvalue['url'])}', {$postid}, {$recvalue['lastcheck']}, '{$recvalue['hash']}', '{$recvalue['status']}'), ";
 					}
 				}
 			}
@@ -426,7 +426,7 @@ log_cron_action('', $nextitem, 1);
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.310
+|| # Version: 4.1.320
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

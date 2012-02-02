@@ -10,7 +10,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.1.310
+     * 4.1.320
 
 
 Description:
@@ -941,7 +941,7 @@ History:
       15. Improve the hooking system (http://forum.phpkd.net/project.php?issueid=126)
       16. Change default setting values (http://forum.phpkd.net/project.php?issueid=81)
       17. Many more...
-	3. Newly supported hosts (53 new):
+	3. Newly supported hosts (53 host):
       1. 10upload.com
       2. 2giga.com
       3. 6ybh-upload.com
@@ -1048,7 +1048,7 @@ History:
 	7. Bug Fix: uploaded.to
 	8. Enhancement: multiple enhancements around the product
 	9. New Language: Croatian ( by: JohnnyBoy )
-	10. Newly supported hosts (36 new):
+	10. Newly supported hosts (36 host):
       1. 1fichier.com
       2. alterupload.com
       3. bitshare.com
@@ -1092,7 +1092,7 @@ History:
 	4. Bug fix: filesonic.com falsely dead reports (http://forum.phpkd.net/project.php?issueid=176)
 	5. Bug fix: No punishments + Warning: Can not use a scalar value as array (http://forum.phpkd.net/project.php?issueid=175)
 	6. Bug fix: vBulletin 4.1.4+ editor functions incompatibility (forum.phpkd.net/project.php?issueid=164)
-	7. Newly supported hosts (36 new):
+	7. Newly supported hosts (15 host):
       1. 1-upload.com
       2. 1clickshare.net
       3. 4fastfile.com
@@ -1108,6 +1108,50 @@ History:
       13. euroshare.eu
       14. eyvx.com
       15. filesflash.com
+     * v4.1.320 02/02/2012 10:00 AM UTC: Featured release (public)
+	1. Bug fix: Database error "REPLACE INTO phpkd_vblvb_link" (http://forum.phpkd.net/project.php?issueid=178)
+	2. Updated hosts (13 host):
+      1. enterupload.com
+      2. extabit.com
+      3. filedino.com
+      4. filesonic.com
+      5. gigasize.com
+      6. hulkshare.com
+      7. megaupload.com
+      8. megavideo.com
+      9. share-online.biz
+      10. shareflare.net
+      11. shragle.com
+      12. uploadbox.com
+      13. x7.to
+	3. Newly supported hosts (26 host):
+      1. 4share.vn
+      2. crocko.com
+      3. fileape.com
+      4. filekeen.com
+      5. fileserving.com
+      6. filetolink.com
+      7. filezzz.com
+      8. gigapeta.com
+      9. glumbouploads.com
+      10. hyperfileshare.com
+      11. icyupload.com
+      12. jakfile.com
+      13. movreel.com
+      14. netuploaded.com
+      15. platinshare.com
+      16. qshare.com
+      17. quickshare.cz
+      18. servifile.com
+      19. share.vnn.vn
+      20. sharerun.com
+      21. speedfile.cz
+      22. uloz.to
+      23. unibytes.com
+      24. uploadc.com
+      25. uploadfloor.com
+      26. uptobox.com
+
 
 Screen Shots:
 ~~~~~~~~~~~~~~
@@ -1132,7 +1176,7 @@ Technical Notes:
      * DB Alterations: 4
      * New Cronjobs: 1
      * Product Specific Settings: 50
-     * Product Specific Modules: 193
+     * Product Specific Modules: 219
         --------------------------
      * Installation Level: Easy
      * Installation Time: ~20 seconds
@@ -1154,4 +1198,4 @@ Recent Products:
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.1.310 $ - $Id$
+$Version: 4.1.320 $ - $Id$
