@@ -38,7 +38,7 @@ $md5_sums = array(
 	),
 );
 $md5_sum_softwareid = 'phpkd_vblvb';
-$md5_sum_versions['phpkd_vblvb'] = '4.1.310';
+$md5_sum_versions['phpkd_vblvb'] = '4.1.320';
 
 
 /*============================================================================*\
