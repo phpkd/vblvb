@@ -10,7 +10,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.1.320
+     * 4.1.330
 
 
 Description:
@@ -1151,6 +1151,37 @@ History:
       24. uploadc.com
       25. uploadfloor.com
       26. uptobox.com
+     * v4.1.330 14/05/2012 10:00 AM UTC: Featured release (public)
+    1. Newly supported hosts (29 host):
+      1. mysharegadget.com
+      2. sendfile.pl
+      3. sendspace.pl
+      4. share50.com
+      5. shareplace.com
+      6. sockshare.com
+      7. spaadyshare.com
+      8. speedy-share.com
+      9. swoopshare.com
+      10. toucansharing.com
+      11. tunescoop.com
+      12. u-file.net
+      13. ultrashare.net
+      14. upload.ee
+      15. upload.tc
+      16. uploadbaz.com
+      17. uploadmb.com
+      18. uploads.ws
+      19. uploadstube.de
+      20. uploaduj.net
+      21. uppit.com
+      22. webshare.cz
+      23. wrzucaj.com
+      24. wyslijplik.pl
+      25. wyslijto.pl
+      26. xfilesharing.com
+      27. xup.in
+      28. yourfiles.to
+      29. zalaa.com
 
 
 Screen Shots:
@@ -1198,4 +1229,4 @@ Recent Products:
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.1.320 $ - $Id$
+$Version: 4.1.330 $ - $Id$
