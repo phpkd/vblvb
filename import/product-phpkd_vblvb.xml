@@ -3,7 +3,7 @@
 <product productid="phpkd_vblvb" active="1">
 	<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate']]></title>
 	<description><![CDATA[This product extract sharing links of hundreds of sharing hosts, and verifies them; If they're "Alive" the post will pass, otherwise it will be punished. (ex: Hotfile, Mediafire, Rapidshare, Zshare, Adrive, Depositfiles, Filefactory, ...etc).]]></description>
-	<version>4.1.330</version>
+	<version>4.1.331</version>
 	<url>http://tools.phpkd.net/en/producthelp/url/vblvb/</url>
 	<versioncheckurl>http://tools.phpkd.net/en/producthelp/version/vblvb/</versioncheckurl>
 	<dependencies>
@@ -674,4 +674,4 @@ You can control this feature per host/module & set host tag's text as well. <a h
 	</faqentries>
 </product>
 
-<!-- SVN: $Version: 4.1.330 $ - $Id$ -->
+<!-- SVN: $Version: 4.1.331 $ - $Id$ -->

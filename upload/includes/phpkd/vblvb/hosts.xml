@@ -357,7 +357,8 @@
     </host>
     <host domain="filefactory.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[filefactory\.com/file/[0-9a-z]+]]></urlmatch>
-        <contentmatch>greyDownload</contentmatch>
+        <contentmatch>downloadFileData</contentmatch>
+        <downmatch>Retry Download</downmatch>
         <tagtext>filefactory.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check REGEX!]]></notes>
     </host>
@@ -1315,4 +1316,4 @@
     </host>
 </hosts>
 
-<!-- SVN: $Version: 4.1.330 $ - $Id$ -->
+<!-- SVN: $Version: 4.1.331 $ - $Id$ -->

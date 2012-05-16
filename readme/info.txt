@@ -10,12 +10,12 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.1.330
+     * 4.1.331
 
 
 Description:
 ~~~~~~~~~~~~~
-     * This product extract sharing links of over 190+ hosts from posts (Rapidshare, Megaupload, Zshare, Adrive, Depositfiles, Filefactory, ...more), then verifies them; If they're "Alive" the post will pass, otherwise the post will be punished.
+     * This product extract sharing links of hundreds of sharing hosts, and verifies them; If they're "Alive" the post will pass, otherwise it will be punished. (ex: Hotfile, Mediafire, Rapidshare, Zshare, Adrive, Depositfiles, Filefactory, ...etc).
 
 
 Compatible With:
@@ -1182,6 +1182,8 @@ History:
       27. xup.in
       28. yourfiles.to
       29. zalaa.com
+     * v4.1.331 16/05/2012 10:00 PM UTC: Maintenance release (public)
+    1. Bug Fix: VBLVB: filefactory.com falsely dead reports (http://forum.phpkd.net/project.php?issueid=187)
 
 
 Screen Shots:
@@ -1229,4 +1231,4 @@ Recent Products:
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.1.330 $ - $Id$
+$Version: 4.1.331 $ - $Id$
