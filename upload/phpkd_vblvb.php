@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.331 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.2.100 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -60,7 +60,7 @@ $includecss = array();
 $phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase, ERRTYPE_SILENT);
 
 // start the navbar
-$navbits = array($vbulletin->phpkd_vblvb['general_scriptname'] . $vbulletin->session->vars['sessionurl_q'] => $vbulletin->phpkd_vblvb['general_scripttitle']);
+$navbits = array($vbulletin->phpkd_vblvb['publicverifier_scriptname'] . $vbulletin->session->vars['sessionurl_q'] => $vbulletin->phpkd_vblvb['publicverifier_scripttitle']);
 
 // set the class for each cell/group
 $navclass = array();
@@ -88,7 +88,7 @@ if ($_REQUEST['do'] == 'hosts')
 		{
 			$host['status'] = $vbphrase['phpkd_vblvb_linkstatus_' . $host['status']];
 			$templater = vB_Template::create('phpkd_vblvb_hostbit');
-				$templater->register('host', $host);
+			$templater->register('host', $host);
 			$hostbits .= $templater->render();
 		}
 	}
@@ -97,6 +97,47 @@ if ($_REQUEST['do'] == 'hosts')
 	$includecss['hosts'] = 'attachments.css';
 	$page_templater = vB_Template::create('phpkd_vblvb_hosts');
 	$page_templater->register('hostbits', $hostbits);
+}
+
+// #######################################################################
+if ($_REQUEST['do'] == 'check')
+{
+	// Taken from edit_post hook, to be reviewed
+	if (($type == 'thread' && ($vbulletin->phpkd_vblvb['general_checked_newposts'] == 1 || $vbulletin->phpkd_vblvb['general_checked_newposts'] == 2)) || $type == 'reply' && $vbulletin->phpkd_vblvb['general_checked_newposts'] == 1)
+	{
+		if ($phpkd_vblvb->verify_license(true) && !in_array($vbulletin->userinfo['usergroupid'], explode(' ', $vbulletin->phpkd_vblvb['punishment_powerful_ugids'])))
+		{
+			$links = $phpkd_vblvb->getDmhandle()->fetch_urls($post['message'], $post['postid']);
+
+			// Required Sharing Links
+			$forums = @unserialize($vbulletin->phpkd_vblvb['general_require_sharing']);
+			if (!empty($forums) && in_array($foruminfo['forumid'], $forums) && $links['all'] <= 0)
+			{
+				$dataman->error('phpkd_vblvb_editpost_require_sharing', $vbulletin->phpkd_vblvb['publicverifier_scriptname']);
+			}
+
+			// Critical Limit/Red Line
+			if ($links['checked'] > 0 && $links['dead'] > 0)
+			{
+				$critical = ($links['dead'] / $links['checked']) * 100;
+
+				if ($critical >= $vbulletin->phpkd_vblvb['general_critical_limit'])
+				{
+					$dataman->error('phpkd_vblvb_invalid_checkpost');
+				}
+			}
+		}
+	}
+
+}
+
+// Posted URLs will be saved to a 'session' database table, which will be cleaned periodically, and then the 'docheck' will get back saved URLs, process it, and display results
+// Will use VaiSpy for the ajax stuff
+
+// #######################################################################
+if ($_POST['do'] == 'docheck')
+{
+	// Process
 }
 
 // #############################################################################
@@ -132,7 +173,7 @@ if (!empty($page_templater))
 
 /*============================================================================*\
  || ########################################################################### ||
-|| # Version: 4.1.331
+|| # Version: 4.2.100
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||

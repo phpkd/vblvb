@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.1.331 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.2.100 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -385,7 +385,7 @@ class PHPKD_VBLVB_Hooks
 					$forums = @unserialize($this->_registry->_vbulletin->phpkd_vblvb['general_require_sharing']);
 					if (!empty($forums) && in_array($foruminfo['forumid'], $forums) && $links['all'] <= 0)
 					{
-						$dataman->error('phpkd_vblvb_editpost_require_sharing', $this->_registry->_vbulletin->phpkd_vblvb['general_scriptname']);
+						$dataman->error('phpkd_vblvb_editpost_require_sharing', $this->_registry->_vbulletin->phpkd_vblvb['publicverifier_scriptname']);
 					}
 
 					// Critical Limit/Red Line
@@ -466,7 +466,7 @@ class PHPKD_VBLVB_Hooks
 						$forums = @unserialize($this->_registry->_vbulletin->phpkd_vblvb['general_require_sharing']);
 						if (!empty($forums) && in_array($threadinfo['forumid'], $forums) && $links['all'] <= 0)
 						{
-							$dataman->error('phpkd_vblvb_editpost_require_sharing', $this->_registry->_vbulletin->phpkd_vblvb['general_scriptname']);
+							$dataman->error('phpkd_vblvb_editpost_require_sharing', $this->_registry->_vbulletin->phpkd_vblvb['publicverifier_scriptname']);
 						}
 
 						// Critical Limit/Red Line
@@ -682,7 +682,7 @@ class PHPKD_VBLVB_Hooks
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.1.331
+|| # Version: 4.2.100
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
