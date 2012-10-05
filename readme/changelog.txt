@@ -1,0 +1,726 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Brought to you by PHP KingDom (www.phpkd.net)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|  PHPKD - vB Link Verifier Bot 'Ultimate'  |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Changelog:
+~~~~~~~~~~~
+     * v4.0.101 06/01/2010 12:12 AM UTC: First initial public release.
+     * v4.0.102 07/01/2010 12:12 PM UTC: Maintenance release.
+    + Miscellaneous optimizations & tweaks.
+     * v4.0.110 07/01/2010 12:12 PM UTC: Featured release (public)
+    + Code base re-written from scratch, it's 100% object oriented now.
+    + vBulletin 3.8 & 4.0 series full compatibility.
+    + Add support for HTTP / HTTPS / FTP protocols with the ability to select which protocols to check & scan.
+    + Add support for all default & common BBCode(s) with the ability to select which BBCodes to check & scan.
+    + Multiple check process enhancements.
+    + Much more ...!
+     * v4.0.120 20/01/2010 10:00 AM UTC: Featured release (public)
+    1. New Feature: Detect recursive masks (http://forum.phpkd.net/project.php?issueid=29).
+    2. Deprecated Feature: URL status 'Temporary Down' is useless (http://forum.phpkd.net/project.php?issueid=28).
+    3. Bug Fix: Wrong error reported when required initialization failed (http://forum.phpkd.net/project.php?issueid=27).
+    4. Bug Fix: DB error with excluding features (http://forum.phpkd.net/project.php?issueid=26).
+    5. New Feature: Checked Thread/Post Modes (opened/closed/sticky/moderated/deleted ...) (http://forum.phpkd.net/project.php?issueid=4).
+    6. Optimizations: Unmasking code has been separated in a separate function & has been optimized.
+    7. Optimizations: Many other core optimizations all over the product.
+    8. Optimizations: Ability to follow redirected pages till reaching the actual download page & verify it (http://forum.phpkd.net/project.php?issueid=30).
+    9. Temporary Disabled Feature: Detecting & checking Rapidhsare Folder Links containers (recognised as mask).
+    10. Temporary Disabled Feature: Thread Deleting Punishment method.
+
+    11. Fixes & updates for current supported hosts (http://forum.phpkd.net/project.php?issueid=24):
+       1. adrive.com => Fixed
+       2. axifile.com => Fixed
+       3. badongo.com => Updated
+       4. bitroad.com => Fixed
+       5. cocoshare.cc => Permenantly Dead
+       6. depositfiles.com => OK
+       7. easy-share.com => Fixed
+       8. egoshare.com => Fixed
+       9. filefactory.com => Fixed
+      10. filefront.com => Fixed
+      11. files.to => Updated
+      12. flyupload.com => Permenantly Dead * becomes enterupload.com *
+      13. gigasize.com => Updated
+      14. ifile.it => Fixed
+      15. ifolder.ru => Fixed
+      16. mediafire.com => Fixed
+      17. megashare.com => Fixed
+      18. megaupload.com => Updated
+      19. momupload.com => Permenantly Dead
+      20. netload.in => Fixed
+      21. rapidshare.com => Updated
+      22. rapidshare.de => Updated
+      23. savefile.com => Permenantly Dead
+      24. sendspace.com => Updated
+      25. speedyshare.com => Fixed
+      26. turboupload.com => Fixed
+      27. ul.to => *New* Added as equvilant to uploaded.to
+      28. uploaded.to => Updated
+      29. uploading.com => Fixed
+      30. uploadpalace.com => Permenantly Dead
+      31. usaupload.net => Permenantly Dead
+      32. ziddu.com => Fixed
+      33. zshare.net => Updated
+
+    12. Newly supported hosts:
+       1. 2shared.com
+       2. 4shared.com
+       3. 9q9q.net
+       4. arabsh.com
+       5. box.net
+       6. crazyupload.com
+       7. divshare.com
+       8. divxden.com
+       9. dualshare.com
+      10. duckload.com
+      11. earthfilez.com
+      12. enterupload.com
+      13. evilshare.com
+      14. file2box.com
+      15. filebase.to
+      16. filebox.com
+      17. filedip.com
+      18. filedropper.com
+      19. fileflyer.com
+      20. filemojo.com
+      21. filerama.com
+      22. fileserver.cc
+      23. filesovermiles.com
+      24. filesplash.com
+      25. hostuje.net
+      26. hotfile.com
+      27. hulkshare.com
+      28. jumbofiles.com
+      29. letitbit.net
+      30. load.to
+      31. loombo.com
+      32. m5zn.com
+      33. midupload.com
+      34. mlfat4arab.com
+      35. moidisk.ru
+      36. my2share.com
+      37. online-sharing.net
+      38. proddl.com
+      39. przeklej.pl
+      40. przeslij.net
+      41. quickupload.net
+      42. senduit.com
+      43. storage.to
+      44. superfastfile.com
+      45. teradepot.com
+      46. transferbigfiles.com
+      47. upfordown.com
+      48. usershare.net
+      49. useupload.com
+      50. vip-file.com
+      51. x7.to
+      52. xinony.com
+      53. yousendit.com
+      54. zippyshare.com
+      55. zomgupload.com
+     * v4.0.121 21/01/2010 10:00 AM UTC: Maintenance release (public)
+    1. Bug Fix: Usergroups/Forums Excluding functions aren't working (http://forum.phpkd.net/project.php?issueid=31).
+    2. Bug Fix: Excluded Thread/Post Modes causes DB error (http://forum.phpkd.net/project.php?issueid=32).
+     * v4.0.130 14/02/2010 10:00 PM UTC: Featured release (public)
+    1. Compatibility: Added "product-phpkd_vblvb_fix.xml" inside "do_not_upload" to fix upgrading from "Lite" edition to "Ultimate" edition (http://forum.phpkd.net/project.php?issueid=45).
+    2. Bug Fix: Adrive.Com and Uploading.Com wrong reports in some cases (http://forum.phpkd.net/project.php?issueid=45).
+    3. Bug Fix: No reports sent when the cronjob autorun (http://forum.phpkd.net/project.php?issueid=43).
+    4. Bug Fix: "Thread Staff Reports" aren't working when the "Reply Staff Reports" turned off (http://forum.phpkd.net/project.php?issueid=40).
+    5. Bug Fix: Massive checking MegaUpload.Com Links lead to wrong dead status reports (http://forum.phpkd.net/project.php?issueid=37).
+    6. Bug Fix: "User PM Reports" doesn't work if "Staff PM Reports" is disabled (http://forum.phpkd.net/project.php?issueid=36).
+    7. Task Achieved: Change the default value for the setting "Powerful Usergroups" (http://forum.phpkd.net/project.php?issueid=41).
+    8. Task Achieved: URL status 'Temporary Down' is Important (http://forum.phpkd.net/project.php?issueid=38).
+    9. Task Achieved: Multilingual hosts requires checking & optimizing (http://forum.phpkd.net/project.php?issueid=46).
+    10. Optimization: hard-coded checked/reported links has been replaced with a configurable phrase.
+    11. Optimization: Cronjob has more checks now before running, it will check if there's hosts/protocols/bbcodes to be checked or not. If yes, proceed, if no then kill the process & display an error message. Additional check added to make sure there's posts to be checked, if there isn't then an error message displayed (http://forum.phpkd.net/project.php?issueid=8).
+    12. Optimization: Display punished posts report within manual cronjob run report (http://forum.phpkd.net/project.php?issueid=50).
+    16. Optimization: Multiple tweaks and optimizations to the product's core.
+    13. New Feature: Ability to set when to send staff reports (http://forum.phpkd.net/project.php?issueid=7).
+    14. New Feature: Ability to customize link status colors (http://forum.phpkd.net/project.php?issueid=49).
+    15. New Feature: Added a log viewer to AdminCP (http://forum.phpkd.net/project.php?issueid=48).
+    17. Updated installation/upgrade instructions.
+    18. Updated the following hosts:
+      1. 2shared.com
+      2. adrive.com
+      3. bitroad.net
+      4. badongo.com
+      5. cocoshare.cc
+      6. crazyupload.com
+      7. depositfiles.com
+      8. divxden.com
+      9. dualshare.com
+      10. earthfilez.com
+      11. easy-share.com
+      12. egoshare.com
+      13. enterupload.com
+      14. evilshare.com
+      15. file2box.com
+      16. filebase.to
+      17. filebox.com
+      18. filedip.com
+      19. fileflyer.com
+      20. filefront.com
+      21. filemojo.com
+      22. filerama.com
+      23. files.to
+      24. fileserver.cc
+      25. filesovermiles.com
+      26. flyupload.com
+      27. hostuje.net
+      28. ifile.it
+      29. jumbofiles.com
+      30. letitbit.net
+      31. load.to
+      32. loombo.com
+      33. megashare.com
+      34. megaupload.com
+      35. midupload.com
+      36. mlfat4arab.com
+      37. moidisk.ru
+      38. momupload.com
+      39. my2share.com
+      40. netload.in
+      41. online-sharing.net
+      42. proddl.com
+      43. przeslij.net
+      44. quickupload.net
+      45. rapidshare.com
+      46. rapidshare.de
+      47. rnbload.com
+      48. savefile.com
+      49. sendspace.com
+      50. senduit.com
+      51. storage.to
+      52. superfastfile.com
+      53. teradepot.com
+      54. transferbigfiles.com
+      55. turboupload.com
+      56. upfordown.com
+      57. uploaded.to
+      58. uploading.com
+      59. uploadpalace.com
+      60. usaupload.net
+      61. usershare.net
+      62. useupload.com
+      63. vip-file.com
+      64. xinony.com
+      65. ziddu.com
+      66. zippyshare.com
+      67. zomgupload.com
+      68. zshare.net
+     * v4.0.131 16/02/2010 10:00 PM UTC: Maintenance release (public)
+    1. Bug Fix: No punishments at all!! (http://forum.phpkd.net/project.php?issueid=54).
+    2. Optimization: other optimizations introduced in this maintenance release which should affect cronjob performance & decrease server load chances.
+     * v4.0.132 07/05/2010 10:00 PM UTC: Maintenance release (public)
+    1. Fixed "Call to a member function query_write() on a non-object" bug (http://forum.phpkd.net/project.php?issueid=76).
+    2. Solution for both "MySQL server gone away" & "Allowed memory exhausted" errors (http://forum.phpkd.net/project.php?issueid=91).
+    3. Auto exclude report forums/threads & recycle bin forum from being checked (http://forum.phpkd.net/project.php?issueid=71).
+    4. Added a new attribute for all hosts to control it's active status (on/off).
+    5. Many other optimizations & performance tweaks.
+    6. Fixes & updates for current supported hosts:
+      1. 4shared.com => Updated (now supports -file|video|audio|photo|document- URLs)
+      2. arabsh.com => Fixed
+      3. depositfiles.com => Fixed
+      4. dualshare.com => Permanently Dead
+      5. duckload.com => Updated
+      6. filebase.to => Updated
+      7. filebox.com => Permanently Dead
+      8. filedip.com => Permanently Dead
+      9. filemojo.com => Permanently Dead
+      10. filerama.com => Permanently Dead
+      11. ifile.it => No longer supported
+      12. m5zn.com => Fixed & Updated
+      13. mediafire.com => Updated
+      14. megashare.com => No longer supported
+      15. midupload.com => No longer supported
+      16. my2share.com => Semi-Dead
+      17. online-sharing.net => Permanently Dead
+      18. przeklej.pl => Fixed
+      19. rapidshare.de => Permanently Dead
+      20. sendspace.com => Fixed
+      21. transferbigfiles.com => Fixed
+      22. upfordown.com => Fixed
+      23. netload.in => Updated
+
+      Flag declaration:
+      OK: means that there's no different between the old & the current version of this host's module. It was working fine & still working as it is.
+      Fixed: means that the previous version of that host's module had some problems & wasn't working good, but the new version has been fixed & confirmed to be working fine now.
+      Updated: means that the previous version of that host's module was good, but the current one has some tweaks & some optimizations.
+      Permanently Dead: means that the host itself has been gone down forever, it's no more working. So the related module within the product marked also as dead & it will report all links of that host as dead.
+      No longer supported: means that the bot no longer able to check this host's links & for technical limitations raised recently on those web hosts websites, so support for those hosts has been terminated & those links no longer checked.
+      Semi-Dead: means that the host has problems currently, but it's not clear if it's alive or permanently dead, so we kept it alive for the mean time & will update it soon when we're sure it's permanently dead.
+     * v4.0.133 15/05/2010 11:11 AM UTC: Maintenance release (public)
+    1. Fixed Bug: "MySQL server gone away" & "Allowed memory exhausted" errors (http://forum.phpkd.net/project.php?issueid=91).
+    2. Fixed Bug: "ifolder.ru" not working well (http://forum.phpkd.net/project.php?issueid=97).
+    3. Fixed Bug: "vip-file.com" not working well (http://forum.phpkd.net/project.php?issueid=96).
+    4. Added the following new translations:
+      1. Arabic
+      2. English
+      3. French
+      4. Greek
+      5. Russian
+      6. Spanish
+      7. Turkish
+     * v4.0.134 23/07/2010 10:00 AM UTC: Maintenance release (public)
+    1. Fixes & updates for current supported hosts:
+      1. 2shared.com => Fixed & updated
+      2. 4shared.com => Fixed & updated
+      3. crazyupload.com => permanently dead
+      4. divshare.com => Fixed & updated
+      5. easy-share.com => Fixed & updated
+      6. evilshare.com => permanently dead
+      7. filesovermiles.com => No longer supported
+      8. hotfile.com => Fixed & updated
+      9. hulkshare.com => Fixed & updated
+      10. ifile.it => Revived again & updated
+      11. my2share.com => permanently dead
+      12. proddl.com => permanently dead
+      13. przeslij.net => Permanently dead & No longer supported
+      14. sendspace.com => Fixed & updated
+      15. transferbigfiles.com => No longer supported
+      16. usaupload.net => Revived again & updated
+      17. useupload.com => Permanently dead
+      18. yousendit.com => No longer supported
+      19. zippyshare.com => Fixed & updated
+      20. zshare.net => Fixed & updated
+    2. Updated maximum redirects from 1 to 3.
+     * v4.0.135 25/07/2010 10:00 PM UTC: Maintenance release (public)
+    1. Fixes & updates for current supported hosts:
+      1. hotfile.com => Fixed
+      2. megaupload.com => Fixed
+    2. Bug Fix: Check Succession Period = 0 (http://forum.phpkd.net/project.php?issueid=104)
+    3. Bug Fix: megaupload.com 1 GB files marked as dead (http://forum.phpkd.net/project.php?issueid=105)
+    4. Bug Fix: megaupload.com password protected files marked as dead (http://forum.phpkd.net/project.php?issueid=106)
+    5. Bug Fix: new posts & edited posts no longer pre-checked (http://forum.phpkd.net/project.php?issueid=108)
+     * v4.0.136 26/07/2010 10:00 AM UTC: Maintenance release (public)
+    1. Bug Fix: Check Succession Period = 0 (http://forum.phpkd.net/project.php?issueid=104)
+     * v4.0.137 29/07/2010 10:00 PM UTC: Maintenance release (public)
+    1. Bug Fix: Check Succession Period stopped working (http://forum.phpkd.net/project.php?issueid=111)
+    2. Bug Fix: Critical Limit/Red Line not working accurate (http://forum.phpkd.net/project.php?issueid=112)
+    3. Added new 'Italian' translation.
+     * v4.0.200 11/11/2010 11:11 AM UTC: Major Featured release -second generation- (public)
+    1. Rewritten from scratch with the following concepts in mind: OOP, Plug-and-Play, Features, Flexibility, Extensibility, Innovation.
+    2. Implemented new features:
+      1. Add cronjob status messages & configuration conclusion (http://forum.phpkd.net/project.php?issueid=8)
+      2. Complete support for API checking routine (http://forum.phpkd.net/project.php?issueid=119)
+      3. Color picker for link status colors (http://forum.phpkd.net/project.php?issueid=57)
+      4. Include/Exclude alive links/posts from reports (http://forum.phpkd.net/project.php?issueid=78)
+      5. Backward Time/Date Cutoff (http://forum.phpkd.net/project.php?issueid=87)
+      6. Detailed user reports (http://forum.phpkd.net/project.php?issueid=6)
+      7. Post flag - Last checked in Date/Time (http://forum.phpkd.net/project.php?issueid=17)
+      8. User Report modes (Always send/Send only if ..) (http://forum.phpkd.net/project.php?issueid=51)
+      9. Host Management Console (Host Manager) (http://forum.phpkd.net/project.php?issueid=120)
+      10. New standalone settings manager (http://forum.phpkd.net/project.php?issueid=121)
+      11. Ability to prune previous old logs (http://forum.phpkd.net/project.php?issueid=122)
+      12. Standalone log archive (http://forum.phpkd.net/project.php?issueid=123)
+      13. Import/Export (Backup/Restore) Settings & Hosts (http://forum.phpkd.net/project.php?issueid=124)
+      14. Direct clear obvious link to run the cronjob (http://forum.phpkd.net/project.php?issueid=125)
+      15. Improve the hooking system (http://forum.phpkd.net/project.php?issueid=126)
+      16. Change default setting values (http://forum.phpkd.net/project.php?issueid=81)
+      17. Many more...
+    3. Newly supported hosts (53 host):
+      1. 10upload.com
+      2. 2giga.com
+      3. 6ybh-upload.com
+      4. adigashare.com
+      5. amonshare.com
+      6. banashare.com
+      7. cramit.in
+      8. dataup.to
+      9. extabit.com
+      10. filaty.com
+      11. file2box.net
+      12. filemo.com
+      13. filesavr.com
+      14. filesend.net
+      15. fileserve.com
+      16. filesift.com
+      17. filesonic.com
+      18. filestab.com
+      19. filethe.net
+      20. freakshare.net
+      21. goldfile.eu
+      22. gotupload.com
+      23. hitfile.net
+      24. ju7ju7.com
+      25. kickload.com
+      26. megavideo.com
+      27. mozillashare.com
+      28. nonstopshare.com
+      29. oron.com
+      30. putshare.com
+      31. q4share.com
+      32. rapida.cc
+      33. ravishare.com
+      34. rocknum.com
+      35. seed-share.com
+      36. seedfly.com
+      37. share-online.biz
+      38. share-online.com
+      39. share.cx
+      40. shareator.net
+      41. shareswift.com
+      42. sharingmatrix.com
+      43. shragle.com
+      44. slingfile.com
+      45. speedshare.org
+      46. storedfiles.me
+      47. turbobit.net
+      48. uploadking.biz
+      49. uploadmachine.com
+      50. uploadspace.pl
+      51. vidxden.com
+      52. wikiupload.com
+      53. xfilesharing.ca
+     * v4.1.201 07/01/2011 10:00 AM UTC: Maintenance release (public)
+    1. Full vBulletin 4.0.x & 4.1.x compatibility (http://forum.phpkd.net/project.php?issueid=147)
+    2. Updated some phrases here & there for consistency.
+    3. Bug fix: megaupload.com links now falsely reported as dead (http://forum.phpkd.net/project.php?issueid=142)
+    4. Bug fix: storage.to redirects TO kickload.com (http://forum.phpkd.net/project.php?issueid=134)
+    5. Bug fix: false reports for badongo.com video links (http://forum.phpkd.net/project.php?issueid=138)
+    6. Bug fix: Some hotfile.com links falsely reported as dead (http://forum.phpkd.net/project.php?issueid=141)
+    7. Bug fix: Some mediafire.com links not checked (http://forum.phpkd.net/project.php?issueid=148)
+     * v4.1.202 10/01/2011 10:00 AM UTC: Maintenance release (public)
+    1. Bug fix: Upgrade process does not update hosts/modules & requires manual re-import of hosts.xml (http://forum.phpkd.net/project.php?issueid=151)
+     * v4.1.203 12/05/2011 10:00 AM UTC: Maintenance release (public)
+    1. Bug fix: Conflict with hide/thank-hack addons in postbit (http://forum.phpkd.net/project.php?issueid=127)
+    2. Bug fix: "Run Scheduled Task" redirect error, Cannot modify header information (http://forum.phpkd.net/project.php?issueid=152)
+    3. Bug fix: Copyright statement appears in redirect messages (http://forum.phpkd.net/project.php?issueid=154)
+    4. Bug fix: vBCMS Fatal error: vBulletin Registry object is not an object! (http://forum.phpkd.net/project.php?issueid=153)
+     * v4.1.210 24/07/2011 10:00 AM UTC: Featured release (public)
+    1. New Feature: Check new posts
+    2. New Feature: Check edited posts
+    3. New Feature: Revert actions on edit
+    4. New Feature: Add support for cramitin.net, cramitin.us, cramitin.eu
+    5. Enhancement: Always import hosts from xml file after every upgrade to keep it up-to-date (http://forum.phpkd.net/project.php?issueid=159)
+    6. Bug Fix: Some filesonic.com links getting ignored (http://forum.phpkd.net/project.php?issueid=158)
+    7. Bug Fix: uploaded.to links are falsely reported (http://forum.phpkd.net/project.php?issueid=160)
+    8. Bug Fix: cramit.in links are falsely reported (http://forum.phpkd.net/project.php?issueid=161)
+    9. Bug Fix: Log records SQL Error - Unknown column 'log.dateline' in 'where clause' (http://forum.phpkd.net/project.php?issueid=155)
+    10. Normalization, standardization and consintency
+     * v4.1.211 24/07/2011 11:00 AM UTC: Maintenance release (public)
+    1. Bug Fix: Thread punishment 'move' causes DB error (http://forum.phpkd.net/project.php?issueid=162)
+     * v4.1.212 25/07/2011 11:00 AM UTC: Maintenance release (public)
+    1. Bug Fix: Installation/Upgrade issue
+    2. Bug Fix: Branding free issue
+     * v4.1.220 28/09/2011 10:00 AM UTC: Featured release (public)
+    1. Bug Fix: vBulletin 4.1.4+ editor functions incompatibility (http://forum.phpkd.net/project.php?issueid=164)
+    2. Bug Fix: Some direct download links get stuck & keep loading so far (http://forum.phpkd.net/project.php?issueid=149)
+    3. Bug Fix: filefactory.com links falsely reported (http://forum.phpkd.net/project.php?issueid=166)
+    4. Bug Fix: oron.com links falsely reported (http://forum.phpkd.net/project.php?issueid=167)
+    5. Bug Fix: Rapidshare.com links falsely reported (http://forum.phpkd.net/project.php?issueid=163)
+    6. New Feature: Thread description style checked status (http://forum.phpkd.net/project.php?issueid=157)
+    7. New Feature: Post Flag: Last Check Note - Only in first post (http://forum.phpkd.net/project.php?issueid=144)
+    8. New Feature: Per link check timeout (http://forum.phpkd.net/project.php?issueid=135)
+    9. New Feature: Configurable maximum redirections setting (http://forum.phpkd.net/project.php?issueid=165)
+    10. New Language: French ( by: fxwoody )
+    11. Enhancement: multiple enhancements here & there
+     * v4.1.300 26/12/2011 10:00 AM UTC: Featured release (public)
+    1. New Feature: Tag Threads - Reported Status (http://forum.phpkd.net/project.php?issueid=172)
+    2. New Feature: Tag Threads - Included Hosts (http://forum.phpkd.net/project.php?issueid=173)
+    3. New Feature: Sharing links required for posts (http://forum.phpkd.net/project.php?issueid=145)
+    4. New Feature: Public Script Displays supported hosts for users (http://forum.phpkd.net/project.php?issueid=174)
+    5. Bug Fix: megaupload.com links falsely reported (http://forum.phpkd.net/project.php?issueid=171)
+    6. Bug Fix: freakshare.com
+    7. Bug Fix: uploaded.to
+    8. Enhancement: multiple enhancements around the product
+    9. New Language: Croatian ( by: JohnnyBoy )
+    10. Newly supported hosts (36 host):
+      1. 1fichier.com
+      2. alterupload.com
+      3. bitshare.com
+      4. cjoint.net
+      5. datei.to
+      6. desfichiers.com
+      7. dfichiers.com
+      8. divxstage.eu
+      9. dl4free.com
+      10. file-upload.net
+      11. filedino.com
+      12. filedude.com
+      13. filefat.com
+      14. filejungle.com
+      15. fileover.net
+      16. filepost.com
+      17. filerio.com
+      18. filesafekeep.com
+      19. filesmonster.com
+      20. fshare.vn
+      21. furk.net
+      22. i-filez.com
+      23. megadl.fr
+      24. mesfichiers.org
+      25. novamov.com
+      26. piecejointe.net
+      27. pjointe.com
+      28. plunder.com
+      29. putlocker.com
+      30. shareflare.net
+      31. supershare.pl
+      32. tenvoi.com
+      33. ul.to
+      34. uploadbox.com
+      35. uploadstation.com
+      36. wupload.com
+     * v4.1.310 18/01/2012 10:00 AM UTC: Featured release (public)
+    1. Enhancement: The core product's code
+    2. Enhancement: The default English language file
+    3. Bug fix: Wrong layout when activating "Punished Posts Only" in reports (http://forum.phpkd.net/project.php?issueid=177)
+    4. Bug fix: filesonic.com falsely dead reports (http://forum.phpkd.net/project.php?issueid=176)
+    5. Bug fix: No punishments + Warning: Can not use a scalar value as array (http://forum.phpkd.net/project.php?issueid=175)
+    6. Bug fix: vBulletin 4.1.4+ editor functions incompatibility (forum.phpkd.net/project.php?issueid=164)
+    7. Newly supported hosts (15 host):
+      1. 1-upload.com
+      2. 1clickshare.net
+      3. 4fastfile.com
+      4. annonhost.net
+      5. asixfiles.com
+      6. boosterking.com
+      7. bulletupload.com
+      8. cobrashare.sk
+      9. coolshare.cz
+      10. czshare.com
+      11. easybytez.com
+      12. edisk.cz
+      13. euroshare.eu
+      14. eyvx.com
+      15. filesflash.com
+     * v4.1.320 02/02/2012 10:00 AM UTC: Featured release (public)
+    1. Bug fix: Database error "REPLACE INTO phpkd_vblvb_link" (http://forum.phpkd.net/project.php?issueid=178)
+    2. Updated hosts (13 host):
+      1. enterupload.com
+      2. extabit.com
+      3. filedino.com
+      4. filesonic.com
+      5. gigasize.com
+      6. hulkshare.com
+      7. megaupload.com
+      8. megavideo.com
+      9. share-online.biz
+      10. shareflare.net
+      11. shragle.com
+      12. uploadbox.com
+      13. x7.to
+    3. Newly supported hosts (26 host):
+      1. 4share.vn
+      2. crocko.com
+      3. fileape.com
+      4. filekeen.com
+      5. fileserving.com
+      6. filetolink.com
+      7. filezzz.com
+      8. gigapeta.com
+      9. glumbouploads.com
+      10. hyperfileshare.com
+      11. icyupload.com
+      12. jakfile.com
+      13. movreel.com
+      14. netuploaded.com
+      15. platinshare.com
+      16. qshare.com
+      17. quickshare.cz
+      18. servifile.com
+      19. share.vnn.vn
+      20. sharerun.com
+      21. speedfile.cz
+      22. uloz.to
+      23. unibytes.com
+      24. uploadc.com
+      25. uploadfloor.com
+      26. uptobox.com
+     * v4.1.330 14/05/2012 10:00 AM UTC: Featured release (public)
+    1. Newly supported hosts (29 host):
+      1. mysharegadget.com
+      2. sendfile.pl
+      3. sendspace.pl
+      4. share50.com
+      5. shareplace.com
+      6. sockshare.com
+      7. spaadyshare.com
+      8. speedy-share.com
+      9. swoopshare.com
+      10. toucansharing.com
+      11. tunescoop.com
+      12. u-file.net
+      13. ultrashare.net
+      14. upload.ee
+      15. upload.tc
+      16. uploadbaz.com
+      17. uploadmb.com
+      18. uploads.ws
+      19. uploadstube.de
+      20. uploaduj.net
+      21. uppit.com
+      22. webshare.cz
+      23. wrzucaj.com
+      24. wyslijplik.pl
+      25. wyslijto.pl
+      26. xfilesharing.com
+      27. xup.in
+      28. yourfiles.to
+      29. zalaa.com
+     * v4.1.331 16/05/2012 10:00 PM UTC: Maintenance release (public)
+    1. Bug Fix: VBLVB: filefactory.com falsely dead reports (http://forum.phpkd.net/project.php?issueid=187)
+     * v4.2.100 05/10/2012 02:00 PM UTC: Featured release (public)
+    1. Full compatibility with vBulletin v4.2.x
+    2. New Feature: Catch and follow up HTML http-equiv refresh redirects (forum.phpkd.net/project.php?issueid=188)
+    3. New Hosts ( host):
+      1. bayfiles.com
+      2. billionuploads.com
+      3. cobrashare.net
+      4. cramit.eu
+      5. cramit.net
+      6. cramit.us
+      7. depfile.com
+      8. fastshare.cz
+      9. fiberupload.com
+      10. filecloud.io
+      11. filemates.com
+      12. filestay.com
+      13. fp.io
+      14. freakshare.net
+      15. hosamko.com
+      16. megashares.com
+      17. queenshare.com
+      18. restfile.net
+      19. ryushare.com
+      20. up.ht
+      21. uploaded.net
+      22. zaiin.com
+    4. Updated Hosts ( hosts):
+      1. 10upload.com
+      2. 1fichier.com
+      3. 2shared.com
+      4. 4share.vn
+      5. 4shared.com
+      6. alterupload.com
+      7. arabsh.com
+      8. axifile.com
+      9. banashare.com
+      10. bitshare.com
+      11. cjoint.net
+      12. cobrashare.sk
+      13. cramit.in
+      14. desfichiers.com
+      15. dfichiers.com
+      16. divshare.com
+      17. dl4free.com
+      18. easy-share.com
+      19. egoshare.com
+      20. euroshare.eu
+      21. file-upload.net
+      22. filebox.com
+      23. filedropper.com
+      24. filerio.in
+      25. fileserving.com
+      26. filesift.com
+      27. freakshare.com
+      28. goldfile.eu
+      29. hulkshare.com
+      30. hyperfileshare.com
+      31. i-filez.com
+      32. ju7ju7.com
+      33. letitbit.net
+      34. m5zn.com
+      35. megadl.fr
+      36. mesfichiers.org
+      37. piecejointe.net
+      38. pjointe.com
+      39. putshare.com
+      40. q4share.com
+      41. sendspace.com
+      42. share50.com
+      43. slingfile.com
+      44. speedyshare.com
+      45. swoopshare.com
+      46. tenvoi.com
+      47. transferbigfiles.com
+      48. uloz.to
+      49. upfordown.com
+      50. uploading.com
+      51. useupload.com
+      52. wrzucaj.com
+      53. xup.in
+    5. Disabled Hosts ( Hosts):
+      1. boosterking.com
+      2. box.com
+      3. filecloud.io
+      4. filetolink.com
+      5. ifile.it
+      6. shareplace.com
+      7. shareswift.com
+      8. unibytes.com
+      9. uploadspace.pl
+    6. Dead Hosts ( Hosts):
+      1. 2giga.com
+      2. 6ybh-upload.com
+      3. annonhost.net
+      4. badongo.com
+      5. bitroad.net
+      6. coolshare.cz
+      7. dataup.to
+      8. duckload.com
+      9. earthfilez.com
+      10. eyvx.com
+      11. file2box.com
+      12. file2box.net
+      13. fileape.com
+      14. filebase.to
+      15. filedino.com
+      16. filedude.com
+      17. filefat.com
+      18. filefront.com
+      19. filejungle.com
+      20. filemo.com
+      21. filesafekeep.com
+      22. filesavr.com
+      23. fileserve.com
+      24. fileserver.cc
+      25. fileserver.cc
+      26. filesonic.com
+      27. filesplash.com
+      28. filestab.com
+      29. filethe.net
+      30. filezzz.com
+      31. gotupload.com
+      32. jakfile.com
+      33. kickload.com
+      34. loombo.com
+      35. megashare.com
+      36. midupload.com
+      37. mozillashare.com
+      38. nonstopshare.com
+      39. oron.com
+      40. platinshare.com
+      41. przeklej.pl
+      42. rapida.cc
+      43. ravishare.com
+      44. rocknum.com
+      45. seed-share.com
+      46. seedfly.com
+      47. share.cx
+      48. shareator.net
+      49. sharerun.com
+      50. sharingmatrix.com
+      51. shragle.com
+      52. storage.to
+      53. storedfiles.me
+      54. turboupload.com
+      55. uploadfloor.com
+      56. uploadmachine.com
+      57. uploadstation.com
+      58. uploadstube.de
+      59. usershare.net
+      60. wupload.com
+      61. wyslijplik.pl
+      62. zalaa.com
+      63. zomgupload.com
+      64. zshare.net
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Brought to you by PHP KingDom (www.phpkd.net)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$Version: 4.2.100 $ - $Id: install.txt 258 2012-07-10 15:44:48Z PHPKD $

@@ -2,11 +2,11 @@
 do_not_upload/product-phpkd_vblvb_fix.xml -text
 import/product-phpkd_vblvb.xml -text
 languages/English.xml -text svneol=unset#text/plain
-languages/translations.txt -text svneol=unset#text/plain
-readme/info.txt -text
-readme/install.txt -text
+readme/changelog.txt -text svneol=unset#text/plain
+readme/information.txt -text
+readme/installation.txt -text
 readme/license.txt -text
-readme/upgrade.txt -text
+readme/supportedhosts.txt -text svneol=unset#text/plain
 screenshots/phpkd_vblvb_admincp_cronjob_disabled.png -text
 screenshots/phpkd_vblvb_admincp_cronjob_invalid_license.png -text
 screenshots/phpkd_vblvb_admincp_cronjob_noitems.png -text
@@ -38,6 +38,7 @@ screenshots/phpkd_vblvb_admincp_settings_punishment.png -text
 screenshots/phpkd_vblvb_admincp_settings_reporting.png -text
 screenshots/phpkd_vblvb_admincp_settings_tagging.png -text
 screenshots/phpkd_vblvb_error_dead_links.png -text
+screenshots/phpkd_vblvb_forum_suported_hosts.png -text
 screenshots/phpkd_vblvb_post_checked_last_1.png -text
 screenshots/phpkd_vblvb_post_checked_last_2.png -text
 screenshots/phpkd_vblvb_post_checked_never.png -text

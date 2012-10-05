@@ -499,6 +499,42 @@ class PHPKD_VBLVB_Install
 	}
 
 	/**
+	 * Install v4.2.100
+	 *
+	 * @return	void
+	 */
+	public function install_42100()
+	{
+		$this->_vbulletin->db->hide_errors();
+
+		print_dots_start('Installing v4.2.100 updates...', ':', 'phpkd_vbaddon_install_42100');
+
+		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_setting` SET `displayorder` = `displayorder` - 20 WHERE `grouptitle` = 'general' && `displayorder` > 20");
+
+		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` SET `displayorder` = `displayorder` + 10 WHERE `grouptitle` = 'linkdir'");
+
+		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` (`grouptitle`, `displayorder`, `volatile`) VALUES('publicverifier', 60, 1)");
+
+		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_setting` SET `displayorder` = 10, `grouptitle` = 'publicverifier', `varname` = 'publicverifier_scriptname' WHERE `varname` = 'general_scriptname'");
+
+		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_setting` SET `displayorder` = 20, `grouptitle` = 'publicverifier', `varname` = 'publicverifier_scripttitle' WHERE `varname` = 'publicverifier_scripttitle'");
+
+		print_dots_stop();
+
+		$this->_vbulletin->db->show_errors();
+	}
+
+	/**
+	 * Uninstall v4.2.100
+	 *
+	 * @return	void
+	 */
+	function uninstall_42100()
+	{
+		// Nothing!
+	}
+
+	/**
 	 * Re-Import hosts, this step required for upgrade process!
 	 * This is a temporary way to do it, we'll replace it with versioning later in the main xml files.
 	 *

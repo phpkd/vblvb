@@ -93,15 +93,78 @@ if ($_REQUEST['do'] == 'hosts')
 		}
 	}
 
+	$navbits[''] = $vbphrase['phpkd_vblvb_nav_hosts'];
 	$navclass['hosts'] = 'active';
 	$includecss['hosts'] = 'attachments.css';
 	$page_templater = vB_Template::create('phpkd_vblvb_hosts');
 	$page_templater->register('hostbits', $hostbits);
 }
 
+/*
 // #######################################################################
 if ($_REQUEST['do'] == 'check')
 {
+	$vbulletin->input->clean_array_gpc('r', array(
+			'message'       => TYPE_STR,
+	));
+	$message = htmlspecialchars_uni($vbulletin->GPC['message']);
+
+	exec_nocache_headers();
+	echo '<ol>';
+	vbflush();
+	sleep(1);
+	echo '<li>First Link</li>';
+	vbflush();
+	sleep(1);
+	echo '<li>Second Link</li>';
+	vbflush();
+	sleep(1);
+	echo '<li>Third Link</li>';
+	vbflush();
+	sleep(1);
+	echo '<li>Fourth Link</li>';
+	vbflush();
+	sleep(1);
+	echo '<li>Fifth Link</li>';
+	vbflush();
+	sleep(1);
+	echo '<li>Sixth Link</li>';
+	vbflush();
+	sleep(1);
+	echo '<li>Seventh Link</li>';
+	vbflush();
+	sleep(1);
+	echo '<li>Eighth Link</li>';
+	vbflush();
+	sleep(1);
+	echo '<li>Ninth Link</li>';
+	vbflush();
+	sleep(1);
+	echo '<li>Tenth Link</li>';
+	echo '</ol>';
+	vbflush();
+
+
+	$navclass['checker'] = 'active';
+	$includecss['hosts'] = 'attachments.css';
+	$page_templater = vB_Template::create('phpkd_vblvb_check');
+	$page_templater->register('hostbits', $hostbits);
+	$page_templater->register('message', $message);
+
+}
+
+// Posted URLs will be saved to a 'session' database table, which will be cleaned periodically, and then the 'docheck' will get back saved URLs, process it, and display results
+// Will use VaiSpy for the ajax stuff
+
+// #######################################################################
+if ($_REQUEST['do'] == 'docheck')
+{
+	// Process
+	$vbulletin->input->clean_array_gpc('r', array(
+			'message'       => TYPE_STR,
+	));
+	echo $vbulletin->GPC['message'];
+
 	// Taken from edit_post hook, to be reviewed
 	if (($type == 'thread' && ($vbulletin->phpkd_vblvb['general_checked_newposts'] == 1 || $vbulletin->phpkd_vblvb['general_checked_newposts'] == 2)) || $type == 'reply' && $vbulletin->phpkd_vblvb['general_checked_newposts'] == 1)
 	{
@@ -128,16 +191,44 @@ if ($_REQUEST['do'] == 'check')
 			}
 		}
 	}
-
 }
+*/
 
-// Posted URLs will be saved to a 'session' database table, which will be cleaned periodically, and then the 'docheck' will get back saved URLs, process it, and display results
-// Will use VaiSpy for the ajax stuff
-
-// #######################################################################
-if ($_POST['do'] == 'docheck')
+// ############################## Start vbflush ####################################
+/**
+ * Force the output buffers to the browser
+ */
+function vbflush()
 {
-	// Process
+	static $gzip_handler = null;
+	if ($gzip_handler === null)
+	{
+		$gzip_handler = false;
+		$output_handlers = ob_list_handlers();
+		if (is_array($output_handlers))
+		{
+			foreach ($output_handlers AS $handler)
+			{
+				if ($handler == 'ob_gzhandler')
+				{
+					$gzip_handler = true;
+					break;
+				}
+			}
+		}
+	}
+
+	if ($gzip_handler)
+	{
+		// forcing a flush with this is very bad
+		return;
+	}
+
+	if (ob_get_length() !== false)
+	{
+		@ob_flush();
+	}
+	flush();
 }
 
 // #############################################################################

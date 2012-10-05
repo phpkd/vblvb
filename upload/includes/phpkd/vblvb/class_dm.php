@@ -318,6 +318,25 @@ class PHPKD_VBLVB_DM
 					$status = 'down';
 					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $oriurl);
 				}
+				else if (preg_match("#http-equiv=[\'|\"]refresh[\'|\"].*content=[\'|\"][0-9]+;url=[\'|\"]?([0-9a-z_=:/.\?%]+)[\'|\"]?[\'|\"].* />#i", $page, $matches))
+				{
+					$page = $this->vurl($matches[1]);
+					if (!empty($contentmatch) && preg_match("#$contentmatch#i", $page))
+					{
+						$status = 'alive';
+						$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $oriurl);
+					}
+					else if (!empty($downmatch) && preg_match("#$downmatch#i", $page))
+					{
+						$status = 'down';
+						$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $oriurl);
+					}
+					else
+					{
+						$status = 'dead';
+						$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $oriurl);
+					}
+				}
 				else
 				{
 					$status = 'dead';

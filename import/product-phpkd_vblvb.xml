@@ -2,7 +2,7 @@
 
 <product productid="phpkd_vblvb" active="1">
 	<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate']]></title>
-	<description><![CDATA[This product extract sharing links of hundreds of sharing hosts, and verifies them; If they're "Alive" the post will pass, otherwise it will be punished. (ex: Hotfile, Mediafire, Rapidshare, Zshare, Adrive, Depositfiles, Filefactory, ...etc).]]></description>
+	<description><![CDATA[This product extract sharing links of hundreds of sharing hosts, and verifies them; If they're "Alive" the post will pass, otherwise it will be punished. (ex: Hotfile, Mediafire, Rapidshare, 4shared, Depositfiles, Filefactory, ...etc).]]></description>
 	<version>4.2.100</version>
 	<url>http://tools.phpkd.net/en/producthelp/url/vblvb/</url>
 	<versioncheckurl>http://tools.phpkd.net/en/producthelp/version/vblvb/</versioncheckurl>
@@ -30,11 +30,15 @@ $phpkd_vblvb->uninstall_init();]]></uninstallcode>
 			<installcode><![CDATA[$phpkd_vblvb->install_41220();]]></installcode>
 			<uninstallcode><![CDATA[$phpkd_vblvb->uninstall_41220();]]></uninstallcode>
 		</code>
-		<code version="4.1.300">
-			<installcode><![CDATA[$phpkd_vblvb->install_41300();]]></installcode>
-			<uninstallcode><![CDATA[$phpkd_vblvb->uninstall_41300();]]></uninstallcode>
-		</code>
-		<code version="4.1.999">
+        <code version="4.1.300">
+            <installcode><![CDATA[$phpkd_vblvb->install_41300();]]></installcode>
+            <uninstallcode><![CDATA[$phpkd_vblvb->uninstall_41300();]]></uninstallcode>
+        </code>
+        <code version="4.2.100">
+            <installcode><![CDATA[$phpkd_vblvb->install_42100();]]></installcode>
+            <uninstallcode><![CDATA[$phpkd_vblvb->uninstall_42100();]]></uninstallcode>
+        </code>
+		<code version="4.9.999">
 			<installcode><![CDATA[$phpkd_vblvb->import_hosts();]]></installcode>
 			<uninstallcode />
 		</code>
@@ -543,10 +547,6 @@ Select "Include All Users" to check all users' posts, or select "Include Specifi
 			<phrase name="setting_general_require_sharing_desc" date="1324476117" username="PHPKD" version="4.1.300"><![CDATA[You may force users to post 'supported' sharing links within their posts in order to submit their posts, otherwise they will get an error message.<br />
 You can select which forums would you like to force users include 'supported' sharing links within their posts.]]></phrase>
 			<phrase name="setting_general_require_sharing_title" date="1324476117" username="PHPKD" version="4.1.300"><![CDATA[Required Sharing Links]]></phrase>
-			<phrase name="setting_general_scriptname_desc" date="1324477869" username="PHPKD" version="4.1.300"><![CDATA[The public script name available for users, this script displays list of supported hosts, allow users to live check sharing links on the fly, etc..]]></phrase>
-			<phrase name="setting_general_scriptname_title" date="1324477869" username="PHPKD" version="4.1.300"><![CDATA[Public Script Name]]></phrase>
-			<phrase name="setting_general_scripttitle_desc" date="1324477937" username="PHPKD" version="4.1.300"><![CDATA[The public script title available for users, this script displays list of supported hosts, allow users to live check sharing links on the fly, etc..]]></phrase>
-			<phrase name="setting_general_scripttitle_title" date="1324477937" username="PHPKD" version="4.1.300"><![CDATA[Public Script Title]]></phrase>
 			<phrase name="setting_general_succession_period_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Successive checks for same posts can be separated by a certain period of time, so those 'checked recently' posts did not checked every time the script runs. Same posts can be checked multiple times, but with at least 1 day between each two successive checks. Define how many days should separate each two successive checks for the same post, or enter "0" to check posts ONLY ONCE. Note: "14" means your checked posts will be checked again every fourteen days (two weeks). <strong>"0" or a high Value usually recommended specially for large boards.</strong>]]></phrase>
 			<phrase name="setting_general_succession_period_title" date="1289528687" username="PHPKD" version="4.0.200"><![CDATA[Check Succession Period]]></phrase>
 			<phrase name="setting_general_thread_modes_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Specific thread modes can be excluded from being checked. By default all threads are checked regardless of it is mode. To exclude certain thread mode, choose it from the list.]]></phrase>
@@ -577,6 +577,10 @@ This is where the "Last Check Note" will be displayed, so you can choose another
 			<phrase name="setting_lookfeel_postbit_note_firstpost_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[Post Flag: Last Check Note can be displayed either in thread's head (first post) only, or in every post in the thread. That is depends on your usage & your product's settings.]]></phrase>
 			<phrase name="setting_lookfeel_postbit_note_firstpost_title" date="1315057457" username="PHPKD" version="4.1.220"><![CDATA[Post Flag: Last Check Note in first post only]]></phrase>
 			<phrase name="setting_lookfeel_postbit_note_title" date="1289529943" username="PHPKD" version="4.0.200"><![CDATA[Post Flag: Last Check Note]]></phrase>
+            <phrase name="setting_publicverifier_scriptname_desc" date="1324477869" username="PHPKD" version="4.1.300"><![CDATA[The public script name available for users, this script displays list of supported hosts, allow users to live check sharing links on the fly, etc..]]></phrase>
+            <phrase name="setting_publicverifier_scriptname_title" date="1324477869" username="PHPKD" version="4.1.300"><![CDATA[Public Script Name]]></phrase>
+            <phrase name="setting_publicverifier_scripttitle_desc" date="1324477937" username="PHPKD" version="4.1.300"><![CDATA[The public script title available for users, this script displays list of supported hosts, allow users to live check sharing links on the fly, etc..]]></phrase>
+            <phrase name="setting_publicverifier_scripttitle_title" date="1324477937" username="PHPKD" version="4.1.300"><![CDATA[Public Script Title]]></phrase>
 			<phrase name="setting_punishment_forumid_desc" date="1289546711" username="PHPKD" version="4.0.200"><![CDATA[If "Move Thread" method is selected in "Thread Punishment Methods" then a forum should be selected to move punished threads to it. Select preferred forum from the list.]]></phrase>
 			<phrase name="setting_punishment_forumid_title" date="1289546711" username="PHPKD" version="4.0.200"><![CDATA[Punishment Recycle Bin Forum]]></phrase>
 			<phrase name="setting_punishment_onedit_revert_desc" date="1326813108" username="PHPKD" version="4.1.310"><![CDATA[If this option is enabled & if edited posts is being checked, and there were a past punishment for that specific post, then it can be reverted if the new check reports it as 'passed' (no dead links or few dead links under the critical limit). Suppose that the edited post was previously punished with (Close Thread - Move Thread - Moderate Post), after a valid check those past punishment actions can be reverted to (Open Thread - Move Thread back to it is original forum - Approve Post).]]></phrase>
@@ -642,6 +646,7 @@ You can control this feature per host/module & set host tag's text as well. <a h
 			<phrase name="settinggroup_general" date="1277873745" username="PHPKD" version="4.0.133"><![CDATA[General Settings]]></phrase>
 			<phrase name="settinggroup_linkdir" date="1287282017" username="PHPKD" version="4.0.200"><![CDATA[Link Directory Settings]]></phrase>
 			<phrase name="settinggroup_lookfeel" date="1277930949" username="PHPKD" version="4.0.133"><![CDATA[Look & Feel Settings]]></phrase>
+            <phrase name="settinggroup_publicverifier" date="1349440675" username="PHPKD" version="4.2.100"><![CDATA[Public Link Verifier]]></phrase>
 			<phrase name="settinggroup_punishment" date="1277881025" username="PHPKD" version="4.0.133"><![CDATA[Punishment Settings]]></phrase>
 			<phrase name="settinggroup_reporting" date="1277873734" username="PHPKD" version="4.0.133"><![CDATA[Reporting Settings]]></phrase>
 			<phrase name="settinggroup_tagging" date="1324470451" username="PHPKD" version="4.1.300"><![CDATA[Tagging Settings]]></phrase>

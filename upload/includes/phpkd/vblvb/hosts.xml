@@ -2,12 +2,12 @@
 
 <hosts>
     <host domain="1-upload.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[1-upload\.com/abv-fs/[0-9]+]]></urlmatch>
+        <urlmatch><![CDATA[1-upload\.com/abv-fs/[0-9a-z]+]]></urlmatch>
         <contentmatch>file-name</contentmatch>
         <tagtext>1-upload.com</tagtext>
     </host>
     <host domain="10upload.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[10upload\.com/[0-9a-z]+/]]></urlmatch>
+        <urlmatch><![CDATA[10upload\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>10upload.com</tagtext>
     </host>
@@ -18,16 +18,16 @@
     </host>
     <host domain="1fichier.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.1fichier\.com]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>1fichier.com</tagtext>
     </host>
-    <host domain="2giga.com" active="1" status="alive" taggable="1">
+    <host domain="2giga.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[2giga\.com/([0-9a-z]+|download-[0-9a-z]+)]]></urlmatch>
         <contentmatch>ch_pass</contentmatch>
         <tagtext>2giga.com</tagtext>
     </host>
     <host domain="2shared.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[2shared\.com/(file|video|audio|photo|document)((/[0-9]+)?/[0-9a-z]+|/[0-9a-z_-]+)]]></urlmatch>
+        <urlmatch><![CDATA[2shared\.com/(zip|music|image|file|video|audio|photo|document)/[0-9a-z]+]]></urlmatch>
         <contentmatch>fileinfo</contentmatch>
         <tagtext>2shared.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check REGEX!]]></notes>
@@ -38,17 +38,17 @@
         <tagtext>4fastfile.com</tagtext>
     </host>
     <host domain="4share.vn" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[4share\.vn/f/[0-9]+]]></urlmatch>
-        <contentmatch>download_button</contentmatch>
+        <urlmatch><![CDATA[4share\.vn/f/[0-9a-z]+]]></urlmatch>
+        <contentmatch>security_code</contentmatch>
         <tagtext>4share.vn</tagtext>
     </host>
     <host domain="4shared.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[4shared\.com/(file|video|audio|photo|document|get)((/[0-9]+)?/[0-9a-z]+|/[0-9a-z_-]+)]]></urlmatch>
-        <contentmatch>(fileNameTextSpan|downloadDelayTimeSec)</contentmatch>
+        <urlmatch><![CDATA[4shared\.com/(zip|music|image|file|video|audio|photo|document|get)/[0-9a-z]+]]></urlmatch>
+        <contentmatch>fileMeta</contentmatch>
         <tagtext>4shared.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity ONLY & ONLY if not included, BUT not if entered wrong-, so we can make it optional in the check REGEX!]]></notes>
     </host>
-    <host domain="6ybh-upload.com" active="1" status="alive" taggable="1">
+    <host domain="6ybh-upload.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[6ybh-upload\.com/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>6ybh-upload.com</tagtext>
@@ -59,7 +59,7 @@
         <tagtext>9q9q.net</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT REQUIRES trailing slash '/' after the first numeric syllable if the second syllable didn't entered!.]]></notes>
     </host>
-    <host domain="adigashare.com" active="1" status="alive" taggable="1">
+    <host domain="adigashare.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[adigashare\.com/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>adigashare.com</tagtext>
@@ -71,22 +71,22 @@
     </host>
     <host domain="alterupload.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.alterupload\.com]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>alterupload.com</tagtext>
     </host>
     <host domain="amonshare.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[amonshare\.com/[0-9a-z]+/]]></urlmatch>
+        <urlmatch><![CDATA[amonshare\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>amonshare.com</tagtext>
     </host>
-    <host domain="annonhost.net" active="1" status="alive" taggable="1">
+    <host domain="annonhost.net" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[annonhost\.net/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>annonhost.net</tagtext>
     </host>
     <host domain="arabsh.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[arabsh\.com/[0-9a-z]+]]></urlmatch>
-        <contentmatch>(file_slot|download1info)</contentmatch>
+        <urlmatch><![CDATA[arabsh\.com/(sounds|uploads/(image|flash)|videos|files)/[0-9a-z]+]]></urlmatch>
+        <contentmatch>download-link</contentmatch>
         <tagtext>arabsh.com</tagtext>
     </host>
     <host domain="asixfiles.com" active="1" status="alive" taggable="1">
@@ -95,13 +95,11 @@
         <tagtext>asixfiles.com</tagtext>
     </host>
     <host domain="axifile.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[axifile\.com/\?[0-9]+]]></urlmatch>
-        <contentmatch>mydownload\.php\?</contentmatch>
-        <urlsearch>com\?</urlsearch>
-        <urlreplace>com/?</urlreplace>
+        <urlmatch><![CDATA[axifile\.com/([a-z]{2}/)?[0-9a-z]+]]></urlmatch>
+        <contentmatch>filestats</contentmatch>
         <tagtext>axifile.com</tagtext>
     </host>
-    <host domain="badongo.com" active="1" status="alive" taggable="1">
+    <host domain="badongo.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[badongo\.com/([a-z]{2}/)?(file|vid|audio|pic)/[0-9]+]]></urlmatch>
         <contentmatch>(file_fileinfo|vid_fileinfo|img_fileinfo)</contentmatch>
         <urlsearch><![CDATA[com/[a-z]{2}/]]></urlsearch>
@@ -109,27 +107,37 @@
         <tagtext>badongo.com</tagtext>
     </host>
     <host domain="banashare.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[banashare\.com/[0-9a-z]+/]]></urlmatch>
+        <urlmatch><![CDATA[banashare\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>banashare.com</tagtext>
     </host>
-    <host domain="bitroad.net" active="1" status="alive" taggable="1">
+    <host domain="bayfiles.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[bayfiles\.com/file/[0-9a-z]+]]></urlmatch>
+        <contentmatch>premium-push</contentmatch>
+        <tagtext>bayfiles.com</tagtext>
+    </host>
+    <host domain="billionuploads.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[billionuploads\.com/[0-9a-z]+]]></urlmatch>
+        <contentmatch>(download1|download2)</contentmatch>
+        <tagtext>billionuploads.com</tagtext>
+    </host>
+    <host domain="bitroad.net" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[bitroad\.net/download/[0-9a-z]+/]]></urlmatch>
         <contentmatch>check\.php</contentmatch>
         <tagtext>bitroad.net</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT if last syllable removed, the trailing slash '/' after the first syllable should be omitted!]]></notes>
     </host>
     <host domain="bitshare.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[bitshare\.com/files/[0-9a-z]+/[0-9a-z_.-]+]]></urlmatch>
+        <urlmatch><![CDATA[bitshare\.com/(files/|\?f=)[0-9a-z]+]]></urlmatch>
         <contentmatch>downloadstarting_link</contentmatch>
         <tagtext>bitshare.com</tagtext>
     </host>
-    <host domain="boosterking.com" active="1" status="alive" taggable="1">
+    <host domain="boosterking.com" active="0" status="alive" taggable="1">
         <urlmatch><![CDATA[boosterking\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>boosterking.com</tagtext>
     </host>
-    <host domain="box.net" active="1" status="alive" taggable="1">
+    <host domain="box.net" active="0" status="alive" taggable="1">
         <urlmatch><![CDATA[box\.net/shared/[0-9a-z]+]]></urlmatch>
         <contentmatch>box_download_shared_file</contentmatch>
         <tagtext>box.net</tagtext>
@@ -142,11 +150,16 @@
     </host>
     <host domain="cjoint.net" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.cjoint\.net]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>cjoint.net</tagtext>
     </host>
+    <host domain="cobrashare.net" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[cobrashare\.net(\:[0-9]+)?/(.*)\?id=[0-9a-z]+]]></urlmatch>
+        <contentmatch>captcha</contentmatch>
+        <tagtext>cobrashare.net</tagtext>
+    </host>
     <host domain="cobrashare.sk" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[cobrashare\.sk/downloadFile\.php\?id=[0-9a-z]+]]></urlmatch>
+        <urlmatch><![CDATA[cobrashare\.sk(\:[0-9]+)?/(.*)\?id=[0-9a-z]+]]></urlmatch>
         <contentmatch>captcha</contentmatch>
         <tagtext>cobrashare.sk</tagtext>
     </host>
@@ -155,15 +168,36 @@
         <tagtext>cocoshare.cc</tagtext>
         <notes>Permanently dead host!</notes>
     </host>
-    <host domain="coolshare.cz" active="1" status="alive" taggable="1">
+    <host domain="coolshare.cz" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[coolshare\.cz/stahnout/[0-9]+]]></urlmatch>
         <contentmatch>startFreeDownload</contentmatch>
         <tagtext>coolshare.cz</tagtext>
     </host>
+    <host domain="cramit.eu" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[cramit\.eu/[0-9a-z]+]]></urlmatch>
+        <contentmatch>method_free</contentmatch>
+        <urlsearch>cramit\.eu</urlsearch>
+        <urlreplace>cramit.in</urlreplace>
+        <tagtext>cramit.eu</tagtext>
+    </host>
     <host domain="cramit.in" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[(cramit\.in|cramit\.net|cramit\.us|cramit\.eu)/[0-9a-z]+]]></urlmatch>
+        <urlmatch><![CDATA[cramit\.in/[0-9a-z]+]]></urlmatch>
         <contentmatch>method_free</contentmatch>
         <tagtext>cramit.in</tagtext>
+    </host>
+    <host domain="cramit.net" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[cramit\.net/[0-9a-z]+]]></urlmatch>
+        <contentmatch>method_free</contentmatch>
+        <urlsearch>cramit\.net</urlsearch>
+        <urlreplace>cramit.in</urlreplace>
+        <tagtext>cramit.net</tagtext>
+    </host>
+    <host domain="cramit.us" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[cramit\.us/[0-9a-z]+]]></urlmatch>
+        <contentmatch>method_free</contentmatch>
+        <urlsearch>cramit\.us</urlsearch>
+        <urlreplace>cramit.in</urlreplace>
+        <tagtext>cramit.us</tagtext>
     </host>
     <host domain="crazyupload.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[crazyupload\.com/[0-9a-z]+]]></urlmatch>
@@ -181,7 +215,7 @@
         <contentmatch>detail-content</contentmatch>
         <tagtext>czshare.com</tagtext>
     </host>
-    <host domain="dataup.to" active="1" status="alive" taggable="1">
+    <host domain="dataup.to" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[dataup\.to/[0-9]+/]]></urlmatch>
         <contentmatch>/download/</contentmatch>
         <tagtext>dataup.to</tagtext>
@@ -190,6 +224,11 @@
         <urlmatch><![CDATA[datei\.to/datei/[0-9a-z]+]]></urlmatch>
         <contentmatch>abuseDatei</contentmatch>
         <tagtext>datei.to</tagtext>
+    </host>
+    <host domain="depfile.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[depfile\.com/downloads/i/[0-9]+]]></urlmatch>
+        <contentmatch>free_vs_premium</contentmatch>
+        <tagtext>depfile.com</tagtext>
     </host>
     <host domain="depositfiles.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[depositfiles\.com/([a-z]{2}/)?files/[0-9a-z]+]]></urlmatch>
@@ -200,16 +239,16 @@
     </host>
     <host domain="desfichiers.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.desfichiers\.com]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>desfichiers.com</tagtext>
     </host>
     <host domain="dfichiers.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.dfichiers\.com]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>dfichiers.com</tagtext>
     </host>
     <host domain="divshare.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[divshare\.com/download/(\?[0-9-]+|[0-9a-z-]+)]]></urlmatch>
+        <urlmatch><![CDATA[divshare\.com/download/[0-9]+]]></urlmatch>
         <contentmatch>fileNameHeader</contentmatch>
         <tagtext>divshare.com</tagtext>
         <notes><![CDATA[This host's links should NOT end with a trailing slash '/', just put 'launch' after the 'download' phrase & you'll go to the download page directly without waiting!]]></notes>
@@ -227,7 +266,7 @@
     </host>
     <host domain="dl4free.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.dl4free\.com]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>dl4free.com</tagtext>
     </host>
     <host domain="dualshare.com" active="1" status="dead" taggable="1">
@@ -236,20 +275,20 @@
         <tagtext>dualshare.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity ONLY & ONLY if not included, BUT not if entered wrong, in such case the link should NOT contain a trailing slash '/' after the first syllable!]]></notes>
     </host>
-    <host domain="duckload.com" active="1" status="alive" taggable="1">
+    <host domain="duckload.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[duckload\.com/download/[0-9]+]]></urlmatch>
         <contentmatch>nstream_middle</contentmatch>
         <tagtext>duckload.com</tagtext>
         <notes>Last syllable -file name- required, but not included in the REGEX!</notes>
     </host>
-    <host domain="earthfilez.com" active="1" status="alive" taggable="1">
+    <host domain="earthfilez.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[earthfilez\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>earthfilez.com</tagtext>
         <notes><![CDATA[If '.html' has been removed from the URL, then the URL should NOT ends with a trailing slash '/'!]]></notes>
     </host>
     <host domain="easy-share.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[easy-share\.com/[0-9]+]]></urlmatch>
+        <urlmatch><![CDATA[easy-share\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>tabCaptcha</contentmatch>
         <tagtext>easy-share.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so it's not required in the check REGEX!]]></notes>
@@ -266,7 +305,7 @@
     </host>
     <host domain="egoshare.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[egoshare\.com/download.php\?id=[0-9a-z]+]]></urlmatch>
-        <contentmatch>downloadTable</contentmatch>
+        <contentmatch>dl_package</contentmatch>
         <tagtext>egoshare.com</tagtext>
     </host>
     <host domain="enterupload.com" active="1" status="dead" taggable="1">
@@ -277,7 +316,7 @@
     </host>
     <host domain="euroshare.eu" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[euroshare\.eu/file/[0-9]+]]></urlmatch>
-        <contentmatch>download-in</contentmatch>
+        <contentmatch>downloadButton</contentmatch>
         <tagtext>euroshare.eu</tagtext>
     </host>
     <host domain="evilshare.com" active="1" status="dead" taggable="1">
@@ -291,10 +330,20 @@
         <contentmatch>col-fileinfo</contentmatch>
         <tagtext>extabit.com</tagtext>
     </host>
-    <host domain="eyvx.com" active="1" status="alive" taggable="1">
+    <host domain="eyvx.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[eyvx\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>eyvx.com</tagtext>
+    </host>
+    <host domain="fastshare.cz" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[fastshare\.cz/[0-9]+]]></urlmatch>
+        <contentmatch>securimage_show</contentmatch>
+        <tagtext>fastshare.cz</tagtext>
+    </host>
+    <host domain="fiberupload.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[fiberupload\.com/[0-9a-z]+]]></urlmatch>
+        <contentmatch>(download1|download2)</contentmatch>
+        <tagtext>fiberupload.com</tagtext>
     </host>
     <host domain="filaty.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[filaty\.com/[a-z]+/([0-9]+/[0-9]+/|[0-9a-z]+)]]></urlmatch>
@@ -303,38 +352,43 @@
     </host>
     <host domain="file-upload.net" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[file-upload\.net/download-[0-9]+]]></urlmatch>
-        <contentmatch>Downloads</contentmatch>
+        <contentmatch>label</contentmatch>
         <tagtext>file-upload.net</tagtext>
     </host>
-    <host domain="file2box.com" active="1" status="alive" taggable="1">
+    <host domain="file2box.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[file2box\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>file2box.com</tagtext>
         <notes><![CDATA[This host's links should NOT end with a trailing slash '/'!]]></notes>
     </host>
-    <host domain="file2box.net" active="1" status="alive" taggable="1">
+    <host domain="file2box.net" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[file2box\.net/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>file2box.net</tagtext>
         <notes><![CDATA[This host's links should NOT end with a trailing slash '/'!]]></notes>
     </host>
-    <host domain="fileape.com" active="1" status="alive" taggable="1">
+    <host domain="fileape.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[fileape\.com/(dl/|index\.php\?act=download&id=)[0-9a-z]+]]></urlmatch>
         <contentmatch>prebox</contentmatch>
         <tagtext>fileape.com</tagtext>
     </host>
-    <host domain="filebase.to" active="1" status="alive" taggable="1">
+    <host domain="filebase.to" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filebase\.to/files/[0-9]+]]></urlmatch>
         <contentmatch>(dl_free|dl_premium)</contentmatch>
         <tagtext>filebase.to</tagtext>
         <notes>Last syllable -file name- required, but not included in the REGEX!</notes>
     </host>
-    <host domain="filebox.com" active="1" status="dead" taggable="1">
+    <host domain="filebox.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[filebox\.com/[0-9a-z]+]]></urlmatch>
-        <contentmatch>splash_filedInfo</contentmatch>
+        <contentmatch>countdown_str</contentmatch>
         <tagtext>filebox.com</tagtext>
     </host>
-    <host domain="filedino.com" active="1" status="alive" taggable="1">
+    <host domain="filecloud.io" active="0" status="alive" taggable="1">
+        <urlmatch><![CDATA[filecloud\.io/[0-9a-z]+]]></urlmatch>
+        <contentmatch>requestBtnHolder</contentmatch>
+        <tagtext>filecloud.io</tagtext>
+    </host>
+    <host domain="filedino.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filedino\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>filedino.com</tagtext>
@@ -350,7 +404,7 @@
         <contentmatch>/processing/filedownload\.php\?id=</contentmatch>
         <tagtext>filedropper.com</tagtext>
     </host>
-    <host domain="filedude.com" active="1" status="alive" taggable="1">
+    <host domain="filedude.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filedude\.com/download/[0-9a-z]+]]></urlmatch>
         <contentmatch>captcha</contentmatch>
         <tagtext>filedude.com</tagtext>
@@ -362,7 +416,7 @@
         <tagtext>filefactory.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check REGEX!]]></notes>
     </host>
-    <host domain="filefat.com" active="1" status="alive" taggable="1">
+    <host domain="filefat.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filefat\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(method_free|method_premium)</contentmatch>
         <tagtext>filefat.com</tagtext>
@@ -379,7 +433,7 @@
         <tagtext>filefront.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check REGEX! This host sometimes return blank screen regardless it's status!!]]></notes>
     </host>
-    <host domain="filejungle.com" active="1" status="alive" taggable="1">
+    <host domain="filejungle.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filejungle\.com/f/[0-9a-z]+]]></urlmatch>
         <contentmatch>file_name</contentmatch>
         <tagtext>filejungle.com</tagtext>
@@ -389,7 +443,12 @@
         <contentmatch>method_free</contentmatch>
         <tagtext>filekeen.com</tagtext>
     </host>
-    <host domain="filemo.com" active="1" status="alive" taggable="1">
+    <host domain="filemates.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[filemates\.com/[0-9a-z]+]]></urlmatch>
+        <contentmatch>(download1|download2)</contentmatch>
+        <tagtext>filemates.com</tagtext>
+    </host>
+    <host domain="filemo.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filemo\.com/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>filemo.com</tagtext>
@@ -420,17 +479,22 @@
         <contentmatch>method_free</contentmatch>
         <tagtext>filerio.com</tagtext>
     </host>
+    <host domain="filerio.in" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[filerio\.in/[0-9a-z]+]]></urlmatch>
+        <contentmatch>method_free</contentmatch>
+        <tagtext>filerio.in</tagtext>
+    </host>
     <host domain="files.to" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[files\.to/get/[0-9]+/[0-9a-z]+]]></urlmatch>
         <contentmatch>downloadname</contentmatch>
         <tagtext>files.to</tagtext>
     </host>
-    <host domain="filesafekeep.com" active="1" status="alive" taggable="1">
+    <host domain="filesafekeep.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filesafekeep\.com/download\.php\?id=[0-9a-z]+]]></urlmatch>
         <contentmatch>dl-combox-comment</contentmatch>
         <tagtext>filesafekeep.com</tagtext>
     </host>
-    <host domain="filesavr.com" active="1" status="alive" taggable="1">
+    <host domain="filesavr.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filesavr\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>share-file</contentmatch>
         <tagtext>filesavr.com</tagtext>
@@ -440,19 +504,19 @@
         <contentmatch>(download\(\)|Server bandwidth full)</contentmatch>
         <tagtext>filesend.net</tagtext>
     </host>
-    <host domain="fileserve.com" active="1" status="alive" taggable="1">
+    <host domain="fileserve.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[fileserve\.com/file/[0-9a-z]+]]></urlmatch>
         <contentmatch>downloadBox1</contentmatch>
         <tagtext>fileserve.com</tagtext>
     </host>
-    <host domain="fileserver.cc" active="1" status="alive" taggable="1">
+    <host domain="fileserver.cc" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[fileserver\.cc/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>fileserver.cc</tagtext>
     </host>
     <host domain="fileserving.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[fileserving\.com/files/[0-9a-z]+]]></urlmatch>
-        <contentmatch>download_table</contentmatch>
+        <urlmatch><![CDATA[fileserving\.com/files/[0-9a-z_]+]]></urlmatch>
+        <contentmatch>get_download_link</contentmatch>
         <tagtext>fileserving.com</tagtext>
     </host>
     <host domain="filesflash.com" active="1" status="alive" taggable="1">
@@ -461,7 +525,7 @@
         <tagtext>filesflash.com</tagtext>
     </host>
     <host domain="filesift.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[filesift\.com/[0-9a-z]+/]]></urlmatch>
+        <urlmatch><![CDATA[filesift\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>filesift.com</tagtext>
     </host>
@@ -480,29 +544,34 @@
         <contentmatch>fileinfo</contentmatch>
         <tagtext>filesovermiles.com</tagtext>
     </host>
-    <host domain="filesplash.com" active="1" status="alive" taggable="1">
+    <host domain="filesplash.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filesplash\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>btn_download</contentmatch>
         <tagtext>filesplash.com</tagtext>
     </host>
-    <host domain="filestab.com" active="1" status="alive" taggable="1">
+    <host domain="filestab.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filestab\.com/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(method_free|method_premium)</contentmatch>
         <tagtext>filestab.com</tagtext>
     </host>
-    <host domain="filethe.net" active="1" status="alive" taggable="1">
+    <host domain="filestay.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[filestay\.com/[0-9a-z]+]]></urlmatch>
+        <contentmatch>(download1|download2)</contentmatch>
+        <tagtext>filestay.com</tagtext>
+    </host>
+    <host domain="filethe.net" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filethe\.net/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>filethe.net</tagtext>
     </host>
     <host domain="filetolink.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[filetolink\.com/(d/|download/)\?h=[0-9a-z]+]]></urlmatch>
+        <urlmatch><![CDATA[filetolink\.com/((d|download)/\?h=)?[0-9a-z]+]]></urlmatch>
         <contentmatch>download_link</contentmatch>
         <urlsearch>/download/</urlsearch>
         <urlreplace>/d/</urlreplace>
         <tagtext>filetolink.com</tagtext>
     </host>
-    <host domain="filezzz.com" active="1" status="alive" taggable="1">
+    <host domain="filezzz.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[filezzz\.com/[0-9]+]]></urlmatch>
         <contentmatch>dlinkinfo</contentmatch>
         <tagtext>filezzz.com</tagtext>
@@ -512,8 +581,18 @@
         <tagtext>flyupload.com</tagtext>
         <notes>Permanently dead host!</notes>
     </host>
+    <host domain="fp.io" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[fp\.io/[0-9a-z]+]]></urlmatch>
+        <contentmatch>file_info_active</contentmatch>
+        <tagtext>fp.io</tagtext>
+    </host>
     <host domain="freakshare.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[freakshare\.com/files/[0-9a-z]+/]]></urlmatch>
+        <urlmatch><![CDATA[freakshare\.com/files/[0-9a-z]+]]></urlmatch>
+        <contentmatch>dlbutton</contentmatch>
+        <tagtext>freakshare.com</tagtext>
+    </host>
+    <host domain="freakshare.net" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[freakshare\.net/files/[0-9a-z]+]]></urlmatch>
         <contentmatch>dlbutton</contentmatch>
         <tagtext>freakshare.net</tagtext>
     </host>
@@ -543,11 +622,11 @@
         <tagtext>glumbouploads.com</tagtext>
     </host>
     <host domain="goldfile.eu" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[goldfile\.eu/[0-9a-z]+/]]></urlmatch>
+        <urlmatch><![CDATA[goldfile\.eu/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>goldfile.eu</tagtext>
     </host>
-    <host domain="gotupload.com" active="1" status="alive" taggable="1">
+    <host domain="gotupload.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[gotupload\.com/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>gotupload.com</tagtext>
@@ -556,6 +635,11 @@
         <urlmatch><![CDATA[hitfile\.net/[0-9a-z]+]]></urlmatch>
         <contentmatch>(checkCodeForm|download-file)</contentmatch>
         <tagtext>hitfile.net</tagtext>
+    </host>
+    <host domain="hosamko.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[hosamko\.com/download\.php\?(filename|id)=[0-9a-z]+]]></urlmatch>
+        <contentmatch>ti\(\)</contentmatch>
+        <tagtext>hosamko.com</tagtext>
     </host>
     <host domain="hostuje.net" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[hostuje\.net/file\.php\?id=[0-9a-z]+]]></urlmatch>
@@ -571,16 +655,16 @@
     </host>
     <host domain="hulkshare.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[hulkshare\.com/[0-9a-z]+]]></urlmatch>
-        <contentmatch>(download1|download2)</contentmatch>
+        <contentmatch>myFilesTopLeft</contentmatch>
         <tagtext>hulkshare.com</tagtext>
     </host>
     <host domain="hyperfileshare.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[hyperfileshare\.com/download\.php\?code=[0-9a-z]+]]></urlmatch>
+        <urlmatch><![CDATA[hyperfileshare\.com/(download\.php\?code=|d/)[0-9a-z]+]]></urlmatch>
         <contentmatch>downlotst</contentmatch>
         <tagtext>hyperfileshare.com</tagtext>
     </host>
     <host domain="i-filez.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[i-filez.com/downloads/i/[0-9]+/f/[0-9a-z_-]+]]></urlmatch>
+        <urlmatch><![CDATA[i-filez\.com/downloads/i/[0-9]+]]></urlmatch>
         <contentmatch>free_vs_premium</contentmatch>
         <tagtext>i-filez.com</tagtext>
     </host>
@@ -589,9 +673,9 @@
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>icyupload.com</tagtext>
     </host>
-    <host domain="ifile.it" active="1" status="alive" taggable="1">
+    <host domain="ifile.it" active="0" status="alive" taggable="1">
         <urlmatch><![CDATA[ifile\.it/[0-9a-z]+]]></urlmatch>
-        <contentmatch>req_btn2</contentmatch>
+        <contentmatch>requestBtnHolder</contentmatch>
         <tagtext>ifile.it</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check REGEX!]]></notes>
     </host>
@@ -601,13 +685,13 @@
         <tagtext>ifolder.ru</tagtext>
         <notes>ints_code: Appears sometimes with ifolder.ru server load | confirmed_number: the normal behavior!</notes>
     </host>
-    <host domain="jakfile.com" active="1" status="alive" taggable="1">
+    <host domain="jakfile.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[jakfile\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>boxdown_info</contentmatch>
         <tagtext>jakfile.com</tagtext>
     </host>
     <host domain="ju7ju7.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[ju7ju7\.com/download\.php\?filename=[0-9a-z]+]]></urlmatch>
+        <urlmatch><![CDATA[ju7ju7\.com/download\.php\?(filename|id)=[0-9a-z]+]]></urlmatch>
         <contentmatch>ti\(\)</contentmatch>
         <tagtext>ju7ju7.com</tagtext>
     </host>
@@ -616,14 +700,14 @@
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>jumbofiles.com</tagtext>
     </host>
-    <host domain="kickload.com" active="1" status="alive" taggable="1">
+    <host domain="kickload.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[kickload\.com/file/[0-9]+]]></urlmatch>
         <contentmatch>download_details</contentmatch>
         <tagtext>kickload.com</tagtext>
     </host>
     <host domain="letitbit.net" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[letitbit\.net/download/[0-9a-z.]+/[0-9a-z_-]+]]></urlmatch>
-        <contentmatch>download4\.php</contentmatch>
+        <urlmatch><![CDATA[letitbit\.net/download/[0-9a-z]+]]></urlmatch>
+        <contentmatch>file-info-size</contentmatch>
         <tagtext>letitbit.net</tagtext>
         <notes><![CDATA[Last syllable of the link doesn't affect URL validity ONLY & ONLY if entered wrong, but not if ignored. It REQUIRES also trailing '.html' after the last syllable!]]></notes>
     </host>
@@ -633,14 +717,14 @@
         <tagtext>load.to</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT REQUIRES trailing slash '/' after the first numeric syllable if the second syllable didn't entered!.]]></notes>
     </host>
-    <host domain="loombo.com" active="1" status="alive" taggable="1">
+    <host domain="loombo.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[loombo\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>loombo.com</tagtext>
     </host>
     <host domain="m5zn.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[m5zn\.com/files-[0-9a-z]+]]></urlmatch>
-        <contentmatch>download_code</contentmatch>
+        <urlmatch><![CDATA[m5zn\.com/d/\?[0-9a-z]+]]></urlmatch>
+        <contentmatch>download_info</contentmatch>
         <tagtext>m5zn.com</tagtext>
     </host>
     <host domain="mediafire.com" active="1" status="alive" taggable="1">
@@ -652,13 +736,18 @@
     </host>
     <host domain="megadl.fr" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.megadl\.fr]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>megadl.fr</tagtext>
     </host>
-    <host domain="megashare.com" active="0" status="alive" taggable="1">
+    <host domain="megashare.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[megashare\.com/[0-9]+]]></urlmatch>
         <contentmatch>(PremDz|FreePremDz|FreeDz)</contentmatch>
         <tagtext>megashare.com</tagtext>
+    </host>
+    <host domain="megashares.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[megashares\.com/(dl/|index\.php\?d[0-9]+=)[0-9a-z]+]]></urlmatch>
+        <contentmatch>(desc_col|file_info)</contentmatch>
+        <tagtext>megashares.com</tagtext>
     </host>
     <host domain="megaupload.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[megaupload\.com/\?d=[0-9a-z]+(&setlang=[a-z]{2}/)?]]></urlmatch>
@@ -679,10 +768,10 @@
     </host>
     <host domain="mesfichiers.org" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.mesfichiers\.org]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>mesfichiers.org</tagtext>
     </host>
-    <host domain="midupload.com" active="1" status="alive" taggable="1">
+    <host domain="midupload.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[midupload\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>midupload.com</tagtext>
@@ -707,7 +796,7 @@
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>movreel.com</tagtext>
     </host>
-    <host domain="mozillashare.com" active="1" status="alive" taggable="1">
+    <host domain="mozillashare.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[mozillashare\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>mozillashare.com</tagtext>
@@ -736,7 +825,7 @@
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>netuploaded.com</tagtext>
     </host>
-    <host domain="nonstopshare.com" active="1" status="alive" taggable="1">
+    <host domain="nonstopshare.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[nonstopshare\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>nonstopshare.com</tagtext>
@@ -758,22 +847,22 @@
         <tagtext>online-sharing.net</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity ONLY & ONLY if not included, BUT not if entered wrong, so we can make it optional in the check REGEX!]]></notes>
     </host>
-    <host domain="oron.com" active="1" status="alive" taggable="1">
+    <host domain="oron.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[oron\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>oron.com</tagtext>
     </host>
     <host domain="piecejointe.net" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.piecejointe\.net]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>piecejointe.net</tagtext>
     </host>
     <host domain="pjointe.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.pjointe\.com]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>pjointe.com</tagtext>
     </host>
-    <host domain="platinshare.com" active="1" status="alive" taggable="1">
+    <host domain="platinshare.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[platinshare\.com/files/[0-9a-z]+]]></urlmatch>
         <contentmatch>download-page</contentmatch>
         <tagtext>platinshare.com</tagtext>
@@ -789,12 +878,12 @@
         <tagtext>proddl.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity ONLY & ONLY if not included, BUT not if entered wrong, so we can make it optional in the check REGEX!]]></notes>
     </host>
-    <host domain="przeklej.pl" active="1" status="alive" taggable="1">
+    <host domain="przeklej.pl" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[przeklej\.pl/plik/[0-9a-z_-]+]]></urlmatch>
         <contentmatch>download-file</contentmatch>
         <tagtext>przeklej.pl</tagtext>
     </host>
-    <host domain="przeslij.net" active="0" status="dead" taggable="1">
+    <host domain="przeslij.net" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[przeslij\.net/download\.php\?file=[0-9a-z_-]+]]></urlmatch>
         <contentmatch>countdown</contentmatch>
         <tagtext>przeslij.net</tagtext>
@@ -805,12 +894,12 @@
         <tagtext>putlocker.com</tagtext>
     </host>
     <host domain="putshare.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[putshare\.com/[0-9a-z]+/]]></urlmatch>
+        <urlmatch><![CDATA[putshare\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>putshare.com</tagtext>
     </host>
     <host domain="q4share.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[q4share\.com/[0-9a-z]+/]]></urlmatch>
+        <urlmatch><![CDATA[q4share\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>q4share.com</tagtext>
     </host>
@@ -818,6 +907,11 @@
         <urlmatch><![CDATA[qshare\.com/get/[0-9]+]]></urlmatch>
         <contentmatch>file-name</contentmatch>
         <tagtext>qshare.com</tagtext>
+    </host>
+    <host domain="queenshare.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[queenshare\.com/[0-9a-z]+]]></urlmatch>
+        <contentmatch>(download1|download2)</contentmatch>
+        <tagtext>queenshare.com</tagtext>
     </host>
     <host domain="quickshare.cz" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[quickshare\.cz/stahnout-soubor/[0-9]+]]></urlmatch>
@@ -830,7 +924,7 @@
         <tagtext>quickupload.net</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity ONLY & ONLY if not included, BUT not if entered wrong, so we can make it optional in the check REGEX!]]></notes>
     </host>
-    <host domain="rapida.cc" active="1" status="alive" taggable="1">
+    <host domain="rapida.cc" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[rapida\.cc/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>rapida.cc</tagtext>
@@ -847,10 +941,15 @@
         <contentmatch>dl\.start</contentmatch>
         <tagtext>rapidshare.de</tagtext>
     </host>
-    <host domain="ravishare.com" active="1" status="alive" taggable="1">
+    <host domain="ravishare.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[ravishare\.com/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>ravishare.com</tagtext>
+    </host>
+    <host domain="restfile.net" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[restfile\.net/[0-9a-z]+]]></urlmatch>
+        <contentmatch>method_free</contentmatch>
+        <tagtext>restfile.net</tagtext>
     </host>
     <host domain="rnbload.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[rnbload\.com/file/[0-9]+]]></urlmatch>
@@ -858,21 +957,26 @@
         <tagtext>rnbload.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, BUT REQUIRES trailing slash '/' after the first numeric syllable if the second syllable didn't entered!]]></notes>
     </host>
-    <host domain="rocknum.com" active="1" status="alive" taggable="1">
+    <host domain="rocknum.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[rocknum\.com/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>rocknum.com</tagtext>
+    </host>
+    <host domain="ryushare.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[ryushare\.com/[0-9a-z]+]]></urlmatch>
+        <contentmatch>(download1|download2)</contentmatch>
+        <tagtext>ryushare.com</tagtext>
     </host>
     <host domain="savefile.com" active="1" status="dead" taggable="1">
         <urlmatch>savefile\.com/files/</urlmatch>
         <tagtext>savefile.com</tagtext>
     </host>
-    <host domain="seed-share.com" active="1" status="alive" taggable="1">
+    <host domain="seed-share.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[seed-share\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>seed-share.com</tagtext>
     </host>
-    <host domain="seedfly.com" active="1" status="alive" taggable="1">
+    <host domain="seedfly.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[seedfly\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>seedfly.com</tagtext>
@@ -884,7 +988,7 @@
     </host>
     <host domain="sendspace.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[sendspace\.com/file/[0-9a-z]+]]></urlmatch>
-        <contentmatch>checkregister2</contentmatch>
+        <contentmatch>title_desc</contentmatch>
         <tagtext>sendspace.com</tagtext>
     </host>
     <host domain="sendspace.pl" active="1" status="alive" taggable="1">
@@ -912,7 +1016,7 @@
         <contentmatch>downloadTable</contentmatch>
         <tagtext>share-online.com</tagtext>
     </host>
-    <host domain="share.cx" active="1" status="alive" taggable="1">
+    <host domain="share.cx" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[share\.cx/files/[0-9]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>share.cx</tagtext>
@@ -924,10 +1028,10 @@
     </host>
     <host domain="share50.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[share50\.com/download\.php\?id=[0-9a-z]+]]></urlmatch>
-        <contentmatch>download.php</contentmatch>
+        <contentmatch>download\.php</contentmatch>
         <tagtext>share50.com</tagtext>
     </host>
-    <host domain="shareator.net" active="1" status="alive" taggable="1">
+    <host domain="shareator.net" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[shareator\.net/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>shareator.net</tagtext>
@@ -937,34 +1041,34 @@
         <contentmatch>lid-file_name</contentmatch>
         <tagtext>shareflare.net</tagtext>
     </host>
-    <host domain="shareplace.com" active="1" status="alive" taggable="1">
+    <host domain="shareplace.com" active="0" status="alive" taggable="1">
         <urlmatch><![CDATA[shareplace\.com/\?=[0-9a-z]+]]></urlmatch>
         <contentmatch>zzipitime</contentmatch>
         <tagtext>shareplace.com</tagtext>
     </host>
-    <host domain="sharerun.com" active="1" status="alive" taggable="1">
+    <host domain="sharerun.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[sharerun\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>sharerun.com</tagtext>
     </host>
-    <host domain="shareswift.com" active="1" status="alive" taggable="1">
+    <host domain="shareswift.com" active="0" status="alive" taggable="1">
         <urlmatch><![CDATA[shareswift\.com/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>shareswift.com</tagtext>
     </host>
-    <host domain="sharingmatrix.com" active="1" status="alive" taggable="1">
+    <host domain="sharingmatrix.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[sharingmatrix\.com/file/[0-9]+/]]></urlmatch>
         <contentmatch>filename</contentmatch>
         <tagtext>sharingmatrix.com</tagtext>
     </host>
-    <host domain="shragle.com" active="1" status="alive" taggable="1">
+    <host domain="shragle.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[shragle\.com/files/[0-9a-z]+]]></urlmatch>
         <contentmatch>downloadFrame</contentmatch>
         <tagtext>shragle.com</tagtext>
     </host>
     <host domain="slingfile.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[slingfile\.com/file/[0-9a-z]+]]></urlmatch>
-        <contentmatch>downloadbutton</contentmatch>
+        <contentmatch>downloadbar</contentmatch>
         <tagtext>slingfile.com</tagtext>
     </host>
     <host domain="sockshare.com" active="1" status="alive" taggable="1">
@@ -993,11 +1097,11 @@
         <tagtext>speedy-share.com</tagtext>
     </host>
     <host domain="speedyshare.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[speedyshare\.com/files/[0-9]+/[0-9a-z_-]+]]></urlmatch>
+        <urlmatch><![CDATA[speedyshare\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>/download/</contentmatch>
         <tagtext>speedyshare.com</tagtext>
     </host>
-    <host domain="storage.to" active="0" status="alive" taggable="1">
+    <host domain="storage.to" active="0" status="dead" taggable="1">
         <urlmatch><![CDATA[storage\.to/get/[0-9a-z]+]]></urlmatch>
         <contentmatch>download_container</contentmatch>
         <urlsearch><![CDATA[\?language=[a-zA-Z]{2}]]></urlsearch>
@@ -1005,7 +1109,7 @@
         <tagtext>storage.to</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check REGEX!]]></notes>
     </host>
-    <host domain="storedfiles.me" active="1" status="alive" taggable="1">
+    <host domain="storedfiles.me" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[storedfiles\.me/[0-9a-z]+/]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>storedfiles.me</tagtext>
@@ -1022,13 +1126,13 @@
         <tagtext>supershare.pl</tagtext>
     </host>
     <host domain="swoopshare.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[swoopshare\.com/add/[0-9a-z]+]]></urlmatch>
+        <urlmatch><![CDATA[swoopshare\.com/file/[0-9a-z]+]]></urlmatch>
         <contentmatch>file_mail</contentmatch>
         <tagtext>swoopshare.com</tagtext>
     </host>
     <host domain="tenvoi.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[[0-9a-z]+\.tenvoi\.com]]></urlmatch>
-        <contentmatch>download_tools</contentmatch>
+        <contentmatch>ftable2</contentmatch>
         <tagtext>tenvoi.com</tagtext>
     </host>
     <host domain="teradepot.com" active="1" status="dead" taggable="1">
@@ -1044,7 +1148,7 @@
     </host>
     <host domain="transferbigfiles.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[transferbigfiles\.com/[0-9a-z-]+\?]]></urlmatch>
-        <contentmatch>downFileList</contentmatch>
+        <contentmatch>transfer-size</contentmatch>
         <tagtext>transferbigfiles.com</tagtext>
     </host>
     <host domain="tunescoop.com" active="1" status="alive" taggable="1">
@@ -1057,7 +1161,7 @@
         <contentmatch>download-file</contentmatch>
         <tagtext>turbobit.net</tagtext>
     </host>
-    <host domain="turboupload.com" active="1" status="alive" taggable="1">
+    <host domain="turboupload.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[turboupload\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>turboupload.com</tagtext>
@@ -1073,7 +1177,7 @@
         <tagtext>ul.to</tagtext>
     </host>
     <host domain="uloz.to" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[uloz\.to/[0-9]+]]></urlmatch>
+        <urlmatch><![CDATA[uloz\.to/[0-9a-z]+]]></urlmatch>
         <contentmatch>fileinfo</contentmatch>
         <tagtext>uloz.to</tagtext>
     </host>
@@ -1082,14 +1186,19 @@
         <contentmatch>downloadbutton</contentmatch>
         <tagtext>ultrashare.net</tagtext>
     </host>
-    <host domain="unibytes.com" active="1" status="alive" taggable="1">
+    <host domain="unibytes.com" active="0" status="alive" taggable="1">
         <urlmatch><![CDATA[unibytes\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>fileName</contentmatch>
         <tagtext>unibytes.com</tagtext>
     </host>
+    <host domain="up.ht" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[up\.ht/[0-9a-z]+]]></urlmatch>
+        <contentmatch>(download1|download2)</contentmatch>
+        <tagtext>up.ht</tagtext>
+    </host>
     <host domain="upfordown.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[upfordown\.com/public/pdownload/[0-9]+/[0-9a-z_-]+]]></urlmatch>
-        <contentmatch>divDLStart</contentmatch>
+        <urlmatch><![CDATA[upfordown\.com/(public/pdownload|pupload/view)/[0-9]+]]></urlmatch>
+        <contentmatch>setViewMode</contentmatch>
         <tagtext>upfordown.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity ONLY & ONLY if entered wrong, BUT not if ignored, it should has at least one character, so we can make it optional in the check REGEX!]]></notes>
     </host>
@@ -1118,19 +1227,24 @@
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>uploadc.com</tagtext>
     </host>
+    <host domain="uploaded.net" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[uploaded\.net/(\?id=|file/)?[0-9a-z]+]]></urlmatch>
+        <contentmatch>Download._blink</contentmatch>
+        <tagtext>uploaded.net</tagtext>
+    </host>
     <host domain="uploaded.to" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[uploaded\.to/(\?id=|file/)?[0-9a-z]+]]></urlmatch>
         <contentmatch>Download._blink</contentmatch>
         <tagtext>uploaded.to</tagtext>
     </host>
-    <host domain="uploadfloor.com" active="1" status="alive" taggable="1">
+    <host domain="uploadfloor.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[uploadfloor\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>uploadfloor.com</tagtext>
     </host>
     <host domain="uploading.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[uploading\.com/files/[0-9a-z]+]]></urlmatch>
-        <contentmatch>downloadform</contentmatch>
+        <urlmatch><![CDATA[uploading\.com/files/(get/)?[0-9a-z]+]]></urlmatch>
+        <contentmatch>page_title</contentmatch>
         <downmatch>Service Not Available</downmatch>
         <tagtext>uploading.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check REGEX! This host sometimes goes down & display the following message (regardless link is alive or dead): "Service Not Available. We're sorry. Our service is temporarily unavailable. Everything is fine, but we'd appreciate your patience while our techs correct the situation. Please try accessing your account in a few minutes"!]]></notes>
@@ -1140,7 +1254,7 @@
         <contentmatch>detailtable</contentmatch>
         <tagtext>uploadking.biz</tagtext>
     </host>
-    <host domain="uploadmachine.com" active="1" status="alive" taggable="1">
+    <host domain="uploadmachine.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[uploadmachine\.com/file/[0-9]+/]]></urlmatch>
         <contentmatch>downloadbtn</contentmatch>
         <tagtext>uploadmachine.com</tagtext>
@@ -1159,17 +1273,17 @@
         <contentmatch>fileInfo</contentmatch>
         <tagtext>uploads.ws</tagtext>
     </host>
-    <host domain="uploadspace.pl" active="1" status="alive" taggable="1">
+    <host domain="uploadspace.pl" active="0" status="alive" taggable="1">
         <urlmatch><![CDATA[uploadspace\.pl/[0-9a-z]+]]></urlmatch>
         <contentmatch>waithash</contentmatch>
         <tagtext>uploadspace.pl</tagtext>
     </host>
-    <host domain="uploadstation.com" active="1" status="alive" taggable="1">
+    <host domain="uploadstation.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[uploadstation\.com/file/[0-9a-z]+]]></urlmatch>
         <contentmatch>download_item</contentmatch>
         <tagtext>uploadstation.com</tagtext>
     </host>
-    <host domain="uploadstube.de" active="1" status="alive" taggable="1">
+    <host domain="uploadstube.de" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[uploadstube\.de/download\.php\?file=[0-9]+]]></urlmatch>
         <contentmatch>countdown</contentmatch>
         <tagtext>uploadstube.de</tagtext>
@@ -1194,13 +1308,13 @@
         <contentmatch>scode</contentmatch>
         <tagtext>usaupload.net</tagtext>
     </host>
-    <host domain="usershare.net" active="1" status="alive" taggable="1">
+    <host domain="usershare.net" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[usershare\.net/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>usershare.net</tagtext>
         <notes><![CDATA[This host's links shouldn't end with a trailing slash '/'!]]></notes>
     </host>
-    <host domain="useupload.com" active="1" status="dead" taggable="1">
+    <host domain="useupload.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[useupload\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>useupload.com</tagtext>
@@ -1230,15 +1344,15 @@
     </host>
     <host domain="wrzucaj.com" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[wrzucaj\.com/[0-9]+]]></urlmatch>
-        <contentmatch>report.php</contentmatch>
+        <contentmatch>report\.php</contentmatch>
         <tagtext>wrzucaj.com</tagtext>
     </host>
-    <host domain="wupload.com" active="1" status="alive" taggable="1">
+    <host domain="wupload.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[wupload\.com/file/[0-9]+]]></urlmatch>
         <contentmatch>filename</contentmatch>
         <tagtext>wupload.com</tagtext>
     </host>
-    <host domain="wyslijplik.pl" active="1" status="alive" taggable="1">
+    <host domain="wyslijplik.pl" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[wyslijplik\.pl/download\.php\?sid=[0-9a-z]+]]></urlmatch>
         <contentmatch>get.php</contentmatch>
         <tagtext>wyslijplik.pl</tagtext>
@@ -1272,7 +1386,7 @@
     </host>
     <host domain="xup.in" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[xup\.in/dl,[0-9]+]]></urlmatch>
-        <contentmatch>xddl.php</contentmatch>
+        <contentmatch>xddl\.php</contentmatch>
         <tagtext>xup.in</tagtext>
     </host>
     <host domain="yourfiles.to" active="1" status="alive" taggable="1">
@@ -1286,7 +1400,12 @@
         <tagtext>yousendit.com</tagtext>
         <notes><![CDATA[There's three different formats for this host's URLs! Too complex, no longer maintained!]]></notes>
     </host>
-    <host domain="zalaa.com" active="1" status="alive" taggable="1">
+    <host domain="zaiin.com" active="1" status="alive" taggable="1">
+        <urlmatch><![CDATA[zaiin\.com/[0-9a-z]+]]></urlmatch>
+        <contentmatch>file_meta</contentmatch>
+        <tagtext>zaiin.com</tagtext>
+    </host>
+    <host domain="zalaa.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[zalaa\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>zalaa.com</tagtext>
@@ -1304,12 +1423,12 @@
         <urlreplace>view.jsp?locale=en</urlreplace>
         <tagtext>zippyshare.com</tagtext>
     </host>
-    <host domain="zomgupload.com" active="1" status="alive" taggable="1">
+    <host domain="zomgupload.com" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[zomgupload\.com/[0-9a-z]+]]></urlmatch>
         <contentmatch>(download1|download2)</contentmatch>
         <tagtext>zomgupload.com</tagtext>
     </host>
-    <host domain="zshare.net" active="1" status="alive" taggable="1">
+    <host domain="zshare.net" active="1" status="dead" taggable="1">
         <urlmatch><![CDATA[zshare\.net/(download|audio|video)/[0-9a-z]+]]></urlmatch>
         <contentmatch>delete\.html</contentmatch>
         <tagtext>zshare.net</tagtext>
