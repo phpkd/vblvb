@@ -10,7 +10,7 @@
         <dependency dependencytype="phpkd_vblvb" minversion="4.0.0" maxversion="4.2.99" />
     </dependencies>
 	<codes>
-		<code version="4.1.999">
+		<code version="4.2.999">
 			<installcode><![CDATA[require_once(DIR . '/includes/phpkd/vblvb/class_install.php');
 $phpkd_vblvb = new PHPKD_VBLVB_Install($vbulletin);
 $phpkd_vblvb->install_init($info);
