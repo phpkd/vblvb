@@ -463,8 +463,6 @@ class PHPKD_VBLVB_Install
 
 		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_setting` SET `displayorder` = `displayorder` + 20 WHERE `grouptitle` = 'general' && `displayorder` > 20");
 
-		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` SET `displayorder` = `displayorder` + 10 WHERE `displayorder` >= 40");
-
 		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` (`grouptitle`, `displayorder`, `volatile`) VALUES('tagging', 40, 1)");
 
 		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_setting` (`varname`, `grouptitle`, `value`, `defaultvalue`, `optioncode`, `displayorder`, `advanced`, `volatile`, `datatype`, `validationcode`, `blacklist`) VALUES('general_scriptname', 'general', 'phpkd_vblvb.php', 'phpkd_vblvb.php', '', 30, 0, 1, 'free', '', 0)");
@@ -511,15 +509,8 @@ class PHPKD_VBLVB_Install
 
 		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_setting` SET `displayorder` = `displayorder` - 20 WHERE `grouptitle` = 'general' && `displayorder` > 20");
 
-		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` SET `displayorder` = 40 WHERE `grouptitle` = 'tagging'");
 		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` SET `displayorder` = 50 WHERE `grouptitle` = 'lookfeel'");
-		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` SET `displayorder` = 70 WHERE `grouptitle` = 'linkdir'");
-
-		$this->_vbulletin->db->query_write("INSERT INTO `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` (`grouptitle`, `displayorder`, `volatile`) VALUES('publicverifier', 60, 1)");
-
-		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_setting` SET `displayorder` = 10, `grouptitle` = 'publicverifier', `varname` = 'publicverifier_scriptname' WHERE `varname` = 'general_scriptname'");
-
-		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_setting` SET `displayorder` = 20, `grouptitle` = 'publicverifier', `varname` = 'publicverifier_scripttitle' WHERE `varname` = 'publicverifier_scripttitle'");
+		$this->_vbulletin->db->query_write("UPDATE `" . TABLE_PREFIX . "phpkd_vblvb_settinggroup` SET `displayorder` = 60 WHERE `grouptitle` = 'linkdir'");
 
 		$this->_vbulletin->db->query_write("DELETE FROM `" . TABLE_PREFIX . "phpkd_vblvb_setting` WHERE `varname` = 'general_scriptname' OR `varname` = 'general_scripttitle'");
 
