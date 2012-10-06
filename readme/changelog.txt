@@ -564,7 +564,7 @@ Changelog:
     1. Bug Fix: VBLVB: filefactory.com falsely dead reports (http://forum.phpkd.net/project.php?issueid=187)
      * v4.2.100 05/10/2012 02:00 PM UTC: Featured release (public)
     1. Full compatibility with vBulletin v4.2.x
-    2. New Feature: Catch and follow up HTML http-equiv refresh redirects (forum.phpkd.net/project.php?issueid=188)
+    2. New Feature: Catch and follow up HTML http-equiv refresh redirects (http://forum.phpkd.net/project.php?issueid=188)
     3. New Hosts ( host):
       1. bayfiles.com
       2. billionuploads.com
