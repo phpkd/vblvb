@@ -565,7 +565,7 @@ Changelog:
      * v4.2.100 05/10/2012 02:00 PM UTC: Featured release (public)
     1. Full compatibility with vBulletin v4.2.x
     2. New Feature: Catch and follow up HTML http-equiv refresh redirects (http://forum.phpkd.net/project.php?issueid=188)
-    3. New Hosts ( host):
+    3. New Hosts (22 host):
       1. bayfiles.com
       2. billionuploads.com
       3. cobrashare.net
@@ -588,7 +588,7 @@ Changelog:
       20. up.ht
       21. uploaded.net
       22. zaiin.com
-    4. Updated Hosts ( hosts):
+    4. Updated Hosts (53 hosts):
       1. 10upload.com
       2. 1fichier.com
       3. 2shared.com
@@ -642,7 +642,7 @@ Changelog:
       51. useupload.com
       52. wrzucaj.com
       53. xup.in
-    5. Disabled Hosts ( Hosts):
+    5. Disabled Hosts (9 Hosts):
       1. boosterking.com
       2. box.com
       3. filecloud.io
@@ -652,7 +652,7 @@ Changelog:
       7. shareswift.com
       8. unibytes.com
       9. uploadspace.pl
-    6. Dead Hosts ( Hosts):
+    6. Dead Hosts (64 Hosts):
       1. 2giga.com
       2. 6ybh-upload.com
       3. annonhost.net
