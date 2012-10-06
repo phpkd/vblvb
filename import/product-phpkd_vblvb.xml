@@ -646,7 +646,7 @@ You can control this feature per host/module & set host tag's text as well. <a h
 			<phrase name="settinggroup_general" date="1277873745" username="PHPKD" version="4.0.133"><![CDATA[General Settings]]></phrase>
 			<phrase name="settinggroup_linkdir" date="1287282017" username="PHPKD" version="4.0.200"><![CDATA[Link Directory Settings]]></phrase>
 			<phrase name="settinggroup_lookfeel" date="1277930949" username="PHPKD" version="4.0.133"><![CDATA[Look & Feel Settings]]></phrase>
-            <phrase name="settinggroup_publicverifier" date="1349440675" username="PHPKD" version="4.2.100"><![CDATA[Public Link Verifier]]></phrase>
+            <phrase name="settinggroup_publicverifier" date="1349440675" username="PHPKD" version="4.2.100"><![CDATA[Public Verifier Settings]]></phrase>
 			<phrase name="settinggroup_punishment" date="1277881025" username="PHPKD" version="4.0.133"><![CDATA[Punishment Settings]]></phrase>
 			<phrase name="settinggroup_reporting" date="1277873734" username="PHPKD" version="4.0.133"><![CDATA[Reporting Settings]]></phrase>
 			<phrase name="settinggroup_tagging" date="1324470451" username="PHPKD" version="4.1.300"><![CDATA[Tagging Settings]]></phrase>

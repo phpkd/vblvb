@@ -264,7 +264,14 @@ $options = construct_forum_chooser_options(1);</optioncode>
             <defaultvalue>1</defaultvalue>
         </setting>
     </settinggroup>
-    <settinggroup name="publicverifier" displayorder="60">
+    <settinggroup name="linkdir" displayorder="60">
+        <setting varname="linkdir_recording_active" displayorder="10">
+            <datatype>boolean</datatype>
+            <optioncode>yesno</optioncode>
+            <defaultvalue>0</defaultvalue>
+        </setting>
+    </settinggroup>
+    <settinggroup name="publicverifier" displayorder="70">
         <setting varname="publicverifier_scriptname" displayorder="10">
             <datatype>free</datatype>
             <defaultvalue>phpkd_vblvb.php</defaultvalue>
@@ -272,13 +279,6 @@ $options = construct_forum_chooser_options(1);</optioncode>
         <setting varname="publicverifier_scripttitle" displayorder="10">
             <datatype>free</datatype>
             <defaultvalue>vB Link Verifier Bot</defaultvalue>
-        </setting>
-    </settinggroup>
-    <settinggroup name="linkdir" displayorder="70">
-        <setting varname="linkdir_recording_active" displayorder="10">
-            <datatype>boolean</datatype>
-            <optioncode>yesno</optioncode>
-            <defaultvalue>0</defaultvalue>
         </setting>
     </settinggroup>
 </settinggroups>
