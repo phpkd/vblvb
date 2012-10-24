@@ -277,21 +277,36 @@ class PHPKD_VBLVB_DM
 			if (!empty($apiurl))
 			{
 				$page = $this->vurl($apiurl);
-				$excontentmatch = explode('|', $contentmatch);
-				$ex2contentmatch = explode(',', $excontentmatch[1]);
-				$exdownmatch = explode('|', $downmatch);
-				$expage = explode(',', $page);
 
-				// if (count($excontentmatch) > 1 && count($expage) > 1 && $excontentmatch[1] == $expage[$excontentmatch[0] - 1])
-				if (count($excontentmatch) > 1 && count($expage) > 1 && ($ex2contentmatch[0] == $expage[$excontentmatch[0] - 1] || $ex2contentmatch[1] == $expage[$excontentmatch[0] - 1]))
+				if (isset($page['headers']['http-response']['statuscode']) AND $page['headers']['http-response']['statuscode'] == 200)
 				{
-					$status = 'alive';
-					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $oriurl);
+					$excontentmatch = explode('|', $contentmatch);
+					$ex2contentmatch = explode(',', $excontentmatch[1]);
+					$exdownmatch = explode('|', $downmatch);
+					$expage = explode(',', $page['body']);
+
+					// if (count($excontentmatch) > 1 && count($expage) > 1 && $excontentmatch[1] == $expage[$excontentmatch[0] - 1])
+					if (count($excontentmatch) > 1 && count($expage) > 1 && ($ex2contentmatch[0] == $expage[$excontentmatch[0] - 1] || $ex2contentmatch[1] == $expage[$excontentmatch[0] - 1]))
+					{
+						$status = 'alive';
+						$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $oriurl);
+					}
+					else if (count($exdownmatch) > 1 && count($expage) > 1 && $exdownmatch[1] == $expage[$exdownmatch[0] - 1])
+					{
+						$status = 'down';
+						$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $oriurl);
+					}
+					else
+					{
+						$status = 'dead';
+						$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $oriurl);
+					}
 				}
-				else if (count($exdownmatch) > 1 && count($expage) > 1 && $exdownmatch[1] == $expage[$exdownmatch[0] - 1])
+				// This link supposed to be a direct link since the responce headers not set & content length too long; We'll consider it down since we can't make sure what content is it!! (not alive/not dead)
+				else if ($page['body'] == 'VURL_ERROR_MAXSIZE')
 				{
 					$status = 'down';
-					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $oriurl);
+					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down_dl'], $colors[2], $oriurl);
 				}
 				else
 				{
@@ -308,34 +323,63 @@ class PHPKD_VBLVB_DM
 
 				$page = $this->vurl($url);
 
-				if (!empty($contentmatch) && preg_match("#$contentmatch#i", $page))
+				if (isset($page['headers']['http-response']['statuscode']) AND $page['headers']['http-response']['statuscode'] == 200)
 				{
-					$status = 'alive';
-					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $oriurl);
-				}
-				else if (!empty($downmatch) && preg_match("#$downmatch#i", $page))
-				{
-					$status = 'down';
-					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $oriurl);
-				}
-				else if (preg_match("#http-equiv=[\'|\"]refresh[\'|\"].*content=[\'|\"][0-9]+;url=[\'|\"]?([0-9a-z_=:/.\?%]+)[\'|\"]?[\'|\"].* />#i", $page, $matches))
-				{
-					$page = $this->vurl($matches[1]);
-					if (!empty($contentmatch) && preg_match("#$contentmatch#i", $page))
+					if (!empty($contentmatch) && preg_match("#$contentmatch#i", $page['body']))
 					{
 						$status = 'alive';
 						$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $oriurl);
 					}
-					else if (!empty($downmatch) && preg_match("#$downmatch#i", $page))
+					else if (!empty($downmatch) && preg_match("#$downmatch#i", $page['body']))
 					{
 						$status = 'down';
 						$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $oriurl);
+					}
+					else if (preg_match("#http-equiv=[\'|\"]refresh[\'|\"].*content=[\'|\"][0-9]+;url=[\'|\"]?([0-9a-z_=:/.\?%]+)[\'|\"]?[\'|\"].* />#i", $page['body'], $matches))
+					{
+						$page = $this->vurl($matches[1]);
+
+						if (isset($page['headers']['http-response']['statuscode']) AND $page['headers']['http-response']['statuscode'] == 200)
+						{
+							if (!empty($contentmatch) && preg_match("#$contentmatch#i", $page['body']))
+							{
+								$status = 'alive';
+								$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_alive'], $colors[0], $oriurl);
+							}
+							else if (!empty($downmatch) && preg_match("#$downmatch#i", $page['body']))
+							{
+								$status = 'down';
+								$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down'], $colors[2], $oriurl);
+							}
+							else
+							{
+								$status = 'dead';
+								$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $oriurl);
+							}
+						}
+						// This link supposed to be a direct link since the responce headers not set & content length too long; We'll consider it down since we can't make sure what content is it!! (not alive/not dead)
+						else if ($page['body'] == 'VURL_ERROR_MAXSIZE')
+						{
+							$status = 'down';
+							$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down_dl'], $colors[2], $oriurl);
+						}
+						else
+						{
+							$status = 'dead';
+							$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $oriurl);
+						}
 					}
 					else
 					{
 						$status = 'dead';
 						$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_dead'], $colors[1], $oriurl);
 					}
+				}
+				// This link supposed to be a direct link since the responce headers not set & content length too long; We'll consider it down since we can't make sure what content is it!! (not alive/not dead)
+				else if ($page['body'] == 'VURL_ERROR_MAXSIZE')
+				{
+					$status = 'down';
+					$log = construct_phrase($this->_registry->_vbphrase['phpkd_vblvb_log_link_down_dl'], $colors[2], $oriurl);
 				}
 				else
 				{
@@ -379,6 +423,7 @@ class PHPKD_VBLVB_DM
 		$vurl->set_option(VURL_MAXREDIRS, $this->_registry->_vbulletin->phpkd_vblvb['general_vurl_maxredirs']);
 		$vurl->set_option(VURL_TIMEOUT, $this->_registry->_vbulletin->phpkd_vblvb['general_vurl_timeout']);
 		$vurl->set_option(VURL_MAXSIZE, $this->_registry->_vbulletin->phpkd_vblvb['general_vurl_maxsize']);
+		$vurl->set_option(VURL_DIEONMAXSIZE, false);
 
 		if ($post !== null)
 		{
@@ -386,6 +431,7 @@ class PHPKD_VBLVB_DM
 			$vurl->set_option(VURL_POSTFIELDS, $post);
 		}
 
+		$vurl->set_option(VURL_HEADER, 1);
 		$vurl->set_option(VURL_RETURNTRANSFER, 1);
 		$vurl->set_option(VURL_CLOSECONNECTION, 1);
 

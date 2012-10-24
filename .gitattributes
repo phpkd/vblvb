@@ -64,6 +64,7 @@ upload/includes/phpkd/vblvb/class_dml.php -text
 upload/includes/phpkd/vblvb/class_hooks.php -text
 upload/includes/phpkd/vblvb/class_init.php -text
 upload/includes/phpkd/vblvb/class_install.php -text
+upload/includes/phpkd/vblvb/class_vurl.php -text
 upload/includes/phpkd/vblvb/hosts.xml -text svneol=unset#text/plain
 upload/includes/phpkd/vblvb/index.html -text
 upload/includes/phpkd/vblvb/settings.xml -text svneol=unset#text/plain
