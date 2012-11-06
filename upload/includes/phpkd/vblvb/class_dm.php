@@ -197,7 +197,8 @@ class PHPKD_VBLVB_DM
 
 						if (!empty($host['apiurl']) && count($hostmatch) > 1)
 						{
-							unset($hostmatch[0]);
+							$hostmatch[1] = rawurlencode($hostmatch[1]);
+							$hostmatch[2] = rawurlencode($hostmatch[2]);
 							$urlsreturn[] = (($this->_registry->_vbulletin->phpkd_vblvb['linkdir_recording_active'] || $this->_registry->_vbulletin->phpkd_vblvb['tagging_host']) ? array('host' => $host['domain'], 'url' => $url, 'lastcheck' => TIMENOW, 'hash' => md5($url), 'status' => $this->check($url, str_replace(array('{1}', '{2}'), array($hostmatch[1], $hostmatch[2]), $host['apiurl']), $host['status'], $host['contentmatch'], $host['downmatch'], $host['urlsearch'], $host['urlreplace'], $userid, $postid)) : array('status' => $this->check($url, str_replace(array('{1}', '{2}'), array($hostmatch[1], $hostmatch[2]), $host['apiurl']), $host['status'], $host['contentmatch'], $host['downmatch'], $host['urlsearch'], $host['urlreplace'], $userid, $postid)));
 						}
 						else
