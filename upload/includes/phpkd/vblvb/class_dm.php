@@ -414,7 +414,7 @@ class PHPKD_VBLVB_DM
 	 */
 	public function vurl($url, $post = null)
 	{
-		require_once(DIR . '/includes/class_vurl.php');
+		require_once(DIR . '/includes/phpkd/vblvb/class_vurl.php');
 
 		$vurl = new vB_vURL($this->_registry->_vbulletin);
 		$vurl->set_option(VURL_URL, $url);
