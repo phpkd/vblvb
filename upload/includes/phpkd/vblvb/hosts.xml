@@ -154,12 +154,12 @@
         <tagtext>cjoint.net</tagtext>
     </host>
     <host domain="cobrashare.net" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[cobrashare\.net(\:[0-9]+)?/(.*)\?id=[0-9a-z]+]]></urlmatch>
+        <urlmatch><![CDATA[cobrashare\.net(\:[0-9]+)?/(.+)\?id=[0-9a-z]+]]></urlmatch>
         <contentmatch>captcha</contentmatch>
         <tagtext>cobrashare.net</tagtext>
     </host>
     <host domain="cobrashare.sk" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[cobrashare\.sk(\:[0-9]+)?/(.*)\?id=[0-9a-z]+]]></urlmatch>
+        <urlmatch><![CDATA[cobrashare\.sk(\:[0-9]+)?/(.+)\?id=[0-9a-z]+]]></urlmatch>
         <contentmatch>captcha</contentmatch>
         <tagtext>cobrashare.sk</tagtext>
     </host>
@@ -930,7 +930,7 @@
         <tagtext>rapida.cc</tagtext>
     </host>
     <host domain="rapidshare.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[rapidshare\.com/files/([0-9]+)/([0-9a-z_.-]+)]]></urlmatch>
+        <urlmatch><![CDATA[rapidshare\.com/files/([0-9]+)/(.+)]]></urlmatch>
         <apiurl><![CDATA[http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles&files={1}&filenames={2}]]></apiurl>
         <contentmatch>5|1</contentmatch>
         <downmatch>5|3</downmatch>
