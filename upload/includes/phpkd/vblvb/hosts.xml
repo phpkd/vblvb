@@ -812,6 +812,11 @@
         <contentmatch>downloadLinks</contentmatch>
         <tagtext>mysharegadget.com</tagtext>
     </host>
+	<host domain="netfolder.in" active="1" status="alive" taggable="1">
+		<urlmatch><![CDATA[netfolder\.in/folder\.php\?folder_id=[0-9a-z]+]]></urlmatch>
+		<contentmatch>export\.php</contentmatch>
+		<tagtext>netfolder.in</tagtext>
+	</host>
     <host domain="netload.in" active="1" status="alive" taggable="1">
         <urlmatch><![CDATA[netload\.in/datei[0-9a-z]+]]></urlmatch>
         <contentmatch>(dl_first_file_download|Download_Limit|password-protected)</contentmatch>
