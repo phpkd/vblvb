@@ -97,7 +97,7 @@ class PHPKD_VBLVB_DM
 							$opentags[] = $value;
 							break;
 						case 'close':
-							if ('LIST' != $bbkey)
+							if ('list' != $bbkey)
 							{
 								$closetags[] = $value;
 							}
