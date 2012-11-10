@@ -719,14 +719,15 @@ Changelog:
       64. zshare.net
      * v4.2.110 10/11/2012 05:00 PM UTC: Featured release (public)
 	1. New Feature: Check HTTP reponse headers for more accurate/effecient result (http://forum.phpkd.net/project.php?issueid=204)
-    2. Bug Fix: Checked BBCode "List" Regex Pattern Disorder (http://forum.phpkd.net/project.php?issueid=199)
+	2. New Feature: vB_vURL is limiting us acheiving certain tasks, create our own implementation (http://forum.phpkd.net/project.php?issueid=205)
     3. Bug Fix: Rapidshare.com falsely report 'some' links (with spaces in file names) (http://forum.phpkd.net/project.php?issueid=200)
     4. Bug Fix: API URL check falsely reported when parameters contain special characters (http://forum.phpkd.net/project.php?issueid=201)
     5. Bug Fix: false reports for netload.in premium user links (http://forum.phpkd.net/project.php?issueid=202)
 	6. Bug Fix: false reports for netload.in full links (http://forum.phpkd.net/project.php?issueid=133)
 	7. Bug Fix: false reports for netload.in password protected links (http://forum.phpkd.net/project.php?issueid=132)
     8. Bug Fix: All direct links marked falsely as dead (http://forum.phpkd.net/project.php?issueid=192)
-	9. General: Removed trail version support.
+    9. Bug Fix: Checked BBCode "List" Regex Pattern Disorder (http://forum.phpkd.net/project.php?issueid=199)
+	10. General: Removed trail version support.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Brought to you by PHP KingDom (www.phpkd.net)
