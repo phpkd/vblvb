@@ -287,7 +287,7 @@ class PHPKD_VBLVB_DML
 
 		if (!class_exists('vB_vURL'))
 		{
-			require_once(DIR . '/includes/class_vurl.php');
+			require_once(DIR . '/includes/phpkd/vblvb/class_vurl.php');
 		}
 
 		$vurl = new vB_vURL($this->_registry->_vbulletin);
