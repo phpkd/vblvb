@@ -65,4 +65,4 @@ Upgrade Procedure:
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$Version: 4.2.100 $ - $Id$
+$Version: 4.2.110 $ - $Id$

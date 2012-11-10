@@ -1,7 +1,7 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.2.100 # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.2.110 # ||
 || # License Type: Commercial License                            $Revision$ # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
@@ -23,7 +23,7 @@ if (!defined('VB_AREA'))
 define('ERRTYPE_ECHO',               10);
 
 define('PHPKD_VBLVB_DEBUG',          false);
-define('PHPKD_VBLVB_VERSION',        '4.2.100');
+define('PHPKD_VBLVB_VERSION',        '4.2.110');
 define('PHPKD_VBLVB_TOCKEN',         '7efad4a065eb29fb5ac56d57bc2c090c');
 define('PHPKD_VBLVB_LICENSE_PREFIX', 'VBLVB');
 
@@ -743,7 +743,7 @@ class PHPKD_VBLVB
 
 /*============================================================================*\
 || ########################################################################### ||
-|| # Version: 4.2.100
+|| # Version: 4.2.110
 || # $Revision$
 || # Released: $Date$
 || ########################################################################### ||
