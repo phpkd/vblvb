@@ -25,7 +25,6 @@ define('ERRTYPE_ECHO',               10);
 define('PHPKD_VBLVB_DEBUG',          false);
 define('PHPKD_VBLVB_VERSION',        '4.2.110');
 define('PHPKD_VBLVB_TOCKEN',         '7efad4a065eb29fb5ac56d57bc2c090c');
-define('PHPKD_VBLVB_LICENSE_PREFIX', 'VBLVB');
 
 
 /**
@@ -389,13 +388,9 @@ class PHPKD_VBLVB
 	 */
 	public function verify_license($periodic = false)
 	{
-		if (empty($this->_vbulletin->phpkd_vblvb['general_licensekey']))
+		if (empty($this->_vbulletin->phpkd_vblvb['general_licensekey']) || strtolower(substr($this->_vbulletin->phpkd_vblvb['general_licensekey'], 0, 5)) != 'vblvb')
 		{
 			$this->seterror('phpkd_vblvb_invalid_license_key');
-		}
-		else if (strtolower(substr($this->_vbulletin->phpkd_vblvb['general_licensekey'], 0, 5)) != strtolower(PHPKD_VBLVB_LICENSE_PREFIX))
-		{
-			$this->seterror('phpkd_vblvb_invalid_license_' . strtolower(PHPKD_VBLVB_LICENSE_PREFIX));
 		}
 
 		if ($periodic)
