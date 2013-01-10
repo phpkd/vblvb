@@ -283,5 +283,3 @@ Supported Hosts:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-$Version: 4.2.110 $ - $Id: install.txt 258 2012-07-10 15:44:48Z PHPKD $

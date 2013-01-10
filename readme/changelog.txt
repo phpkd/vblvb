@@ -728,9 +728,8 @@ Changelog:
     8. Bug Fix: All direct links marked falsely as dead (http://forum.phpkd.net/project.php?issueid=192)
     9. Bug Fix: Checked BBCode "List" Regex Pattern Disorder (http://forum.phpkd.net/project.php?issueid=199)
 	10. General: Removed trail version support.
+     * v4.2.120 10/01/2013 10:10 AM UTC: Going Opensource!
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-$Version: 4.2.110 $ - $Id: install.txt 258 2012-07-10 15:44:48Z PHPKD $

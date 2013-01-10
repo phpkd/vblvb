@@ -10,7 +10,7 @@ Name:
 
 Version:
 ~~~~~~~~~
-     * 4.2.110
+     * 4.2.120
 
 
 Description:
@@ -26,17 +26,6 @@ Compatible With:
 Requirements:
 ~~~~~~~~~~~~~~
      * vBulletin version 4.0.x/4.1.x/4.2.x
-
-
-License:
-~~~~~~~~~
-     * http://info.phpkd.net/en/license/commercial/
-
-
-Helpful links:
-~~~~~~~~~~~~~~
-     * Bug Reports: http://forum.phpkd.net/project.php?do=issuelist&projectid=2&issuetypeid=bug
-     * Feature Requests: http://forum.phpkd.net/project.php?do=issuelist&projectid=2&issuetypeid=feature
 
 
 Features:
@@ -333,17 +322,6 @@ Features:
 	     o Can Administer "PHPKD - vB Link Verifier Bot"
 
 
-Translations *Coming Soon* :
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    * Arabic » ISO-8859-6
-    * English, French, Spanish » ISO-8859-1
-    * Croatian » ISO-8859-2
-    * Greek » ISO-8859-7
-    * Italian » ISO-8859-16
-    * Russian » ISO-8859-5
-    * Turkish » ISO-8859-9
-
-
 Controls:
 ~~~~~~~~~~
      * Administrator Permissions
@@ -372,7 +350,7 @@ Controls:
 
 License:
 ~~~~~~~~~
-     * http://info.phpkd.net/en/license/commercial/
+     * http://creativecommons.org/licenses/by-nc-sa/3.0/
 
 
 Help with:
@@ -381,21 +359,6 @@ Help with:
      * Contributing any updates, upgrades and/or any new features.
      * Translations to benefit more users (Translate the product & win a free 'Ultimate' edition - http://forum.phpkd.net/showthread.php?t=21).
      * Spreading the 'Lite' edition of this product product. Yes, you're free to re-distribute 'Lite' edition of this product as it is (See 'Free' license details).
-
-
-Known Issues:
-~~~~~~~~~~~~~
-     * None!
-
-
-Future TO-DO-LIST:
-~~~~~~~~~~~~~~~~~~~
-     * Post your suggestions!
-
-
-Screen Shots:
-~~~~~~~~~~~~~~
-     * Available at: http://product.phpkd.net/en/commercial/vblvb/
 
 
 Technical Notes:
@@ -422,20 +385,6 @@ Technical Notes:
      * Installation Time: ~20 seconds
 
 
-Reference Links:
-~~~~~~~~~~~~~~~~~
-     * PHPKD.NET: http://product.phpkd.net/en/commercial/vblvb/
-
-
-Recent Products:
-~~~~~~~~~~~~~~~~~
-
-     * vB Automated Bookie Center 'Ultimate'
-	http://go.phpkd.net/en/product/vbabc/
-
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Brought to you by PHP KingDom (www.phpkd.net)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-$Version: 4.2.110 $ - $Id$

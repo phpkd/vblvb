@@ -3,7 +3,7 @@
 <product productid="phpkd_vblvb_fix" active="1">
 	<title>vB Link Verifier Bot Fix</title>
 	<description><![CDATA[This product just fix a transition issue for those upgrading from 'Lite' edition to 'Ultimate' edition.]]></description>
-	<version>4.2.100</version>
+	<version>4.2.120</version>
 	<url />
 	<versioncheckurl />
     <dependencies>
@@ -41,5 +41,3 @@ print_cp_redirect("plugin.php?" . $vbulletin->session->vars['sessionurl'] . "do=
 	<faqentries>
 	</faqentries>
 </product>
-
-<!-- SVN: $Version: 4.2.100 $ - $Id$ -->

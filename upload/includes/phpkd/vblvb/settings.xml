@@ -282,5 +282,3 @@ $options = construct_forum_chooser_options(1);</optioncode>
         </setting>
     </settinggroup>
 </settinggroups>
-
-<!-- SVN: $Version: 4.2.110 $ - $Id$ -->

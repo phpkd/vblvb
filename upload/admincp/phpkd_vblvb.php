@@ -1,15 +1,15 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.2.110 # ||
-|| # License Type: Commercial License                            $Revision$ # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.2.120 # ||
+|| # License Type: Creative Commons - Attribution-Noncommercial-Share Alike 3.0   # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #            Copyright ©2005-2012 PHP KingDom. All Rights Reserved.            # ||
-|| #      This product may not be redistributed in whole or significant part.     # ||
+|| #           Copyright ©2005-2013 PHP KingDom. Some Rights Reserved.            # ||
+|| #       This product may be redistributed in whole or significant part.        # ||
 || # 																			  # ||
-|| # ---------- "vB Link Verifier Bot 'Ultimate'" IS NOT FREE SOFTWARE ---------- # ||
-|| #     http://www.phpkd.net | http://info.phpkd.net/en/license/commercial       # ||
+|| # ----------- "vB Link Verifier Bot 'Ultimate'" IS A FREE SOFTWARE ----------- # ||
+|| #   http://www.phpkd.net | http://creativecommons.org/licenses/by-nc-sa/3.0/   # ||
 || ################################################################################ ||
 \*==================================================================================*/
 

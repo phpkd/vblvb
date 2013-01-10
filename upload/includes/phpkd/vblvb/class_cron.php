@@ -1,15 +1,15 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.2.110 # ||
-|| # License Type: Commercial License                            $Revision$ # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.2.120 # ||
+|| # License Type: Creative Commons - Attribution-Noncommercial-Share Alike 3.0   # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #            Copyright ©2005-2012 PHP KingDom. All Rights Reserved.            # ||
-|| #      This product may not be redistributed in whole or significant part.     # ||
+|| #           Copyright ©2005-2013 PHP KingDom. Some Rights Reserved.            # ||
+|| #       This product may be redistributed in whole or significant part.        # ||
 || # 																			  # ||
-|| # ---------- "vB Link Verifier Bot 'Ultimate'" IS NOT FREE SOFTWARE ---------- # ||
-|| #     http://www.phpkd.net | http://info.phpkd.net/en/license/commercial       # ||
+|| # ----------- "vB Link Verifier Bot 'Ultimate'" IS A FREE SOFTWARE ----------- # ||
+|| #   http://www.phpkd.net | http://creativecommons.org/licenses/by-nc-sa/3.0/   # ||
 || ################################################################################ ||
 \*==================================================================================*/
 
@@ -38,26 +38,17 @@ if (!defined('IN_CONTROL_PANEL'))
 // ######################### START MAIN SCRIPT ############################
 // ########################################################################
 require_once(DIR . '/includes/phpkd/vblvb/class_core.php');
-require_once(DIR . '/includes/phpkd/vblvb/class_copyright.php');
 require_once(DIR . '/includes/class_taggablecontent.php');
 
 $phpkd_vblvb = new PHPKD_VBLVB($vbulletin, $vbphrase, defined('IN_CONTROL_PANEL') ? ERRTYPE_CP : ERRTYPE_SILENT);
 $plugin = $vbulletin->db->query_first("SELECT * FROM " . TABLE_PREFIX . "plugin WHERE product = 'phpkd_vblvb' && hookname = 'global_complete'");
-$bburl = @parse_url($vbulletin->options['bburl']);
-$tocken = md5(md5($bburl['host']) . md5(PHPKD_VBLVB_TOCKEN) . md5($vbulletin->userinfo['securitytoken']) . md5(TIMENOW));
 
-if ((!$plugin['active'] && $copyright != $tocken) || md5($plugin['phpcode']) != '9d75af8827a7d278565dd87b7c6d852e')
-{
-	$phpkd_vblvb->seterror('phpkd_vblvb_copyright_violate');
-}
-else if ($vbulletin->phpkd_vblvb['general_active'])
+if ($vbulletin->phpkd_vblvb['general_active'])
 {
 	if (!$vbulletin->phpkd_vblvb['general_checked_existingposts'])
 	{
 		$phpkd_vblvb->seterror('phpkd_vblvb_checked_existing');
 	}
-
-	$phpkd_vblvb->verify_license();
 
 	// Required Initialization
 	$phpkd_vblvb->initialize(array('thread_modes' => array(), 'post_modes' => array()));
@@ -423,12 +414,4 @@ unset($phpkd_vblvb);
 
 log_cron_action('', $nextitem, 1);
 
-
-/*============================================================================*\
-|| ########################################################################### ||
-|| # Version: 4.2.110
-|| # $Revision$
-|| # Released: $Date$
-|| ########################################################################### ||
-\*============================================================================*/
 ?>

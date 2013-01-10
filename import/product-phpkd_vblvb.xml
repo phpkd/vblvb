@@ -3,9 +3,9 @@
 <product productid="phpkd_vblvb" active="1">
 	<title><![CDATA[PHPKD - vB Link Verifier Bot 'Ultimate']]></title>
 	<description><![CDATA[This product extract sharing links of hundreds of sharing hosts, and verifies them; If they're "Alive" the post will pass, otherwise it will be punished. (ex: Hotfile, Mediafire, Rapidshare, 4shared, Depositfiles, Filefactory, ...etc).]]></description>
-	<version>4.2.110</version>
-	<url>http://tools.phpkd.net/en/producthelp/url/vblvb/</url>
-	<versioncheckurl>http://tools.phpkd.net/en/producthelp/version/vblvb/</versioncheckurl>
+	<version>4.2.120</version>
+	<url><![CDATA[http://www.vbulletin.org/forum/misc.php?do=producthelp&pid=phpkd_vblvb]]></url>
+	<versioncheckurl><![CDATA[http://www.vbulletin.org/forum/misc.php?do=productcheck&pid=phpkd_vblvb]]></versioncheckurl>
 	<dependencies>
 		<dependency dependencytype="vbulletin" minversion="4.0.0" maxversion="4.2.99" />
 	</dependencies>
@@ -402,7 +402,6 @@ $bbtitle]]></phrase>
 	<li>All posts has been checked already, and the next successive check did not come yet.</li>
 	<li>As per your product's settings, there is not any posts to check currently. <a href="phpkd_vblvb.php?null=0">You may wish to review your product's settings</a>.</li>
 </ol>]]></phrase>
-			<phrase name="phpkd_vblvb_copyright_violate" date="1308855639" username="PHPKD" version="4.1.210"><![CDATA[<span class="diff-deleted">Sorry, copyright notice has been altered or disalbed without prior official permission. 'Branding Free' option required to do so.. Please contact support at <a href="http://www.phpkd.net" target="_blank">www.phpkd.net</a> for this matter.</span>]]></phrase>
 			<phrase name="phpkd_vblvb_developers_only" date="1277049500" username="PHPKD" version="4.0.200"><![CDATA[Sorry, this feature is available for official developers only.]]></phrase>
 			<phrase name="phpkd_vblvb_editpost_require_sharing" date="1324480635" username="PHPKD" version="4.1.300"><![CDATA[Sorry, you should include some 'supported' sharing links within your post in order to submit it. Sharing links required in this forum. <a href="{1}?do=hosts">Supported Hosts</a>]]></phrase>
 			<phrase name="phpkd_vblvb_host_deleted_successfully" date="1278005341" username="PHPKD" version="4.0.200"><![CDATA[Host deleted successfully!]]></phrase>
@@ -676,5 +675,3 @@ You can control this feature per host/module & set host tag's text as well. <a h
 	<faqentries>
 	</faqentries>
 </product>
-
-<!-- SVN: $Version: 4.2.110 $ - $Id$ -->

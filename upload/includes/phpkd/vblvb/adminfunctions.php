@@ -1,15 +1,15 @@
 <?php
 /*==================================================================================*\
 || ################################################################################ ||
-|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.2.110 # ||
-|| # License Type: Commercial License                            $Revision$ # ||
+|| # Product Name: vB Link Verifier Bot 'Ultimate'               Version: 4.2.120 # ||
+|| # License Type: Creative Commons - Attribution-Noncommercial-Share Alike 3.0   # ||
 || # ---------------------------------------------------------------------------- # ||
 || # 																			  # ||
-|| #            Copyright ©2005-2012 PHP KingDom. All Rights Reserved.            # ||
-|| #      This product may not be redistributed in whole or significant part.     # ||
+|| #           Copyright ©2005-2013 PHP KingDom. Some Rights Reserved.            # ||
+|| #       This product may be redistributed in whole or significant part.        # ||
 || # 																			  # ||
-|| # ---------- "vB Link Verifier Bot 'Ultimate'" IS NOT FREE SOFTWARE ---------- # ||
-|| #     http://www.phpkd.net | http://info.phpkd.net/en/license/commercial       # ||
+|| # ----------- "vB Link Verifier Bot 'Ultimate'" IS A FREE SOFTWARE ----------- # ||
+|| #   http://www.phpkd.net | http://creativecommons.org/licenses/by-nc-sa/3.0/   # ||
 || ################################################################################ ||
 \*==================================================================================*/
 
@@ -1211,107 +1211,3 @@ function phpkd_vblvb_color_picker_element($x, $y, $color)
 	global $vbulletin;
 	return "\t\t<td style=\"background:$color\" id=\"sw$x-$y\"><img src=\"../" . $vbulletin->options['cleargifurl'] . "\" alt=\"\" style=\"width:11px; height:11px\" /></td>\r\n";
 }
-
-/*
- * Fix Bug: "MySQL server gone away" & "Allowed memory exhausted" errors
- * We've initiated a new DB connection with persistance allowed, so we don't get in such troubles with ongoing queries!!
- */
-function phpkd_vblvb_fix_wait_timeout()
-{
-	global $vbulletin;
-
-	// Set persistent connection ON!
-	$vbulletin->config['MasterServer']['usepconnect'] = 1;
-
-	// load database class
-	switch (strtolower($vbulletin->config['Database']['dbtype']))
-	{
-		// load standard MySQL class
-		case 'mysql':
-		case '':
-		{
-			if ($vbulletin->debug && ($vbulletin->input->clean_gpc('r', 'explain', TYPE_UINT) || (defined('POST_EXPLAIN') && !empty($_POST))))
-			{
-				// load 'explain' database class
-				require_once(DIR . '/includes/class_database_explain.php');
-				$db2 = new vB_Database_Explain($vbulletin);
-			}
-			else
-			{
-				$db2 = new vB_Database($vbulletin);
-			}
-			break;
-		}
-
-		case 'mysql_slave':
-		{
-			require_once(DIR . '/includes/class_database_slave.php');
-			$db2 = new vB_Database_Slave($vbulletin);
-			break;
-		}
-
-		// load MySQLi class
-		case 'mysqli':
-		{
-			if ($vbulletin->debug && ($vbulletin->input->clean_gpc('r', 'explain', TYPE_UINT) || (defined('POST_EXPLAIN') && !empty($_POST))))
-			{
-				// load 'explain' database class
-				require_once(DIR . '/includes/class_database_explain.php');
-				$db2 = new vB_Database_MySQLi_Explain($vbulletin);
-			}
-			else
-			{
-				$db2 = new vB_Database_MySQLi($vbulletin);
-			}
-			break;
-		}
-
-		case 'mysqli_slave':
-		{
-			require_once(DIR . '/includes/class_database_slave.php');
-			$db2 = new vB_Database_Slave_MySQLi($vbulletin);
-			break;
-		}
-
-		// load extended, non MySQL class
-		default:
-		{
-			// This is not implemented fully yet
-			// $db2 = 'vB_Database_' . $vbulletin->config['Database']['dbtype'];
-			// $db2 = new $db($vbulletin);
-			die('Fatal error: Database class not found');
-		}
-	}
-
-	// Make a new database connection
-	$db2->connect(
-		$vbulletin->config['Database']['dbname'],
-		$vbulletin->config['MasterServer']['servername'],
-		$vbulletin->config['MasterServer']['port'],
-		$vbulletin->config['MasterServer']['username'],
-		$vbulletin->config['MasterServer']['password'],
-		$vbulletin->config['MasterServer']['usepconnect'],
-		$vbulletin->config['SlaveServer']['servername'],
-		$vbulletin->config['SlaveServer']['port'],
-		$vbulletin->config['SlaveServer']['username'],
-		$vbulletin->config['SlaveServer']['password'],
-		$vbulletin->config['SlaveServer']['usepconnect'],
-		$vbulletin->config['Mysqli']['ini_file'],
-		(isset($vbulletin->config['Mysqli']['charset']) ? $vbulletin->config['Mysqli']['charset'] : '')
-	);
-
-	// vBulletin doesn't work under MySQL strict mode currently, so force mode required!
-	$db2->force_sql_mode('');
-
-	// make $db2 a member of $vbulletin
-	$vbulletin->db =& $db2;
-}
-
-
-/*============================================================================*\
-|| ########################################################################### ||
-|| # Version: 4.2.110
-|| # $Revision$
-|| # Released: $Date$
-|| ########################################################################### ||
-\*============================================================================*/
