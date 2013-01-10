@@ -27,7 +27,7 @@
         <tagtext>2giga.com</tagtext>
     </host>
     <host domain="2shared.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[2shared\.com/(zip|music|image|file|video|audio|photo|document)/[0-9a-z]+]]></urlmatch>
+        <urlmatch><![CDATA[2shared\.com/[a-z]+/[0-9a-z]+]]></urlmatch>
         <contentmatch>fileinfo</contentmatch>
         <tagtext>2shared.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity either if not included or if entered wrong, so we can make it optional in the check REGEX!]]></notes>
@@ -43,7 +43,7 @@
         <tagtext>4share.vn</tagtext>
     </host>
     <host domain="4shared.com" active="1" status="alive" taggable="1">
-        <urlmatch><![CDATA[4shared\.com/(zip|music|image|file|video|audio|photo|document|get)/[0-9a-z]+]]></urlmatch>
+        <urlmatch><![CDATA[4shared\.com/[a-z]+/[0-9a-z]+]]></urlmatch>
         <contentmatch>fileMeta</contentmatch>
         <tagtext>4shared.com</tagtext>
         <notes><![CDATA[Last syllable of the link is optional & doesn't affect the URL validity ONLY & ONLY if not included, BUT not if entered wrong-, so we can make it optional in the check REGEX!]]></notes>
