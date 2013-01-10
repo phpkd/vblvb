@@ -355,10 +355,10 @@ License:
 
 Help with:
 ~~~~~~~~~~~
+     * Translations to benefit more users.
      * Suggestions & feature requests to develop this product.
      * Contributing any updates, upgrades and/or any new features.
-     * Translations to benefit more users (Translate the product & win a free 'Ultimate' edition - http://forum.phpkd.net/showthread.php?t=21).
-     * Spreading the 'Lite' edition of this product product. Yes, you're free to re-distribute 'Lite' edition of this product as it is (See 'Free' license details).
+     * Spreading this product product. Yes, you're free to re-distribute this product as it is (See license details).
 
 
 Technical Notes:
