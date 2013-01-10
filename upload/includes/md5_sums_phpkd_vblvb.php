@@ -16,24 +16,24 @@
 
 $md5_sums = array(
 	'/' => array(
-		'phpkd_vblvb.php'			=> 'badc2af789a726033318f08504eefb8a',
+		'phpkd_vblvb.php'			=> '96bf5af96d462160ddc2dae3c9b40bce',
 	),
 	'/admincp' => array(
-		'phpkd_vblvb.php'			=> 'badc2af789a726033318f08504eefb8a',
+		'phpkd_vblvb.php'			=> 'a3dbe0f8ce2bffe6621cf86f877f4e63',
 	),
 	'/includes/phpkd/vblvb' => array(
-		'adminfunctions.php'		=> '4b09e88ea8815669fb6e4846805f8328',
-		'class_core.php'			=> 'c9c06a76e10ad002fafae09c6ad88b18',
-		'class_cron.php'			=> 'eb73364c0abab5c3074393465dfe3511',
-		'class_dm.php'				=> 'c5fac4c6843b27bb9881e3411faa46fa',
-		'class_hooks.php'			=> 'd786451b511082b9bc3623f0ae486458',
-		'class_init.php'			=> '484333de4ec7f9bdec44a13d58f1a415',
-		'class_install.php'			=> 'c6bae854db816df452ee83e09857602a',
-		'class_vurl.php'			=> 'c6bae854db816df452ee83e09857602a',
+		'adminfunctions.php'		=> '76b2633c38304bd236e9ab9e70ef86b1',
+		'class_core.php'			=> '834791e2788899774adf8031d67c42d0',
+		'class_cron.php'			=> '5b5ab0c46f7e360c0851e079c71be61a',
+		'class_dm.php'				=> 'e318489dc3c6d41786513a42d1e274c7',
+		'class_hooks.php'			=> 'ace67b50da295fd5a101c79b85355812',
+		'class_init.php'			=> 'eb6a3deef26c9e107bcae38878b5ba1e',
+		'class_install.php'			=> 'd8054572ffc96284e8a7acfe6ab86898',
+		'class_vurl.php'			=> '9d86b28c28d9a032d92af5232a48d152',
 	),
 	'/includes/xml' => array(
-		'bitfield_phpkd_vblvb.xml'	=> 'f7198b729a84d132ddca91c6e2835085',
-		'cpnav_phpkd_vblvb.xml'		=> '94ed7f71c932c284cd98ed34be2239b0',
+		'bitfield_phpkd_vblvb.xml'	=> '39695887388a1bf56798ea62c26ea634',
+		'cpnav_phpkd_vblvb.xml'		=> '049ee028adda3d2f72408ac0da457ee2',
 	),
 );
 $md5_sum_softwareid = 'phpkd_vblvb';
